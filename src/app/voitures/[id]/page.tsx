@@ -214,13 +214,13 @@ export default function CarDetailPage() {
           : false;
 
     if (isStart || isEnd)
-      return "bg-[linear-gradient(135deg,#231F20_0%,#231F20_100%)] text-[#f7e8ad] rounded-lg font-semibold shadow-sm";
-    if (isInRange) return "bg-[#231F20]/12 text-[#231F20]";
+      return "bg-[linear-gradient(135deg,#497198_0%,#497198_100%)] text-[#f7e8ad] rounded-lg font-semibold shadow-sm";
+    if (isInRange) return "bg-[#497198]/12 text-[#497198]";
     if (isPast)
       return "bg-slate-100/40 text-slate-300 cursor-not-allowed line-through";
     if (isUnavail)
       return "bg-slate-100/40 text-slate-300 cursor-not-allowed line-through";
-    return "hover:bg-[#231F20]/8 cursor-pointer text-[#231F20]";
+    return "hover:bg-[#497198]/8 cursor-pointer text-[#497198]";
   }
 
   const totalDays =
@@ -310,7 +310,7 @@ export default function CarDetailPage() {
           <div className="text-2xl font-bold mb-2">Véhicule introuvable</div>
           <button
             onClick={() => router.push("/voitures")}
-            className="text-sm text-[#2B2E4A] mt-4 hover:text-[#2B2E4A]/80 font-medium"
+            className="text-sm text-[#fee076] mt-4 hover:text-[#fee076]/80 font-medium"
           >
             ← Retour aux véhicules
           </button>
@@ -337,7 +337,7 @@ export default function CarDetailPage() {
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Left — images */}
           <div data-reveal="left" className="reveal-d1">
-            <div className="relative mb-4 flex h-64 items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-[#2B2E4A]/10 shadow-soft sm:h-80">
+            <div className="relative mb-4 flex h-64 items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-[#fee076]/10 shadow-soft sm:h-80">
               {car.images?.[activeImage] ? (
                 <Image
                   src={car.images[activeImage]}
@@ -348,7 +348,7 @@ export default function CarDetailPage() {
                 />
               ) : (
                 <svg
-                  className="w-32 h-32 text-[#2B2E4A]"
+                  className="w-32 h-32 text-[#fee076]"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -362,7 +362,7 @@ export default function CarDetailPage() {
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
-                    className={`relative w-16 h-16 rounded-2xl overflow-hidden border-2 transition-all duration-250 ${activeImage === i ? "border-[#2B2E4A] shadow-soft" : "border-slate-200 hover:border-slate-300"}`}
+                    className={`relative w-16 h-16 rounded-2xl overflow-hidden border-2 transition-all duration-250 ${activeImage === i ? "border-[#fee076] shadow-soft" : "border-slate-200 hover:border-slate-300"}`}
                   >
                     <Image
                       src={img}
@@ -400,7 +400,7 @@ export default function CarDetailPage() {
                 {car.features.map((f) => (
                   <span
                     key={f}
-                    className="rounded-2xl border border-[#2B2E4A] bg-[#2B2E4A]/20 px-4 py-2 text-xs font-medium text-[#231F20]"
+                    className="rounded-2xl border border-[#fee076] bg-[#fee076]/20 px-4 py-2 text-xs font-medium text-[#497198]"
                   >
                     {f}
                   </span>
@@ -415,7 +415,7 @@ export default function CarDetailPage() {
             <h1 className="mt-3 mb-2 text-3xl font-bold text-navy-500 sm:text-4xl">
               {car.brand} {car.name}
             </h1>
-            <div className="mb-2 text-2xl font-bold text-[#2B2E4A] sm:text-3xl">
+            <div className="mb-2 text-2xl font-bold text-[#fee076] sm:text-3xl">
               {car.price_per_day}{" "}
               <span className="text-lg text-slate-600 font-normal">
                 DT / jour
@@ -423,8 +423,8 @@ export default function CarDetailPage() {
             </div>
 
             {pricingTiers.length > 0 && (
-              <div className="mb-6 rounded-2xl border border-[#231F20]/15 bg-[#231F20]/5 p-4">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#231F20]">
+              <div className="mb-6 rounded-2xl border border-[#497198]/15 bg-[#497198]/5 p-4">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#497198]">
                   Tarifs par durée
                 </p>
                 <div className="mt-3 space-y-2">
@@ -440,8 +440,8 @@ export default function CarDetailPage() {
                         key={`${tier.min_days}-${tier.max_days}-${tier.price_per_day}`}
                         className={`flex items-center justify-between rounded-xl border px-3 py-2 text-sm transition-colors ${
                           isActive
-                            ? "border-[#2B2E4A] bg-[#2B2E4A]/15 text-[#231F20]"
-                            : "border-[#231F20]/15 bg-white text-slate-700"
+                            ? "border-[#fee076] bg-[#fee076]/15 text-[#497198]"
+                            : "border-[#497198]/15 bg-white text-slate-700"
                         }`}
                       >
                         <span className="font-medium">
@@ -469,10 +469,10 @@ export default function CarDetailPage() {
             {/* WhatsApp */}
 
             <a
-              href={`https://wa.me/21654541541?text=Bonjour, je suis intéressé par la ${car.brand} ${car.name}`}
+              href={`https://wa.me/21626380160?text=Bonjour, je suis intéressé par la ${car.brand} ${car.name}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full border-2 border-[#2B2E4A] text-[#231F20] hover:bg-[#2B2E4A] hover:text-[#F2F2F2] transition-all duration-250 rounded-2xl py-3 text-base font-semibold mb-3 shadow-soft"
+              className="flex items-center justify-center gap-2 w-full border-2 border-[#fee076] text-[#497198] hover:bg-[#fee076] hover:text-[#497198] transition-all duration-250 rounded-2xl py-3 text-base font-semibold mb-3 shadow-soft"
             >
               <svg
                 width="16"
@@ -503,7 +503,7 @@ export default function CarDetailPage() {
           </div>
 
           <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.45fr_0.95fr] lg:items-start">
-            <div className="rounded-3xl border border-[#231F20]/12 bg-white p-4 shadow-soft sm:p-6">
+            <div className="rounded-3xl border border-[#497198]/12 bg-white p-4 shadow-soft sm:p-6">
               {/* Month nav */}
               <div className="mb-6 flex items-center justify-between sm:mb-8">
                 <button
@@ -513,11 +513,11 @@ export default function CarDetailPage() {
                       setViewYear((y) => y - 1);
                     } else setViewMonth((m) => m - 1);
                   }}
-                  className="rounded-lg border border-transparent p-2 font-bold text-[#231F20] transition-colors hover:border-[#231F20]/20 hover:bg-[#231F20]/8"
+                  className="rounded-lg border border-transparent p-2 font-bold text-[#497198] transition-colors hover:border-[#497198]/20 hover:bg-[#497198]/8"
                 >
                   ←
                 </button>
-                <span className="text-base font-bold text-[#231F20] sm:text-lg">
+                <span className="text-base font-bold text-[#497198] sm:text-lg">
                   {MONTHS_FR[viewMonth]} {viewYear}
                 </span>
                 <button
@@ -527,7 +527,7 @@ export default function CarDetailPage() {
                       setViewYear((y) => y + 1);
                     } else setViewMonth((m) => m + 1);
                   }}
-                  className="rounded-lg border border-transparent p-2 font-bold text-[#231F20] transition-colors hover:border-[#231F20]/20 hover:bg-[#231F20]/8"
+                  className="rounded-lg border border-transparent p-2 font-bold text-[#497198] transition-colors hover:border-[#497198]/20 hover:bg-[#497198]/8"
                 >
                   →
                 </button>
@@ -538,7 +538,7 @@ export default function CarDetailPage() {
                 {DAYS_FR.map((d) => (
                   <div
                     key={d}
-                    className="py-2 text-center text-[10px] font-bold uppercase text-[#231F20]/80 sm:py-3 sm:text-xs"
+                    className="py-2 text-center text-[10px] font-bold uppercase text-[#497198]/80 sm:py-3 sm:text-xs"
                   >
                     {d}
                   </div>
@@ -575,13 +575,13 @@ export default function CarDetailPage() {
               </div>
 
               {/* Legend */}
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-[#231F20]/75">
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-[#497198]/75">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-white border border-[#231F20]/35 shadow-[0_1px_4px_rgba(35,31,32,0.15)]" />
+                  <div className="w-3 h-3 rounded bg-white border border-[#497198]/35 shadow-[0_1px_4px_rgba(73,113,152,0.15)]" />
                   <span>Disponible</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-[linear-gradient(135deg,#231F20_0%,#231F20_100%)]" />
+                  <div className="w-3 h-3 rounded bg-[linear-gradient(135deg,#497198_0%,#497198_100%)]" />
                   <span>Sélectionné</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -592,27 +592,27 @@ export default function CarDetailPage() {
             </div>
 
             <div className="space-y-4 lg:sticky lg:top-24">
-              <div className="rounded-2xl border border-[#231F20]/20 bg-[linear-gradient(135deg,rgba(35,31,32,0.06)_0%,rgba(212,175,55,0.08)_100%)] p-4 sm:p-5">
-                <p className="text-xs font-bold uppercase tracking-wide text-[#231F20]">
+              <div className="rounded-2xl border border-[#497198]/20 bg-[linear-gradient(135deg,rgba(73,113,152,0.06)_0%,rgba(254,224,118,0.08)_100%)] p-4 sm:p-5">
+                <p className="text-xs font-bold uppercase tracking-wide text-[#497198]">
                   Comment réserver
                 </p>
                 <div className="mt-3 grid gap-2">
-                  <div className="rounded-xl border border-[#231F20]/15 bg-white/90 px-3 py-2 text-xs text-[#231F20] shadow-[0_2px_10px_rgba(35,31,32,0.06)]">
+                  <div className="rounded-xl border border-[#497198]/15 bg-white/90 px-3 py-2 text-xs text-[#497198] shadow-[0_2px_10px_rgba(73,113,152,0.06)]">
                     1. Sélectionnez le début
                   </div>
-                  <div className="rounded-xl border border-[#231F20]/15 bg-white/90 px-3 py-2 text-xs text-[#231F20] shadow-[0_2px_10px_rgba(35,31,32,0.06)]">
+                  <div className="rounded-xl border border-[#497198]/15 bg-white/90 px-3 py-2 text-xs text-[#497198] shadow-[0_2px_10px_rgba(73,113,152,0.06)]">
                     2. Sélectionnez la fin
                   </div>
-                  <div className="rounded-xl border border-[#231F20]/15 bg-white/90 px-3 py-2 text-xs text-[#231F20] shadow-[0_2px_10px_rgba(35,31,32,0.06)]">
+                  <div className="rounded-xl border border-[#497198]/15 bg-white/90 px-3 py-2 text-xs text-[#497198] shadow-[0_2px_10px_rgba(73,113,152,0.06)]">
                     3. Confirmez
                   </div>
                 </div>
-                <p className="mt-3 text-sm font-medium text-[#231F20]">
+                <p className="mt-3 text-sm font-medium text-[#497198]">
                   {selectionHelp}
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-[#2B2E4A]/40 bg-[linear-gradient(135deg,#231F20_0%,#231F20_65%,#231F20_100%)] p-4 text-white shadow-soft backdrop-blur sm:p-5">
+              <div className="rounded-2xl border border-[#fee076]/40 bg-[linear-gradient(135deg,#497198_0%,#497198_65%,#497198_100%)] p-4 text-white shadow-soft backdrop-blur sm:p-5">
                 <div className="mb-4 grid grid-cols-1 gap-3 sm:mb-5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-1">
                   <div>
                     <div className="mb-1 text-xs text-white/75">
@@ -647,7 +647,7 @@ export default function CarDetailPage() {
                 {endDate ? (
                   <button
                     onClick={() => setShowForm(true)}
-                    className="hidden w-full bg-[linear-gradient(135deg,#2B2E4A_0%,#2B2E4A_100%)] hover:brightness-95 text-[#F2F2F2] py-3 rounded-xl text-sm font-semibold transition-all sm:block"
+                    className="hidden w-full bg-[linear-gradient(135deg,#fee076_0%,#fee076_100%)] hover:brightness-95 text-[#497198] py-3 rounded-xl text-sm font-semibold transition-all sm:block"
                   >
                     Confirmer la réservation — {totalDays} jour
                     {totalDays > 1 ? "s" : ""}
@@ -665,7 +665,7 @@ export default function CarDetailPage() {
       </div>
 
       {startDate && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#2B2E4A]/35 bg-[linear-gradient(135deg,#231F20_0%,#231F20_70%,#231F20_100%)] p-3 shadow-soft-lg backdrop-blur sm:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#fee076]/35 bg-[linear-gradient(135deg,#497198_0%,#497198_70%,#497198_100%)] p-3 shadow-soft-lg backdrop-blur sm:hidden">
           <div className="mx-auto flex max-w-2xl items-center justify-between gap-3">
             <div className="min-w-0">
               <p className="text-[11px] uppercase tracking-wide text-white/75">
@@ -680,7 +680,7 @@ export default function CarDetailPage() {
             <button
               onClick={() => setShowForm(true)}
               disabled={!endDate}
-              className="rounded-xl bg-[linear-gradient(135deg,#2B2E4A_0%,#2B2E4A_100%)] px-4 py-2.5 text-xs font-semibold text-[#F2F2F2] transition-all disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-xl bg-[linear-gradient(135deg,#fee076_0%,#fee076_100%)] px-4 py-2.5 text-xs font-semibold text-[#497198] transition-all disabled:cursor-not-allowed disabled:opacity-50"
             >
               Confirmer
             </button>
@@ -720,7 +720,7 @@ export default function CarDetailPage() {
                 </label>
                 <input
                   type="tel"
-                  placeholder="54 541 541"
+                  placeholder="+216 26 380 160"
                   value={form.phone}
                   onChange={(e) =>
                     setForm((f) => ({ ...f, phone: e.target.value }))
@@ -781,9 +781,9 @@ export default function CarDetailPage() {
       {success && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
           <div className="w-full max-w-[calc(100vw-1rem)] rounded-3xl bg-white p-6 text-center shadow-soft-xl card-surface sm:max-w-sm sm:p-10">
-            <div className="w-16 h-16 bg-[#2B2E4A]/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-[#2B2E4A]">
+            <div className="w-16 h-16 bg-[#fee076]/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-[#fee076]">
               <svg
-                className="w-8 h-8 text-[#2B2E4A]"
+                className="w-8 h-8 text-[#fee076]"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

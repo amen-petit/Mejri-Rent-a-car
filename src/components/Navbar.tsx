@@ -13,10 +13,10 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
         <Link href="/" className="group flex items-center">
           <div className="flex flex-col leading-none">
-            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#2B2E4A]">
-              Wind Wing
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#fee076]">
+              bahri
             </span>
-            <span className="mt-1 text-lg font-bold text-[#231F20] sm:text-xl">
+            <span className="mt-1 text-lg font-bold text-[#497198] sm:text-xl">
               rent a car
             </span>
           </div>
@@ -25,25 +25,25 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-12 text-sm font-medium text-slate-600">
           <Link
             href="/"
-            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#2B2E4A] after:transition-all after:duration-250 hover:after:w-full"
+            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#fee076] after:transition-all after:duration-250 hover:after:w-full"
           >
             Accueil
           </Link>
           <Link
             href="/voitures"
-            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#2B2E4A] after:transition-all after:duration-250 hover:after:w-full"
+            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#fee076] after:transition-all after:duration-250 hover:after:w-full"
           >
             Nos Véhicules
           </Link>
           <Link
             href="/#about"
-            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#2B2E4A] after:transition-all after:duration-250 hover:after:w-full"
+            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#fee076] after:transition-all after:duration-250 hover:after:w-full"
           >
             À Propos
           </Link>
           <Link
             href="/#contact"
-            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#2B2E4A] after:transition-all after:duration-250 hover:after:w-full"
+            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#fee076] after:transition-all after:duration-250 hover:after:w-full"
           >
             Contact
           </Link>
@@ -58,7 +58,7 @@ export default function Navbar() {
         <button
           className="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-2xl text-white shadow-soft transition-all duration-250 hover:opacity-95"
           style={{
-            background: "linear-gradient(135deg, #231F20 0%, #2B2E4A 100%)",
+            background: "linear-gradient(135deg, #497198 0%, #fee076 100%)",
             border: "1px solid rgba(255,255,255,0.18)",
           }}
           onClick={() => setMenuOpen(!menuOpen)}

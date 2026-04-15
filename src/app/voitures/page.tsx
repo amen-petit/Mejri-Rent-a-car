@@ -100,10 +100,10 @@ export default function CarsPage() {
     onSelect: (value: string) => void,
   ) => (
     <div>
-      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#231F20]">
+      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#497198]">
         {label}
       </label>
-      <div className="rounded-2xl border border-[#231F20]/20 bg-white/80 p-2">
+      <div className="rounded-2xl border border-[#497198]/20 bg-white/80 p-2">
         <div className="flex flex-wrap gap-2">
           {options.map((item) => {
             const isActive = selected === item;
@@ -115,13 +115,13 @@ export default function CarsPage() {
                 className={`rounded-xl px-3 py-2 text-xs font-semibold transition-all duration-200 ${
                   isActive
                     ? "text-white shadow-soft"
-                    : "border border-slate-200 bg-white text-slate-700 hover:border-[#2B2E4A] hover:text-[#231F20]"
+                    : "border border-slate-200 bg-white text-slate-700 hover:border-[#fee076] hover:text-[#497198]"
                 }`}
                 style={
                   isActive
                     ? {
                         background:
-                          "linear-gradient(135deg, #231F20 0%, #2B2E4A 100%)",
+                          "linear-gradient(135deg, #497198 0%, #fee076 100%)",
                       }
                     : undefined
                 }
@@ -136,12 +136,12 @@ export default function CarsPage() {
   );
 
   const filterPanel = (
-    <div className="card-surface border border-[#231F20]/15 bg-[linear-gradient(180deg,rgba(35,31,32,0.06)_0%,rgba(212,175,55,0.08)_100%)] p-5 sm:p-6">
-      <h2 className="text-lg font-semibold text-[#231F20]">Filtres</h2>
+    <div className="card-surface border border-[#497198]/15 bg-[linear-gradient(180deg,rgba(73,113,152,0.06)_0%,rgba(254,224,118,0.08)_100%)] p-5 sm:p-6">
+      <h2 className="text-lg font-semibold text-[#497198]">Filtres</h2>
 
       <div className="mt-6 space-y-6">
         <div>
-          <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#231F20]">
+          <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#497198]">
             Recherche
           </label>
           <input
@@ -165,7 +165,7 @@ export default function CarsPage() {
         {renderOptionGroup("Carburant", fuels, fuel, setFuel)}
 
         <div>
-          <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#231F20]">
+          <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#497198]">
             Prix max: {maxPrice} DT
           </label>
           <input
@@ -175,7 +175,7 @@ export default function CarsPage() {
             step={10}
             value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}
-            className="w-full accent-[#2B2E4A]"
+            className="w-full accent-[#fee076]"
           />
           <div className="mt-1 flex justify-between text-xs text-slate-500">
             <span>50</span>
@@ -185,7 +185,7 @@ export default function CarsPage() {
 
         <button
           onClick={resetFilters}
-          className="w-full rounded-xl border border-[#231F20]/25 bg-white px-4 py-2.5 text-sm font-semibold text-[#231F20] transition-colors hover:bg-[#231F20]/10"
+          className="w-full rounded-xl border border-[#497198]/25 bg-white px-4 py-2.5 text-sm font-semibold text-[#497198] transition-colors hover:bg-[#497198]/10"
         >
           Reinitialiser
         </button>
@@ -213,11 +213,11 @@ export default function CarsPage() {
       <section className="pb-12">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 xl:grid-cols-[280px_1fr]">
           <div className="xl:hidden">
-            <div className="card-surface mb-4 flex items-center justify-between border border-[#231F20]/15 bg-[linear-gradient(180deg,rgba(35,31,32,0.05)_0%,rgba(212,175,55,0.08)_100%)] p-4">
-              <p className="text-sm font-medium text-[#231F20]">Filtres</p>
+            <div className="card-surface mb-4 flex items-center justify-between border border-[#497198]/15 bg-[linear-gradient(180deg,rgba(73,113,152,0.05)_0%,rgba(254,224,118,0.08)_100%)] p-4">
+              <p className="text-sm font-medium text-[#497198]">Filtres</p>
               <button
                 onClick={() => setFiltersOpen((open) => !open)}
-                className="rounded-lg border border-[#231F20]/25 bg-white px-4 py-2 text-xs font-semibold text-[#231F20] transition-colors hover:bg-[#231F20]/10"
+                className="rounded-lg border border-[#497198]/25 bg-white px-4 py-2 text-xs font-semibold text-[#497198] transition-colors hover:bg-[#497198]/10"
               >
                 {filtersOpen ? "Masquer" : "Afficher"}
               </button>
@@ -279,7 +279,7 @@ export default function CarsPage() {
                         </div>
 
                         <div className="p-5">
-                          <p className="text-xs uppercase tracking-wide text-[#231F20]">
+                          <p className="text-xs uppercase tracking-wide text-[#497198]">
                             {car.category}
                           </p>
                           <h2 className="mt-1 text-lg font-semibold text-navy-500">

@@ -23,11 +23,11 @@ const openSans = Open_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Wind Wing rent a car | Location de Voitures en Tunisie",
-    template: "%s | Wind Wing rent a car",
+    default: "bahri rent a car | Location de Voitures en Tunisie",
+    template: "%s | bahri rent a car",
   },
   description:
-    "Location de voitures en Tunisie. Réservez votre véhicule en ligne avec Wind Wing rent a car: citadine, berline, SUV et utilitaires aux meilleurs tarifs.",
+    "Location de voitures en Tunisie. Réservez votre véhicule en ligne avec bahri rent a car: citadine, berline, SUV et utilitaires aux meilleurs tarifs.",
   metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     "location voiture aeroport tunis",
     "location voiture pas cher tunisie",
     "location SUV tunisie",
-    "Wind Wing rent a car",
+    "bahri rent a car",
   ],
   robots: {
     index: true,
@@ -52,11 +52,11 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Wind Wing rent a car | Location de Voitures en Tunisie",
+    title: "bahri rent a car | Location de Voitures en Tunisie",
     description:
-      "Réservez votre voiture en Tunisie facilement avec Wind Wing rent a car. Flotte moderne, assistance 24/7 et réservation rapide.",
+      "Réservez votre voiture en Tunisie facilement avec bahri rent a car. Flotte moderne, assistance 24/7 et réservation rapide.",
     url: siteUrl,
-    siteName: "Wind Wing rent a car",
+    siteName: "bahri rent a car",
     locale: "fr_FR",
     type: "website",
     images: [
@@ -64,15 +64,15 @@ export const metadata: Metadata = {
         url: ogImagePath,
         width: 1200,
         height: 630,
-        alt: "Wind Wing rent a car",
+        alt: "bahri rent a car",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wind Wing rent a car | Location de Voitures en Tunisie",
+    title: "bahri rent a car | Location de Voitures en Tunisie",
     description:
-      "Réservez votre voiture en Tunisie facilement avec Wind Wing rent a car. Flotte moderne et réservation en ligne.",
+      "Réservez votre voiture en Tunisie facilement avec bahri rent a car. Flotte moderne et réservation en ligne.",
     images: [ogImagePath],
   },
   icons: {

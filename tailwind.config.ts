@@ -14,7 +14,7 @@ const config: Config = {
           100: "#F1EEEF",
           200: "#E3DEDE",
           300: "#D5CDCE",
-          500: "#231F20",
+          500: "#497198",
           600: "#2a2728",
           700: "#1d1b1a",
         },
@@ -23,7 +23,7 @@ const config: Config = {
           100: "#fde7e5",
           200: "#fccfcc",
           300: "#f9a8a1",
-          500: "#2B2E4A",
+          500: "#fee076",
           600: "#8b2629",
           700: "#72201f",
         },
@@ -45,11 +45,11 @@ const config: Config = {
         "soft-xl": "0 16px 32px rgba(10, 16, 46, 0.20)",
       },
       backgroundImage: {
-        "gradient-premium": "linear-gradient(135deg, #231F20 0%, #2B2E4A 100%)",
+        "gradient-premium": "linear-gradient(135deg, #497198 0%, #fee076 100%)",
         "gradient-navy-to-emerald":
-          "linear-gradient(180deg, #231F20 0%, #2B2E4A 100%)",
+          "linear-gradient(180deg, #497198 0%, #fee076 100%)",
         "gradient-emerald-to-navy":
-          "linear-gradient(180deg, #2B2E4A 0%, #231F20 100%)",
+          "linear-gradient(180deg, #fee076 0%, #497198 100%)",
       },
       fontFamily: {
         heading: ["var(--font-heading)"],
