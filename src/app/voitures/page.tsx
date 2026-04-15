@@ -115,13 +115,13 @@ export default function CarsPage() {
                 className={`rounded-xl px-3 py-2 text-xs font-semibold transition-all duration-200 ${
                   isActive
                     ? "text-white shadow-soft"
-                    : "border border-slate-200 bg-white text-slate-700 hover:border-[#D4AF37] hover:text-[#231F20]"
+                    : "border border-slate-200 bg-white text-slate-700 hover:border-[#2B2E4A] hover:text-[#231F20]"
                 }`}
                 style={
                   isActive
                     ? {
                         background:
-                          "linear-gradient(135deg, #231F20 0%, #D4AF37 100%)",
+                          "linear-gradient(135deg, #231F20 0%, #2B2E4A 100%)",
                       }
                     : undefined
                 }
@@ -175,7 +175,7 @@ export default function CarsPage() {
             step={10}
             value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}
-            className="w-full accent-[#D4AF37]"
+            className="w-full accent-[#2B2E4A]"
           />
           <div className="mt-1 flex justify-between text-xs text-slate-500">
             <span>50</span>

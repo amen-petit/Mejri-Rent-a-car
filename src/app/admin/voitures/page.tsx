@@ -330,7 +330,7 @@ export default function AdminVoitures() {
               className="card-surface rounded-3xl overflow-hidden hover:shadow-soft-lg transition-all duration-250"
             >
               {/* Image */}
-              <div className="relative h-40 bg-[#D4AF37]/10 border-b border-slate-200 flex items-center justify-center overflow-hidden group">
+              <div className="relative h-40 bg-[#2B2E4A]/10 border-b border-slate-200 flex items-center justify-center overflow-hidden group">
                 {car.images?.[0] ? (
                   <Image
                     src={car.images[0]}
@@ -342,7 +342,7 @@ export default function AdminVoitures() {
                   />
                 ) : (
                   <svg
-                    className="w-16 h-16 text-[#D4AF37]"
+                    className="w-16 h-16 text-[#2B2E4A]"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
@@ -354,7 +354,7 @@ export default function AdminVoitures() {
                   onClick={() => toggleAvailable(car)}
                   className={`absolute top-3 right-3 text-xs px-4 py-2 rounded-full border-2 font-bold transition-all shadow-soft ${
                     car.is_available
-                      ? "bg-[#D4AF37] text-[#231F20] border-[#D4AF37] hover:bg-[#D4AF37]/90 hover:shadow-soft-lg"
+                      ? "bg-[#2B2E4A] text-[#F2F2F2] border-[#2B2E4A] hover:bg-[#2B2E4A]/90 hover:shadow-soft-lg"
                       : "bg-red-500 text-white border-red-600 hover:bg-red-600 hover:shadow-soft-lg"
                   }`}
                 >
@@ -377,7 +377,7 @@ export default function AdminVoitures() {
                 <div className="mb-2 text-xs font-semibold text-slate-600">
                   Quantité: {car.quantity ?? 1}
                 </div>
-                <div className="text-base font-bold text-[#D4AF37] mb-4">
+                <div className="text-base font-bold text-[#2B2E4A] mb-4">
                   {car.price_per_day}{" "}
                   <span className="text-xs text-slate-600 font-normal">
                     DT / jour

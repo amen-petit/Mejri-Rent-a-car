@@ -15,7 +15,7 @@ export default function Input({ label, className = "", ...props }: InputProps) {
         <span className="mb-2 block font-semibold text-slate-700">{label}</span>
       ) : null}
       <input
-        className={`w-full rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-250 placeholder:text-slate-400 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 ${className}`}
+        className={`w-full rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-250 placeholder:text-slate-400 focus:border-[#2B2E4A] focus:ring-2 focus:ring-[#2B2E4A]/20 ${className}`}
         {...props}
       />
     </label>

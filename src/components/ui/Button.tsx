@@ -7,7 +7,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary:
-    "text-white shadow-soft hover:-translate-y-0.5 active:translate-y-0 focus-visible:ring-2 focus-visible:ring-[#D4AF37]",
+    "text-white shadow-soft hover:-translate-y-0.5 active:translate-y-0 focus-visible:ring-2 focus-visible:ring-[#2B2E4A]",
   secondary:
     "bg-navy-500 text-white shadow-soft hover:-translate-y-0.5 hover:bg-navy-600 active:translate-y-0 focus-visible:ring-2 focus-visible:ring-navy-300",
   outline:
@@ -23,7 +23,7 @@ export default function Button({
 }: ButtonProps) {
   const style =
     variant === "primary"
-      ? { background: "linear-gradient(135deg, #231F20 0%, #D4AF37 100%)" }
+      ? { background: "linear-gradient(135deg, #231F20 0%, #2B2E4A 100%)" }
       : {};
 
   return (

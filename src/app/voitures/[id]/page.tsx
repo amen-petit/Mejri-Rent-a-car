@@ -310,7 +310,7 @@ export default function CarDetailPage() {
           <div className="text-2xl font-bold mb-2">Véhicule introuvable</div>
           <button
             onClick={() => router.push("/voitures")}
-            className="text-sm text-[#D4AF37] mt-4 hover:text-[#D4AF37]/80 font-medium"
+            className="text-sm text-[#2B2E4A] mt-4 hover:text-[#2B2E4A]/80 font-medium"
           >
             ← Retour aux véhicules
           </button>
@@ -337,7 +337,7 @@ export default function CarDetailPage() {
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Left — images */}
           <div data-reveal="left" className="reveal-d1">
-            <div className="relative mb-4 flex h-64 items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-[#D4AF37]/10 shadow-soft sm:h-80">
+            <div className="relative mb-4 flex h-64 items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-[#2B2E4A]/10 shadow-soft sm:h-80">
               {car.images?.[activeImage] ? (
                 <Image
                   src={car.images[activeImage]}
@@ -348,7 +348,7 @@ export default function CarDetailPage() {
                 />
               ) : (
                 <svg
-                  className="w-32 h-32 text-[#D4AF37]"
+                  className="w-32 h-32 text-[#2B2E4A]"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -362,7 +362,7 @@ export default function CarDetailPage() {
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
-                    className={`relative w-16 h-16 rounded-2xl overflow-hidden border-2 transition-all duration-250 ${activeImage === i ? "border-[#D4AF37] shadow-soft" : "border-slate-200 hover:border-slate-300"}`}
+                    className={`relative w-16 h-16 rounded-2xl overflow-hidden border-2 transition-all duration-250 ${activeImage === i ? "border-[#2B2E4A] shadow-soft" : "border-slate-200 hover:border-slate-300"}`}
                   >
                     <Image
                       src={img}
@@ -400,7 +400,7 @@ export default function CarDetailPage() {
                 {car.features.map((f) => (
                   <span
                     key={f}
-                    className="rounded-2xl border border-[#D4AF37] bg-[#D4AF37]/20 px-4 py-2 text-xs font-medium text-[#231F20]"
+                    className="rounded-2xl border border-[#2B2E4A] bg-[#2B2E4A]/20 px-4 py-2 text-xs font-medium text-[#231F20]"
                   >
                     {f}
                   </span>
@@ -415,7 +415,7 @@ export default function CarDetailPage() {
             <h1 className="mt-3 mb-2 text-3xl font-bold text-navy-500 sm:text-4xl">
               {car.brand} {car.name}
             </h1>
-            <div className="mb-2 text-2xl font-bold text-[#D4AF37] sm:text-3xl">
+            <div className="mb-2 text-2xl font-bold text-[#2B2E4A] sm:text-3xl">
               {car.price_per_day}{" "}
               <span className="text-lg text-slate-600 font-normal">
                 DT / jour
@@ -440,7 +440,7 @@ export default function CarDetailPage() {
                         key={`${tier.min_days}-${tier.max_days}-${tier.price_per_day}`}
                         className={`flex items-center justify-between rounded-xl border px-3 py-2 text-sm transition-colors ${
                           isActive
-                            ? "border-[#D4AF37] bg-[#D4AF37]/15 text-[#231F20]"
+                            ? "border-[#2B2E4A] bg-[#2B2E4A]/15 text-[#231F20]"
                             : "border-[#231F20]/15 bg-white text-slate-700"
                         }`}
                       >
@@ -469,10 +469,10 @@ export default function CarDetailPage() {
             {/* WhatsApp */}
 
             <a
-              href={`https://wa.me/21624786189?text=Bonjour, je suis intéressé par la ${car.brand} ${car.name}`}
+              href={`https://wa.me/21654541541?text=Bonjour, je suis intéressé par la ${car.brand} ${car.name}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full border-2 border-[#D4AF37] text-[#231F20] hover:bg-[#D4AF37] hover:text-[#231F20] transition-all duration-250 rounded-2xl py-3 text-base font-semibold mb-3 shadow-soft"
+              className="flex items-center justify-center gap-2 w-full border-2 border-[#2B2E4A] text-[#231F20] hover:bg-[#2B2E4A] hover:text-[#F2F2F2] transition-all duration-250 rounded-2xl py-3 text-base font-semibold mb-3 shadow-soft"
             >
               <svg
                 width="16"
@@ -612,7 +612,7 @@ export default function CarDetailPage() {
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-[#D4AF37]/40 bg-[linear-gradient(135deg,#231F20_0%,#231F20_65%,#231F20_100%)] p-4 text-white shadow-soft backdrop-blur sm:p-5">
+              <div className="rounded-2xl border border-[#2B2E4A]/40 bg-[linear-gradient(135deg,#231F20_0%,#231F20_65%,#231F20_100%)] p-4 text-white shadow-soft backdrop-blur sm:p-5">
                 <div className="mb-4 grid grid-cols-1 gap-3 sm:mb-5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-1">
                   <div>
                     <div className="mb-1 text-xs text-white/75">
@@ -647,7 +647,7 @@ export default function CarDetailPage() {
                 {endDate ? (
                   <button
                     onClick={() => setShowForm(true)}
-                    className="hidden w-full bg-[linear-gradient(135deg,#D4AF37_0%,#D4AF37_100%)] hover:brightness-95 text-[#231F20] py-3 rounded-xl text-sm font-semibold transition-all sm:block"
+                    className="hidden w-full bg-[linear-gradient(135deg,#2B2E4A_0%,#2B2E4A_100%)] hover:brightness-95 text-[#F2F2F2] py-3 rounded-xl text-sm font-semibold transition-all sm:block"
                   >
                     Confirmer la réservation — {totalDays} jour
                     {totalDays > 1 ? "s" : ""}
@@ -665,7 +665,7 @@ export default function CarDetailPage() {
       </div>
 
       {startDate && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#D4AF37]/35 bg-[linear-gradient(135deg,#231F20_0%,#231F20_70%,#231F20_100%)] p-3 shadow-soft-lg backdrop-blur sm:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#2B2E4A]/35 bg-[linear-gradient(135deg,#231F20_0%,#231F20_70%,#231F20_100%)] p-3 shadow-soft-lg backdrop-blur sm:hidden">
           <div className="mx-auto flex max-w-2xl items-center justify-between gap-3">
             <div className="min-w-0">
               <p className="text-[11px] uppercase tracking-wide text-white/75">
@@ -680,7 +680,7 @@ export default function CarDetailPage() {
             <button
               onClick={() => setShowForm(true)}
               disabled={!endDate}
-              className="rounded-xl bg-[linear-gradient(135deg,#D4AF37_0%,#D4AF37_100%)] px-4 py-2.5 text-xs font-semibold text-[#231F20] transition-all disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-xl bg-[linear-gradient(135deg,#2B2E4A_0%,#2B2E4A_100%)] px-4 py-2.5 text-xs font-semibold text-[#F2F2F2] transition-all disabled:cursor-not-allowed disabled:opacity-50"
             >
               Confirmer
             </button>
@@ -720,7 +720,7 @@ export default function CarDetailPage() {
                 </label>
                 <input
                   type="tel"
-                  placeholder="24 786 189"
+                  placeholder="54 541 541"
                   value={form.phone}
                   onChange={(e) =>
                     setForm((f) => ({ ...f, phone: e.target.value }))
@@ -781,9 +781,9 @@ export default function CarDetailPage() {
       {success && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
           <div className="w-full max-w-[calc(100vw-1rem)] rounded-3xl bg-white p-6 text-center shadow-soft-xl card-surface sm:max-w-sm sm:p-10">
-            <div className="w-16 h-16 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-[#D4AF37]">
+            <div className="w-16 h-16 bg-[#2B2E4A]/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-[#2B2E4A]">
               <svg
-                className="w-8 h-8 text-[#D4AF37]"
+                className="w-8 h-8 text-[#2B2E4A]"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

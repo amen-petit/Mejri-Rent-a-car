@@ -23,12 +23,12 @@ const config: Config = {
           100: "#fde7e5",
           200: "#fccfcc",
           300: "#f9a8a1",
-          500: "#D4AF37",
+          500: "#2B2E4A",
           600: "#8b2629",
           700: "#72201f",
         },
         slate: {
-          50: "#F8F9FB",
+          50: "#F2F2F2",
           100: "#F1F3F7",
           200: "#E3E7EF",
           300: "#D5DBE7",
@@ -45,11 +45,11 @@ const config: Config = {
         "soft-xl": "0 16px 32px rgba(10, 16, 46, 0.20)",
       },
       backgroundImage: {
-        "gradient-premium": "linear-gradient(135deg, #231F20 0%, #D4AF37 100%)",
+        "gradient-premium": "linear-gradient(135deg, #231F20 0%, #2B2E4A 100%)",
         "gradient-navy-to-emerald":
-          "linear-gradient(180deg, #231F20 0%, #D4AF37 100%)",
+          "linear-gradient(180deg, #231F20 0%, #2B2E4A 100%)",
         "gradient-emerald-to-navy":
-          "linear-gradient(180deg, #D4AF37 0%, #231F20 100%)",
+          "linear-gradient(180deg, #2B2E4A 0%, #231F20 100%)",
       },
       fontFamily: {
         heading: ["var(--font-heading)"],

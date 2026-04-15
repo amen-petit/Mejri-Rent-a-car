@@ -103,11 +103,11 @@ export default function AdminLayout({
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col lg:flex-row">
-      <header className="lg:hidden sticky top-0 z-50 bg-[#000000] text-white shadow-soft-lg border-b border-[#D4AF37]/20">
+      <header className="lg:hidden sticky top-0 z-50 bg-[#000000] text-white shadow-soft-lg border-b border-[#2B2E4A]/20">
         <div className="flex items-center justify-between px-4 py-4">
           <div>
-            <div className="text-lg font-bold">Yahyaoui Rent a Car</div>
-            <div className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold">
+            <div className="text-lg font-bold">Wind Wing rent a car</div>
+            <div className="text-[10px] uppercase tracking-widest text-[#F2F2F2]/90 font-bold">
               Admin Panel
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function AdminLayout({
         </div>
 
         {menuOpen && (
-          <div className="border-t border-[#D4AF37]/20 px-4 py-4 space-y-2">
+          <div className="border-t border-[#2B2E4A]/20 px-4 py-4 space-y-2">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -147,7 +147,7 @@ export default function AdminLayout({
                   onClick={() => setMenuOpen(false)}
                   className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition-all ${
                     isActive
-                      ? "bg-[#D4AF37] text-[#231F20] shadow-soft"
+                      ? "bg-[#2B2E4A] text-[#F2F2F2] shadow-soft"
                       : "bg-white/10 text-slate-100"
                   }`}
                 >
@@ -183,7 +183,7 @@ export default function AdminLayout({
             <Link
               href="/"
               onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 px-2 py-2 text-xs text-slate-300 hover:text-[#D4AF37] transition-colors font-medium"
+              className="flex items-center gap-2 px-2 py-2 text-xs text-slate-300 hover:text-[#F2F2F2] transition-colors font-medium"
             >
               <svg
                 className="w-4 h-4"
@@ -206,14 +206,14 @@ export default function AdminLayout({
 
       <aside
         data-reveal="left"
-        className="hidden lg:flex lg:flex-col w-72 text-white border-r border-[#D4AF37]/20 fixed top-0 left-0 h-full z-40 shadow-soft-lg"
+        className="hidden lg:flex lg:flex-col w-72 text-white border-r border-[#2B2E4A]/20 fixed top-0 left-0 h-full z-40 shadow-soft-lg"
         style={{
-          background: "linear-gradient(180deg, #231F20 0%, #D4AF37 100%)",
+          background: "linear-gradient(180deg, #231F20 0%, #2B2E4A 100%)",
         }}
       >
-        <div className="p-7 border-b border-[#D4AF37]/20">
-          <div className="text-2xl font-bold">Yahyaoui Rent a Car</div>
-          <div className="mt-2 text-xs uppercase tracking-widest text-[#D4AF37] font-bold">
+        <div className="p-7 border-b border-[#2B2E4A]/20">
+          <div className="text-2xl font-bold">Wind Wing rent a car</div>
+          <div className="mt-2 text-xs uppercase tracking-widest text-[#F2F2F2]/90 font-bold">
             Admin Panel
           </div>
         </div>
@@ -226,7 +226,7 @@ export default function AdminLayout({
                 href={item.href}
                 className={`flex items-center gap-3 rounded-2xl px-5 py-4 text-sm font-semibold transition-all duration-250 ${
                   isActive
-                    ? "bg-[#D4AF37] text-[#231F20] shadow-soft"
+                    ? "bg-[#2B2E4A] text-[#F2F2F2] shadow-soft"
                     : "text-slate-200 hover:bg-white/10 hover:text-white"
                 }`}
               >
@@ -248,7 +248,7 @@ export default function AdminLayout({
             );
           })}
         </nav>
-        <div className="p-4 border-t border-[#D4AF37]/20 space-y-3">
+        <div className="p-4 border-t border-[#2B2E4A]/20 space-y-3">
           <button
             onClick={handleLogout}
             disabled={loggingOut}
@@ -258,7 +258,7 @@ export default function AdminLayout({
           </button>
           <Link
             href="/"
-            className="flex items-center gap-2 text-xs text-slate-300 hover:text-[#D4AF37] transition-colors font-medium"
+            className="flex items-center gap-2 text-xs text-slate-300 hover:text-[#F2F2F2] transition-colors font-medium"
           >
             <svg
               className="w-4 h-4"

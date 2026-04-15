@@ -7,16 +7,16 @@
     color-scheme: light;
 
     /* Core Colors */
-    --navy-primary: #231F20;
-    --emerald-primary: #D4AF37;
-    --slate-bg: #f8f9fb;
+    --navy-primary: #231f20;
+    --emerald-primary: #2b2e4a;
+    --slate-bg: #f2f2f2;
     --slate-border: #e3e7ef;
     --slate-text: #2d3e55;
     --slate-muted: #6b7280;
 
     /* Surface */
     --surface: #ffffff;
-    --surface-hover: #f8f9fb;
+    --surface-hover: #f2f2f2;
     --surface-active: #f1f3f7;
 
     /* Spacing */
@@ -90,7 +90,7 @@
       color: white;
       transition: all 250ms ease-out;
 
-      background: linear-gradient(135deg, #231F20 0%, #D4AF37 100%);
+      background: linear-gradient(135deg, #231f20 0%, #2b2e4a 100%);
       box-shadow: 0 4px 12px rgba(10, 16, 46, 0.15);
     }
 
@@ -175,7 +175,7 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-weight: 600;
-      color: #D4AF37;
+      color: #2b2e4a;
     }
 
     /* Card */
@@ -208,7 +208,7 @@
     }
 
     .input-premium:focus {
-      border-color: #D4AF37;
+      border-color: #2b2e4a;
       box-shadow: 0 0 0 3px rgba(132, 169, 250, 0.1);
     }
 
@@ -229,7 +229,7 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #231F20 0%, #D4AF37 100%);
+    background: linear-gradient(135deg, #231f20 0%, #2b2e4a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
