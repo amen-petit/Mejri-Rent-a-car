@@ -35,7 +35,7 @@ function StatCard({
         {label}
       </div>
       <div
-        className={`text-4xl font-bold ${color === "blue" ? "text-[#dfc830]" : color === "red" ? "text-red-500" : color === "blue" ? "text-[#dfc830]" : "text-navy-500"}`}
+        className={`text-4xl font-bold ${color === "blue" ? "text-[#D4AF37]" : color === "red" ? "text-red-500" : color === "blue" ? "text-[#D4AF37]" : "text-navy-500"}`}
       >
         {value}
       </div>
@@ -108,7 +108,7 @@ export default function AdminDashboard() {
   };
   const statusColor: Record<string, string> = {
     pending: "bg-yellow-50 text-yellow-700 border-yellow-200",
-    confirmed: "bg-[#dfc830]/20 text-[#18559d] border-[#dfc830]",
+    confirmed: "bg-[#D4AF37]/20 text-[#231F20] border-[#D4AF37]",
     cancelled: "bg-red-50 text-red-500 border-red-200",
   };
 
@@ -217,11 +217,11 @@ export default function AdminDashboard() {
                 <div
                   key={i}
                   className={`aspect-square flex flex-col items-center justify-center rounded-lg text-xs relative transition-all duration-250 font-semibold
-                  ${isToday ? "bg-[#dfc830] text-[#18559d] shadow-soft" : rsvs.length > 0 ? "bg-[#dfc830]/20 text-[#18559d]" : "text-slate-600 hover:bg-slate-100"}`}
+                  ${isToday ? "bg-[#D4AF37] text-[#231F20] shadow-soft" : rsvs.length > 0 ? "bg-[#D4AF37]/20 text-[#231F20]" : "text-slate-600 hover:bg-slate-100"}`}
                 >
                   {date.getDate()}
                   {rsvs.length > 0 && !isToday && (
-                    <div className="w-1 h-1 rounded-full bg-[#dfc830] mt-0.5" />
+                    <div className="w-1 h-1 rounded-full bg-[#D4AF37] mt-0.5" />
                   )}
                   {rsvs.length > 0 && isToday && (
                     <div className="w-1 h-1 rounded-full bg-white mt-0.5" />
@@ -233,11 +233,11 @@ export default function AdminDashboard() {
 
           <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-medium text-slate-600">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[#dfc830]" />
+              <div className="w-3 h-3 rounded bg-[#D4AF37]" />
               <span>Aujourd&apos;hui</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[#dfc830]/20 border-2 border-[#dfc830]" />
+              <div className="w-3 h-3 rounded bg-[#D4AF37]/20 border-2 border-[#D4AF37]" />
               <span>Location active</span>
             </div>
           </div>
@@ -272,7 +272,7 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="text-base font-bold text-[#dfc830]">
+                    <div className="text-base font-bold text-[#D4AF37]">
                       {r.total_price} DT
                     </div>
                     <span

@@ -7,7 +7,7 @@ import MotionProvider from "@/components/MotionProvider";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 const ogImagePath = "/Untitled design.png";
-const brandIconPath = "/brand-logo.png";
+const brandIconPath = "/icons/car.svg";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,11 +23,11 @@ const openSans = Open_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Royal Car | Location de Voitures en Tunisie",
-    template: "%s | Royal Car",
+    default: "Yahyaoui Rent a Car | Location de Voitures en Tunisie",
+    template: "%s | Yahyaoui Rent a Car",
   },
   description:
-    "Location de voitures en Tunisie. Réservez votre véhicule en ligne avec Royal Car: citadine, berline, SUV et utilitaires aux meilleurs tarifs.",
+    "Location de voitures en Tunisie. Réservez votre véhicule en ligne avec Yahyaoui Rent a Car: citadine, berline, SUV et utilitaires aux meilleurs tarifs.",
   metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     "location voiture aeroport tunis",
     "location voiture pas cher tunisie",
     "location SUV tunisie",
-    "Royal Car",
+    "Yahyaoui Rent a Car",
   ],
   robots: {
     index: true,
@@ -52,11 +52,11 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Royal Car | Location de Voitures en Tunisie",
+    title: "Yahyaoui Rent a Car | Location de Voitures en Tunisie",
     description:
-      "Réservez votre voiture en Tunisie facilement avec Royal Car. Flotte moderne, assistance 24/7 et réservation rapide.",
+      "Réservez votre voiture en Tunisie facilement avec Yahyaoui Rent a Car. Flotte moderne, assistance 24/7 et réservation rapide.",
     url: siteUrl,
-    siteName: "Royal Car",
+    siteName: "Yahyaoui Rent a Car",
     locale: "fr_FR",
     type: "website",
     images: [
@@ -64,15 +64,15 @@ export const metadata: Metadata = {
         url: ogImagePath,
         width: 1200,
         height: 630,
-        alt: "Royal Car",
+        alt: "Yahyaoui Rent a Car",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Royal Car | Location de Voitures en Tunisie",
+    title: "Yahyaoui Rent a Car | Location de Voitures en Tunisie",
     description:
-      "Réservez votre voiture en Tunisie facilement avec Royal Car. Flotte moderne et réservation en ligne.",
+      "Réservez votre voiture en Tunisie facilement avec Yahyaoui Rent a Car. Flotte moderne et réservation en ligne.",
     images: [ogImagePath],
   },
   icons: {

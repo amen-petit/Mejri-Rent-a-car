@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 const navItems = [
@@ -12,28 +11,20 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "linear-gradient(180deg, #18559d 0%, #dfc830 100%)",
+        background: "linear-gradient(180deg, #231F20 0%, #D4AF37 100%)",
       }}
       className="text-white"
     >
       <div className="mx-auto grid max-w-7xl items-start gap-10 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-[1.2fr_1fr_1fr]">
         <div className="space-y-4">
-          <div className="flex items-center">
-            <div
-              className="rounded-2xl p-0.5 shadow-soft"
-              style={{
-                background: "linear-gradient(135deg, #dfc830 0%, #18559d 100%)",
-              }}
-            >
-              <div className="relative h-14 w-40 rounded-2xl bg-white/95 sm:h-16 sm:w-48">
-                <Image
-                  src="/Untitled design (4).png"
-                  alt="Royal Car"
-                  fill
-                  sizes="(max-width: 640px) 160px, 192px"
-                  className="object-contain p-2"
-                />
-              </div>
+          <div className="inline-flex rounded-2xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-sm">
+            <div className="flex flex-col leading-none">
+              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#D4AF37]">
+                Yahyaoui
+              </span>
+              <span className="mt-1 text-xl font-bold text-white">
+                Rent a Car
+              </span>
             </div>
           </div>
           <p className="text-sm leading-7 text-slate-300 max-w-xs">
@@ -41,10 +32,11 @@ export default function Footer() {
             Réservation en ligne facile, service client dédié, et assistance
             24/7.
           </p>
+          <p className="text-sm font-semibold text-[#D4AF37]">24 786 189</p>
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs uppercase tracking-widest font-bold text-[#dfc830]">
+          <p className="text-xs uppercase tracking-widest font-bold text-[#D4AF37]">
             Navigation
           </p>
           <div className="flex flex-col gap-3">
@@ -52,7 +44,7 @@ export default function Footer() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-sm text-slate-300 transition-colors duration-250 hover:text-[#dfc830]"
+                className="text-sm text-slate-300 transition-colors duration-250 hover:text-[#D4AF37]"
               >
                 {item.label}
               </Link>
@@ -61,25 +53,25 @@ export default function Footer() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs uppercase tracking-widest font-bold text-[#dfc830]">
+          <p className="text-xs uppercase tracking-widest font-bold text-[#D4AF37]">
             Légal
           </p>
           <div className="flex flex-col gap-3">
             <Link
               href="/#privacy"
-              className="text-sm text-slate-300 transition-colors duration-250 hover:text-[#dfc830]"
+              className="text-sm text-slate-300 transition-colors duration-250 hover:text-[#D4AF37]"
             >
               Politique de confidentialité
             </Link>
             <Link
               href="/#terms"
-              className="text-sm text-slate-300 transition-colors duration-250 hover:text-[#dfc830]"
+              className="text-sm text-slate-300 transition-colors duration-250 hover:text-[#D4AF37]"
             >
               Conditions d&apos;utilisation
             </Link>
             <Link
               href="/#contact"
-              className="text-sm text-slate-300 transition-colors duration-250 hover:text-[#dfc830]"
+              className="text-sm text-slate-300 transition-colors duration-250 hover:text-[#D4AF37]"
             >
               Nous contacter
             </Link>
@@ -87,25 +79,25 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-[#dfc830]/30 px-4 py-6 sm:px-6">
+      <div className="border-t border-[#D4AF37]/30 px-4 py-6 sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 text-xs text-slate-400 md:flex-row md:items-center md:justify-between">
           <span>© 2026 Tous droits réservés.</span>
           <div className="flex flex-wrap gap-4 sm:gap-6">
             <a
               href="#"
-              className="transition-colors duration-250 hover:text-[#d4a5a0]"
+              className="transition-colors duration-250 hover:text-[#D4AF37]"
             >
               Confidentialité
             </a>
             <a
               href="#"
-              className="transition-colors duration-250 hover:text-[#d4a5a0]"
+              className="transition-colors duration-250 hover:text-[#D4AF37]"
             >
               Conditions
             </a>
             <a
               href="#"
-              className="transition-colors duration-250 hover:text-[#d4a5a0]"
+              className="transition-colors duration-250 hover:text-[#D4AF37]"
             >
               Contact
             </a>

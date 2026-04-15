@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -12,41 +11,39 @@ export default function Navbar() {
       className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-md shadow-soft"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
-        <Link href="/" className="flex items-center group">
-          <div className="relative h-14 w-40 sm:h-16 sm:w-48">
-            <Image
-              src="/Untitled design (4).png"
-              alt="Royal Car"
-              fill
-              priority
-              sizes="(max-width: 640px) 160px, 192px"
-              className="object-contain"
-            />
+        <Link href="/" className="group flex items-center">
+          <div className="flex flex-col leading-none">
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
+              Yahyaoui
+            </span>
+            <span className="mt-1 text-lg font-bold text-[#231F20] sm:text-xl">
+              Rent a Car
+            </span>
           </div>
         </Link>
 
         <div className="hidden md:flex items-center gap-12 text-sm font-medium text-slate-600">
           <Link
             href="/"
-            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#dfc830] after:transition-all after:duration-250 hover:after:w-full"
+            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#D4AF37] after:transition-all after:duration-250 hover:after:w-full"
           >
             Accueil
           </Link>
           <Link
             href="/voitures"
-            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#dfc830] after:transition-all after:duration-250 hover:after:w-full"
+            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#D4AF37] after:transition-all after:duration-250 hover:after:w-full"
           >
             Nos Véhicules
           </Link>
           <Link
             href="/#about"
-            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#dfc830] after:transition-all after:duration-250 hover:after:w-full"
+            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#D4AF37] after:transition-all after:duration-250 hover:after:w-full"
           >
             À Propos
           </Link>
           <Link
             href="/#contact"
-            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#dfc830] after:transition-all after:duration-250 hover:after:w-full"
+            className="relative transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#D4AF37] after:transition-all after:duration-250 hover:after:w-full"
           >
             Contact
           </Link>
@@ -61,7 +58,7 @@ export default function Navbar() {
         <button
           className="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-2xl text-white shadow-soft transition-all duration-250 hover:opacity-95"
           style={{
-            background: "linear-gradient(135deg, #18559d 0%, #dfc830 100%)",
+            background: "linear-gradient(135deg, #231F20 0%, #D4AF37 100%)",
             border: "1px solid rgba(255,255,255,0.18)",
           }}
           onClick={() => setMenuOpen(!menuOpen)}

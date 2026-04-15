@@ -7,8 +7,8 @@
     color-scheme: light;
 
     /* Core Colors */
-    --navy-primary: #18559d;
-    --emerald-primary: #dfc830;
+    --navy-primary: #231F20;
+    --emerald-primary: #D4AF37;
     --slate-bg: #f8f9fb;
     --slate-border: #e3e7ef;
     --slate-text: #2d3e55;
@@ -90,7 +90,7 @@
       color: white;
       transition: all 250ms ease-out;
 
-      background: linear-gradient(135deg, #18559d 0%, #dfc830 100%);
+      background: linear-gradient(135deg, #231F20 0%, #D4AF37 100%);
       box-shadow: 0 4px 12px rgba(10, 16, 46, 0.15);
     }
 
@@ -175,7 +175,7 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-weight: 600;
-      color: #dfc830;
+      color: #D4AF37;
     }
 
     /* Card */
@@ -208,7 +208,7 @@
     }
 
     .input-premium:focus {
-      border-color: #dfc830;
+      border-color: #D4AF37;
       box-shadow: 0 0 0 3px rgba(132, 169, 250, 0.1);
     }
 
@@ -229,7 +229,7 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #18559d 0%, #dfc830 100%);
+    background: linear-gradient(135deg, #231F20 0%, #D4AF37 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
