@@ -9,7 +9,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 export const metadata: Metadata = {
   title: "Accueil",
   description:
-    "bahri rent a car: location de voitures en Tunisie avec réservation en ligne simple, flotte moderne et assistance 24/7.",
+    "RentPoint: location de voitures en Tunisie avec réservation en ligne simple, flotte moderne et assistance 24/7.",
   alternates: {
     canonical: "/",
   },
@@ -59,10 +59,10 @@ export default async function Home() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "CarRental",
-    name: "bahri rent a car",
+    name: "RentPoint",
     url: siteUrl,
     image: `${siteUrl}/Untitled%20design.png`,
-    telephone: "+216 26 380 160",
+    telephone: "+216 56 417 050",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Tunis",
@@ -86,18 +86,18 @@ export default async function Home() {
         data-reveal
         className="relative overflow-hidden px-4 py-20 text-white sm:px-6 sm:py-24 lg:py-28"
         style={{
-          background: "linear-gradient(180deg, #497198 0%, #497198 100%)",
+          background: "linear-gradient(180deg, #0A0A0C 0%, #0A0A0C 100%)",
         }}
       >
-        <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#fee076]/20 blur-3xl" />
+        <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#D4AF37]/20 blur-3xl" />
         <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
           <div data-reveal="left" className="relative z-10 reveal-d1">
-            <span className="section-label text-[#fee076]">
+            <span className="section-label text-[#D4AF37]">
               Location de voitures en Tunisie
             </span>
             <h1 className="mt-6 max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
               La route vous attend,{" "}
-              <span className="text-[#fee076]">bahri rent a car</span>{" "}
+              <span className="text-[#D4AF37]">RentPoint</span>{" "}
               s&apos;occupe du reste.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-slate-100 sm:mt-8 sm:text-lg sm:leading-8">
@@ -121,10 +121,10 @@ export default async function Home() {
             data-reveal="right"
             className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 shadow-soft-lg backdrop-blur-xl reveal-d2 sm:p-8 lg:p-10"
           >
-            <div className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-[#fee076]/20 blur-3xl" />
+            <div className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-[#D4AF37]/20 blur-3xl" />
             <div className="relative space-y-6">
               <div className="space-y-4 rounded-3xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm sm:p-6">
-                <p className="text-xs uppercase tracking-widest text-[#fee076] font-semibold">
+                <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">
                   Service premium
                 </p>
                 <h2 className="text-xl font-bold sm:text-2xl">
@@ -144,7 +144,7 @@ export default async function Home() {
                     key={label}
                     className="rounded-2xl border border-white/30 bg-white/15 px-5 py-4 backdrop-blur-sm sm:px-6"
                   >
-                    <p className="text-xs uppercase tracking-widest text-[#fee076] font-semibold">
+                    <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">
                       {label}
                     </p>
                     <p className="mt-3 text-base font-bold text-white sm:text-lg">
@@ -170,7 +170,7 @@ export default async function Home() {
               key={item.label}
               className="card-surface flex items-center gap-4 p-6 sm:p-7"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fee076]/10 shrink-0">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#D4AF37]/10 shrink-0">
                 <Image
                   src={item.icon}
                   alt={item.label}
@@ -230,7 +230,7 @@ export default async function Home() {
                     )}
                   </div>
                   <div className="p-7">
-                    <div className="text-xs uppercase tracking-widest text-[#fee076] font-bold mb-2">
+                    <div className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold mb-2">
                       {car.category}
                     </div>
                     <h3 className="text-xl font-bold text-navy-500 mb-4">
@@ -244,7 +244,7 @@ export default async function Home() {
                       ].map((spec) => (
                         <span
                           key={spec}
-                          className="rounded-full bg-[#fee076]/10 px-3 py-1.5 font-medium"
+                          className="rounded-full bg-[#D4AF37]/10 px-3 py-1.5 font-medium"
                         >
                           {spec}
                         </span>
@@ -274,7 +274,7 @@ export default async function Home() {
         data-reveal
         className="relative scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24"
       >
-        <div className="absolute -left-20 top-12 h-48 w-48 rounded-full bg-[#fee076]/10 blur-3xl" />
+        <div className="absolute -left-20 top-12 h-48 w-48 rounded-full bg-[#D4AF37]/10 blur-3xl" />
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <span className="section-label">Simple et rapide</span>
@@ -295,7 +295,7 @@ export default async function Home() {
                     className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl text-2xl font-bold text-white shadow-soft"
                     style={{
                       background:
-                        "linear-gradient(135deg, #497198 0%, #fee076 100%)",
+                        "linear-gradient(135deg, #0A0A0C 0%, #D4AF37 100%)",
                     }}
                   >
                     {step.num}
@@ -317,19 +317,19 @@ export default async function Home() {
         data-reveal
         className="overflow-hidden px-4 py-20 text-white sm:px-6 sm:py-24"
         style={{
-          background: "linear-gradient(180deg, #497198 0%, #497198 100%)",
+          background: "linear-gradient(180deg, #0A0A0C 0%, #0A0A0C 100%)",
         }}
       >
-        <div className="absolute right-0 top-8 h-48 w-48 rounded-full bg-[#fee076]/15 blur-3xl" />
+        <div className="absolute right-0 top-8 h-48 w-48 rounded-full bg-[#D4AF37]/15 blur-3xl" />
         <div
-          className="relative mx-auto max-w-6xl rounded-3xl border border-[#fee076]/30 p-6 shadow-soft-lg sm:p-10 lg:p-16"
+          className="relative mx-auto max-w-6xl rounded-3xl border border-[#D4AF37]/30 p-6 shadow-soft-lg sm:p-10 lg:p-16"
           style={{
-            background: "linear-gradient(135deg, #497198 0%, #497198 100%)",
+            background: "linear-gradient(135deg, #0A0A0C 0%, #0A0A0C 100%)",
           }}
         >
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
-              <span className="inline-block text-xs uppercase tracking-widest font-bold text-[#fee076] mb-4">
+              <span className="inline-block text-xs uppercase tracking-widest font-bold text-[#D4AF37] mb-4">
                 Départ dès aujourd&apos;hui
               </span>
               <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
@@ -365,7 +365,7 @@ export default async function Home() {
               les tarifs longue durée et l&apos;assistance avant départ.
             </p>
             <div className="mt-8 space-y-3 text-sm font-medium text-navy-500 sm:text-base">
-              <p>Téléphone: +216 26 380 160</p>
+              <p>Téléphone: +216 56 417 050</p>
               <p>Adresse: Tunis, Tunisie</p>
             </div>
           </div>

@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "linear-gradient(180deg, #497198 0%, #497198 100%)",
+        background: "linear-gradient(180deg, #0A0A0C 0%, #0A0A0C 100%)",
       }}
       className="text-white"
     >
@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="inline-flex rounded-2xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-sm">
             <div className="flex flex-col leading-none">
               <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F2F2F2]">
-                bahri
+                RentPoint
               </span>
               <span className="mt-1 text-xl font-bold text-white">
                 rent a car
@@ -33,7 +33,7 @@ export default function Footer() {
             24/7.
           </p>
           <p className="text-sm font-semibold text-[#F2F2F2]">
-            +216 26 380 160
+            +216 56 417 050
           </p>
         </div>
 
@@ -81,7 +81,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-[#fee076]/30 px-4 py-6 sm:px-6">
+      <div className="border-t border-[#D4AF37]/30 px-4 py-6 sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 text-xs text-slate-400 md:flex-row md:items-center md:justify-between">
           <span>© 2026 Tous droits réservés.</span>
           <div className="flex flex-wrap gap-4 sm:gap-6">

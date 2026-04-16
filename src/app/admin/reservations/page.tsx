@@ -14,7 +14,7 @@ const statusLabel: Record<string, string> = {
 
 const statusColor: Record<string, string> = {
   pending: "bg-yellow-50 text-yellow-700 border-yellow-200",
-  confirmed: "bg-[#fee076]/20 text-[#497198] border-[#fee076]",
+  confirmed: "bg-[#D4AF37]/20 text-[#0A0A0C] border-[#D4AF37]",
   cancelled: "bg-red-50 text-red-500 border-red-200",
 };
 
@@ -59,7 +59,7 @@ export default function AdminReservations() {
         body: JSON.stringify({
           event: status,
           carName: reservation.car?.name || "Voiture",
-          carBrand: reservation.car?.brand || "bahri rent a car",
+          carBrand: reservation.car?.brand || "RentPoint",
           clientName: reservation.client_name,
           clientPhone: reservation.client_phone,
           clientEmail: reservation.client_email || null,
@@ -179,14 +179,14 @@ export default function AdminReservations() {
                   onClick={() => setSelected(r)}
                   className={`card-surface relative z-10 rounded-3xl p-5 cursor-pointer transition-all bg-white ${
                     selected?.id === r.id
-                      ? "border-2 border-[#fee076] bg-[#fee076]/10! shadow-soft-lg ring-2 ring-[#fee076] scale-[1.01]"
-                      : "border-2 border-slate-200 hover:border-[#fee076] hover:shadow-soft"
+                      ? "border-2 border-[#D4AF37] bg-[#D4AF37]/10! shadow-soft-lg ring-2 ring-[#D4AF37] scale-[1.01]"
+                      : "border-2 border-slate-200 hover:border-[#D4AF37] hover:shadow-soft"
                   }`}
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-start gap-4 sm:items-center">
                       {/* Car image */}
-                      <div className="relative w-14 h-14 rounded-xl border-2 border-[#fee076] overflow-hidden shrink-0 bg-[#fee076]/10">
+                      <div className="relative w-14 h-14 rounded-xl border-2 border-[#D4AF37] overflow-hidden shrink-0 bg-[#D4AF37]/10">
                         {car?.images?.[0] ? (
                           <Image
                             src={car.images[0]}
@@ -197,7 +197,7 @@ export default function AdminReservations() {
                           />
                         ) : (
                           <svg
-                            className="w-7 h-7 text-[#fee076]"
+                            className="w-7 h-7 text-[#D4AF37]"
                             viewBox="0 0 24 24"
                             fill="currentColor"
                           >
@@ -224,7 +224,7 @@ export default function AdminReservations() {
 
                     <div className="flex items-center justify-between gap-3 shrink-0 sm:justify-end">
                       <div className="text-left sm:text-right">
-                        <div className="font-bold text-sm text-[#fee076]">
+                        <div className="font-bold text-sm text-[#D4AF37]">
                           {r.total_price} DT
                         </div>
                         <div className="text-xs text-slate-600">
@@ -282,7 +282,7 @@ export default function AdminReservations() {
                   </div>
 
                   {/* Car */}
-                  <div className="bg-[#fee076]/10 rounded-2xl p-4 mb-6 flex items-center gap-3 border-2 border-[#fee076]">
+                  <div className="bg-[#D4AF37]/10 rounded-2xl p-4 mb-6 flex items-center gap-3 border-2 border-[#D4AF37]">
                     <div className="relative w-14 h-14 rounded-lg border-2 border-slate-200 overflow-hidden shrink-0 bg-slate-50">
                       {selected.car?.images?.[0] ? (
                         <Image
@@ -294,7 +294,7 @@ export default function AdminReservations() {
                         />
                       ) : (
                         <svg
-                          className="w-7 h-7 text-[#fee076]"
+                          className="w-7 h-7 text-[#D4AF37]"
                           viewBox="0 0 24 24"
                           fill="currentColor"
                         >
@@ -306,7 +306,7 @@ export default function AdminReservations() {
                       <div className="text-sm font-bold text-navy-500">
                         {selected.car?.brand} {selected.car?.name}
                       </div>
-                      <div className="text-xs text-[#fee076] font-bold mt-0.5">
+                      <div className="text-xs text-[#D4AF37] font-bold mt-0.5">
                         {selected.total_price} DT total
                       </div>
                     </div>
@@ -358,7 +358,7 @@ export default function AdminReservations() {
 
                   {/* Notes */}
                   {selected.notes && (
-                    <div className="bg-slate-100 rounded-xl p-3 mb-6 text-xs text-slate-700 font-medium leading-relaxed border-l-4 border-[#fee076]">
+                    <div className="bg-slate-100 rounded-xl p-3 mb-6 text-xs text-slate-700 font-medium leading-relaxed border-l-4 border-[#D4AF37]">
                       <div className="font-bold text-slate-600 mb-1.5">
                         Notes:
                       </div>
@@ -430,7 +430,7 @@ export default function AdminReservations() {
                       href={`https://wa.me/${selected.client_phone.replace(/\s/g, "")}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full border-2 border-[#fee076] text-[#497198] hover:bg-[#fee076]/10 py-2.5 rounded-xl text-sm text-center font-medium transition-colors flex items-center justify-center gap-2"
+                      className="w-full border-2 border-[#D4AF37] text-[#0A0A0C] hover:bg-[#D4AF37]/10 py-2.5 rounded-xl text-sm text-center font-medium transition-colors flex items-center justify-center gap-2"
                     >
                       <svg
                         width="14"

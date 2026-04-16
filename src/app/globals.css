@@ -7,8 +7,8 @@
     color-scheme: light;
 
     /* Core Colors */
-    --navy-primary: #497198;
-    --emerald-primary: #fee076;
+    --navy-primary: #0A0A0C;
+    --emerald-primary: #D4AF37;
     --slate-bg: #f2f2f2;
     --slate-border: #e3e7ef;
     --slate-text: #2d3e55;
@@ -87,10 +87,10 @@
       border-radius: 1rem;
       font-size: 0.875rem;
       font-weight: 600;
-      color: #497198;
+      color: #0A0A0C;
       transition: all 250ms ease-out;
 
-      background: linear-gradient(135deg, #fee076 0%, #fee076 100%);
+      background: linear-gradient(135deg, #D4AF37 0%, #D4AF37 100%);
       box-shadow: 0 4px 12px rgba(10, 16, 46, 0.15);
     }
 
@@ -175,7 +175,7 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-weight: 600;
-      color: #fee076;
+      color: #D4AF37;
     }
 
     /* Card */
@@ -208,7 +208,7 @@
     }
 
     .input-premium:focus {
-      border-color: #fee076;
+      border-color: #D4AF37;
       box-shadow: 0 0 0 3px rgba(132, 169, 250, 0.1);
     }
 
@@ -229,7 +229,7 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #497198 0%, #fee076 100%);
+    background: linear-gradient(135deg, #0A0A0C 0%, #D4AF37 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
