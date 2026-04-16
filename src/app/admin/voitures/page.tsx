@@ -344,7 +344,7 @@ export default function AdminVoitures() {
               className="card-surface rounded-3xl overflow-hidden hover:shadow-soft-lg transition-all duration-250"
             >
               {/* Image */}
-              <div className="relative h-40 bg-[#D4AF37]/10 border-b border-slate-200 flex items-center justify-center overflow-hidden group">
+              <div className="relative h-40 bg-[#89a9f1]/10 border-b border-slate-200 flex items-center justify-center overflow-hidden group">
                 {car.images?.[0] ? (
                   <Image
                     src={car.images[0]}
@@ -356,7 +356,7 @@ export default function AdminVoitures() {
                   />
                 ) : (
                   <svg
-                    className="w-16 h-16 text-[#D4AF37]"
+                    className="w-16 h-16 text-[#89a9f1]"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
@@ -368,7 +368,7 @@ export default function AdminVoitures() {
                   onClick={() => toggleAvailable(car)}
                   className={`absolute top-3 right-3 text-xs px-4 py-2 rounded-full border-2 font-bold transition-all shadow-soft ${
                     car.is_available
-                      ? "bg-[#D4AF37] text-[#0A0A0C] border-[#D4AF37] hover:bg-[#D4AF37]/90 hover:shadow-soft-lg"
+                      ? "bg-[#89a9f1] text-[#1F2430] border-[#89a9f1] hover:bg-[#89a9f1]/90 hover:shadow-soft-lg"
                       : "bg-red-500 text-white border-red-600 hover:bg-red-600 hover:shadow-soft-lg"
                   }`}
                 >
@@ -382,7 +382,7 @@ export default function AdminVoitures() {
               </div>
 
               <div className="p-6">
-                <div className="text-xs text-[#0A0A0C] uppercase tracking-wide font-bold mb-2">
+                <div className="text-xs text-[#1F2430] uppercase tracking-wide font-bold mb-2">
                   {car.category}
                 </div>
                 <div className="text-lg font-bold text-navy-500 mb-1">
@@ -391,14 +391,14 @@ export default function AdminVoitures() {
                 <div className="mb-2 text-xs font-semibold text-slate-600">
                   Quantité: {car.quantity ?? 1}
                 </div>
-                <div className="text-base font-bold text-[#D4AF37] mb-4">
+                <div className="text-base font-bold text-[#89a9f1] mb-4">
                   {car.price_per_day}{" "}
                   <span className="text-xs text-slate-600 font-normal">
                     DT / jour
                   </span>
                 </div>
                 {(car.pricing_tiers?.length || 0) > 0 && (
-                  <div className="mb-4 rounded-xl border border-[#0A0A0C]/20 bg-[#0A0A0C]/5 px-3 py-2 text-[11px] text-[#0A0A0C] font-medium">
+                  <div className="mb-4 rounded-xl border border-[#1F2430]/20 bg-[#1F2430]/5 px-3 py-2 text-[11px] text-[#1F2430] font-medium">
                     Tarification durée active: {car.pricing_tiers?.length}{" "}
                     palier
                     {(car.pricing_tiers?.length || 0) > 1 ? "s" : ""}
@@ -528,7 +528,7 @@ export default function AdminVoitures() {
                     onClick={() =>
                       setPricingTiers((rows) => [...rows, emptyTierRow()])
                     }
-                    className="rounded-lg border border-[#0A0A0C]/25 bg-white px-3 py-1.5 text-[11px] font-semibold text-[#0A0A0C] hover:bg-[#0A0A0C]/10 transition-colors"
+                    className="rounded-lg border border-[#1F2430]/25 bg-white px-3 py-1.5 text-[11px] font-semibold text-[#1F2430] hover:bg-[#1F2430]/10 transition-colors"
                   >
                     + Ajouter un palier
                   </button>

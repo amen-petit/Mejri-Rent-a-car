@@ -7,11 +7,12 @@
     color-scheme: light;
 
     /* Core Colors */
-    --navy-primary: #0A0A0C;
-    --emerald-primary: #D4AF37;
-    --slate-bg: #f2f2f2;
-    --slate-border: #e3e7ef;
-    --slate-text: #2d3e55;
+    --navy-primary: #1f2430;
+    --emerald-primary: #89a9f1;
+    --plum-primary: #a66694;
+    --slate-bg: #f7f8fc;
+    --slate-border: #dce5f7;
+    --slate-text: #2c3343;
     --slate-muted: #6b7280;
 
     /* Surface */
@@ -87,21 +88,21 @@
       border-radius: 1rem;
       font-size: 0.875rem;
       font-weight: 600;
-      color: #0A0A0C;
+      color: #1f2430;
       transition: all 250ms ease-out;
 
-      background: linear-gradient(135deg, #D4AF37 0%, #D4AF37 100%);
-      box-shadow: 0 4px 12px rgba(10, 16, 46, 0.15);
+      background: linear-gradient(135deg, #89a9f1 0%, #a66694 100%);
+      box-shadow: 0 4px 12px rgba(31, 36, 48, 0.15);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(33, 104, 68, 0.25);
+      box-shadow: 0 8px 24px rgba(89, 107, 160, 0.24);
     }
 
     .btn-primary:active {
       transform: translateY(0);
-      box-shadow: 0 2px 8px rgba(10, 16, 46, 0.12);
+      box-shadow: 0 2px 8px rgba(31, 36, 48, 0.12);
     }
 
     /* Secondary Button */
@@ -114,16 +115,16 @@
       font-size: 0.875rem;
       font-weight: 600;
       color: white;
-      background-color: #000000;
+      background-color: #a66694;
       transition: all 250ms ease-out;
 
-      box-shadow: 0 4px 12px rgba(10, 16, 46, 0.15);
+      box-shadow: 0 4px 12px rgba(31, 36, 48, 0.15);
     }
 
     .btn-secondary:hover {
       transform: translateY(-2px);
-      background-color: #1a1a1a;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      background-color: #91607f;
+      box-shadow: 0 8px 24px rgba(166, 102, 148, 0.22);
     }
 
     /* Outline Button */
@@ -136,8 +137,8 @@
       font-size: 0.875rem;
       font-weight: 600;
 
-      border: 2px solid #000000;
-      color: #000000;
+      border: 2px solid #1f2430;
+      color: #1f2430;
       background: transparent;
 
       transition: all 250ms ease-out;
@@ -145,7 +146,7 @@
 
     .btn-outline:hover {
       transform: translateY(-2px);
-      background-color: #f0f1f5;
+      background-color: #eef2fa;
     }
 
     /* Ghost Button */
@@ -158,15 +159,15 @@
       font-size: 0.875rem;
       font-weight: 600;
 
-      color: #000000;
-      background-color: #f1f3f7;
+      color: #1f2430;
+      background-color: #eef2fa;
 
       transition: all 250ms ease-out;
     }
 
     .btn-ghost:hover {
       transform: translateY(-2px);
-      background-color: #e3e7ef;
+      background-color: #dce5f7;
     }
 
     /* Section Label */
@@ -175,41 +176,41 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-weight: 600;
-      color: #D4AF37;
+      color: #a66694;
     }
 
     /* Card */
     .card-surface {
       border-radius: 1.5rem;
       background: white;
-      border: 1px solid #e3e7ef;
+      border: 1px solid #dce5f7;
       transition: all 300ms ease-out;
 
-      box-shadow: 0 4px 12px rgba(10, 16, 46, 0.08);
+      box-shadow: 0 4px 12px rgba(31, 36, 48, 0.08);
     }
 
     .card-surface:hover {
       transform: translateY(-6px);
-      border-color: #cdd7ff;
-      box-shadow: 0 10px 24px rgba(132, 169, 250, 0.12);
+      border-color: #89a9f1;
+      box-shadow: 0 10px 24px rgba(137, 169, 241, 0.16);
     }
 
     /* Input */
     .input-premium {
       width: 100%;
       border-radius: 1rem;
-      border: 2px solid #e3e7ef;
+      border: 2px solid #dce5f7;
       background: white;
       padding: 0.75rem 1rem;
       font-size: 0.875rem;
-      color: #0f172a;
+      color: #1f2430;
       outline: none;
       transition: all 250ms ease;
     }
 
     .input-premium:focus {
-      border-color: #D4AF37;
-      box-shadow: 0 0 0 3px rgba(132, 169, 250, 0.1);
+      border-color: #89a9f1;
+      box-shadow: 0 0 0 3px rgba(137, 169, 241, 0.14);
     }
 
     .input-premium::placeholder {
@@ -218,18 +219,18 @@
 
     /* Divider */
     .divider-soft {
-      border-top: 1px solid #e3e7ef;
+      border-top: 1px solid #dce5f7;
     }
   }
 }
 
 @layer utilities {
   .shadow-soft {
-    box-shadow: 0 4px 12px rgba(10, 16, 46, 0.08);
+    box-shadow: 0 4px 12px rgba(31, 36, 48, 0.08);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #0A0A0C 0%, #D4AF37 100%);
+    background: linear-gradient(135deg, #89a9f1 0%, #a66694 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

@@ -26,7 +26,7 @@ export async function generateMetadata({
   }
 
   const title = `${car.brand} ${car.name} - Location en Tunisie`;
-  const description = `Louez ${car.brand} ${car.name} en Tunisie à partir de ${car.price_per_day} DT/jour. Réservation rapide en ligne avec RentPoint.`;
+  const description = `Louez ${car.brand} ${car.name} en Tunisie à partir de ${car.price_per_day} DT/jour. Réservation rapide en ligne avec Fekra rent a car.`;
   const canonical = `/voitures/${car.id}`;
 
   return {

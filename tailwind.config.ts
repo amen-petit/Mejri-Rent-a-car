@@ -10,22 +10,22 @@ const config: Config = {
     extend: {
       colors: {
         navy: {
-          50: "#F8F7F7",
-          100: "#F1EEEF",
-          200: "#E3DEDE",
-          300: "#D5CDCE",
-          500: "#0A0A0C",
-          600: "#2a2728",
-          700: "#1d1b1a",
+          50: "#F7F8FC",
+          100: "#EEF2FA",
+          200: "#DCE5F7",
+          300: "#C4D2EE",
+          500: "#1F2430",
+          600: "#353B4D",
+          700: "#242A37",
         },
         emerald: {
-          50: "#fef3f2",
-          100: "#fde7e5",
-          200: "#fccfcc",
-          300: "#f9a8a1",
-          500: "#D4AF37",
-          600: "#8b2629",
-          700: "#72201f",
+          50: "#F1F5FE",
+          100: "#E6EDFC",
+          200: "#CCD9F8",
+          300: "#AFC3F3",
+          500: "#89a9f1",
+          600: "#6E88D7",
+          700: "#556EBB",
         },
         slate: {
           50: "#F2F2F2",
@@ -45,11 +45,11 @@ const config: Config = {
         "soft-xl": "0 16px 32px rgba(10, 16, 46, 0.20)",
       },
       backgroundImage: {
-        "gradient-premium": "linear-gradient(135deg, #0A0A0C 0%, #D4AF37 100%)",
+        "gradient-premium": "linear-gradient(135deg, #89a9f1 0%, #a66694 100%)",
         "gradient-navy-to-emerald":
-          "linear-gradient(180deg, #0A0A0C 0%, #D4AF37 100%)",
+          "linear-gradient(180deg, #1F2430 0%, #89a9f1 100%)",
         "gradient-emerald-to-navy":
-          "linear-gradient(180deg, #D4AF37 0%, #0A0A0C 100%)",
+          "linear-gradient(180deg, #a66694 0%, #1F2430 100%)",
       },
       fontFamily: {
         heading: ["var(--font-heading)"],
