@@ -2,21 +2,12 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { Reservation, Car } from "@/lib/types";
-
-const MONTHS_FR = [
-  "Jan",
-  "Fév",
-  "Mar",
-  "Avr",
-  "Mai",
-  "Jun",
-  "Jul",
-  "Aoû",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Déc",
-];
+import {
+  MONTHS_FR_SHORT,
+  DAYS_FR,
+  RESERVATION_STATUS_LABEL,
+  RESERVATION_STATUS_COLOR,
+} from "@/lib/constants";
 
 function StatCard({
   label,
@@ -101,16 +92,6 @@ export default function AdminDashboard() {
 
   const recent = reservations.slice(0, 5);
 
-  const statusLabel: Record<string, string> = {
-    pending: "En attente",
-    confirmed: "Confirmée",
-    cancelled: "Annulée",
-  };
-  const statusColor: Record<string, string> = {
-    pending: "bg-yellow-50 text-yellow-700 border-yellow-200",
-    confirmed: "bg-[#89a9f1]/20 text-[#1F2430] border-[#89a9f1]",
-    cancelled: "bg-red-50 text-red-500 border-red-200",
-  };
 
   if (loading)
     return (
@@ -181,7 +162,7 @@ export default function AdminDashboard() {
                 ←
               </button>
               <span className="text-base font-bold w-32 text-center text-navy-500">
-                {MONTHS_FR[calMonth]} {calYear}
+                {MONTHS_FR_SHORT[calMonth]} {calYear}
               </span>
               <button
                 onClick={() => {
@@ -198,7 +179,7 @@ export default function AdminDashboard() {
           </div>
 
           <div className="mb-2 grid grid-cols-7">
-            {["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"].map((d) => (
+            {DAYS_FR.map((d) => (
               <div
                 key={d}
                 className="text-center text-xs text-slate-600 font-bold uppercase py-2"
@@ -276,12 +257,12 @@ export default function AdminDashboard() {
                       {r.total_price} DT
                     </div>
                     <span
-                      className={`text-xs px-3 py-1 rounded-full border-2 font-bold flex items-center gap-1.5 ${statusColor[r.status]}`}
+                      className={`text-xs px-3 py-1 rounded-full border-2 font-bold flex items-center gap-1.5 ${RESERVATION_STATUS_COLOR[r.status]}`}
                     >
                       {r.status === "pending" && "⏳"}
                       {r.status === "confirmed" && "✓"}
                       {r.status === "cancelled" && "✕"}
-                      {statusLabel[r.status]}
+                      {RESERVATION_STATUS_LABEL[r.status]}
                     </span>
                   </div>
                 </div>

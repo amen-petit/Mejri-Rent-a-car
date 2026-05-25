@@ -6,12 +6,17 @@ import Navbar from "@/components/Navbar";
 import { getCarById, getUnavailableDates } from "@/lib/cars";
 import { Car, PricingTier } from "@/lib/types";
 import { supabase } from "@/lib/supabase";
+import {
+  MONTHS_FR,
+  DAYS_FR,
+  MS_PER_DAY,
+  WHATSAPP_NUMBER,
+} from "@/lib/constants";
 
 function isDateInRange(date: Date, start: Date, end: Date) {
   return date >= start && date <= end;
 }
 
-// Count how many confirmed reservations cover a specific date
 function countReservationsForDate(
   date: Date,
   reservations: { start_date: string; end_date: string }[],
@@ -25,20 +30,16 @@ function countReservationsForDate(
   }).length;
 }
 
-// Check if a date is unavailable based on quantity
 function isDateUnavailable(
   date: Date,
   reservations: { start_date: string; end_date: string }[],
-  quantity: number = 1, // Default to 1 if quantity not provided (backward compat)
+  quantity = 1,
 ): boolean {
-  const count = countReservationsForDate(date, reservations);
-  return count >= quantity;
+  return countReservationsForDate(date, reservations) >= quantity;
 }
 
 function getDaysBetween(start: Date, end: Date) {
-  return (
-    Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1
-  );
+  return Math.ceil((end.getTime() - start.getTime()) / MS_PER_DAY) + 1;
 }
 
 function normalizePricingTiers(tiers?: PricingTier[] | null): PricingTier[] {
@@ -97,21 +98,6 @@ function getMatchingTierForDuration(
   return normalized[0];
 }
 
-const MONTHS_FR = [
-  "Janvier",
-  "Février",
-  "Mars",
-  "Avril",
-  "Mai",
-  "Juin",
-  "Juillet",
-  "Août",
-  "Septembre",
-  "Octobre",
-  "Novembre",
-  "Décembre",
-];
-const DAYS_FR = ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"];
 
 export default function CarDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -326,7 +312,6 @@ export default function CarDetailPage() {
         data-reveal
         className="mx-auto max-w-7xl px-4 py-8 pt-24 sm:px-6 sm:py-10 sm:pt-28"
       >
-        {/* Back */}
         <button
           onClick={() => router.back()}
           className="text-sm text-slate-500 hover:text-slate-700 transition-colors mb-8 flex items-center gap-1 font-medium"
@@ -335,7 +320,6 @@ export default function CarDetailPage() {
         </button>
 
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-          {/* Left — images */}
           <div data-reveal="left" className="reveal-d1">
             <div className="relative mb-4 flex h-64 items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-[#89a9f1]/10 shadow-soft sm:h-80">
               {car.images?.[activeImage] ? (
@@ -376,7 +360,6 @@ export default function CarDetailPage() {
               </div>
             )}
 
-            {/* Quick specs */}
             <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {[
                 ["Transmission", car.transmission],
@@ -394,7 +377,6 @@ export default function CarDetailPage() {
               ))}
             </div>
 
-            {/* Features */}
             {car.features?.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
                 {car.features.map((f) => (
@@ -409,7 +391,6 @@ export default function CarDetailPage() {
             )}
           </div>
 
-          {/* Right — info */}
           <div data-reveal="right" className="reveal-d2">
             <span className="section-label">{car.category}</span>
             <h1 className="mt-3 mb-2 text-3xl font-bold text-navy-500 sm:text-4xl">
@@ -466,10 +447,8 @@ export default function CarDetailPage() {
               </p>
             )}
 
-            {/* WhatsApp */}
-
             <a
-              href={`https://wa.me/21656417050?text=Bonjour, je suis intéressé par la ${car.brand} ${car.name}`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour, je suis intéressé par la ${car.brand} ${car.name}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full border-2 border-[#89a9f1] text-[#1F2430] hover:bg-[#89a9f1] hover:text-[#1F2430] transition-all duration-250 rounded-2xl py-3 text-base font-semibold mb-3 shadow-soft"
@@ -487,7 +466,6 @@ export default function CarDetailPage() {
           </div>
         </div>
 
-        {/* Calendar */}
         <div
           data-reveal
           className="mt-16 border-t border-slate-200 pt-12 sm:mt-20 sm:pt-16"
@@ -504,7 +482,6 @@ export default function CarDetailPage() {
 
           <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.45fr_0.95fr] lg:items-start">
             <div className="rounded-3xl border border-[#1F2430]/12 bg-white p-4 shadow-soft sm:p-6">
-              {/* Month nav */}
               <div className="mb-6 flex items-center justify-between sm:mb-8">
                 <button
                   onClick={() => {
@@ -533,7 +510,6 @@ export default function CarDetailPage() {
                 </button>
               </div>
 
-              {/* Day headers */}
               <div className="mb-3 grid grid-cols-7">
                 {DAYS_FR.map((d) => (
                   <div
@@ -545,7 +521,6 @@ export default function CarDetailPage() {
                 ))}
               </div>
 
-              {/* Days grid */}
               <div className="grid grid-cols-7 gap-1">
                 {calDays.map((date, i) => (
                   <div
@@ -574,7 +549,6 @@ export default function CarDetailPage() {
                 ))}
               </div>
 
-              {/* Legend */}
               <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-[#1F2430]/75">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded bg-white border border-[#1F2430]/35 shadow-[0_1px_4px_rgba(137,169,241,0.15)]" />
@@ -688,7 +662,6 @@ export default function CarDetailPage() {
         </div>
       )}
 
-      {/* Booking form modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
           <div className="max-h-[90vh] w-full max-w-[calc(100vw-1rem)] overflow-y-auto rounded-2xl bg-white p-5 shadow-xl sm:max-w-md sm:p-8">
@@ -777,7 +750,6 @@ export default function CarDetailPage() {
         </div>
       )}
 
-      {/* Success message */}
       {success && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
           <div className="w-full max-w-[calc(100vw-1rem)] rounded-3xl bg-white p-6 text-center shadow-soft-xl card-surface sm:max-w-sm sm:p-10">

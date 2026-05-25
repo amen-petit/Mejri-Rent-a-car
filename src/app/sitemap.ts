@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getCars } from "@/lib/cars";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+import { SITE_URL } from "@/lib/constants";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -9,13 +8,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: `${siteUrl}/`,
+      url: `${SITE_URL}/`,
       lastModified: now,
       changeFrequency: "daily",
       priority: 1,
     },
     {
-      url: `${siteUrl}/voitures`,
+      url: `${SITE_URL}/voitures`,
       lastModified: now,
       changeFrequency: "daily",
       priority: 0.9,
@@ -23,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const carRoutes: MetadataRoute.Sitemap = cars.map((car) => ({
-    url: `${siteUrl}/voitures/${car.id}`,
+    url: `${SITE_URL}/voitures/${car.id}`,
     lastModified: car.created_at ? new Date(car.created_at) : now,
     changeFrequency: "weekly",
     priority: 0.8,

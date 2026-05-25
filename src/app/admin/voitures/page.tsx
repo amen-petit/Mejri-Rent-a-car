@@ -3,15 +3,35 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { Car, PricingTier } from "@/lib/types";
+import {
+  CAR_CATEGORIES,
+  TRANSMISSION_OPTIONS,
+  FUEL_TYPES,
+} from "@/lib/constants";
 
-const emptyForm = {
+type FormState = {
+  name: string;
+  brand: string;
+  category: string;
+  price_per_day: string;
+  quantity: string;
+  transmission: string;
+  fuel_type: string;
+  seats: string;
+  description: string;
+  features: string;
+  is_available: boolean;
+  is_featured: boolean;
+};
+
+const emptyForm: FormState = {
   name: "",
   brand: "",
-  category: "Citadine",
+  category: CAR_CATEGORIES[0],
   price_per_day: "",
   quantity: "1",
-  transmission: "Manuelle",
-  fuel_type: "Essence",
+  transmission: TRANSMISSION_OPTIONS[0],
+  fuel_type: FUEL_TYPES[0],
   seats: "5",
   description: "",
   features: "",
@@ -36,7 +56,7 @@ export default function AdminVoitures() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<Car | null>(null);
-  const [form, setForm] = useState(emptyForm);
+  const [form, setForm] = useState<FormState>(emptyForm);
   const [images, setImages] = useState<FileList | null>(null);
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -52,21 +72,7 @@ export default function AdminVoitures() {
   }
 
   useEffect(() => {
-    let cancelled = false;
-
-    supabase
-      .from("cars")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        if (cancelled) return;
-        setCars(data || []);
-        setLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
+    load();
   }, []);
 
   function openAdd() {
@@ -479,11 +485,9 @@ export default function AdminVoitures() {
                     }
                     className="input-premium w-full appearance-none bg-white"
                   >
-                    {["Citadine", "Berline", "SUV", "Utilitaire", "Luxe"].map(
-                      (c) => (
-                        <option key={c}>{c}</option>
-                      ),
-                    )}
+                    {CAR_CATEGORIES.map((c) => (
+                      <option key={c}>{c}</option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -624,8 +628,9 @@ export default function AdminVoitures() {
                     }
                     className="input-premium w-full appearance-none bg-white"
                   >
-                    <option>Manuelle</option>
-                    <option>Automatique</option>
+                    {TRANSMISSION_OPTIONS.map((t) => (
+                      <option key={t}>{t}</option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -639,10 +644,9 @@ export default function AdminVoitures() {
                     }
                     className="input-premium w-full appearance-none bg-white"
                   >
-                    <option>Essence</option>
-                    <option>Diesel</option>
-                    <option>Hybride</option>
-                    <option>Électrique</option>
+                    {FUEL_TYPES.map((f) => (
+                      <option key={f}>{f}</option>
+                    ))}
                   </select>
                 </div>
                 <div>

@@ -1,34 +1,34 @@
 import type { Metadata } from "next";
-import { Poppins, Open_Sans } from "next/font/google";
+import { Space_Grotesk, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import ConditionalFooter from "@/components/ConditionalFooter";
 import MotionProvider from "@/components/MotionProvider";
+import { SITE_URL, BRAND_NAME } from "@/lib/constants";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-const ogImagePath = "/Untitled design.png";
-const brandIconPath = "/icons/car.svg";
+const OG_IMAGE_PATH = "/Untitled design.png";
+const BRAND_ICON_PATH = "/icons/car.svg";
 
-const poppins = Poppins({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-heading",
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const openSans = Open_Sans({
+const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Fekra rent a car | Location de Voitures en Tunisie",
-    template: "%s | Fekra rent a car",
+    default: `${BRAND_NAME} | Location de Voitures en Tunisie`,
+    template: `%s | ${BRAND_NAME}`,
   },
   description:
-    "Location de voitures en Tunisie. Réservez votre véhicule en ligne avec Fekra rent a car: citadine, berline, SUV et utilitaires aux meilleurs tarifs.",
-  metadataBase: new URL(siteUrl),
+    `Location de voitures en Tunisie. Réservez votre véhicule en ligne avec ${BRAND_NAME}: citadine, berline, SUV et utilitaires aux meilleurs tarifs.`,
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
   },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     "location voiture aeroport tunis",
     "location voiture pas cher tunisie",
     "location SUV tunisie",
-    "Fekra rent a car",
+    BRAND_NAME,
   ],
   robots: {
     index: true,
@@ -52,35 +52,35 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Fekra rent a car | Location de Voitures en Tunisie",
+    title: `${BRAND_NAME} | Location de Voitures en Tunisie`,
     description:
-      "Réservez votre voiture en Tunisie facilement avec Fekra rent a car. Flotte moderne, assistance 24/7 et réservation rapide.",
-    url: siteUrl,
-    siteName: "Fekra rent a car",
+      `Réservez votre voiture en Tunisie facilement avec ${BRAND_NAME}. Flotte moderne, assistance 24/7 et réservation rapide.`,
+    url: SITE_URL,
+    siteName: BRAND_NAME,
     locale: "fr_FR",
     type: "website",
     images: [
       {
-        url: ogImagePath,
+        url: OG_IMAGE_PATH,
         width: 1200,
         height: 630,
-        alt: "Fekra rent a car",
+        alt: BRAND_NAME,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fekra rent a car | Location de Voitures en Tunisie",
+    title: `${BRAND_NAME} | Location de Voitures en Tunisie`,
     description:
-      "Réservez votre voiture en Tunisie facilement avec Fekra rent a car. Flotte moderne et réservation en ligne.",
-    images: [ogImagePath],
+      `Réservez votre voiture en Tunisie facilement avec ${BRAND_NAME}. Flotte moderne et réservation en ligne.`,
+    images: [OG_IMAGE_PATH],
   },
   icons: {
     icon: [
-      { url: brandIconPath, type: "image/png" },
-      { url: brandIconPath, rel: "shortcut icon", type: "image/png" },
+      { url: BRAND_ICON_PATH, type: "image/png" },
+      { url: BRAND_ICON_PATH, rel: "shortcut icon", type: "image/png" },
     ],
-    apple: [{ url: brandIconPath, type: "image/png" }],
+    apple: [{ url: BRAND_ICON_PATH, type: "image/png" }],
   },
   category: "travel",
 };
@@ -93,7 +93,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${poppins.variable} ${openSans.variable} font-body bg-[#F7F8FC] text-[#2c3343] antialiased overflow-x-hidden`}
+        className={`${spaceGrotesk.variable} ${dmSans.variable} font-body bg-[#F7F8FC] text-[#2c3343] antialiased overflow-x-hidden`}
       >
         <MotionProvider />
         <div className="min-h-screen page-enter">{children}</div>

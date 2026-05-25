@@ -3,20 +3,13 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { Reservation, Car } from "@/lib/types";
+import {
+  RESERVATION_STATUS_LABEL,
+  RESERVATION_STATUS_COLOR,
+  MS_PER_DAY,
+} from "@/lib/constants";
 
 type ReservationWithCar = Reservation & { car?: Car };
-
-const statusLabel: Record<string, string> = {
-  pending: "En attente",
-  confirmed: "Confirmée",
-  cancelled: "Annulée",
-};
-
-const statusColor: Record<string, string> = {
-  pending: "bg-yellow-50 text-yellow-700 border-yellow-200",
-  confirmed: "bg-[#89a9f1]/20 text-[#1F2430] border-[#89a9f1]",
-  cancelled: "bg-red-50 text-red-500 border-red-200",
-};
 
 export default function AdminReservations() {
   const [reservations, setReservations] = useState<ReservationWithCar[]>([]);
@@ -37,10 +30,7 @@ export default function AdminReservations() {
   }
 
   useEffect(() => {
-    async function init() {
-      await load();
-    }
-    init();
+    load();
   }, []);
 
   async function updateStatus(id: string, status: "confirmed" | "cancelled") {
@@ -102,9 +92,11 @@ export default function AdminReservations() {
   };
 
   function getDays(start: string, end: string) {
-    const s = new Date(start),
-      e = new Date(end);
-    return Math.ceil((e.getTime() - s.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+    return (
+      Math.ceil(
+        (new Date(end).getTime() - new Date(start).getTime()) / MS_PER_DAY,
+      ) + 1
+    );
   }
 
   return (
@@ -131,7 +123,7 @@ export default function AdminReservations() {
                 : "border-2 border-slate-200 text-slate-600 hover:bg-slate-50"
             }`}
           >
-            {f === "all" ? "Toutes" : statusLabel[f]}
+            {f === "all" ? "Toutes" : RESERVATION_STATUS_LABEL[f]}
             <span
               className={`text-xs px-2 py-0.5 rounded-full font-bold ${
                 filter === f
@@ -232,12 +224,12 @@ export default function AdminReservations() {
                         </div>
                       </div>
                       <span
-                        className={`text-[11px] px-3 py-1 rounded-full border-2 font-bold flex items-center gap-1.5 ${statusColor[r.status]}`}
+                        className={`text-[11px] px-3 py-1 rounded-full border-2 font-bold flex items-center gap-1.5 ${RESERVATION_STATUS_COLOR[r.status]}`}
                       >
                         {r.status === "pending" && "⏳"}
                         {r.status === "confirmed" && "✓"}
                         {r.status === "cancelled" && "✕"}
-                        {statusLabel[r.status]}
+                        {RESERVATION_STATUS_LABEL[r.status]}
                       </span>
                     </div>
                   </div>
@@ -372,7 +364,7 @@ export default function AdminReservations() {
                       Statut
                     </div>
                     <span
-                      className={`text-xs px-3 py-2 rounded-full border-2 font-bold inline-flex items-center gap-1.5 ${statusColor[selected.status]}`}
+                      className={`text-xs px-3 py-2 rounded-full border-2 font-bold inline-flex items-center gap-1.5 ${RESERVATION_STATUS_COLOR[selected.status]}`}
                     >
                       {selected.status === "pending" && (
                         <span className="text-sm">⏳</span>
@@ -383,7 +375,7 @@ export default function AdminReservations() {
                       {selected.status === "cancelled" && (
                         <span className="text-sm">✕</span>
                       )}
-                      {statusLabel[selected.status]}
+                      {RESERVATION_STATUS_LABEL[selected.status]}
                     </span>
                   </div>
 
