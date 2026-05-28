@@ -453,7 +453,7 @@ export default function CarsPage() {
                           src={filteredCars[0].images[0]}
                           alt={`${filteredCars[0].brand} ${filteredCars[0].name}`}
                           fill
-                          unoptimized
+                          priority
                           sizes="(max-width: 640px) 100vw, 55vw"
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />
@@ -552,7 +552,6 @@ export default function CarsPage() {
                                 src={car.images[0]}
                                 alt={`${car.brand} ${car.name}`}
                                 fill
-                                unoptimized
                                 sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                               />

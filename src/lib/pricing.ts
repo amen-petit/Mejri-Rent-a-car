@@ -10,13 +10,23 @@ import type { Car, PricingTier } from "./types";
 
 export const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-/** Parse a YYYY-MM-DD string into a UTC date (tz-stable). */
+/** Parse a YYYY-MM-DD string into a UTC date (tz-stable). Rejects out-of-range
+ *  values like 2025-13-40 via a round-trip check. */
 export function parseDateOnly(value: string): Date | null {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
   if (!match) return null;
-  const [, y, m, d] = match;
-  const date = new Date(Date.UTC(Number(y), Number(m) - 1, Number(d)));
-  return Number.isNaN(date.getTime()) ? null : date;
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) {
+    return null;
+  }
+  return date;
 }
 
 /** Inclusive day count between two calendar dates (start and end both counted). */
