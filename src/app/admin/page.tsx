@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 import { Reservation, Car } from "@/lib/types";
 import {
   MONTHS_FR_SHORT,
@@ -44,13 +43,12 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     async function load() {
-      const [{ data: resData }, { data: carData }] = await Promise.all([
-        supabase
-          .from("reservations")
-          .select("*, car:cars(*)")
-          .order("created_at", { ascending: false }),
-        supabase.from("cars").select("*"),
+      const [resRes, carRes] = await Promise.all([
+        fetch("/api/admin/reservations", { cache: "no-store" }),
+        fetch("/api/admin/cars", { cache: "no-store" }),
       ]);
+      const resData = resRes.ok ? (await resRes.json()).reservations : [];
+      const carData = carRes.ok ? (await carRes.json()).cars : [];
       setReservations(resData || []);
       setCars(carData || []);
       setLoading(false);

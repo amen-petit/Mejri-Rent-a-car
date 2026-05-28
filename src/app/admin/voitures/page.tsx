@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 import { Car, PricingTier } from "@/lib/types";
 import {
   CAR_CATEGORIES,
@@ -63,11 +62,9 @@ export default function AdminVoitures() {
   const [pricingTiers, setPricingTiers] = useState<TierFormRow[]>([]);
 
   async function load() {
-    const { data } = await supabase
-      .from("cars")
-      .select("*")
-      .order("created_at", { ascending: false });
-    setCars(data || []);
+    const res = await fetch("/api/admin/cars", { cache: "no-store" });
+    const data = res.ok ? await res.json() : { cars: [] };
+    setCars(data.cars || []);
     setLoading(false);
   }
 
@@ -110,22 +107,16 @@ export default function AdminVoitures() {
     setShowForm(true);
   }
 
-  async function uploadImages(carId: string): Promise<string[]> {
-    if (!images || images.length === 0) return [];
-    const urls: string[] = [];
+  async function uploadImages(carId: string): Promise<void> {
+    if (!images || images.length === 0) return;
+    const fd = new FormData();
     for (let i = 0; i < images.length; i++) {
-      const file = images[i];
-      const ext = file.name.split(".").pop();
-      const path = `${carId}/${Date.now()}-${i}.${ext}`;
-      const { error } = await supabase.storage
-        .from("car-images")
-        .upload(path, file, { upsert: true });
-      if (!error) {
-        const { data } = supabase.storage.from("car-images").getPublicUrl(path);
-        urls.push(data.publicUrl);
-      }
+      fd.append("files", images[i]);
     }
-    return urls;
+    await fetch(`/api/admin/cars/${carId}/images`, {
+      method: "POST",
+      body: fd,
+    });
   }
 
   async function handleSave() {
@@ -214,48 +205,39 @@ export default function AdminVoitures() {
     };
 
     if (editing) {
-      const { error: updateError } = await supabase
-        .from("cars")
-        .update(payload)
-        .eq("id", editing.id);
+      const res = await fetch(`/api/admin/cars/${editing.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-      if (updateError) {
-        alert(`Erreur lors de la sauvegarde: ${updateError.message}`);
+      if (!res.ok) {
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        alert(`Erreur lors de la sauvegarde: ${data.error || res.status}`);
         setSaving(false);
         return;
       }
 
       if (images && images.length > 0) {
-        const newUrls = await uploadImages(editing.id);
-        if (newUrls.length > 0) {
-          const merged = [...(editing.images || []), ...newUrls];
-          await supabase
-            .from("cars")
-            .update({ images: merged })
-            .eq("id", editing.id);
-        }
+        await uploadImages(editing.id);
       }
     } else {
-      const { data, error: insertError } = await supabase
-        .from("cars")
-        .insert(payload)
-        .select()
-        .single();
+      const res = await fetch("/api/admin/cars", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-      if (insertError) {
-        alert(`Erreur lors de la création: ${insertError.message}`);
+      if (!res.ok) {
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        alert(`Erreur lors de la création: ${data.error || res.status}`);
         setSaving(false);
         return;
       }
 
-      if (data && images && images.length > 0) {
-        const newUrls = await uploadImages(data.id);
-        if (newUrls.length > 0) {
-          await supabase
-            .from("cars")
-            .update({ images: newUrls })
-            .eq("id", data.id);
-        }
+      const { id } = (await res.json()) as { id: string };
+      if (id && images && images.length > 0) {
+        await uploadImages(id);
       }
     }
 
@@ -267,22 +249,27 @@ export default function AdminVoitures() {
   async function handleDelete(id: string) {
     if (!confirm("Supprimer ce véhicule ?")) return;
     setDeletingId(id);
-    await supabase.from("cars").delete().eq("id", id);
+    await fetch(`/api/admin/cars/${id}`, { method: "DELETE" });
     setDeletingId(null);
     load();
   }
 
   async function toggleAvailable(car: Car) {
-    await supabase
-      .from("cars")
-      .update({ is_available: !car.is_available })
-      .eq("id", car.id);
+    await fetch(`/api/admin/cars/${car.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ is_available: !car.is_available }),
+    });
     load();
   }
 
   async function removeImage(car: Car, url: string) {
     const updated = car.images.filter((i) => i !== url);
-    await supabase.from("cars").update({ images: updated }).eq("id", car.id);
+    await fetch(`/api/admin/cars/${car.id}/images`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url }),
+    });
     load();
     if (editing) setEditing({ ...car, images: updated });
   }

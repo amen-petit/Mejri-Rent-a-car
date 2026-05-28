@@ -36,6 +36,22 @@ async function importSecretKey(secret: string) {
   );
 }
 
+/**
+ * Constant-time string comparison. Avoids early-exit timing leaks and is
+ * Edge-runtime safe (no node:crypto), so it works in middleware too. Length
+ * difference is folded into the accumulator rather than short-circuiting.
+ */
+export function constantTimeEqual(a: string, b: string): boolean {
+  const aBytes = new TextEncoder().encode(a);
+  const bBytes = new TextEncoder().encode(b);
+  let diff = aBytes.length ^ bBytes.length;
+  const len = Math.max(aBytes.length, bBytes.length);
+  for (let i = 0; i < len; i += 1) {
+    diff |= (aBytes[i] ?? 0) ^ (bBytes[i] ?? 0);
+  }
+  return diff === 0;
+}
+
 async function signValue(value: string, secret: string) {
   const key = await importSecretKey(secret);
   const signature = await crypto.subtle.sign(
@@ -70,7 +86,7 @@ export async function verifyAdminSessionToken(
   if (!encodedPayload || !signature) return null;
 
   const expectedSignature = await signValue(encodedPayload, secret);
-  if (signature !== expectedSignature) return null;
+  if (!constantTimeEqual(signature, expectedSignature)) return null;
 
   try {
     const payload = JSON.parse(

@@ -12,6 +12,8 @@ export default function CarsPage() {
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  // car_id -> number of units rented today
+  const [rentedToday, setRentedToday] = useState<Record<string, number>>({});
 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Tous");
@@ -46,8 +48,15 @@ export default function CarsPage() {
   useEffect(() => {
     const loadCars = async () => {
       try {
-        const data = await getCars();
-        setCars(data);
+        const [carsData, availability] = await Promise.all([
+          getCars(),
+          fetch("/api/availability/today")
+            .then((r) => r.json())
+            .catch(() => ({ counts: {} as Record<string, number> })),
+        ]);
+
+        setCars(carsData);
+        setRentedToday(availability.counts ?? {});
       } finally {
         setLoading(false);
       }
@@ -264,22 +273,28 @@ export default function CarsPage() {
                     <div className="h-3 w-28 animate-pulse rounded bg-white/5" />
                   </div>
                 ) : (
-                  <div className="space-y-2.5">
-                    <p className="text-sm text-slate-400">
-                      <span className="font-semibold text-white">
-                        {cars.filter((c) => c.is_available).length}
-                      </span>{" "}
-                      véhicules disponibles sur{" "}
-                      <span className="text-slate-500">{cars.length}</span>
-                    </p>
-                    <p className="text-sm text-slate-400">
-                      Tarifs dès{" "}
-                      <span className="font-semibold" style={{ color: "#89a9f1" }}>
-                        {Math.min(...cars.map((c) => c.price_per_day))} DT
-                      </span>
-                      {" "}/ jour
-                    </p>
-                  </div>
+                  (() => {
+                    const totalUnits = cars.reduce((s, c) => s + (c.quantity ?? 1), 0);
+                    const availableUnits = cars
+                      .filter((c) => c.is_available)
+                      .reduce((s, c) => s + Math.max(0, (c.quantity ?? 1) - (rentedToday[c.id] ?? 0)), 0);
+                    return (
+                      <div className="space-y-2.5">
+                        <p className="text-sm text-slate-400">
+                          <span className="font-semibold text-white">{availableUnits}</span>{" "}
+                          véhicules disponibles sur{" "}
+                          <span className="text-slate-500">{totalUnits}</span>
+                        </p>
+                        <p className="text-sm text-slate-400">
+                          Tarifs dès{" "}
+                          <span className="font-semibold" style={{ color: "#89a9f1" }}>
+                            {Math.min(...cars.map((c) => c.price_per_day))} DT
+                          </span>
+                          {" "}/ jour
+                        </p>
+                      </div>
+                    );
+                  })()
                 )}
               </div>
             </div>
@@ -291,24 +306,27 @@ export default function CarsPage() {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
               En direct
             </span>
-            {!loading && cars.length > 0 && (
-              <>
-                <span className="text-white/20">·</span>
-                <span>
-                  <span className="font-semibold text-white">
-                    {cars.filter((c) => c.is_available).length}
-                  </span>{" "}
-                  disponibles
-                </span>
-                <span className="text-white/20">·</span>
-                <span>
-                  dès{" "}
-                  <span className="font-semibold" style={{ color: "#89a9f1" }}>
-                    {Math.min(...cars.map((c) => c.price_per_day))} DT
+            {!loading && cars.length > 0 && (() => {
+              const availableUnits = cars
+                .filter((c) => c.is_available)
+                .reduce((s, c) => s + Math.max(0, (c.quantity ?? 1) - (rentedToday[c.id] ?? 0)), 0);
+              return (
+                <>
+                  <span className="text-white/20">·</span>
+                  <span>
+                    <span className="font-semibold text-white">{availableUnits}</span>{" "}
+                    disponibles
                   </span>
-                </span>
-              </>
-            )}
+                  <span className="text-white/20">·</span>
+                  <span>
+                    dès{" "}
+                    <span className="font-semibold" style={{ color: "#89a9f1" }}>
+                      {Math.min(...cars.map((c) => c.price_per_day))} DT
+                    </span>
+                  </span>
+                </>
+              );
+            })()}
           </div>
         </div>
       </section>

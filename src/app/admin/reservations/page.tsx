@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 import { Reservation, Car } from "@/lib/types";
 import {
   RESERVATION_STATUS_LABEL,
@@ -21,11 +20,9 @@ export default function AdminReservations() {
   const [updating, setUpdating] = useState<string | null>(null);
 
   async function load() {
-    const { data } = await supabase
-      .from("reservations")
-      .select("*, car:cars(*)")
-      .order("created_at", { ascending: false });
-    setReservations(data || []);
+    const res = await fetch("/api/admin/reservations", { cache: "no-store" });
+    const data = res.ok ? await res.json() : { reservations: [] };
+    setReservations(data.reservations || []);
     setLoading(false);
   }
 
@@ -35,39 +32,12 @@ export default function AdminReservations() {
 
   async function updateStatus(id: string, status: "confirmed" | "cancelled") {
     setUpdating(id);
-    await supabase.from("reservations").update({ status }).eq("id", id);
-
-    const reservation =
-      selected?.id === id ? selected : reservations.find((r) => r.id === id);
-
-    if (reservation) {
-      void fetch("/api/reservations/notify", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          event: status,
-          carName: reservation.car?.name || "Voiture",
-          carBrand: reservation.car?.brand || "Fekra rent a car",
-          clientName: reservation.client_name,
-          clientPhone: reservation.client_phone,
-          clientEmail: reservation.client_email || null,
-          startDate: new Date(reservation.start_date).toLocaleDateString(
-            "fr-FR",
-          ),
-          endDate: new Date(reservation.end_date).toLocaleDateString("fr-FR"),
-          totalPrice: reservation.total_price,
-          notes: reservation.notes || null,
-        }),
-      }).catch((notifyError) => {
-        console.error(
-          "Failed to send reservation status email notification:",
-          notifyError,
-        );
-      });
-    }
-
+    // Status change + customer email are handled server-side.
+    await fetch(`/api/admin/reservations/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    });
     setUpdating(null);
     if (selected?.id === id) setSelected((s) => (s ? { ...s, status } : null));
     load();
@@ -75,7 +45,7 @@ export default function AdminReservations() {
 
   async function handleDelete(id: string) {
     if (!confirm("Supprimer cette réservation ?")) return;
-    await supabase.from("reservations").delete().eq("id", id);
+    await fetch(`/api/admin/reservations/${id}`, { method: "DELETE" });
     setSelected(null);
     load();
   }

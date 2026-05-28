@@ -2,8 +2,10 @@ import { NextResponse } from "next/server";
 import {
   ADMIN_SESSION_COOKIE,
   ADMIN_SESSION_TTL_SECONDS,
+  constantTimeEqual,
   createAdminSessionToken,
 } from "@/lib/admin-auth";
+import { rateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -14,6 +16,16 @@ type LoginBody = {
 
 export async function POST(req: Request) {
   try {
+    // Brute-force protection: 5 attempts per IP per minute.
+    const ip = getClientIp(req);
+    const limit = rateLimit(`login:${ip}`, 5, 60_000);
+    if (!limit.ok) {
+      return NextResponse.json(
+        { error: "Too many attempts. Try again shortly." },
+        { status: 429, headers: { "Retry-After": String(limit.retryAfter) } },
+      );
+    }
+
     const adminUsername = process.env.ADMIN_USERNAME;
     const adminPassword = process.env.ADMIN_PASSWORD;
 
@@ -26,7 +38,10 @@ export async function POST(req: Request) {
 
     const { username, password } = (await req.json()) as LoginBody;
 
-    if (username !== adminUsername || password !== adminPassword) {
+    // Evaluate both comparisons (no short-circuit) to avoid timing side channels.
+    const usernameOk = constantTimeEqual(username ?? "", adminUsername);
+    const passwordOk = constantTimeEqual(password ?? "", adminPassword);
+    if (!usernameOk || !passwordOk) {
       return NextResponse.json(
         { error: "Invalid username or password." },
         { status: 401 },
@@ -41,7 +56,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const token = await createAdminSessionToken(username, sessionSecret);
+    const token = await createAdminSessionToken(adminUsername, sessionSecret);
 
     const response = NextResponse.json({ ok: true });
     response.cookies.set(ADMIN_SESSION_COOKIE, token, {

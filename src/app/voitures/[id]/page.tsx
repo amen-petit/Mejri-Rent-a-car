@@ -3,9 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import { getCarById, getUnavailableDates } from "@/lib/cars";
+import { getCarById } from "@/lib/cars";
 import { Car, PricingTier } from "@/lib/types";
-import { supabase } from "@/lib/supabase";
 import {
   MONTHS_FR,
   DAYS_FR,
@@ -132,7 +131,15 @@ export default function CarDetailPage() {
 
   useEffect(() => {
     if (!id) return;
-    Promise.all([getCarById(id), getUnavailableDates(id)])
+    Promise.all([
+      getCarById(id),
+      fetch(`/api/cars/${id}/availability`)
+        .then((r) => r.json())
+        .then(
+          (d) => (d.unavailable ?? []) as { start_date: string; end_date: string }[],
+        )
+        .catch(() => [] as { start_date: string; end_date: string }[]),
+    ])
       .then(([carData, unavailData]) => {
         setCar(carData);
         setUnavailable(unavailData);
@@ -227,48 +234,35 @@ export default function CarDetailPage() {
   async function handleSubmit() {
     if (!car || !startDate || !endDate || !form.name || !form.phone) return;
     setSubmitting(true);
-    const payload = {
-      car_id: car.id,
-      client_name: form.name,
-      client_phone: form.phone,
-      client_email: form.email || null,
-      start_date: startDate.toISOString().split("T")[0],
-      end_date: endDate.toISOString().split("T")[0],
-      total_price: totalPrice,
-      notes: form.notes || null,
-      status: "pending" as const,
-    };
 
-    const { error } = await supabase.from("reservations").insert(payload);
-
-    if (!error) {
-      void fetch("/api/reservations/notify", {
+    // Price and availability are validated and computed on the server.
+    try {
+      const res = await fetch("/api/reservations", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          carName: car.name,
-          carBrand: car.brand,
-          clientName: form.name,
-          clientPhone: form.phone,
-          clientEmail: form.email || null,
-          startDate: startDate.toLocaleDateString("fr-FR"),
-          endDate: endDate.toLocaleDateString("fr-FR"),
-          totalPrice,
+          car_id: car.id,
+          client_name: form.name,
+          client_phone: form.phone,
+          client_email: form.email || null,
+          start_date: startDate.toISOString().split("T")[0],
+          end_date: endDate.toISOString().split("T")[0],
           notes: form.notes || null,
         }),
-      }).catch((notifyError) => {
-        console.error(
-          "Failed to send reservation email notification:",
-          notifyError,
-        );
       });
 
-      setSuccess(true);
-      setShowForm(false);
+      if (res.ok) {
+        setSuccess(true);
+        setShowForm(false);
+      } else {
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        alert(data.error || "La réservation a échoué. Veuillez réessayer.");
+      }
+    } catch {
+      alert("Erreur réseau. Veuillez réessayer.");
+    } finally {
+      setSubmitting(false);
     }
-    setSubmitting(false);
   }
 
   if (loading)
