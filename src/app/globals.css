@@ -7,14 +7,17 @@
    inline gradients, and tints) is derived from these tokens.
    ========================================================================= */
 @theme {
-  --color-primary: #f17720; /* main accent */
-  --color-secondary: #00a7e1; /* secondary accent */
-  --color-navy: #1f2430; /* dark base (sections, headings) */
-  --color-navy-deep: #181c27; /* darkest gradient stop */
-  --color-navy-soft: #252d41; /* lighter gradient stop */
-  --color-surface: #f7f8fc; /* light page background */
-  --color-edge: #dce5f7; /* borders / hairlines */
-  --color-ink: #2c3343; /* body text */
+  --color-primary: #b12a34;
+  --color-secondary: #d94a57; /* use lighter red instead of blue for CTA gradients */
+
+  --color-navy: #183153;
+  --color-navy-deep: #12233b;
+  --color-navy-soft: #2f4f78;
+
+  --color-surface: #f5f7fb;
+  --color-edge: #d8e0ec;
+
+  --color-ink: #ffffff;
 }
 
 /* Premium Design System */
@@ -110,8 +113,13 @@
       color: var(--color-navy);
       transition: all 250ms ease-out;
 
-      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--color-navy) 15%, transparent);
+      background: linear-gradient(
+        135deg,
+        var(--color-primary) 0%,
+        var(--color-secondary) 100%
+      );
+      box-shadow: 0 4px 12px
+        color-mix(in srgb, var(--color-navy) 15%, transparent);
     }
 
     .btn-primary:hover {
@@ -121,7 +129,8 @@
 
     .btn-primary:active {
       transform: translateY(0);
-      box-shadow: 0 2px 8px color-mix(in srgb, var(--color-navy) 12%, transparent);
+      box-shadow: 0 2px 8px
+        color-mix(in srgb, var(--color-navy) 12%, transparent);
     }
 
     /* Secondary Button */
@@ -137,13 +146,15 @@
       background-color: var(--color-secondary);
       transition: all 250ms ease-out;
 
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--color-navy) 15%, transparent);
+      box-shadow: 0 4px 12px
+        color-mix(in srgb, var(--color-navy) 15%, transparent);
     }
 
     .btn-secondary:hover {
       transform: translateY(-2px);
       background-color: #91607f;
-      box-shadow: 0 8px 24px color-mix(in srgb, var(--color-secondary) 22%, transparent);
+      box-shadow: 0 8px 24px
+        color-mix(in srgb, var(--color-secondary) 22%, transparent);
     }
 
     /* Outline Button */
@@ -205,13 +216,15 @@
       border: 1px solid var(--color-edge);
       transition: all 300ms ease-out;
 
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--color-navy) 8%, transparent);
+      box-shadow: 0 4px 12px
+        color-mix(in srgb, var(--color-navy) 8%, transparent);
     }
 
     .card-surface:hover {
       transform: translateY(-6px);
       border-color: var(--color-primary);
-      box-shadow: 0 10px 24px color-mix(in srgb, var(--color-primary) 16%, transparent);
+      box-shadow: 0 10px 24px
+        color-mix(in srgb, var(--color-primary) 16%, transparent);
     }
 
     /* Input */
@@ -229,7 +242,8 @@
 
     .input-premium:focus {
       border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 14%, transparent);
+      box-shadow: 0 0 0 3px
+        color-mix(in srgb, var(--color-primary) 14%, transparent);
     }
 
     .input-premium::placeholder {
@@ -388,7 +402,8 @@
   .feature-card:hover {
     transform: translateY(-4px);
     border-color: var(--color-primary);
-    box-shadow: 0 12px 32px color-mix(in srgb, var(--color-primary) 14%, transparent);
+    box-shadow: 0 12px 32px
+      color-mix(in srgb, var(--color-primary) 14%, transparent);
   }
 
   /* Feature icon container */
@@ -427,7 +442,12 @@
   .card-gradient-border {
     background:
       linear-gradient(white, white) padding-box,
-      linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%) border-box;
+      linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-secondary) 100%
+        )
+        border-box;
     border: 2px solid transparent;
     border-radius: 1.5rem;
   }
@@ -457,11 +477,13 @@
 
 @layer utilities {
   .shadow-glow {
-    box-shadow: 0 0 50px color-mix(in srgb, var(--color-primary) 22%, transparent);
+    box-shadow: 0 0 50px
+      color-mix(in srgb, var(--color-primary) 22%, transparent);
   }
 
   .shadow-glow-plum {
-    box-shadow: 0 0 50px color-mix(in srgb, var(--color-secondary) 18%, transparent);
+    box-shadow: 0 0 50px
+      color-mix(in srgb, var(--color-secondary) 18%, transparent);
   }
 }
 
@@ -508,7 +530,8 @@
 }
 
 @keyframes float-orb {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   33% {
@@ -520,7 +543,8 @@
 }
 
 @keyframes float-orb-reverse {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   33% {
@@ -532,7 +556,8 @@
 }
 
 @keyframes scroll-dot {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
     opacity: 1;
   }
