@@ -11,13 +11,13 @@ palette block. You can rebrand a new client in a few minutes.
 Set these in `.env.local` (local) and in your host's env settings (e.g. Vercel).
 See `.env.example` for the full list.
 
-| Variable | What it controls |
-|---|---|
-| `NEXT_PUBLIC_BRAND_NAME` | Full brand name (page titles, footer, admin header, emails, SEO). e.g. `"Sahara Rent a Car"` |
-| `NEXT_PUBLIC_BRAND_SHORT` | Short mark used in headings and the big background watermark. e.g. `"Sahara"` |
+| Variable                      | What it controls                                                                                                                          |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_BRAND_NAME`      | Full brand name (page titles, footer, admin header, emails, SEO). e.g. `"Sahara Rent a Car"`                                              |
+| `NEXT_PUBLIC_BRAND_SHORT`     | Short mark used in headings and the big background watermark. e.g. `"Sahara"`                                                             |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp / call number in international format, digits only. Drives every `wa.me/…` link and the `tel:` call button. e.g. `"21620123456"` |
-| `NEXT_PUBLIC_PHONE_DISPLAY` | Human-readable phone shown in the UI. e.g. `"20 123 456"` |
-| `NEXT_PUBLIC_SITE_URL` | Public site URL (canonical links, OpenGraph, sitemap). |
+| `NEXT_PUBLIC_PHONE_DISPLAY`   | Human-readable phone shown in the UI. e.g. `"20 123 456"`                                                                                 |
+| `NEXT_PUBLIC_SITE_URL`        | Public site URL (canonical links, OpenGraph, sitemap).                                                                                    |
 
 No brand name, phone, or WhatsApp number is hardcoded anywhere in the source —
 they all flow from these variables (defined once in `src/lib/constants.ts`).
@@ -34,14 +34,14 @@ The entire visual skin is driven by **8 tokens** at the top of
 
 ```css
 @theme {
-  --color-primary:    #89a9f1; /* main accent (buttons, links, highlights) */
-  --color-secondary:  #a66694; /* secondary accent (gradients, labels) */
-  --color-navy:       #1f2430; /* dark base (dark sections, headings) */
-  --color-navy-deep:  #181c27; /* darkest gradient stop */
-  --color-navy-soft:  #252d41; /* lighter gradient stop */
-  --color-surface:    #f7f8fc; /* light page background */
-  --color-edge:       #dce5f7; /* borders / hairlines */
-  --color-ink:        #2c3343; /* body text */
+  --color-primary: #9b3540; /* main accent (buttons, links, highlights) */
+  --color-secondary: #c97d82; /* secondary accent (gradients, labels) */
+  --color-navy: #1f1d1e; /* dark base (dark sections, headings) */
+  --color-navy-deep: #111012; /* darkest gradient stop */
+  --color-navy-soft: #2c292b; /* lighter gradient stop */
+  --color-surface: #f6f2f0; /* page background */
+  --color-edge: #ded7d8; /* borders / hairlines */
+  --color-ink: #251f20; /* body text */
 }
 ```
 
@@ -51,6 +51,7 @@ Change these values and the whole site re-skins — utilities (`bg-primary`,
 touch `--color-primary` and `--color-secondary`.
 
 Notes:
+
 - Neutral grays (`slate-*`), the success green (`emerald-*`/status dots), and
   warning amber are intentionally **not** part of the brand palette.
 - Use OKLCH/hex as you like; any valid CSS color works.

@@ -2,11 +2,11 @@
 
 Brand palette (derived from existing CSS):
 
-- Primary / Accent: #89a9f1 (emerald / light blue)
-- Secondary / Accent 2: #a66694 (plum)
-- Navy / Text: #1f2430
-- Surface / Background: #F7F8FC
-- Border / Muted: #DCE5F7
+- Primary / Accent: #9b3540 (muted crimson)
+- Secondary / Accent 2: #c97d82 (soft rose)
+- Navy / Text: #1f1d1e
+- Surface / Background: #f6f2f0
+- Border / Muted: #ded7d8
 
 ## Typography
 

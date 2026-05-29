@@ -7,17 +7,21 @@
    inline gradients, and tints) is derived from these tokens.
    ========================================================================= */
 @theme {
-  --color-primary: #b12a34;
-  --color-secondary: #d94a57; /* use lighter red instead of blue for CTA gradients */
+  /* Core Brand */
+  --color-primary: #9b3540; /* muted crimson accent */
+  --color-secondary: #c97d82; /* soft rose accent */
 
-  --color-navy: #183153;
-  --color-navy-deep: #12233b;
-  --color-navy-soft: #2f4f78;
+  /* Main Dark System */
+  --color-navy: #1f1d1e; /* charcoal base */
+  --color-navy-deep: #111012; /* deepest background */
+  --color-navy-soft: #2c292b; /* elevated cards / surfaces */
 
-  --color-surface: #f5f7fb;
-  --color-edge: #d8e0ec;
+  /* Atmospheric Layers */
+  --color-surface: #f6f2f0; /* primary UI surface */
+  --color-edge: #ded7d8; /* subtle borders */
 
-  --color-ink: #ffffff;
+  /* Typography */
+  --color-ink: #251f20; /* warm dark ink */
 }
 
 /* Premium Design System */
@@ -37,8 +41,8 @@
 
     /* Surface */
     --surface: #ffffff;
-    --surface-hover: #f2f2f2;
-    --surface-active: #f1f3f7;
+    --surface-hover: #f8f5f4;
+    --surface-active: #efe9e8;
 
     /* Spacing */
     --spacing-xs: 0.25rem;
