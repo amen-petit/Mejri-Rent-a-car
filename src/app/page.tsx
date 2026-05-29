@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import {
   SITE_URL,
   BRAND_NAME,
+  BRAND_SHORT,
   PHONE_DISPLAY,
   WHATSAPP_NUMBER,
   FEATURED_CARS_LIMIT,
@@ -14,8 +15,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Accueil",
-  description:
-    "Fekra rent a car: location de voitures en Tunisie avec réservation en ligne simple, flotte moderne et assistance 24/7.",
+  description: `${BRAND_NAME}: location de voitures en Tunisie avec réservation en ligne simple, flotte moderne et assistance 24/7.`,
   alternates: { canonical: "/" },
 };
 
@@ -128,7 +128,7 @@ const testimonials = [
   {
     name: "Ahmed B.",
     city: "Tunis",
-    text: "Service exceptionnel, véhicule impeccable et livraison rapide. Je recommande vivement Fekra pour toute location en Tunisie.",
+    text: `Service exceptionnel, véhicule impeccable et livraison rapide. Je recommande vivement ${BRAND_SHORT} pour toute location en Tunisie.`,
   },
   {
     name: "Sonia M.",
@@ -183,12 +183,12 @@ export default async function Home() {
         className="relative flex min-h-[80dvh] flex-col overflow-hidden"
         style={{
           background:
-            "linear-gradient(145deg, #181C27 0%, #1F2430 45%, #252D41 100%)",
+            "linear-gradient(145deg, var(--color-navy-deep) 0%, var(--color-navy) 45%, var(--color-navy-soft) 100%)",
         }}
       >
         {/* Large gradient orbs */}
-        <div className="pointer-events-none absolute -right-[5%] -top-[10%] h-[800px] w-[800px] rounded-full bg-[#89a9f1]/10 blur-[130px] animate-float-orb" />
-        <div className="pointer-events-none absolute -bottom-[8%] -left-[8%] h-[700px] w-[700px] rounded-full bg-[#a66694]/10 blur-[120px] animate-float-orb-reverse" />
+        <div className="pointer-events-none absolute -right-[5%] -top-[10%] h-[800px] w-[800px] rounded-full bg-primary/10 blur-[130px] animate-float-orb" />
+        <div className="pointer-events-none absolute -bottom-[8%] -left-[8%] h-[700px] w-[700px] rounded-full bg-secondary/10 blur-[120px] animate-float-orb-reverse" />
 
         {/* Giant background watermark */}
         <div
@@ -199,14 +199,14 @@ export default async function Home() {
             className="select-none whitespace-nowrap text-[28vw] font-black leading-none tracking-tighter"
             style={{ color: "rgba(255,255,255,0.022)" }}
           >
-            FEKRA
+            {BRAND_SHORT.toUpperCase()}
           </span>
         </div>
 
         {/* Main content */}
         <div className="relative z-10 flex flex-1 items-center">
           <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
-            <div className="grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr] xl:gap-14">
+            <div className="grid items-center gap-10 md:grid-cols-[1.1fr_0.9fr] xl:gap-14">
               {/* LEFT: Editorial headline */}
               <div className="hero-col-left">
                 <div className="chip mb-5">
@@ -225,7 +225,7 @@ export default async function Home() {
                   <span className="font-black leading-[0.95] tracking-tight text-white text-[clamp(3rem,8vw,5.5rem)]">
                     La liberté
                   </span>
-                  <span className="font-black leading-[0.95] tracking-tight text-[clamp(3rem,8vw,5.5rem)]" style={{ color: "#89a9f1" }}>
+                  <span className="font-black leading-[0.95] tracking-tight text-[clamp(3rem,8vw,5.5rem)]" style={{ color: "var(--color-primary)" }}>
                     de la route,
                   </span>
                   <span
@@ -239,7 +239,7 @@ export default async function Home() {
                 <div
                   className="my-5 h-px w-20"
                   style={{
-                    background: "linear-gradient(90deg, #89a9f1, #a66694)",
+                    background: "linear-gradient(90deg, var(--color-primary), var(--color-secondary))",
                   }}
                 />
 
@@ -266,15 +266,15 @@ export default async function Home() {
 
                 <div className="mt-7 flex items-center gap-5 border-t border-white/10 pt-5">
                   <div className="flex -space-x-2.5">
-                    <div className="h-9 w-9 rounded-full border-2 border-[#1F2430] bg-linear-to-br from-[#89a9f1] to-[#a66694]" />
-                    <div className="h-9 w-9 rounded-full border-2 border-[#1F2430] bg-linear-to-br from-[#a66694] to-[#89a9f1]" />
-                    <div className="h-9 w-9 rounded-full border-2 border-[#1F2430] bg-linear-to-br from-slate-400 to-slate-600" />
+                    <div className="h-9 w-9 rounded-full border-2 border-navy bg-linear-to-br from-primary to-secondary" />
+                    <div className="h-9 w-9 rounded-full border-2 border-navy bg-linear-to-br from-secondary to-primary" />
+                    <div className="h-9 w-9 rounded-full border-2 border-navy bg-linear-to-br from-slate-400 to-slate-600" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-white">
                       +200 clients satisfaits
                     </p>
-                    <p className="mt-0.5 text-xs text-[#89a9f1]">
+                    <p className="mt-0.5 text-xs text-primary">
                       ★★★★★ · Note 4.9/5
                     </p>
                   </div>
@@ -286,35 +286,29 @@ export default async function Home() {
                 {displayedCars[0] ? (
                   <div className="group relative">
                     {/* Badges — outside the masked container so they stay crisp */}
-                    <div className="absolute left-4 top-4 z-10 flex items-center gap-1.5 rounded-full bg-[#1F2430]/60 px-2.5 py-1 ring-1 ring-white/10 backdrop-blur-sm">
+                    <div className="absolute left-4 top-4 z-10 flex items-center gap-1.5 rounded-full bg-navy/60 px-2.5 py-1 ring-1 ring-white/10 backdrop-blur-sm">
                       <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
                       <span className="text-[11px] font-semibold text-white">
                         Disponible
                       </span>
                     </div>
-                    <div className="absolute right-4 top-4 z-10 rounded-full bg-[#1F2430]/60 px-2.5 py-1 text-[11px] font-medium text-white/60 ring-1 ring-white/10 backdrop-blur-sm">
+                    <div className="absolute right-4 top-4 z-10 rounded-full bg-navy/60 px-2.5 py-1 text-[11px] font-medium text-white/60 ring-1 ring-white/10 backdrop-blur-sm">
                       {displayedCars[0].category}
                     </div>
 
                     {/* Image — masked fade so it bleeds into hero, no hard box */}
-                    <div
-                      className="relative h-[260px] sm:h-[320px] md:h-[370px] overflow-hidden rounded-t-3xl"
-                      style={{
-                        maskImage: "linear-gradient(to bottom, black 55%, transparent 100%)",
-                        WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 100%)",
-                      }}
-                    >
+                    <div className="relative h-[280px] sm:h-[340px] md:h-[390px] overflow-hidden rounded-3xl bg-white shadow-[0_24px_60px_-15px_rgba(0,0,0,0.45)]">
                       {displayedCars[0].images?.[0] ? (
                         <Image
                           src={displayedCars[0].images[0]}
                           alt={`${displayedCars[0].brand} ${displayedCars[0].name}`}
                           fill
                           priority
-                          sizes="(max-width: 768px) 100vw, 40vw"
-                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 45vw"
+                          className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
                         />
                       ) : (
-                        <div className="flex h-full items-center justify-center" style={{ background: "linear-gradient(145deg, #1e2538, #252d41)" }}>
+                        <div className="flex h-full items-center justify-center" style={{ background: "linear-gradient(145deg, var(--color-navy-soft), var(--color-navy-soft))" }}>
                           <svg
                             className="h-20 w-20 text-slate-600"
                             xmlns="http://www.w3.org/2000/svg"
@@ -335,7 +329,7 @@ export default async function Home() {
 
                     {/* Content sits on the hero background — truly blended */}
                     <div className="pt-5 px-1">
-                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#89a9f1]">
+                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">
                         {displayedCars[0].brand}
                       </p>
                       <h3 className="mt-1 text-2xl font-black leading-tight text-white">
@@ -447,7 +441,7 @@ export default async function Home() {
                     <span
                       className="h-1 w-1 shrink-0 rounded-full"
                       style={{
-                        background: "linear-gradient(135deg, #89a9f1, #a66694)",
+                        background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
                       }}
                     />
                     {item}
@@ -462,13 +456,13 @@ export default async function Home() {
       {/* ── 2. FEATURED CARS ── */}
       <section className="relative overflow-hidden bg-white px-4 py-24 sm:px-6">
         {/* Background depth */}
-        <div className="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[#89a9f1]/[0.05] blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-[#a66694]/[0.05] blur-3xl" />
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-primary/[0.05] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-secondary/[0.05] blur-3xl" />
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <span className="section-label">Sélection du moment</span>
-              <h2 className="mt-3 text-3xl font-semibold text-[#1F2430] sm:text-4xl">
+              <h2 className="mt-3 text-3xl font-semibold text-navy sm:text-4xl">
                 Flotte à la une
               </h2>
             </div>
@@ -490,10 +484,10 @@ export default async function Home() {
                 <div
                   data-reveal
                   key={car.id}
-                  className={`reveal-d${idx + 1} group relative cursor-pointer overflow-hidden rounded-2xl border border-[#dce5f7] bg-white shadow-[0_2px_8px_rgba(31,36,48,0.06)] transition-[transform,box-shadow,border-color] duration-500 ease-out hover:-translate-y-2 hover:border-[#89a9f1]/50 hover:shadow-[0_16px_40px_rgba(31,36,48,0.14)]`}
+                  className={`reveal-d${idx + 1} group relative cursor-pointer overflow-hidden rounded-2xl border border-edge bg-white shadow-[0_2px_8px_color-mix(in srgb, var(--color-navy) 6%, transparent)] transition-[transform,box-shadow,border-color] duration-500 ease-out hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_16px_40px_color-mix(in srgb, var(--color-navy) 14%, transparent)]`}
                 >
                   {/* Top gradient accent line on hover */}
-                  <div className="absolute left-0 right-0 top-0 z-10 h-0.5 bg-gradient-to-r from-[#89a9f1] to-[#a66694] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="absolute left-0 right-0 top-0 z-10 h-0.5 bg-gradient-to-r from-primary to-secondary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                   <Link href={`/voitures/${car.id}`} className="block">
                     <div className="relative h-52 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
@@ -526,7 +520,7 @@ export default async function Home() {
                       {/* Persistent bottom gradient for badge readability */}
                       <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/50 to-transparent" />
                       {/* Hover overlay with entrance animation */}
-                      <div className="absolute inset-0 flex items-center justify-center bg-[#1F2430]/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
+                      <div className="absolute inset-0 flex items-center justify-center bg-navy/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
                         <span className="flex translate-y-2 items-center gap-2 rounded-full border border-white/30 bg-white/20 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-y-0">
                           Voir les détails
                           <svg
@@ -544,7 +538,7 @@ export default async function Home() {
                         </span>
                       </div>
                       {car.is_featured && (
-                        <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full bg-gradient-to-r from-[#89a9f1] to-[#a66694] px-2.5 py-1 text-xs font-bold text-[#1F2430] shadow-lg shadow-[#89a9f1]/20">
+                        <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full bg-gradient-to-r from-primary to-secondary px-2.5 py-1 text-xs font-bold text-navy shadow-lg shadow-primary/20">
                           <svg
                             width="9"
                             height="9"
@@ -556,17 +550,17 @@ export default async function Home() {
                           Vedette
                         </div>
                       )}
-                      <div className="absolute bottom-3 right-3 z-10 rounded-full bg-[#1F2430]/80 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                      <div className="absolute bottom-3 right-3 z-10 rounded-full bg-navy/80 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
                         {car.category}
                       </div>
                     </div>
 
                     <div className="p-5">
                       <div className="mb-3">
-                        <p className="mb-0.5 text-[10px] font-bold uppercase tracking-widest text-[#89a9f1]">
+                        <p className="mb-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
                           {car.brand}
                         </p>
-                        <h3 className="text-lg font-bold leading-tight text-[#1F2430]">
+                        <h3 className="text-lg font-bold leading-tight text-navy">
                           {car.name}
                         </h3>
                       </div>
@@ -628,7 +622,7 @@ export default async function Home() {
                             À partir de
                           </p>
                           <div className="flex items-baseline gap-1">
-                            <span className="text-2xl font-black text-[#1F2430]">
+                            <span className="text-2xl font-black text-navy">
                               {car.price_per_day}
                             </span>
                             <span className="text-xs text-slate-400">
@@ -636,7 +630,7 @@ export default async function Home() {
                             </span>
                           </div>
                         </div>
-                        <span className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#89a9f1] to-[#a66694] px-4 py-2.5 text-xs font-bold text-white shadow-md transition-shadow duration-300 group-hover:shadow-[0_6px_20px_rgba(137,169,241,0.45)]">
+                        <span className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-primary to-secondary px-4 py-2.5 text-xs font-bold text-white shadow-md transition-shadow duration-300 group-hover:shadow-[0_6px_20px_color-mix(in srgb, var(--color-primary) 45%, transparent)]">
                           Réserver
                           <svg
                             width="12"
@@ -673,23 +667,23 @@ export default async function Home() {
         id="about"
         data-reveal
         className="relative overflow-hidden scroll-mt-28 px-4 py-24 sm:px-6"
-        style={{ background: "#F7F8FC" }}
+        style={{ background: "var(--color-surface)" }}
       >
         {/* Background depth */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(circle, rgba(31,36,48,0.055) 1px, transparent 1px)",
+              "radial-gradient(circle, color-mix(in srgb, var(--color-navy) 5.5%, transparent) 1px, transparent 1px)",
             backgroundSize: "28px 28px",
           }}
         />
-        <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-[#89a9f1]/[0.06] blur-3xl" />
+        <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-primary/[0.06] blur-3xl" />
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 text-center">
             <span className="section-label">Nos avantages</span>
-            <h2 className="mt-3 text-3xl font-semibold text-[#1F2430] sm:text-4xl">
-              Pourquoi choisir Fekra?
+            <h2 className="mt-3 text-3xl font-semibold text-navy sm:text-4xl">
+              Pourquoi choisir {BRAND_SHORT}?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-slate-600">
               Une expérience de location conçue pour votre confort et votre
@@ -705,7 +699,7 @@ export default async function Home() {
               style={{
                 left: "50%",
                 background:
-                  "linear-gradient(to bottom, transparent 0%, rgba(31,36,48,0.1) 15%, rgba(31,36,48,0.1) 85%, transparent 100%)",
+                  "linear-gradient(to bottom, transparent 0%, color-mix(in srgb, var(--color-navy) 10%, transparent) 15%, color-mix(in srgb, var(--color-navy) 10%, transparent) 85%, transparent 100%)",
               }}
             />
             {/* Horizontal divider between rows */}
@@ -715,12 +709,12 @@ export default async function Home() {
               style={{
                 top: "50%",
                 background:
-                  "linear-gradient(to right, transparent 0%, rgba(31,36,48,0.1) 15%, rgba(31,36,48,0.1) 85%, transparent 100%)",
+                  "linear-gradient(to right, transparent 0%, color-mix(in srgb, var(--color-navy) 10%, transparent) 15%, color-mix(in srgb, var(--color-navy) 10%, transparent) 85%, transparent 100%)",
               }}
             />
 
             {features.map((f, idx) => {
-              const accent = idx % 2 === 0 ? "#89a9f1" : "#a66694";
+              const accent = idx % 2 === 0 ? "var(--color-primary)" : "var(--color-secondary)";
               const accentRgb =
                 idx % 2 === 0 ? "137,169,241" : "166,102,148";
               return (
@@ -749,7 +743,7 @@ export default async function Home() {
                     <div className="mb-4" style={{ color: accent }}>
                       {f.icon}
                     </div>
-                    <h3 className="text-base font-bold text-[#1F2430]">
+                    <h3 className="text-base font-bold text-navy">
                       {f.title}
                     </h3>
                     <p className="mt-3 text-sm leading-7 text-slate-600">
@@ -770,12 +764,12 @@ export default async function Home() {
         className="relative overflow-hidden scroll-mt-28 bg-white px-4 py-24 sm:px-6"
       >
         {/* Background depth */}
-        <div className="pointer-events-none absolute -left-32 -top-32 h-[480px] w-[480px] rounded-full bg-[#a66694]/[0.05] blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-28 -right-28 h-80 w-80 rounded-full bg-[#89a9f1]/[0.06] blur-3xl" />
+        <div className="pointer-events-none absolute -left-32 -top-32 h-[480px] w-[480px] rounded-full bg-secondary/[0.05] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-28 -right-28 h-80 w-80 rounded-full bg-primary/[0.06] blur-3xl" />
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center">
             <span className="section-label">Simple et rapide</span>
-            <h2 className="mt-3 text-3xl font-semibold text-[#1F2430] sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-semibold text-navy sm:text-4xl">
               Comment ça marche
             </h2>
           </div>
@@ -790,7 +784,7 @@ export default async function Home() {
                 right: "13%",
                 height: "2px",
                 background:
-                  "linear-gradient(90deg, transparent, #89a9f1 20%, #a66694 80%, transparent)",
+                  "linear-gradient(90deg, transparent, var(--color-primary) 20%, var(--color-secondary) 80%, transparent)",
               }}
             />
 
@@ -802,17 +796,17 @@ export default async function Home() {
               >
                 {/* Number badge */}
                 <div
-                  className="relative z-10 mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-2xl text-xl font-black text-white shadow-[0_8px_24px_rgba(137,169,241,0.25)] transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_12px_32px_rgba(137,169,241,0.4)]"
+                  className="relative z-10 mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-2xl text-xl font-black text-white shadow-[0_8px_24px_color-mix(in srgb, var(--color-primary) 25%, transparent)] transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_12px_32px_color-mix(in srgb, var(--color-primary) 40%, transparent)]"
                   style={{
                     background:
-                      "linear-gradient(135deg, #89a9f1 0%, #a66694 100%)",
+                      "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)",
                   }}
                 >
                   {step.num}
                 </div>
                 {/* Content card */}
-                <div className="rounded-2xl border border-[#dce5f7] bg-white p-6 text-center shadow-[0_2px_8px_rgba(31,36,48,0.05)] transition-all duration-300 group-hover:border-[#89a9f1]/30 group-hover:shadow-[0_8px_24px_rgba(137,169,241,0.12)]">
-                  <h3 className="text-base font-bold text-[#1F2430]">
+                <div className="rounded-2xl border border-edge bg-white p-6 text-center shadow-[0_2px_8px_color-mix(in srgb, var(--color-navy) 5%, transparent)] transition-all duration-300 group-hover:border-primary/30 group-hover:shadow-[0_8px_24px_color-mix(in srgb, var(--color-primary) 12%, transparent)]">
+                  <h3 className="text-base font-bold text-navy">
                     {step.title}
                   </h3>
                   <p className="mt-3 text-sm leading-7 text-slate-600">
@@ -829,21 +823,21 @@ export default async function Home() {
       <section
         data-reveal
         className="relative overflow-hidden px-4 py-24 sm:px-6"
-        style={{ background: "#1F2430" }}
+        style={{ background: "var(--color-navy)" }}
       >
         {/* Background depth */}
         <div
           className="pointer-events-none absolute left-1/2 top-0 h-80 w-[800px] -translate-x-1/2 rounded-full"
           style={{
             background:
-              "conic-gradient(from 180deg at 50% 0%, rgba(137,169,241,0.1), rgba(166,102,148,0.07), transparent 55%)",
+              "conic-gradient(from 180deg at 50% 0%, color-mix(in srgb, var(--color-primary) 10%, transparent), color-mix(in srgb, var(--color-secondary) 7%, transparent), transparent 55%)",
             filter: "blur(60px)",
           }}
         />
-        <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-[#a66694]/[0.08] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-secondary/[0.08] blur-3xl" />
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center">
-            <span className="section-label" style={{ color: "#89a9f1" }}>
+            <span className="section-label" style={{ color: "var(--color-primary)" }}>
               Avis clients
             </span>
             <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">
@@ -870,12 +864,12 @@ export default async function Home() {
               <div
                 data-reveal
                 key={t.name}
-                className={`reveal-d${idx + 1} group relative overflow-hidden rounded-2xl border border-white/8 bg-white/[0.05] p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#89a9f1]/30 hover:bg-white/[0.08]`}
+                className={`reveal-d${idx + 1} group relative overflow-hidden rounded-2xl border border-white/8 bg-white/[0.05] p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:bg-white/[0.08]`}
               >
                 {/* Decorative large quote mark */}
                 <span
                   className="pointer-events-none absolute -right-1 -top-3 select-none font-black leading-none"
-                  style={{ fontSize: "8rem", color: "rgba(137,169,241,0.07)" }}
+                  style={{ fontSize: "8rem", color: "color-mix(in srgb, var(--color-primary) 7%, transparent)" }}
                   aria-hidden="true"
                 >
                   &ldquo;
@@ -903,7 +897,7 @@ export default async function Home() {
                     className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white"
                     style={{
                       background:
-                        "linear-gradient(135deg, #89a9f1 0%, #a66694 100%)",
+                        "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)",
                     }}
                   >
                     {t.name.charAt(0)}
@@ -925,35 +919,35 @@ export default async function Home() {
         className="relative overflow-hidden bg-white px-4 py-24 sm:px-6"
       >
         {/* Background depth */}
-        <div className="pointer-events-none absolute -right-24 top-0 h-96 w-96 rounded-full bg-[#89a9f1]/[0.05] blur-3xl" />
-        <div className="pointer-events-none absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-[#a66694]/[0.04] blur-3xl" />
+        <div className="pointer-events-none absolute -right-24 top-0 h-96 w-96 rounded-full bg-primary/[0.05] blur-3xl" />
+        <div className="pointer-events-none absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-secondary/[0.04] blur-3xl" />
         <div className="mx-auto max-w-7xl">
           <div
             className="relative overflow-hidden rounded-3xl px-8 py-12 text-center sm:px-16 sm:py-14"
             style={{
               background:
-                "linear-gradient(135deg, #181C27 0%, #1F2430 45%, #252D41 100%)",
+                "linear-gradient(135deg, var(--color-navy-deep) 0%, var(--color-navy) 45%, var(--color-navy-soft) 100%)",
             }}
           >
             {/* Decorative orbs */}
-            <div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-[#89a9f1]/10 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-[#a66694]/10 blur-3xl" />
-            <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-[#89a9f1]/6 blur-[80px]" />
+            <div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" />
+            <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/6 blur-[80px]" />
 
             {/* Top gradient line */}
             <div
               className="pointer-events-none absolute left-0 right-0 top-0 h-px"
               style={{
                 background:
-                  "linear-gradient(90deg, transparent 0%, #89a9f1 35%, #a66694 65%, transparent 100%)",
+                  "linear-gradient(90deg, transparent 0%, var(--color-primary) 35%, var(--color-secondary) 65%, transparent 100%)",
               }}
             />
 
             <div className="relative">
               {/* Chip */}
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#89a9f1]/20 bg-[#89a9f1]/10 px-4 py-1.5">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#89a9f1]" />
-                <span className="text-xs font-bold uppercase tracking-widest text-[#89a9f1]">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+                <span className="text-xs font-bold uppercase tracking-widest text-primary">
                   Départ dès aujourd&apos;hui
                 </span>
               </div>
@@ -962,7 +956,7 @@ export default async function Home() {
               <h2 className="text-4xl font-black leading-tight text-white sm:text-5xl lg:text-[3.75rem]">
                 Prêt pour votre
                 <br />
-                <span style={{ color: "#89a9f1" }}>prochaine aventure?</span>
+                <span style={{ color: "var(--color-primary)" }}>prochaine aventure?</span>
               </h2>
 
               <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-300">
@@ -1048,19 +1042,19 @@ export default async function Home() {
       <section
         id="contact"
         className="relative overflow-hidden scroll-mt-28 px-4 py-24 sm:px-6"
-        style={{ background: "#F7F8FC" }}
+        style={{ background: "var(--color-surface)" }}
       >
         {/* Background depth */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(circle, rgba(31,36,48,0.055) 1px, transparent 1px)",
+              "radial-gradient(circle, color-mix(in srgb, var(--color-navy) 5.5%, transparent) 1px, transparent 1px)",
             backgroundSize: "28px 28px",
           }}
         />
-        <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#a66694]/[0.06] blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[#89a9f1]/[0.05] blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-secondary/[0.06] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-primary/[0.05] blur-3xl" />
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
           {/* Contact card */}
           <div
@@ -1071,11 +1065,11 @@ export default async function Home() {
             <div
               className="absolute left-0 top-0 h-1 w-full"
               style={{
-                background: "linear-gradient(90deg, #89a9f1, #a66694)",
+                background: "linear-gradient(90deg, var(--color-primary), var(--color-secondary))",
               }}
             />
             <span className="section-label">Contact</span>
-            <h3 className="mt-4 text-2xl font-semibold text-[#1F2430] sm:text-3xl">
+            <h3 className="mt-4 text-2xl font-semibold text-navy sm:text-3xl">
               Parlons de votre prochaine location
             </h3>
             <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base sm:leading-relaxed">
@@ -1094,7 +1088,7 @@ export default async function Home() {
             <div className="mt-8 space-y-4">
               {/* Phone row */}
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#89a9f1]/15 to-[#a66694]/10 text-[#89a9f1] ring-1 ring-[#89a9f1]/20">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/15 to-secondary/10 text-primary ring-1 ring-primary/20">
                   <svg
                     width="18"
                     height="18"
@@ -1112,14 +1106,14 @@ export default async function Home() {
                   <p className="text-xs font-medium text-slate-500">
                     Téléphone
                   </p>
-                  <p className="text-sm font-bold text-[#1F2430]">
+                  <p className="text-sm font-bold text-navy">
                     {PHONE_DISPLAY}
                   </p>
                 </div>
               </div>
               {/* Location row */}
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#89a9f1]/15 to-[#a66694]/10 text-[#89a9f1] ring-1 ring-[#89a9f1]/20">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/15 to-secondary/10 text-primary ring-1 ring-primary/20">
                   <svg
                     width="18"
                     height="18"
@@ -1136,7 +1130,7 @@ export default async function Home() {
                 </div>
                 <div>
                   <p className="text-xs font-medium text-slate-500">Adresse</p>
-                  <p className="text-sm font-bold text-[#1F2430]">
+                  <p className="text-sm font-bold text-navy">
                     Tunis, Tunisie
                   </p>
                 </div>
@@ -1165,10 +1159,10 @@ export default async function Home() {
             <div
               className="absolute left-0 top-0 h-1 w-full"
               style={{
-                background: "linear-gradient(90deg, #a66694, #89a9f1)",
+                background: "linear-gradient(90deg, var(--color-secondary), var(--color-primary))",
               }}
             />
-            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#a66694]/15 to-[#89a9f1]/10 text-[#a66694] ring-1 ring-[#a66694]/20">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary/15 to-primary/10 text-secondary ring-1 ring-secondary/20">
               <svg
                 width="22"
                 height="22"
@@ -1183,7 +1177,7 @@ export default async function Home() {
               </svg>
             </div>
             <span className="section-label">Confidentialité</span>
-            <h3 className="mt-4 text-2xl font-semibold text-[#1F2430] sm:text-3xl">
+            <h3 className="mt-4 text-2xl font-semibold text-navy sm:text-3xl">
               Vos données restent protégées
             </h3>
             <div className="mt-6 space-y-4">
@@ -1194,13 +1188,13 @@ export default async function Home() {
                 "Connexion sécurisée (HTTPS) sur toutes les pages.",
               ].map((point) => (
                 <div key={point} className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#89a9f1]/12">
+                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/12">
                     <svg
                       width="10"
                       height="10"
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke="#89a9f1"
+                      stroke="var(--color-primary)"
                       strokeWidth="3"
                       strokeLinecap="round"
                       strokeLinejoin="round"

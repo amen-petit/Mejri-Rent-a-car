@@ -47,7 +47,7 @@ function LoginForm() {
       <div className="w-full max-w-md card-surface p-8 sm:p-10">
         <div className="mb-8">
           <p className="section-label">Admin Access</p>
-          <h1 className="mt-3 text-3xl font-bold text-navy-500">
+          <h1 className="mt-3 text-3xl font-bold text-navy">
             Connexion administrateur
           </h1>
           <p className="mt-3 text-sm text-slate-600 leading-7">
@@ -57,7 +57,7 @@ function LoginForm() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-xs uppercase tracking-widest text-navy-500 mb-2 font-bold">
+            <label className="block text-xs uppercase tracking-widest text-navy mb-2 font-bold">
               Nom d&apos;utilisateur
             </label>
             <input
@@ -72,7 +72,7 @@ function LoginForm() {
           </div>
 
           <div>
-            <label className="block text-xs uppercase tracking-widest text-navy-500 mb-2 font-bold">
+            <label className="block text-xs uppercase tracking-widest text-navy mb-2 font-bold">
               Mot de passe
             </label>
             <input

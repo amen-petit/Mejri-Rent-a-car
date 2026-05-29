@@ -16,13 +16,13 @@ const legalItems = [
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#1F2430" }} className="text-white">
+    <footer style={{ backgroundColor: "var(--color-navy)" }} className="text-white">
       {/* Gradient top accent */}
       <div
         className="h-px w-full"
         style={{
           background:
-            "linear-gradient(90deg, transparent, #89a9f1 30%, #a66694 70%, transparent)",
+            "linear-gradient(90deg, transparent, var(--color-primary) 30%, var(--color-secondary) 70%, transparent)",
         }}
       />
 
@@ -34,7 +34,7 @@ export default function Footer() {
               className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white"
               style={{
                 background:
-                  "linear-gradient(135deg, #89a9f1 0%, #a66694 100%)",
+                  "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)",
               }}
             >
               <svg
@@ -51,7 +51,7 @@ export default function Footer() {
               </svg>
             </div>
             <div className="flex flex-col leading-none">
-              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#89a9f1]">
+              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
                 {BRAND_NAME}
               </span>
               <span className="mt-0.5 text-lg font-bold text-white">
@@ -70,7 +70,7 @@ export default function Footer() {
               height="14"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#89a9f1"
+              stroke="var(--color-primary)"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -124,7 +124,7 @@ export default function Footer() {
           <span className="flex items-center gap-1">
             <span
               className="h-1.5 w-1.5 rounded-full"
-              style={{ background: "#89a9f1" }}
+              style={{ background: "var(--color-primary)" }}
             />
             Tunisie · Service premium
           </span>

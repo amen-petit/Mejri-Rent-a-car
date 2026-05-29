@@ -30,8 +30,12 @@ export async function POST(req: Request) {
   }
   const input = parsed.data;
 
-  const todayStr = new Date().toISOString().split("T")[0];
-  if (input.start_date < todayStr) {
+  // Allow a 1-day grace: the server runs in UTC while clients send local dates,
+  // so a valid "today" can be up to a day off from UTC near the date boundary.
+  const minDate = new Date(Date.now() - 24 * 60 * 60 * 1000)
+    .toISOString()
+    .split("T")[0];
+  if (input.start_date < minDate) {
     return NextResponse.json(
       { error: "La date de début est dans le passé." },
       { status: 400 },

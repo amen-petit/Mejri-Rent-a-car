@@ -93,7 +93,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${spaceGrotesk.variable} ${dmSans.variable} font-body bg-[#F7F8FC] text-[#2c3343] antialiased overflow-x-hidden`}
+        className={`${spaceGrotesk.variable} ${dmSans.variable} font-body bg-surface text-[var(--color-ink)] antialiased overflow-x-hidden`}
       >
         <MotionProvider />
         <div className="min-h-screen page-enter">{children}</div>

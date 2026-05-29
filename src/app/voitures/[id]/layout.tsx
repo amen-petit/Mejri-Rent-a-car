@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCarById } from "@/lib/cars";
+import { BRAND_NAME } from "@/lib/constants";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -26,7 +27,7 @@ export async function generateMetadata({
   }
 
   const title = `${car.brand} ${car.name} - Location en Tunisie`;
-  const description = `Louez ${car.brand} ${car.name} en Tunisie à partir de ${car.price_per_day} DT/jour. Réservation rapide en ligne avec Fekra rent a car.`;
+  const description = `Louez ${car.brand} ${car.name} en Tunisie à partir de ${car.price_per_day} DT/jour. Réservation rapide en ligne avec ${BRAND_NAME}.`;
   const canonical = `/voitures/${car.id}`;
 
   return {

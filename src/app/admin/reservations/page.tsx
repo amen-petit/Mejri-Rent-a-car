@@ -90,7 +90,7 @@ export default function AdminReservations() {
   return (
     <div data-reveal className="p-4 sm:p-6 lg:p-8">
       <div data-reveal className="mb-10 sm:mb-12">
-        <h1 className="text-3xl font-bold text-navy-500 sm:text-4xl">
+        <h1 className="text-3xl font-bold text-navy sm:text-4xl">
           Réservations
         </h1>
         <p className="mt-2 text-sm text-slate-600 sm:text-base">
@@ -136,7 +136,7 @@ export default function AdminReservations() {
       ) : reservations.length === 0 ? (
         <div className="text-center py-24 text-slate-600">
           <div className="text-4xl mb-4">📅</div>
-          <div className="text-2xl font-bold mb-2 text-navy-500">
+          <div className="text-2xl font-bold mb-2 text-navy">
             Aucune réservation
           </div>
           <div className="text-base">Les réservations apparaîtront ici.</div>
@@ -158,14 +158,14 @@ export default function AdminReservations() {
                   onClick={() => setSelected(r)}
                   className={`card-surface relative z-10 rounded-3xl p-5 cursor-pointer transition-all bg-white ${
                     selected?.id === r.id
-                      ? "border-2 border-[#89a9f1] bg-[#89a9f1]/10! shadow-soft-lg ring-2 ring-[#89a9f1] scale-[1.01]"
-                      : "border-2 border-slate-200 hover:border-[#89a9f1] hover:shadow-soft"
+                      ? "border-2 border-primary bg-primary/10! shadow-soft-lg ring-2 ring-primary scale-[1.01]"
+                      : "border-2 border-slate-200 hover:border-primary hover:shadow-soft"
                   }`}
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-start gap-4 sm:items-center">
                       {/* Car image */}
-                      <div className="relative w-14 h-14 rounded-xl border-2 border-[#89a9f1] overflow-hidden shrink-0 bg-[#89a9f1]/10">
+                      <div className="relative w-14 h-14 rounded-xl border-2 border-primary overflow-hidden shrink-0 bg-primary/10">
                         {car?.images?.[0] ? (
                           <Image
                             src={car.images[0]}
@@ -175,12 +175,12 @@ export default function AdminReservations() {
                             className="object-cover"
                           />
                         ) : (
-                          <CarGlyph className="w-7 h-7 text-[#89a9f1]" />
+                          <CarGlyph className="w-7 h-7 text-primary" />
                         )}
                       </div>
 
                       <div>
-                        <div className="font-bold text-sm text-navy-500">
+                        <div className="font-bold text-sm text-navy">
                           {r.client_name}
                         </div>
                         <div className="text-xs text-slate-600 mt-1">
@@ -197,7 +197,7 @@ export default function AdminReservations() {
 
                     <div className="flex items-center justify-between gap-3 shrink-0 sm:justify-end">
                       <div className="text-left sm:text-right">
-                        <div className="font-bold text-sm text-[#89a9f1]">
+                        <div className="font-bold text-sm text-primary">
                           {r.total_price} DT
                         </div>
                         <div className="text-xs text-slate-600">
@@ -256,7 +256,7 @@ export default function AdminReservations() {
               >
                 <div className="card-surface rounded-3xl p-5 sm:p-6 lg:sticky lg:top-6 shadow-soft-xl overflow-x-hidden">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-bold text-navy-500">
+                    <h3 className="text-lg font-bold text-navy">
                       Détails de réservation
                     </h3>
                     <button
@@ -277,7 +277,7 @@ export default function AdminReservations() {
                   </div>
 
                   {/* Car */}
-                  <div className="bg-[#89a9f1]/10 rounded-2xl p-4 mb-6 flex items-center gap-3 border-2 border-[#89a9f1]">
+                  <div className="bg-primary/10 rounded-2xl p-4 mb-6 flex items-center gap-3 border-2 border-primary">
                     <div className="relative w-14 h-14 rounded-lg border-2 border-slate-200 overflow-hidden shrink-0 bg-slate-50">
                       {selected.car?.images?.[0] ? (
                         <Image
@@ -288,14 +288,14 @@ export default function AdminReservations() {
                           className="object-cover"
                         />
                       ) : (
-                        <CarGlyph className="w-7 h-7 text-[#89a9f1]" />
+                        <CarGlyph className="w-7 h-7 text-primary" />
                       )}
                     </div>
                     <div>
-                      <div className="text-sm font-bold text-navy-500">
+                      <div className="text-sm font-bold text-navy">
                         {selected.car?.brand} {selected.car?.name}
                       </div>
-                      <div className="text-xs text-[#89a9f1] font-bold mt-0.5">
+                      <div className="text-xs text-primary font-bold mt-0.5">
                         {selected.total_price} DT total
                       </div>
                     </div>
@@ -347,7 +347,7 @@ export default function AdminReservations() {
 
                   {/* Notes */}
                   {selected.notes && (
-                    <div className="bg-slate-100 rounded-xl p-3 mb-6 text-xs text-slate-700 font-medium leading-relaxed border-l-4 border-[#89a9f1]">
+                    <div className="bg-slate-100 rounded-xl p-3 mb-6 text-xs text-slate-700 font-medium leading-relaxed border-l-4 border-primary">
                       <div className="font-bold text-slate-600 mb-1.5">
                         Notes:
                       </div>
@@ -419,7 +419,7 @@ export default function AdminReservations() {
                       href={`https://wa.me/${selected.client_phone.replace(/\s/g, "")}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full border-2 border-[#89a9f1] text-[#1F2430] hover:bg-[#89a9f1]/10 py-2.5 rounded-xl text-sm text-center font-medium transition-colors flex items-center justify-center gap-2"
+                      className="w-full border-2 border-primary text-navy hover:bg-primary/10 py-2.5 rounded-xl text-sm text-center font-medium transition-colors flex items-center justify-center gap-2"
                     >
                       <WhatsAppIcon size={14} />
                       WhatsApp

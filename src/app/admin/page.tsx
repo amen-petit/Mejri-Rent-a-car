@@ -25,7 +25,7 @@ function StatCard({
         {label}
       </div>
       <div
-        className={`text-4xl font-bold ${color === "blue" ? "text-[#89a9f1]" : color === "red" ? "text-red-500" : color === "purple" ? "text-[#a66694]" : "text-navy-500"}`}
+        className={`text-4xl font-bold ${color === "blue" ? "text-primary" : color === "red" ? "text-red-500" : color === "purple" ? "text-secondary" : "text-navy"}`}
       >
         {value}
       </div>
@@ -106,7 +106,7 @@ export default function AdminDashboard() {
   return (
     <div data-reveal className="p-4 sm:p-6 lg:p-8">
       <div data-reveal className="mb-10 sm:mb-12">
-        <h1 className="text-3xl font-bold text-navy-500 sm:text-4xl">
+        <h1 className="text-3xl font-bold text-navy sm:text-4xl">
           Tableau de bord
         </h1>
         <p className="mt-2 text-sm text-slate-600 sm:text-base">
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
         {/* Calendar */}
         <div data-reveal="left" className="card-surface p-5 sm:p-8">
           <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="text-2xl font-bold text-navy-500">Calendrier</h2>
+            <h2 className="text-2xl font-bold text-navy">Calendrier</h2>
             <div className="flex items-center gap-3 text-base">
               <button
                 onClick={() => {
@@ -155,11 +155,11 @@ export default function AdminDashboard() {
                     setCalYear((y) => y - 1);
                   } else setCalMonth((m) => m - 1);
                 }}
-                className="text-slate-600 hover:text-navy-500 font-bold transition-colors"
+                className="text-slate-600 hover:text-navy font-bold transition-colors"
               >
                 ←
               </button>
-              <span className="text-base font-bold w-32 text-center text-navy-500">
+              <span className="text-base font-bold w-32 text-center text-navy">
                 {MONTHS_FR_SHORT[calMonth]} {calYear}
               </span>
               <button
@@ -169,7 +169,7 @@ export default function AdminDashboard() {
                     setCalYear((y) => y + 1);
                   } else setCalMonth((m) => m + 1);
                 }}
-                className="text-slate-600 hover:text-navy-500 font-bold transition-colors"
+                className="text-slate-600 hover:text-navy font-bold transition-colors"
               >
                 →
               </button>
@@ -196,11 +196,11 @@ export default function AdminDashboard() {
                 <div
                   key={i}
                   className={`aspect-square flex flex-col items-center justify-center rounded-lg text-xs relative transition-all duration-250 font-semibold
-                  ${isToday ? "bg-[#89a9f1] text-[#1F2430] shadow-soft" : rsvs.length > 0 ? "bg-[#89a9f1]/20 text-[#1F2430]" : "text-slate-600 hover:bg-slate-100"}`}
+                  ${isToday ? "bg-primary text-navy shadow-soft" : rsvs.length > 0 ? "bg-primary/20 text-navy" : "text-slate-600 hover:bg-slate-100"}`}
                 >
                   {date.getDate()}
                   {rsvs.length > 0 && !isToday && (
-                    <div className="w-1 h-1 rounded-full bg-[#89a9f1] mt-0.5" />
+                    <div className="w-1 h-1 rounded-full bg-primary mt-0.5" />
                   )}
                   {rsvs.length > 0 && isToday && (
                     <div className="w-1 h-1 rounded-full bg-white mt-0.5" />
@@ -212,11 +212,11 @@ export default function AdminDashboard() {
 
           <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-medium text-slate-600">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[#89a9f1]" />
+              <div className="w-3 h-3 rounded bg-primary" />
               <span>Aujourd&apos;hui</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[#89a9f1]/20 border-2 border-[#89a9f1]" />
+              <div className="w-3 h-3 rounded bg-primary/20 border-2 border-primary" />
               <span>Location active</span>
             </div>
           </div>
@@ -224,7 +224,7 @@ export default function AdminDashboard() {
 
         {/* Recent reservations */}
         <div data-reveal="right" className="card-surface p-5 sm:p-8">
-          <h2 className="mb-8 text-2xl font-bold text-navy-500">
+          <h2 className="mb-8 text-2xl font-bold text-navy">
             Dernières réservations
           </h2>
           {recent.length === 0 ? (
@@ -239,7 +239,7 @@ export default function AdminDashboard() {
                   className="flex items-center justify-between py-4 px-4 border-b border-slate-200 last:border-0 hover:bg-slate-50 rounded-lg transition-colors"
                 >
                   <div>
-                    <div className="text-base font-semibold text-navy-500">
+                    <div className="text-base font-semibold text-navy">
                       {r.client_name}
                     </div>
                     <div className="text-xs text-slate-600 mt-1">
@@ -251,7 +251,7 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="text-base font-bold text-[#89a9f1]">
+                    <div className="text-base font-bold text-primary">
                       {r.total_price} DT
                     </div>
                     <span

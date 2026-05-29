@@ -4,6 +4,10 @@ export const SITE_URL =
 export const BRAND_NAME =
   process.env.NEXT_PUBLIC_BRAND_NAME || "Fekra rent a car";
 
+// Short brand mark used in headings and the decorative background watermark.
+export const BRAND_SHORT =
+  process.env.NEXT_PUBLIC_BRAND_SHORT || "Fekra";
+
 export const PHONE_DISPLAY =
   process.env.NEXT_PUBLIC_PHONE_DISPLAY || "28 538 910";
 
@@ -56,7 +60,7 @@ export const RESERVATION_STATUS_LABEL: Record<string, string> = {
 
 export const RESERVATION_STATUS_COLOR: Record<string, string> = {
   pending: "bg-yellow-50 text-yellow-700 border-yellow-200",
-  confirmed: "bg-[#89a9f1]/20 text-[#1F2430] border-[#89a9f1]",
+  confirmed: "bg-primary/20 text-navy border-primary",
   cancelled: "bg-red-50 text-red-500 border-red-200",
 };
 

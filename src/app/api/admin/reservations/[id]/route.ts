@@ -3,6 +3,7 @@ import { isAdminRequest } from "@/lib/admin-guard";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { reservationStatusSchema } from "@/lib/validation";
 import { sendReservationEmails } from "@/lib/email";
+import { BRAND_NAME } from "@/lib/constants";
 
 export const runtime = "nodejs";
 
@@ -42,7 +43,7 @@ export async function PATCH(req: Request, { params }: Params) {
   if (parsed.data.status === "confirmed" || parsed.data.status === "cancelled") {
     void sendReservationEmails(parsed.data.status, {
       carName: updated.car?.name ?? "Voiture",
-      carBrand: updated.car?.brand ?? "Fekra rent a car",
+      carBrand: updated.car?.brand ?? BRAND_NAME,
       clientName: updated.client_name,
       clientPhone: updated.client_phone,
       clientEmail: updated.client_email ?? null,

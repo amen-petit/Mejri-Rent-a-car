@@ -1,18 +1,35 @@
 @import "tailwindcss";
 
+/* =========================================================================
+   TEMPLATE PALETTE — single source of truth.
+   To re-skin this template for a new client, edit ONLY these 8 values.
+   Every color in the app (utilities like `text-primary`, component classes,
+   inline gradients, and tints) is derived from these tokens.
+   ========================================================================= */
+@theme {
+  --color-primary: #f17720; /* main accent */
+  --color-secondary: #00a7e1; /* secondary accent */
+  --color-navy: #1f2430; /* dark base (sections, headings) */
+  --color-navy-deep: #181c27; /* darkest gradient stop */
+  --color-navy-soft: #252d41; /* lighter gradient stop */
+  --color-surface: #f7f8fc; /* light page background */
+  --color-edge: #dce5f7; /* borders / hairlines */
+  --color-ink: #2c3343; /* body text */
+}
+
 /* Premium Design System */
 
 @layer base {
   :root {
     color-scheme: light;
 
-    /* Core Colors */
-    --navy-primary: #1f2430;
-    --emerald-primary: #89a9f1;
-    --plum-primary: #a66694;
-    --slate-bg: #f7f8fc;
-    --slate-border: #dce5f7;
-    --slate-text: #2c3343;
+    /* Legacy aliases — derived from the @theme palette above. */
+    --navy-primary: var(--color-navy);
+    --emerald-primary: var(--color-primary);
+    --plum-primary: var(--color-secondary);
+    --slate-bg: var(--color-surface);
+    --slate-border: var(--color-edge);
+    --slate-text: var(--color-ink);
     --slate-muted: #6b7280;
 
     /* Surface */
@@ -90,11 +107,11 @@
       border-radius: 1rem;
       font-size: 0.875rem;
       font-weight: 600;
-      color: #1f2430;
+      color: var(--color-navy);
       transition: all 250ms ease-out;
 
-      background: linear-gradient(135deg, #89a9f1 0%, #a66694 100%);
-      box-shadow: 0 4px 12px rgba(31, 36, 48, 0.15);
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--color-navy) 15%, transparent);
     }
 
     .btn-primary:hover {
@@ -104,7 +121,7 @@
 
     .btn-primary:active {
       transform: translateY(0);
-      box-shadow: 0 2px 8px rgba(31, 36, 48, 0.12);
+      box-shadow: 0 2px 8px color-mix(in srgb, var(--color-navy) 12%, transparent);
     }
 
     /* Secondary Button */
@@ -117,16 +134,16 @@
       font-size: 0.875rem;
       font-weight: 600;
       color: white;
-      background-color: #a66694;
+      background-color: var(--color-secondary);
       transition: all 250ms ease-out;
 
-      box-shadow: 0 4px 12px rgba(31, 36, 48, 0.15);
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--color-navy) 15%, transparent);
     }
 
     .btn-secondary:hover {
       transform: translateY(-2px);
       background-color: #91607f;
-      box-shadow: 0 8px 24px rgba(166, 102, 148, 0.22);
+      box-shadow: 0 8px 24px color-mix(in srgb, var(--color-secondary) 22%, transparent);
     }
 
     /* Outline Button */
@@ -139,8 +156,8 @@
       font-size: 0.875rem;
       font-weight: 600;
 
-      border: 2px solid #1f2430;
-      color: #1f2430;
+      border: 2px solid var(--color-navy);
+      color: var(--color-navy);
       background: transparent;
 
       transition: all 250ms ease-out;
@@ -161,7 +178,7 @@
       font-size: 0.875rem;
       font-weight: 600;
 
-      color: #1f2430;
+      color: var(--color-navy);
       background-color: #eef2fa;
 
       transition: all 250ms ease-out;
@@ -169,7 +186,7 @@
 
     .btn-ghost:hover {
       transform: translateY(-2px);
-      background-color: #dce5f7;
+      background-color: var(--color-edge);
     }
 
     /* Section Label */
@@ -178,41 +195,41 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-weight: 600;
-      color: #a66694;
+      color: var(--color-secondary);
     }
 
     /* Card */
     .card-surface {
       border-radius: 1.5rem;
       background: white;
-      border: 1px solid #dce5f7;
+      border: 1px solid var(--color-edge);
       transition: all 300ms ease-out;
 
-      box-shadow: 0 4px 12px rgba(31, 36, 48, 0.08);
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--color-navy) 8%, transparent);
     }
 
     .card-surface:hover {
       transform: translateY(-6px);
-      border-color: #89a9f1;
-      box-shadow: 0 10px 24px rgba(137, 169, 241, 0.16);
+      border-color: var(--color-primary);
+      box-shadow: 0 10px 24px color-mix(in srgb, var(--color-primary) 16%, transparent);
     }
 
     /* Input */
     .input-premium {
       width: 100%;
       border-radius: 1rem;
-      border: 2px solid #dce5f7;
+      border: 2px solid var(--color-edge);
       background: white;
       padding: 0.75rem 1rem;
       font-size: 0.875rem;
-      color: #1f2430;
+      color: var(--color-navy);
       outline: none;
       transition: all 250ms ease;
     }
 
     .input-premium:focus {
-      border-color: #89a9f1;
-      box-shadow: 0 0 0 3px rgba(137, 169, 241, 0.14);
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 14%, transparent);
     }
 
     .input-premium::placeholder {
@@ -221,14 +238,14 @@
 
     /* Divider */
     .divider-soft {
-      border-top: 1px solid #dce5f7;
+      border-top: 1px solid var(--color-edge);
     }
   }
 }
 
 @layer utilities {
   .shadow-soft {
-    box-shadow: 0 4px 12px rgba(31, 36, 48, 0.08);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--color-navy) 8%, transparent);
   }
 
   .reveal-d1 {
@@ -345,9 +362,9 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    background: rgba(137, 169, 241, 0.12);
-    border: 1px solid rgba(137, 169, 241, 0.28);
-    color: #89a9f1;
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-primary) 28%, transparent);
+    color: var(--color-primary);
   }
 
   /* Dark glass card */
@@ -363,15 +380,15 @@
   .feature-card {
     border-radius: 1.5rem;
     background: white;
-    border: 1px solid #dce5f7;
+    border: 1px solid var(--color-edge);
     transition: all 300ms ease-out;
-    box-shadow: 0 2px 8px rgba(31, 36, 48, 0.05);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--color-navy) 5%, transparent);
   }
 
   .feature-card:hover {
     transform: translateY(-4px);
-    border-color: #89a9f1;
-    box-shadow: 0 12px 32px rgba(137, 169, 241, 0.14);
+    border-color: var(--color-primary);
+    box-shadow: 0 12px 32px color-mix(in srgb, var(--color-primary) 14%, transparent);
   }
 
   /* Feature icon container */
@@ -384,10 +401,10 @@
     border-radius: 1rem;
     background: linear-gradient(
       135deg,
-      rgba(137, 169, 241, 0.15) 0%,
-      rgba(166, 102, 148, 0.1) 100%
+      color-mix(in srgb, var(--color-primary) 15%, transparent) 0%,
+      color-mix(in srgb, var(--color-secondary) 10%, transparent) 100%
     );
-    color: #89a9f1;
+    color: var(--color-primary);
   }
 
   /* Testimonial card */
@@ -401,7 +418,7 @@
   }
 
   .testimonial-card:hover {
-    border-color: rgba(137, 169, 241, 0.25);
+    border-color: color-mix(in srgb, var(--color-primary) 25%, transparent);
     background: rgba(255, 255, 255, 0.09);
     transform: translateY(-4px);
   }
@@ -410,7 +427,7 @@
   .card-gradient-border {
     background:
       linear-gradient(white, white) padding-box,
-      linear-gradient(135deg, #89a9f1 0%, #a66694 100%) border-box;
+      linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%) border-box;
     border: 2px solid transparent;
     border-radius: 1.5rem;
   }
@@ -440,11 +457,11 @@
 
 @layer utilities {
   .shadow-glow {
-    box-shadow: 0 0 50px rgba(137, 169, 241, 0.22);
+    box-shadow: 0 0 50px color-mix(in srgb, var(--color-primary) 22%, transparent);
   }
 
   .shadow-glow-plum {
-    box-shadow: 0 0 50px rgba(166, 102, 148, 0.18);
+    box-shadow: 0 0 50px color-mix(in srgb, var(--color-secondary) 18%, transparent);
   }
 }
 

@@ -21,7 +21,7 @@ export default function Navbar() {
           <div
             className="flex h-9 w-9 items-center justify-center rounded-xl text-white shadow-soft transition-transform duration-250 group-hover:scale-105"
             style={{
-              background: "linear-gradient(135deg, #89a9f1 0%, #a66694 100%)",
+              background: "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)",
             }}
           >
             <svg
@@ -38,10 +38,10 @@ export default function Navbar() {
             </svg>
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#89a9f1]">
+            <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
               {BRAND_NAME}
             </span>
-            <span className="mt-0.5 text-base font-bold text-[#1f2430] sm:text-lg">
+            <span className="mt-0.5 text-base font-bold text-navy sm:text-lg">
               rent a car
             </span>
           </div>
@@ -53,7 +53,7 @@ export default function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className="relative cursor-pointer transition-colors duration-250 hover:text-navy-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#89a9f1] after:transition-all after:duration-250 hover:after:w-full"
+              className="relative cursor-pointer transition-colors duration-250 hover:text-navy after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-250 hover:after:w-full"
             >
               {link.label}
             </Link>
@@ -71,7 +71,7 @@ export default function Navbar() {
         <button
           className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-xl text-white shadow-soft transition-all duration-250 hover:opacity-90 md:hidden"
           style={{
-            background: "linear-gradient(135deg, #89a9f1 0%, #a66694 100%)",
+            background: "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)",
           }}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Ouvrir le menu"
@@ -102,7 +102,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="cursor-pointer rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 transition-colors duration-200 hover:bg-slate-50 hover:text-navy-500"
+                className="cursor-pointer rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 transition-colors duration-200 hover:bg-slate-50 hover:text-navy"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}

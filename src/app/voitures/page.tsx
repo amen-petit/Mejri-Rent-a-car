@@ -108,7 +108,7 @@ export default function CarsPage() {
     onSelect: (value: string) => void,
   ) => (
     <div>
-      <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy-500">
+      <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy">
         {label}
       </label>
       <div className="flex flex-wrap gap-2">
@@ -122,13 +122,13 @@ export default function CarsPage() {
               className={`cursor-pointer rounded-xl px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${
                 isActive
                   ? "text-white shadow-soft"
-                  : "border border-slate-200 bg-white text-slate-600 hover:border-[#89a9f1]/50 hover:text-navy-500"
+                  : "border border-slate-200 bg-white text-slate-600 hover:border-primary/50 hover:text-navy"
               }`}
               style={
                 isActive
                   ? {
                       background:
-                        "linear-gradient(135deg, #89a9f1 0%, #a66694 100%)",
+                        "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)",
                     }
                   : undefined
               }
@@ -144,10 +144,10 @@ export default function CarsPage() {
   const filterPanel = (
     <div className="card-surface p-5 sm:p-6">
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-base font-bold text-navy-500">Filtres</h2>
+        <h2 className="text-base font-bold text-navy">Filtres</h2>
         <button
           onClick={resetFilters}
-          className="cursor-pointer text-xs font-semibold text-[#a66694] hover:text-[#89a9f1] transition-colors"
+          className="cursor-pointer text-xs font-semibold text-secondary hover:text-primary transition-colors"
         >
           Réinitialiser
         </button>
@@ -155,7 +155,7 @@ export default function CarsPage() {
 
       <div className="space-y-6">
         <div>
-          <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy-500">
+          <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy">
             Recherche
           </label>
           <input
@@ -177,9 +177,9 @@ export default function CarsPage() {
         {renderOptionGroup("Carburant", fuels, fuel, setFuel)}
 
         <div>
-          <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy-500">
+          <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-navy">
             Prix max:{" "}
-            <span className="font-bold text-[#89a9f1]">{maxPrice} DT</span>
+            <span className="font-bold text-primary">{maxPrice} DT</span>
           </label>
           <input
             type="range"
@@ -188,7 +188,7 @@ export default function CarsPage() {
             step={10}
             value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}
-            className="w-full accent-[#89a9f1]"
+            className="w-full accent-primary"
           />
           <div className="mt-1.5 flex justify-between text-xs text-slate-400">
             <span>50 DT</span>
@@ -208,12 +208,12 @@ export default function CarsPage() {
         className="relative overflow-hidden pb-6 pt-8 sm:pb-8 sm:pt-10"
         style={{
           background:
-            "linear-gradient(160deg, #252D41 0%, #1F2430 60%, #1A1E2A 100%)",
+            "linear-gradient(160deg, var(--color-navy-soft) 0%, var(--color-navy) 60%, var(--color-navy-deep) 100%)",
         }}
       >
         {/* Ambient orbs */}
-        <div className="pointer-events-none absolute -right-[8%] -top-[20%] h-[360px] w-[360px] rounded-full bg-[#89a9f1]/[0.08] blur-[90px]" />
-        <div className="pointer-events-none absolute -bottom-[5%] -left-[5%] h-[280px] w-[280px] rounded-full bg-[#a66694]/[0.07] blur-[80px]" />
+        <div className="pointer-events-none absolute -right-[8%] -top-[20%] h-[360px] w-[360px] rounded-full bg-primary/[0.08] blur-[90px]" />
+        <div className="pointer-events-none absolute -bottom-[5%] -left-[5%] h-[280px] w-[280px] rounded-full bg-secondary/[0.07] blur-[80px]" />
 
         {/* Background watermark — centered */}
         <div
@@ -232,7 +232,7 @@ export default function CarsPage() {
           <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-12">
             {/* Left: title block */}
             <div className="min-w-0 flex-1">
-              <span className="section-label" style={{ color: "#89a9f1" }}>
+              <span className="section-label" style={{ color: "var(--color-primary)" }}>
                 Notre flotte
               </span>
               <h1
@@ -246,7 +246,7 @@ export default function CarsPage() {
               </p>
               <div
                 className="mt-3 h-px w-12"
-                style={{ background: "linear-gradient(90deg, #89a9f1, transparent)" }}
+                style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }}
               />
             </div>
 
@@ -287,7 +287,7 @@ export default function CarsPage() {
                         </p>
                         <p className="text-sm text-slate-400">
                           Tarifs dès{" "}
-                          <span className="font-semibold" style={{ color: "#89a9f1" }}>
+                          <span className="font-semibold" style={{ color: "var(--color-primary)" }}>
                             {Math.min(...cars.map((c) => c.price_per_day))} DT
                           </span>
                           {" "}/ jour
@@ -320,7 +320,7 @@ export default function CarsPage() {
                   <span className="text-white/20">·</span>
                   <span>
                     dès{" "}
-                    <span className="font-semibold" style={{ color: "#89a9f1" }}>
+                    <span className="font-semibold" style={{ color: "var(--color-primary)" }}>
                       {Math.min(...cars.map((c) => c.price_per_day))} DT
                     </span>
                   </span>
@@ -338,7 +338,7 @@ export default function CarsPage() {
           <div className="xl:hidden">
             <button
               onClick={() => setFiltersOpen((open) => !open)}
-              className="card-surface mb-4 flex w-full cursor-pointer items-center justify-between p-4 transition-colors hover:border-[#89a9f1]"
+              className="card-surface mb-4 flex w-full cursor-pointer items-center justify-between p-4 transition-colors hover:border-primary"
             >
               <div className="flex items-center gap-2">
                 <svg
@@ -346,7 +346,7 @@ export default function CarsPage() {
                   height="16"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#89a9f1"
+                  stroke="var(--color-primary)"
                   strokeWidth="2"
                   strokeLinecap="round"
                 >
@@ -354,11 +354,11 @@ export default function CarsPage() {
                   <line x1="8" y1="12" x2="20" y2="12" />
                   <line x1="12" y1="18" x2="20" y2="18" />
                 </svg>
-                <span className="text-sm font-semibold text-navy-500">
+                <span className="text-sm font-semibold text-navy">
                   Filtres
                 </span>
               </div>
-              <span className="text-xs font-semibold text-[#89a9f1]">
+              <span className="text-xs font-semibold text-primary">
                 {filtersOpen ? "Masquer ↑" : "Afficher ↓"}
               </span>
             </button>
@@ -377,7 +377,7 @@ export default function CarsPage() {
                 {[...Array(6)].map((_, idx) => (
                   <div
                     key={idx}
-                    className="overflow-hidden rounded-2xl border border-[#dce5f7] bg-white shadow-[0_2px_8px_rgba(31,36,48,0.06)]"
+                    className="overflow-hidden rounded-2xl border border-edge bg-white shadow-[0_2px_8px_color-mix(in srgb, var(--color-navy) 6%, transparent)]"
                   >
                     <div className="h-52 animate-pulse bg-slate-200" />
                     <div className="p-5">
@@ -417,7 +417,7 @@ export default function CarsPage() {
                     d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 15.803m10.607 0A7.5 7.5 0 0 1 5.196 15.803"
                   />
                 </svg>
-                <h2 className="text-xl font-bold text-navy-500">
+                <h2 className="text-xl font-bold text-navy">
                   Aucun véhicule trouvé
                 </h2>
                 <p className="mt-2 text-slate-500">
@@ -433,7 +433,7 @@ export default function CarsPage() {
             ) : (
               <>
                 <p className="mb-6 text-sm font-medium text-slate-500">
-                  <span className="font-bold text-[#1F2430]">
+                  <span className="font-bold text-navy">
                     {filteredCars.length}
                   </span>{" "}
                   véhicule{filteredCars.length > 1 ? "s" : ""} disponible
@@ -441,7 +441,7 @@ export default function CarsPage() {
                 </p>
 
                 {/* ── Hero card — first result, landscape layout ── */}
-                <article className="group mb-5 cursor-pointer overflow-hidden rounded-2xl border border-[#dce5f7] bg-white shadow-[0_4px_20px_rgba(31,36,48,0.08)] transition-all duration-500 hover:shadow-[0_24px_64px_rgba(31,36,48,0.16)]">
+                <article className="group mb-5 cursor-pointer overflow-hidden rounded-2xl border border-edge bg-white shadow-[0_4px_20px_color-mix(in srgb, var(--color-navy) 8%, transparent)] transition-all duration-500 hover:shadow-[0_24px_64px_color-mix(in srgb, var(--color-navy) 16%, transparent)]">
                   <Link
                     href={`/voitures/${filteredCars[0].id}`}
                     className="flex flex-col sm:flex-row sm:h-[300px]"
@@ -472,7 +472,7 @@ export default function CarsPage() {
                       {/* Mobile: darken bottom for readability */}
                       <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/40 to-transparent sm:hidden" />
                       {filteredCars[0].is_featured && (
-                        <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full bg-gradient-to-r from-[#89a9f1] to-[#a66694] px-2.5 py-1 text-xs font-bold text-[#1F2430] shadow-lg">
+                        <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full bg-gradient-to-r from-primary to-secondary px-2.5 py-1 text-xs font-bold text-navy shadow-lg">
                           <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                           </svg>
@@ -486,16 +486,16 @@ export default function CarsPage() {
                       <div>
                         <div className="flex items-start justify-between gap-3">
                           <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#89a9f1]">
+                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">
                               {filteredCars[0].brand}
                             </p>
-                            <h2 className="mt-1 text-2xl font-black leading-tight text-[#1F2430] sm:text-[1.75rem]">
+                            <h2 className="mt-1 text-2xl font-black leading-tight text-navy sm:text-[1.75rem]">
                               {filteredCars[0].name}
                             </h2>
                           </div>
                           <span
-                            className="shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold text-[#1F2430]"
-                            style={{ background: "rgba(31,36,48,0.07)" }}
+                            className="shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold text-navy"
+                            style={{ background: "color-mix(in srgb, var(--color-navy) 7%, transparent)" }}
                           >
                             {filteredCars[0].category}
                           </span>
@@ -519,7 +519,7 @@ export default function CarsPage() {
                             À partir de
                           </p>
                           <div className="mt-0.5 flex items-baseline gap-1.5">
-                            <span className="text-[2.5rem] font-black leading-none text-[#1F2430]">
+                            <span className="text-[2.5rem] font-black leading-none text-navy">
                               {filteredCars[0].price_per_day}
                             </span>
                             <span className="text-sm text-slate-400">DT/jour</span>
@@ -542,9 +542,9 @@ export default function CarsPage() {
                     {filteredCars.slice(1).map((car) => (
                       <article
                         key={car.id}
-                        className="group relative cursor-pointer overflow-hidden rounded-2xl border border-[#dce5f7] bg-white shadow-[0_2px_8px_rgba(31,36,48,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-[#89a9f1]/50 hover:shadow-[0_16px_40px_rgba(31,36,48,0.14)]"
+                        className="group relative cursor-pointer overflow-hidden rounded-2xl border border-edge bg-white shadow-[0_2px_8px_color-mix(in srgb, var(--color-navy) 6%, transparent)] transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_16px_40px_color-mix(in srgb, var(--color-navy) 14%, transparent)]"
                       >
-                        <div className="absolute left-0 right-0 top-0 z-10 h-0.5 bg-gradient-to-r from-[#89a9f1] to-[#a66694] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        <div className="absolute left-0 right-0 top-0 z-10 h-0.5 bg-gradient-to-r from-primary to-secondary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                         <Link href={`/voitures/${car.id}`} className="block">
                           <div className="relative h-52 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
                             {car.images?.[0] ? (
@@ -563,7 +563,7 @@ export default function CarsPage() {
                               </div>
                             )}
                             <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/50 to-transparent" />
-                            <div className="absolute inset-0 flex items-center justify-center bg-[#1F2430]/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
+                            <div className="absolute inset-0 flex items-center justify-center bg-navy/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
                               <span className="flex translate-y-2 items-center gap-2 rounded-full border border-white/30 bg-white/20 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-y-0">
                                 Voir les détails
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -572,23 +572,23 @@ export default function CarsPage() {
                               </span>
                             </div>
                             {car.is_featured && (
-                              <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full bg-gradient-to-r from-[#89a9f1] to-[#a66694] px-2.5 py-1 text-xs font-bold text-[#1F2430] shadow-lg shadow-[#89a9f1]/20">
+                              <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full bg-gradient-to-r from-primary to-secondary px-2.5 py-1 text-xs font-bold text-navy shadow-lg shadow-primary/20">
                                 <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
                                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                                 </svg>
                                 Vedette
                               </div>
                             )}
-                            <div className="absolute bottom-3 right-3 z-10 rounded-full bg-[#1F2430]/80 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                            <div className="absolute bottom-3 right-3 z-10 rounded-full bg-navy/80 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
                               {car.category}
                             </div>
                           </div>
                           <div className="p-5">
                             <div className="mb-3">
-                              <p className="mb-0.5 text-[10px] font-bold uppercase tracking-widest text-[#89a9f1]">
+                              <p className="mb-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
                                 {car.brand}
                               </p>
-                              <h2 className="text-lg font-bold leading-tight text-[#1F2430]">
+                              <h2 className="text-lg font-bold leading-tight text-navy">
                                 {car.name}
                               </h2>
                             </div>
@@ -621,13 +621,13 @@ export default function CarsPage() {
                                   À partir de
                                 </p>
                                 <div className="flex items-baseline gap-1">
-                                  <span className="text-2xl font-black text-[#1F2430]">
+                                  <span className="text-2xl font-black text-navy">
                                     {car.price_per_day}
                                   </span>
                                   <span className="text-xs text-slate-400">DT/jour</span>
                                 </div>
                               </div>
-                              <span className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#89a9f1] to-[#a66694] px-4 py-2.5 text-xs font-bold text-white shadow-md transition-shadow duration-300 group-hover:shadow-[0_6px_20px_rgba(137,169,241,0.45)]">
+                              <span className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-primary to-secondary px-4 py-2.5 text-xs font-bold text-white shadow-md transition-shadow duration-300 group-hover:shadow-[0_6px_20px_color-mix(in srgb, var(--color-primary) 45%, transparent)]">
                                 Réserver
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                   <path d="M5 12h14M12 5l7 7-7 7" />

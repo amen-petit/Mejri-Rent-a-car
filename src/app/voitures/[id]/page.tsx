@@ -43,6 +43,15 @@ function getDaysBetween(start: Date, end: Date) {
   return Math.ceil((end.getTime() - start.getTime()) / MS_PER_DAY) + 1;
 }
 
+// Format a Date as YYYY-MM-DD using LOCAL parts (not UTC), so the calendar date
+// the user picked is preserved regardless of timezone.
+function toDateOnly(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 function normalizePricingTiers(tiers?: PricingTier[] | null): PricingTier[] {
   return (tiers || [])
     .filter(
@@ -209,13 +218,13 @@ export default function CarDetailPage() {
           : false;
 
     if (isStart || isEnd)
-      return "bg-[linear-gradient(135deg,#89a9f1_0%,#a66694_100%)] text-[#1F2430] rounded-lg font-semibold shadow-sm";
-    if (isInRange) return "bg-[#89a9f1]/12 text-[#1F2430]";
+      return "bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)] text-navy rounded-lg font-semibold shadow-sm";
+    if (isInRange) return "bg-primary/12 text-navy";
     if (isPast)
       return "bg-slate-100/40 text-slate-300 cursor-not-allowed line-through";
     if (isUnavail)
       return "bg-slate-100/40 text-slate-300 cursor-not-allowed line-through";
-    return "hover:bg-[#89a9f1]/8 cursor-pointer text-[#1F2430]";
+    return "hover:bg-primary/8 cursor-pointer text-navy";
   }
 
   const totalDays =
@@ -247,8 +256,8 @@ export default function CarDetailPage() {
           client_name: form.name,
           client_phone: form.phone,
           client_email: form.email || null,
-          start_date: startDate.toISOString().split("T")[0],
-          end_date: endDate.toISOString().split("T")[0],
+          start_date: toDateOnly(startDate),
+          end_date: toDateOnly(endDate),
           notes: form.notes || null,
         }),
       });
@@ -292,7 +301,7 @@ export default function CarDetailPage() {
           <div className="text-2xl font-bold mb-2">Véhicule introuvable</div>
           <button
             onClick={() => router.push("/voitures")}
-            className="text-sm text-[#89a9f1] mt-4 hover:text-[#89a9f1]/80 font-medium"
+            className="text-sm text-primary mt-4 hover:text-primary/80 font-medium"
           >
             ← Retour aux véhicules
           </button>
@@ -317,7 +326,7 @@ export default function CarDetailPage() {
 
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <div data-reveal="left" className="reveal-d1">
-            <div className="relative mb-4 flex h-64 items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-[#89a9f1]/10 shadow-soft sm:h-80">
+            <div className="relative mb-4 flex h-64 items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-primary/10 shadow-soft sm:h-80">
               {car.images?.[activeImage] ? (
                 <Image
                   src={car.images[activeImage]}
@@ -328,7 +337,7 @@ export default function CarDetailPage() {
                   className="object-cover"
                 />
               ) : (
-                <CarGlyph className="w-32 h-32 text-[#89a9f1]" />
+                <CarGlyph className="w-32 h-32 text-primary" />
               )}
             </div>
             {car.images?.length > 1 && (
@@ -337,7 +346,7 @@ export default function CarDetailPage() {
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
-                    className={`relative w-16 h-16 rounded-2xl overflow-hidden border-2 transition-all duration-250 ${activeImage === i ? "border-[#89a9f1] shadow-soft" : "border-slate-200 hover:border-slate-300"}`}
+                    className={`relative w-16 h-16 rounded-2xl overflow-hidden border-2 transition-all duration-250 ${activeImage === i ? "border-primary shadow-soft" : "border-slate-200 hover:border-slate-300"}`}
                   >
                     <Image
                       src={img}
@@ -361,7 +370,7 @@ export default function CarDetailPage() {
                   <div className="mb-1 text-[10px] font-bold uppercase tracking-wide text-slate-600">
                     {label}
                   </div>
-                  <div className="text-base font-semibold text-navy-500">
+                  <div className="text-base font-semibold text-navy">
                     {value}
                   </div>
                 </div>
@@ -373,7 +382,7 @@ export default function CarDetailPage() {
                 {car.features.map((f) => (
                   <span
                     key={f}
-                    className="rounded-2xl border border-[#89a9f1] bg-[#89a9f1]/20 px-4 py-2 text-xs font-medium text-[#1F2430]"
+                    className="rounded-2xl border border-primary bg-primary/20 px-4 py-2 text-xs font-medium text-navy"
                   >
                     {f}
                   </span>
@@ -384,10 +393,10 @@ export default function CarDetailPage() {
 
           <div data-reveal="right" className="reveal-d2">
             <span className="section-label">{car.category}</span>
-            <h1 className="mt-3 mb-2 text-3xl font-bold text-navy-500 sm:text-4xl">
+            <h1 className="mt-3 mb-2 text-3xl font-bold text-navy sm:text-4xl">
               {car.brand} {car.name}
             </h1>
-            <div className="mb-2 text-2xl font-bold text-[#89a9f1] sm:text-3xl">
+            <div className="mb-2 text-2xl font-bold text-primary sm:text-3xl">
               {car.price_per_day}{" "}
               <span className="text-lg text-slate-600 font-normal">
                 DT / jour
@@ -395,8 +404,8 @@ export default function CarDetailPage() {
             </div>
 
             {pricingTiers.length > 0 && (
-              <div className="mb-6 rounded-2xl border border-[#1F2430]/15 bg-[#1F2430]/5 p-4">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#1F2430]">
+              <div className="mb-6 rounded-2xl border border-navy/15 bg-navy/5 p-4">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-navy">
                   Tarifs par durée
                 </p>
                 <div className="mt-3 space-y-2">
@@ -412,8 +421,8 @@ export default function CarDetailPage() {
                         key={`${tier.min_days}-${tier.max_days}-${tier.price_per_day}`}
                         className={`flex items-center justify-between rounded-xl border px-3 py-2 text-sm transition-colors ${
                           isActive
-                            ? "border-[#89a9f1] bg-[#89a9f1]/15 text-[#1F2430]"
-                            : "border-[#1F2430]/15 bg-white text-slate-700"
+                            ? "border-primary bg-primary/15 text-navy"
+                            : "border-navy/15 bg-white text-slate-700"
                         }`}
                       >
                         <span className="font-medium">
@@ -442,7 +451,7 @@ export default function CarDetailPage() {
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour, je suis intéressé par la ${car.brand} ${car.name}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full border-2 border-[#89a9f1] text-[#1F2430] hover:bg-[#89a9f1] hover:text-[#1F2430] transition-all duration-250 rounded-2xl py-3 text-base font-semibold mb-3 shadow-soft"
+              className="flex items-center justify-center gap-2 w-full border-2 border-primary text-navy hover:bg-primary hover:text-navy transition-all duration-250 rounded-2xl py-3 text-base font-semibold mb-3 shadow-soft"
             >
               <WhatsAppIcon size={16} />
               Contacter sur WhatsApp
@@ -456,7 +465,7 @@ export default function CarDetailPage() {
         >
           <div className="mb-10 text-center sm:mb-12">
             <span className="section-label">Disponibilités</span>
-            <h2 className="mt-3 text-2xl font-bold text-navy-500 sm:text-3xl">
+            <h2 className="mt-3 text-2xl font-bold text-navy sm:text-3xl">
               Choisissez vos dates
             </h2>
             <p className="mt-3 text-sm text-slate-600 sm:text-base">
@@ -465,7 +474,7 @@ export default function CarDetailPage() {
           </div>
 
           <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.45fr_0.95fr] lg:items-start">
-            <div className="rounded-3xl border border-[#1F2430]/12 bg-white p-4 shadow-soft sm:p-6">
+            <div className="rounded-3xl border border-navy/12 bg-white p-4 shadow-soft sm:p-6">
               <div className="mb-6 flex items-center justify-between sm:mb-8">
                 <button
                   onClick={() => {
@@ -474,11 +483,11 @@ export default function CarDetailPage() {
                       setViewYear((y) => y - 1);
                     } else setViewMonth((m) => m - 1);
                   }}
-                  className="rounded-lg border border-transparent p-2 font-bold text-[#1F2430] transition-colors hover:border-[#1F2430]/20 hover:bg-[#1F2430]/8"
+                  className="rounded-lg border border-transparent p-2 font-bold text-navy transition-colors hover:border-navy/20 hover:bg-navy/8"
                 >
                   ←
                 </button>
-                <span className="text-base font-bold text-[#1F2430] sm:text-lg">
+                <span className="text-base font-bold text-navy sm:text-lg">
                   {MONTHS_FR[viewMonth]} {viewYear}
                 </span>
                 <button
@@ -488,7 +497,7 @@ export default function CarDetailPage() {
                       setViewYear((y) => y + 1);
                     } else setViewMonth((m) => m + 1);
                   }}
-                  className="rounded-lg border border-transparent p-2 font-bold text-[#1F2430] transition-colors hover:border-[#1F2430]/20 hover:bg-[#1F2430]/8"
+                  className="rounded-lg border border-transparent p-2 font-bold text-navy transition-colors hover:border-navy/20 hover:bg-navy/8"
                 >
                   →
                 </button>
@@ -498,7 +507,7 @@ export default function CarDetailPage() {
                 {DAYS_FR.map((d) => (
                   <div
                     key={d}
-                    className="py-2 text-center text-[10px] font-bold uppercase text-[#1F2430]/80 sm:py-3 sm:text-xs"
+                    className="py-2 text-center text-[10px] font-bold uppercase text-navy/80 sm:py-3 sm:text-xs"
                   >
                     {d}
                   </div>
@@ -533,13 +542,13 @@ export default function CarDetailPage() {
                 ))}
               </div>
 
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-[#1F2430]/75">
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-navy/75">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-white border border-[#1F2430]/35 shadow-[0_1px_4px_rgba(137,169,241,0.15)]" />
+                  <div className="w-3 h-3 rounded bg-white border border-navy/35 shadow-[0_1px_4px_color-mix(in srgb, var(--color-primary) 15%, transparent)]" />
                   <span>Disponible</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-[linear-gradient(135deg,#89a9f1_0%,#a66694_100%)]" />
+                  <div className="w-3 h-3 rounded bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)]" />
                   <span>Sélectionné</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -550,27 +559,27 @@ export default function CarDetailPage() {
             </div>
 
             <div className="space-y-4 lg:sticky lg:top-24">
-              <div className="rounded-2xl border border-[#1F2430]/20 bg-[linear-gradient(135deg,rgba(137,169,241,0.06)_0%,rgba(166,102,148,0.08)_100%)] p-4 sm:p-5">
-                <p className="text-xs font-bold uppercase tracking-wide text-[#1F2430]">
+              <div className="rounded-2xl border border-navy/20 bg-[linear-gradient(135deg,color-mix(in srgb, var(--color-primary) 6%, transparent)_0%,color-mix(in srgb, var(--color-secondary) 8%, transparent)_100%)] p-4 sm:p-5">
+                <p className="text-xs font-bold uppercase tracking-wide text-navy">
                   Comment réserver
                 </p>
                 <div className="mt-3 grid gap-2">
-                  <div className="rounded-xl border border-[#1F2430]/15 bg-white/90 px-3 py-2 text-xs text-[#1F2430] shadow-[0_2px_10px_rgba(137,169,241,0.06)]">
+                  <div className="rounded-xl border border-navy/15 bg-white/90 px-3 py-2 text-xs text-navy shadow-[0_2px_10px_color-mix(in srgb, var(--color-primary) 6%, transparent)]">
                     1. Sélectionnez le début
                   </div>
-                  <div className="rounded-xl border border-[#1F2430]/15 bg-white/90 px-3 py-2 text-xs text-[#1F2430] shadow-[0_2px_10px_rgba(137,169,241,0.06)]">
+                  <div className="rounded-xl border border-navy/15 bg-white/90 px-3 py-2 text-xs text-navy shadow-[0_2px_10px_color-mix(in srgb, var(--color-primary) 6%, transparent)]">
                     2. Sélectionnez la fin
                   </div>
-                  <div className="rounded-xl border border-[#1F2430]/15 bg-white/90 px-3 py-2 text-xs text-[#1F2430] shadow-[0_2px_10px_rgba(137,169,241,0.06)]">
+                  <div className="rounded-xl border border-navy/15 bg-white/90 px-3 py-2 text-xs text-navy shadow-[0_2px_10px_color-mix(in srgb, var(--color-primary) 6%, transparent)]">
                     3. Confirmez
                   </div>
                 </div>
-                <p className="mt-3 text-sm font-medium text-[#1F2430]">
+                <p className="mt-3 text-sm font-medium text-navy">
                   {selectionHelp}
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-[#89a9f1]/40 bg-[linear-gradient(135deg,#1F2430_0%,#1F2430_65%,#1F2430_100%)] p-4 text-white shadow-soft backdrop-blur sm:p-5">
+              <div className="rounded-2xl border border-primary/40 bg-[linear-gradient(135deg,var(--color-navy)_0%,var(--color-navy)_65%,var(--color-navy)_100%)] p-4 text-white shadow-soft backdrop-blur sm:p-5">
                 <div className="mb-4 grid grid-cols-1 gap-3 sm:mb-5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-1">
                   <div>
                     <div className="mb-1 text-xs text-white/75">
@@ -605,7 +614,7 @@ export default function CarDetailPage() {
                 {endDate ? (
                   <button
                     onClick={() => setShowForm(true)}
-                    className="hidden w-full bg-[linear-gradient(135deg,#89a9f1_0%,#a66694_100%)] hover:brightness-95 text-[#1F2430] py-3 rounded-xl text-sm font-semibold transition-all sm:block"
+                    className="hidden w-full bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)] hover:brightness-95 text-navy py-3 rounded-xl text-sm font-semibold transition-all sm:block"
                   >
                     Confirmer la réservation — {totalDays} jour
                     {totalDays > 1 ? "s" : ""}
@@ -623,7 +632,7 @@ export default function CarDetailPage() {
       </div>
 
       {startDate && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#89a9f1]/35 bg-[linear-gradient(135deg,#1F2430_0%,#1F2430_70%,#1F2430_100%)] p-3 shadow-soft-lg backdrop-blur sm:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-primary/35 bg-[linear-gradient(135deg,var(--color-navy)_0%,var(--color-navy)_70%,var(--color-navy)_100%)] p-3 shadow-soft-lg backdrop-blur sm:hidden">
           <div className="mx-auto flex max-w-2xl items-center justify-between gap-3">
             <div className="min-w-0">
               <p className="text-[11px] uppercase tracking-wide text-white/75">
@@ -638,7 +647,7 @@ export default function CarDetailPage() {
             <button
               onClick={() => setShowForm(true)}
               disabled={!endDate}
-              className="rounded-xl bg-[linear-gradient(135deg,#89a9f1_0%,#a66694_100%)] px-4 py-2.5 text-xs font-semibold text-[#1F2430] transition-all disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-xl bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)] px-4 py-2.5 text-xs font-semibold text-navy transition-all disabled:cursor-not-allowed disabled:opacity-50"
             >
               Confirmer
             </button>
@@ -677,7 +686,7 @@ export default function CarDetailPage() {
                 </label>
                 <input
                   type="tel"
-                  placeholder="+216 56 417 050"
+                  placeholder="+216 00 000 000"
                   value={form.phone}
                   onChange={(e) =>
                     setForm((f) => ({ ...f, phone: e.target.value }))
@@ -737,9 +746,9 @@ export default function CarDetailPage() {
       {success && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
           <div className="w-full max-w-[calc(100vw-1rem)] rounded-3xl bg-white p-6 text-center shadow-soft-xl card-surface sm:max-w-sm sm:p-10">
-            <div className="w-16 h-16 bg-[#89a9f1]/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-[#89a9f1]">
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-primary">
               <svg
-                className="w-8 h-8 text-[#89a9f1]"
+                className="w-8 h-8 text-primary"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -752,7 +761,7 @@ export default function CarDetailPage() {
                 />
               </svg>
             </div>
-            <h3 className="mb-3 text-2xl font-bold text-navy-500">
+            <h3 className="mb-3 text-2xl font-bold text-navy">
               Demande envoyée !
             </h3>
             <p className="mb-8 text-base text-slate-600">
