@@ -19,6 +19,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
+export const dynamic = "force-dynamic";
+
 const steps = [
   {
     num: "01",
@@ -225,7 +227,10 @@ export default async function Home() {
                   <span className="font-black leading-[0.95] tracking-tight text-white text-[clamp(3rem,8vw,5.5rem)]">
                     La liberté
                   </span>
-                  <span className="font-black leading-[0.95] tracking-tight text-[clamp(3rem,8vw,5.5rem)]" style={{ color: "var(--color-primary)" }}>
+                  <span
+                    className="font-black leading-[0.95] tracking-tight text-[clamp(3rem,8vw,5.5rem)]"
+                    style={{ color: "var(--color-primary)" }}
+                  >
                     de la route,
                   </span>
                   <span
@@ -239,7 +244,8 @@ export default async function Home() {
                 <div
                   className="my-5 h-px w-20"
                   style={{
-                    background: "linear-gradient(90deg, var(--color-primary), var(--color-secondary))",
+                    background:
+                      "linear-gradient(90deg, var(--color-primary), var(--color-secondary))",
                   }}
                 />
 
@@ -308,7 +314,13 @@ export default async function Home() {
                           className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
                         />
                       ) : (
-                        <div className="flex h-full items-center justify-center" style={{ background: "linear-gradient(145deg, var(--color-navy-soft), var(--color-navy-soft))" }}>
+                        <div
+                          className="flex h-full items-center justify-center"
+                          style={{
+                            background:
+                              "linear-gradient(145deg, var(--color-navy-soft), var(--color-navy-soft))",
+                          }}
+                        >
                           <svg
                             className="h-20 w-20 text-slate-600"
                             xmlns="http://www.w3.org/2000/svg"
@@ -345,12 +357,16 @@ export default async function Home() {
 
                       <div className="mt-5 flex items-end justify-between">
                         <div>
-                          <p className="text-[10px] text-white/30">À partir de</p>
+                          <p className="text-[10px] text-white/30">
+                            À partir de
+                          </p>
                           <div className="flex items-baseline gap-1">
                             <span className="text-[2.2rem] font-black leading-none text-white">
                               {displayedCars[0].price_per_day}
                             </span>
-                            <span className="text-sm text-white/35">DT/jour</span>
+                            <span className="text-sm text-white/35">
+                              DT/jour
+                            </span>
                           </div>
                         </div>
                         <Link
@@ -404,7 +420,9 @@ export default async function Home() {
                             {s.n}
                           </span>
                           <div>
-                            <p className="text-sm font-bold text-white">{s.t}</p>
+                            <p className="text-sm font-bold text-white">
+                              {s.t}
+                            </p>
                             <p className="mt-0.5 text-xs leading-relaxed text-slate-400">
                               {s.d}
                             </p>
@@ -441,7 +459,8 @@ export default async function Home() {
                     <span
                       className="h-1 w-1 shrink-0 rounded-full"
                       style={{
-                        background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                        background:
+                          "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
                       }}
                     />
                     {item}
@@ -714,9 +733,11 @@ export default async function Home() {
             />
 
             {features.map((f, idx) => {
-              const accent = idx % 2 === 0 ? "var(--color-primary)" : "var(--color-secondary)";
-              const accentRgb =
-                idx % 2 === 0 ? "137,169,241" : "166,102,148";
+              const accent =
+                idx % 2 === 0
+                  ? "var(--color-primary)"
+                  : "var(--color-secondary)";
+              const accentRgb = idx % 2 === 0 ? "137,169,241" : "166,102,148";
               return (
                 <div
                   data-reveal
@@ -743,9 +764,7 @@ export default async function Home() {
                     <div className="mb-4" style={{ color: accent }}>
                       {f.icon}
                     </div>
-                    <h3 className="text-base font-bold text-navy">
-                      {f.title}
-                    </h3>
+                    <h3 className="text-base font-bold text-navy">{f.title}</h3>
                     <p className="mt-3 text-sm leading-7 text-slate-600">
                       {f.desc}
                     </p>
@@ -837,7 +856,10 @@ export default async function Home() {
         <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-secondary/[0.08] blur-3xl" />
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center">
-            <span className="section-label" style={{ color: "var(--color-primary)" }}>
+            <span
+              className="section-label"
+              style={{ color: "var(--color-primary)" }}
+            >
               Avis clients
             </span>
             <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">
@@ -869,7 +891,11 @@ export default async function Home() {
                 {/* Decorative large quote mark */}
                 <span
                   className="pointer-events-none absolute -right-1 -top-3 select-none font-black leading-none"
-                  style={{ fontSize: "8rem", color: "color-mix(in srgb, var(--color-primary) 7%, transparent)" }}
+                  style={{
+                    fontSize: "8rem",
+                    color:
+                      "color-mix(in srgb, var(--color-primary) 7%, transparent)",
+                  }}
                   aria-hidden="true"
                 >
                   &ldquo;
@@ -956,7 +982,9 @@ export default async function Home() {
               <h2 className="text-4xl font-black leading-tight text-white sm:text-5xl lg:text-[3.75rem]">
                 Prêt pour votre
                 <br />
-                <span style={{ color: "var(--color-primary)" }}>prochaine aventure?</span>
+                <span style={{ color: "var(--color-primary)" }}>
+                  prochaine aventure?
+                </span>
               </h2>
 
               <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-300">
@@ -1065,7 +1093,8 @@ export default async function Home() {
             <div
               className="absolute left-0 top-0 h-1 w-full"
               style={{
-                background: "linear-gradient(90deg, var(--color-primary), var(--color-secondary))",
+                background:
+                  "linear-gradient(90deg, var(--color-primary), var(--color-secondary))",
               }}
             />
             <span className="section-label">Contact</span>
@@ -1106,9 +1135,7 @@ export default async function Home() {
                   <p className="text-xs font-medium text-slate-500">
                     Téléphone
                   </p>
-                  <p className="text-sm font-bold text-navy">
-                    {PHONE_DISPLAY}
-                  </p>
+                  <p className="text-sm font-bold text-navy">{PHONE_DISPLAY}</p>
                 </div>
               </div>
               {/* Location row */}
@@ -1130,9 +1157,7 @@ export default async function Home() {
                 </div>
                 <div>
                   <p className="text-xs font-medium text-slate-500">Adresse</p>
-                  <p className="text-sm font-bold text-navy">
-                    Tunis, Tunisie
-                  </p>
+                  <p className="text-sm font-bold text-navy">Tunis, Tunisie</p>
                 </div>
               </div>
             </div>
@@ -1159,7 +1184,8 @@ export default async function Home() {
             <div
               className="absolute left-0 top-0 h-1 w-full"
               style={{
-                background: "linear-gradient(90deg, var(--color-secondary), var(--color-primary))",
+                background:
+                  "linear-gradient(90deg, var(--color-secondary), var(--color-primary))",
               }}
             />
             <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary/15 to-primary/10 text-secondary ring-1 ring-secondary/20">
