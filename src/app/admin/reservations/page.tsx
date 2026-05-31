@@ -309,13 +309,15 @@ export default function AdminReservations() {
                       ["Email", selected.client_email || "—"],
                       [
                         "Arrivée",
-                        new Date(selected.start_date).toLocaleDateString(
+                        `${new Date(selected.start_date).toLocaleDateString(
                           "fr-FR",
-                        ),
+                        )}${selected.pickup_time ? ` à ${selected.pickup_time.slice(0, 5)}` : ""}`,
                       ],
                       [
                         "Départ",
-                        new Date(selected.end_date).toLocaleDateString("fr-FR"),
+                        `${new Date(selected.end_date).toLocaleDateString(
+                          "fr-FR",
+                        )}${selected.return_time ? ` à ${selected.return_time.slice(0, 5)}` : ""}`,
                       ],
                       [
                         "Durée",

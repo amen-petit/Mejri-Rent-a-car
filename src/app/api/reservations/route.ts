@@ -4,6 +4,11 @@ import { reservationInputSchema } from "@/lib/validation";
 import { computeQuote } from "@/lib/pricing";
 import { sendReservationEmails } from "@/lib/email";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
+import { isPickupInPast } from "@/lib/time";
+
+// Require the pickup to be at least this far ahead when booking for "today",
+// so a customer can't reserve a slot that is effectively the current moment.
+const PICKUP_LEAD_MINUTES = 30;
 
 export const runtime = "nodejs";
 
@@ -30,14 +35,17 @@ export async function POST(req: Request) {
   }
   const input = parsed.data;
 
-  // Allow a 1-day grace: the server runs in UTC while clients send local dates,
-  // so a valid "today" can be up to a day off from UTC near the date boundary.
-  const minDate = new Date(Date.now() - 24 * 60 * 60 * 1000)
-    .toISOString()
-    .split("T")[0];
-  if (input.start_date < minDate) {
+  // Reject pickups in the past. Evaluated in the agency timezone (not UTC), so
+  // a same-day booking is allowed only when the chosen pickup time is still
+  // ahead of "now" by the lead buffer. This also makes a valid "today" booking
+  // work regardless of the server's UTC offset.
+  if (
+    isPickupInPast(input.start_date, input.pickup_time, {
+      bufferMinutes: PICKUP_LEAD_MINUTES,
+    })
+  ) {
     return NextResponse.json(
-      { error: "La date de début est dans le passé." },
+      { error: "L'heure de prise en charge est déjà passée." },
       { status: 400 },
     );
   }
@@ -67,6 +75,8 @@ export async function POST(req: Request) {
       p_car_id: car.id,
       p_start: input.start_date,
       p_end: input.end_date,
+      p_pickup: input.pickup_time,
+      p_return: input.return_time,
       p_total: quote.totalPrice,
       p_name: input.client_name,
       p_phone: input.client_phone,
@@ -91,6 +101,8 @@ export async function POST(req: Request) {
     clientEmail: input.client_email ?? null,
     startDate: input.start_date,
     endDate: input.end_date,
+    pickupTime: input.pickup_time,
+    returnTime: input.return_time,
     totalPrice: quote.totalPrice,
     notes: input.notes ?? null,
   }).catch((error) =>

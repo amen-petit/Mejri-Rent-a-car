@@ -1,0 +1,257 @@
+{
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\layout.tsx": {
+    "mtime": 1780049166.416824,
+    "ast_hash": "06ca4c1dffb80d2cef6243bf339b47d5",
+    "semantic_hash": "06ca4c1dffb80d2cef6243bf339b47d5"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\page.tsx": {
+    "mtime": 1780052690.492911,
+    "ast_hash": "9642d9458f604fe10413242362625449",
+    "semantic_hash": "9642d9458f604fe10413242362625449"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\robots.ts": {
+    "mtime": 1779548779.0176682,
+    "ast_hash": "24aab996fd7f4dca60f3ba1875d6e406",
+    "semantic_hash": "24aab996fd7f4dca60f3ba1875d6e406"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\sitemap.ts": {
+    "mtime": 1779548785.958383,
+    "ast_hash": "a3afd73b6d1c74df415cd0b0b48e99b3",
+    "semantic_hash": "a3afd73b6d1c74df415cd0b0b48e99b3"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\layout.tsx": {
+    "mtime": 1780049166.4088285,
+    "ast_hash": "e69582f073f2cf767ed157f118802993",
+    "semantic_hash": "e69582f073f2cf767ed157f118802993"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\page.tsx": {
+    "mtime": 1780049326.0119672,
+    "ast_hash": "3b990f1edf47d0da3708a9b5ee50aa11",
+    "semantic_hash": "3b990f1edf47d0da3708a9b5ee50aa11"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\login\\page.tsx": {
+    "mtime": 1780049326.0119672,
+    "ast_hash": "feda53eb077f463a07d624683b0c1bea",
+    "semantic_hash": "feda53eb077f463a07d624683b0c1bea"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\reservations\\page.tsx": {
+    "mtime": 1780223890.5169775,
+    "ast_hash": "34f7b01a3bf63b0f339a75997599b41d",
+    "semantic_hash": "34f7b01a3bf63b0f339a75997599b41d"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\voitures\\page.tsx": {
+    "mtime": 1780049326.0129676,
+    "ast_hash": "e03504755bf18286d9d8392d1f07d2f8",
+    "semantic_hash": "e03504755bf18286d9d8392d1f07d2f8"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\cars\\route.ts": {
+    "mtime": 1779976691.576231,
+    "ast_hash": "ed2feee9bbf43823daa4285af98fee82",
+    "semantic_hash": "ed2feee9bbf43823daa4285af98fee82"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\cars\\[id]\\route.ts": {
+    "mtime": 1779976643.1241884,
+    "ast_hash": "07393a9470495f54a9925e3f84e3938c",
+    "semantic_hash": "07393a9470495f54a9925e3f84e3938c"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\cars\\[id]\\images\\route.ts": {
+    "mtime": 1779976659.4004116,
+    "ast_hash": "57cb93e5954a36cef5678ca395e87b6c",
+    "semantic_hash": "57cb93e5954a36cef5678ca395e87b6c"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\login\\route.ts": {
+    "mtime": 1779976816.2387564,
+    "ast_hash": "7868bd9206518495fb51982d26dd51da",
+    "semantic_hash": "7868bd9206518495fb51982d26dd51da"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\logout\\route.ts": {
+    "mtime": 1776244235.2212217,
+    "ast_hash": "24bda3a1c80d4c24ba7d5a9fb946cd17",
+    "semantic_hash": "24bda3a1c80d4c24ba7d5a9fb946cd17"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\reservations\\route.ts": {
+    "mtime": 1779979582.4820428,
+    "ast_hash": "0a06d3c65d8b3c24780140b0118d49b7",
+    "semantic_hash": "0a06d3c65d8b3c24780140b0118d49b7"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\reservations\\[id]\\route.ts": {
+    "mtime": 1780048706.970817,
+    "ast_hash": "64c2ea83b84008e6cc277dc235505022",
+    "semantic_hash": "64c2ea83b84008e6cc277dc235505022"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\session\\route.ts": {
+    "mtime": 1776244235.2227166,
+    "ast_hash": "8d6fec55d0f3240b7f0f1da723135fde",
+    "semantic_hash": "8d6fec55d0f3240b7f0f1da723135fde"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\availability\\today\\route.ts": {
+    "mtime": 1779976712.1755235,
+    "ast_hash": "f08d00e56153aadf3a622245d0eadbe8",
+    "semantic_hash": "f08d00e56153aadf3a622245d0eadbe8"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\cars\\[id]\\availability\\route.ts": {
+    "mtime": 1779976704.585417,
+    "ast_hash": "eed371d90b9831c33bc764f653d33f59",
+    "semantic_hash": "eed371d90b9831c33bc764f653d33f59"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\reservations\\route.ts": {
+    "mtime": 1780226864.7250984,
+    "ast_hash": "698edc435545e6649de45b22ea4bdd24",
+    "semantic_hash": "698edc435545e6649de45b22ea4bdd24"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\voitures\\layout.tsx": {
+    "mtime": 1776244235.2647972,
+    "ast_hash": "1ebd62492850d54636ba7166cf88092e",
+    "semantic_hash": "1ebd62492850d54636ba7166cf88092e"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\voitures\\page.tsx": {
+    "mtime": 1780049326.0149655,
+    "ast_hash": "1bbfe5d42a7f79f1341d7b564dca2260",
+    "semantic_hash": "1bbfe5d42a7f79f1341d7b564dca2260"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\voitures\\[id]\\layout.tsx": {
+    "mtime": 1780048765.2361567,
+    "ast_hash": "582d806a90b1d527721ed28ef91c0257",
+    "semantic_hash": "582d806a90b1d527721ed28ef91c0257"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\voitures\\[id]\\page.tsx": {
+    "mtime": 1780261566.446725,
+    "ast_hash": "ddc0daf91d4c844eefeb4914d67ee303",
+    "semantic_hash": "ddc0daf91d4c844eefeb4914d67ee303"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\ConditionalFooter.tsx": {
+    "mtime": 1776244235.2668064,
+    "ast_hash": "3fd3bdf63c270d758bda38a7776daa3e",
+    "semantic_hash": "3fd3bdf63c270d758bda38a7776daa3e"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\Footer.tsx": {
+    "mtime": 1780049166.4238245,
+    "ast_hash": "506ce0f0e5f5c7f26e096ff1f281a319",
+    "semantic_hash": "506ce0f0e5f5c7f26e096ff1f281a319"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\MotionProvider.tsx": {
+    "mtime": 1776244235.2668064,
+    "ast_hash": "85d4f8af188c486c17f31224ab1c8921",
+    "semantic_hash": "85d4f8af188c486c17f31224ab1c8921"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\Navbar.tsx": {
+    "mtime": 1780049326.016968,
+    "ast_hash": "e3338ce95416a26a74dfe900e831bd0b",
+    "semantic_hash": "e3338ce95416a26a74dfe900e831bd0b"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\icons\\CarGlyph.tsx": {
+    "mtime": 1779978890.221463,
+    "ast_hash": "a2eae7984e6f0767bfee88f8d8ce6d09",
+    "semantic_hash": "a2eae7984e6f0767bfee88f8d8ce6d09"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\icons\\WhatsAppIcon.tsx": {
+    "mtime": 1779978882.5047004,
+    "ast_hash": "90a49cde0cec0965e386f3fd1e396b82",
+    "semantic_hash": "90a49cde0cec0965e386f3fd1e396b82"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\admin-auth.ts": {
+    "mtime": 1779976766.3051212,
+    "ast_hash": "1e7a9af953c11769c074c0f6a154042a",
+    "semantic_hash": "1e7a9af953c11769c074c0f6a154042a"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\admin-guard.ts": {
+    "mtime": 1779976085.372165,
+    "ast_hash": "15c329db4cd0cc0429fa6849272fed8e",
+    "semantic_hash": "15c329db4cd0cc0429fa6849272fed8e"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\cars.ts": {
+    "mtime": 1779977019.5563834,
+    "ast_hash": "bcde3e0d3e6770f7b8e41d824b377ca3",
+    "semantic_hash": "bcde3e0d3e6770f7b8e41d824b377ca3"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\constants.ts": {
+    "mtime": 1780223886.6938279,
+    "ast_hash": "352ce6c5a90fc459bb82e32731cb938b",
+    "semantic_hash": "352ce6c5a90fc459bb82e32731cb938b"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\email.ts": {
+    "mtime": 1780223705.1416814,
+    "ast_hash": "bfd80ea2f84863215367b069e5fac768",
+    "semantic_hash": "bfd80ea2f84863215367b069e5fac768"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\pricing.test.ts": {
+    "mtime": 1779978795.4580095,
+    "ast_hash": "414887025faba511a1aae11381df97cb",
+    "semantic_hash": "414887025faba511a1aae11381df97cb"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\pricing.ts": {
+    "mtime": 1779978768.2462084,
+    "ast_hash": "5a0a71315cad8a4f36e44a0d7709ca61",
+    "semantic_hash": "5a0a71315cad8a4f36e44a0d7709ca61"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\rate-limit.ts": {
+    "mtime": 1779976607.5458872,
+    "ast_hash": "ace04780c479352053e6ecc2f17e3d17",
+    "semantic_hash": "ace04780c479352053e6ecc2f17e3d17"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\supabase-admin.ts": {
+    "mtime": 1779977244.9512303,
+    "ast_hash": "c7053f75b458721e1b3e24220164a974",
+    "semantic_hash": "c7053f75b458721e1b3e24220164a974"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\supabase.ts": {
+    "mtime": 1776244235.2710557,
+    "ast_hash": "6e37893d9d9a25d44e26e16a2c317e81",
+    "semantic_hash": "6e37893d9d9a25d44e26e16a2c317e81"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\types.ts": {
+    "mtime": 1780223698.086146,
+    "ast_hash": "9f1e79585b386d722845d3fec52d0684",
+    "semantic_hash": "9f1e79585b386d722845d3fec52d0684"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\validation.ts": {
+    "mtime": 1780223696.0914738,
+    "ast_hash": "2b29c5098e3c2058ae6ba12f05afe60b",
+    "semantic_hash": "2b29c5098e3c2058ae6ba12f05afe60b"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\AGENTS.md": {
+    "mtime": 1776244235.040872,
+    "ast_hash": "9346a4897ff955555ddedb7bebf77adb",
+    "semantic_hash": "9346a4897ff955555ddedb7bebf77adb"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\APP_DOCUMENTATION.md": {
+    "mtime": 1776244235.0422454,
+    "ast_hash": "a40ccdbee1bebd046b48037241bc37ff",
+    "semantic_hash": "a40ccdbee1bebd046b48037241bc37ff"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\CLAUDE.md": {
+    "mtime": 1780222267.4491613,
+    "ast_hash": "b0517ee048d45b5cd5463430230eb52f",
+    "semantic_hash": "b0517ee048d45b5cd5463430230eb52f"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\DESIGN.md": {
+    "mtime": 1780066136.9792812,
+    "ast_hash": "d61a7a64450c6ea31a999c55cc18ed2e",
+    "semantic_hash": "d61a7a64450c6ea31a999c55cc18ed2e"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\PRODUCT.md": {
+    "mtime": 1779719811.7203898,
+    "ast_hash": "3b7f82298ef9d01299a034298d5f8570",
+    "semantic_hash": "3b7f82298ef9d01299a034298d5f8570"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\README.md": {
+    "mtime": 1777202385.126055,
+    "ast_hash": "9162add00befbcdb432430f405c4ad8d",
+    "semantic_hash": "9162add00befbcdb432430f405c4ad8d"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\TEMPLATE.md": {
+    "mtime": 1780066138.7225177,
+    "ast_hash": "91682d33dcdf830fb7ac023d58a91427",
+    "semantic_hash": "91682d33dcdf830fb7ac023d58a91427"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\icon.png": {
+    "mtime": 1776244235.2609098,
+    "ast_hash": "e10d3d20b98e756a3a54a682443387ff",
+    "semantic_hash": "e10d3d20b98e756a3a54a682443387ff"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\time.ts": {
+    "mtime": 1780226851.490244,
+    "ast_hash": "a9706e9a9766005ee1941370a64d7bb1",
+    "semantic_hash": "a9706e9a9766005ee1941370a64d7bb1"
+  }
+}

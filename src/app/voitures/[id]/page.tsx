@@ -12,7 +12,14 @@ import {
   DAYS_FR,
   MS_PER_DAY,
   WHATSAPP_NUMBER,
+  BOOKING_TIME_SLOTS,
+  DEFAULT_PICKUP_TIME,
+  DEFAULT_RETURN_TIME,
 } from "@/lib/constants";
+import { isPickupInPast, nowInTimezone, timeToMinutes } from "@/lib/time";
+
+// Matches the server's lead buffer in src/app/api/reservations/route.ts.
+const PICKUP_LEAD_MINUTES = 30;
 
 function isDateInRange(date: Date, start: Date, end: Date) {
   return date >= start && date <= end;
@@ -128,6 +135,8 @@ export default function CarDetailPage() {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [hoverDate, setHoverDate] = useState<Date | null>(null);
+  const [pickupTime, setPickupTime] = useState<string>(DEFAULT_PICKUP_TIME);
+  const [returnTime, setReturnTime] = useState<string>(DEFAULT_RETURN_TIME);
 
   // Booking form
   const [showForm, setShowForm] = useState(false);
@@ -236,6 +245,48 @@ export default function CarDetailPage() {
       ? getDailyRateForDuration(totalDays, car.price_per_day, pricingTiers)
       : (car?.price_per_day ?? 0);
   const totalPrice = car && totalDays > 0 ? totalDays * appliedDailyRate : 0;
+
+  // On a single-day rental the return time must be strictly after the pickup.
+  const isSameDay =
+    !!startDate &&
+    !!endDate &&
+    startDate.toDateString() === endDate.toDateString();
+  const timeOrderInvalid = isSameDay && returnTime <= pickupTime;
+
+  // When the start day is today (in the agency timezone), only offer pickup
+  // slots that are still ahead by the lead buffer. Mirrors the server check so
+  // the customer can't pick a time that will be rejected on submit.
+  const agencyNow = nowInTimezone();
+  const startDateStr = startDate ? toDateOnly(startDate) : null;
+  const startIsToday = startDateStr === agencyNow.dateStr;
+  const pickupSlots = startIsToday
+    ? BOOKING_TIME_SLOTS.filter(
+        (t) => timeToMinutes(t) > agencyNow.minutes + PICKUP_LEAD_MINUTES,
+      )
+    : BOOKING_TIME_SLOTS;
+  const noPickupSlotsToday = startIsToday && pickupSlots.length === 0;
+  const pickupInPast =
+    !!startDateStr &&
+    isPickupInPast(startDateStr, pickupTime, {
+      bufferMinutes: PICKUP_LEAD_MINUTES,
+    });
+
+  // If the selected pickup time falls out of the still-valid window (e.g. time
+  // passed while the page was open), snap to the first available slot. Deps are
+  // primitives so this only re-runs when the minute or selection actually
+  // changes, not on every render (pickupSlots is a fresh array each render).
+  useEffect(() => {
+    if (!startIsToday) return;
+    const valid = BOOKING_TIME_SLOTS.filter(
+      (t) => timeToMinutes(t) > agencyNow.minutes + PICKUP_LEAD_MINUTES,
+    );
+    if (valid.length > 0 && !valid.includes(pickupTime)) {
+      setPickupTime(valid[0]);
+    }
+  }, [startIsToday, agencyNow.minutes, pickupTime]);
+
+  const bookingBlocked = timeOrderInvalid || pickupInPast || noPickupSlotsToday;
+
   const selectionHelp = !startDate
     ? "Étape 1: Choisissez une date de début disponible."
     : !endDate
@@ -244,6 +295,14 @@ export default function CarDetailPage() {
 
   async function handleSubmit() {
     if (!car || !startDate || !endDate || !form.name || !form.phone) return;
+    if (timeOrderInvalid) {
+      alert("L'heure de retour doit être après l'heure de prise en charge.");
+      return;
+    }
+    if (pickupInPast || noPickupSlotsToday) {
+      alert("L'heure de prise en charge est déjà passée. Choisissez un créneau plus tard.");
+      return;
+    }
     setSubmitting(true);
 
     // Price and availability are validated and computed on the server.
@@ -258,6 +317,8 @@ export default function CarDetailPage() {
           client_email: form.email || null,
           start_date: toDateOnly(startDate),
           end_date: toDateOnly(endDate),
+          pickup_time: pickupTime,
+          return_time: returnTime,
           notes: form.notes || null,
         }),
       });
@@ -579,6 +640,66 @@ export default function CarDetailPage() {
                 </p>
               </div>
 
+              <div className="rounded-2xl border border-navy/20 bg-white p-4 shadow-[0_2px_10px_color-mix(in_srgb,var(--color-primary)_6%,transparent)] sm:p-5">
+                <p className="text-xs font-bold uppercase tracking-wide text-navy">
+                  Heures de prise en charge et de retour
+                </p>
+                <div className="mt-3 grid grid-cols-2 gap-3">
+                  <div>
+                    <label
+                      htmlFor="pickup-time"
+                      className="mb-1 block text-[11px] font-semibold text-slate-600"
+                    >
+                      Prise en charge
+                    </label>
+                    <select
+                      id="pickup-time"
+                      value={pickupTime}
+                      onChange={(e) => setPickupTime(e.target.value)}
+                      className="w-full rounded-xl border border-navy/15 bg-white px-3 py-2 text-sm font-medium text-navy outline-none transition-colors focus:border-primary"
+                    >
+                      {pickupSlots.map((t) => (
+                        <option key={t} value={t}>
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="return-time"
+                      className="mb-1 block text-[11px] font-semibold text-slate-600"
+                    >
+                      Retour
+                    </label>
+                    <select
+                      id="return-time"
+                      value={returnTime}
+                      onChange={(e) => setReturnTime(e.target.value)}
+                      className="w-full rounded-xl border border-navy/15 bg-white px-3 py-2 text-sm font-medium text-navy outline-none transition-colors focus:border-primary"
+                    >
+                      {BOOKING_TIME_SLOTS.map((t) => (
+                        <option key={t} value={t}>
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                {timeOrderInvalid && (
+                  <p className="mt-2 text-xs font-medium text-rose-600">
+                    Pour une location d&apos;une journée, l&apos;heure de retour
+                    doit être après l&apos;heure de prise en charge.
+                  </p>
+                )}
+                {noPickupSlotsToday && (
+                  <p className="mt-2 text-xs font-medium text-rose-600">
+                    Plus de créneau de prise en charge disponible aujourd&apos;hui.
+                    Choisissez une autre date.
+                  </p>
+                )}
+              </div>
+
               <div className="rounded-2xl border border-primary/40 bg-[linear-gradient(135deg,var(--color-navy)_0%,var(--color-navy)_65%,var(--color-navy)_100%)] p-4 text-white shadow-soft backdrop-blur sm:p-5">
                 <div className="mb-4 grid grid-cols-1 gap-3 sm:mb-5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-1">
                   <div>
@@ -586,7 +707,9 @@ export default function CarDetailPage() {
                       Date de début
                     </div>
                     <div className="font-medium text-sm">
-                      {startDate ? startDate.toLocaleDateString("fr-FR") : "—"}
+                      {startDate
+                        ? `${startDate.toLocaleDateString("fr-FR")} à ${pickupTime}`
+                        : "—"}
                     </div>
                   </div>
                   <div>
@@ -594,7 +717,9 @@ export default function CarDetailPage() {
                       Date de fin
                     </div>
                     <div className="font-medium text-sm">
-                      {endDate ? endDate.toLocaleDateString("fr-FR") : "—"}
+                      {endDate
+                        ? `${endDate.toLocaleDateString("fr-FR")} à ${returnTime}`
+                        : "—"}
                     </div>
                   </div>
                   <div>
@@ -614,7 +739,8 @@ export default function CarDetailPage() {
                 {endDate ? (
                   <button
                     onClick={() => setShowForm(true)}
-                    className="hidden w-full bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)] hover:brightness-95 text-navy py-3 rounded-xl text-sm font-semibold transition-all sm:block"
+                    disabled={bookingBlocked}
+                    className="hidden w-full bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)] hover:brightness-95 text-navy py-3 rounded-xl text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-50 sm:block"
                   >
                     Confirmer la réservation — {totalDays} jour
                     {totalDays > 1 ? "s" : ""}
@@ -646,7 +772,7 @@ export default function CarDetailPage() {
             </div>
             <button
               onClick={() => setShowForm(true)}
-              disabled={!endDate}
+              disabled={!endDate || bookingBlocked}
               className="rounded-xl bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)] px-4 py-2.5 text-xs font-semibold text-navy transition-all disabled:cursor-not-allowed disabled:opacity-50"
             >
               Confirmer

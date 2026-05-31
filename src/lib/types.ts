@@ -31,6 +31,8 @@ export type Reservation = {
   client_email: string | null;
   start_date: string;
   end_date: string;
+  pickup_time: string | null;
+  return_time: string | null;
   total_price: number;
   status: "pending" | "confirmed" | "cancelled";
   notes: string | null;

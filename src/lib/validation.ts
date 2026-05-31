@@ -3,7 +3,12 @@
  * Shared by the server route handlers.
  */
 import { z } from "zod";
-import { CAR_CATEGORIES, TRANSMISSION_OPTIONS, FUEL_TYPES } from "./constants";
+import {
+  CAR_CATEGORIES,
+  TRANSMISSION_OPTIONS,
+  FUEL_TYPES,
+  BOOKING_TIME_SLOTS,
+} from "./constants";
 
 export const pricingTierSchema = z
   .object({
@@ -37,6 +42,15 @@ const dateOnly = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/, "Expected YYYY-MM-DD");
 
+// HH:MM that must be one of the offered booking slots (08:00–20:00, 30-min).
+// Validating against the shared slot list keeps the server authoritative: a
+// crafted request can't smuggle an out-of-hours time past the UI.
+const bookingTime = z
+  .string()
+  .refine((t) => BOOKING_TIME_SLOTS.includes(t), {
+    message: "Heure invalide",
+  });
+
 export const reservationInputSchema = z
   .object({
     car_id: z.string().uuid(),
@@ -45,12 +59,22 @@ export const reservationInputSchema = z
     client_email: z.string().trim().email().max(200).nullable().optional(),
     start_date: dateOnly,
     end_date: dateOnly,
+    pickup_time: bookingTime,
+    return_time: bookingTime,
     notes: z.string().trim().max(2000).nullable().optional(),
   })
   .refine((r) => r.end_date >= r.start_date, {
     message: "end_date must be on or after start_date",
     path: ["end_date"],
-  });
+  })
+  // On a single-day rental the return must be strictly after the pickup.
+  .refine(
+    (r) => r.start_date !== r.end_date || r.return_time > r.pickup_time,
+    {
+      message: "return_time must be after pickup_time on the same day",
+      path: ["return_time"],
+    },
+  );
 
 export type ReservationInput = z.infer<typeof reservationInputSchema>;
 

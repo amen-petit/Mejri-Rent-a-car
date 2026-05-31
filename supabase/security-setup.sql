@@ -17,10 +17,22 @@
 --    Uses a per-car transaction advisory lock so concurrent bookings for the
 --    same car are serialized -> no overbooking under load.
 -- -----------------------------------------------------------------------------
+-- Pickup / return times the client chooses on the booking page.
+alter table reservations add column if not exists pickup_time time;
+alter table reservations add column if not exists return_time time;
+
+-- Drop the older (pre-time) signature if it exists, so we don't leave a stale
+-- overload behind when upgrading an existing database.
+drop function if exists create_reservation_if_available(
+  uuid, date, date, numeric, text, text, text, text
+);
+
 create or replace function create_reservation_if_available(
   p_car_id uuid,
   p_start  date,
   p_end    date,
+  p_pickup time,
+  p_return time,
   p_total  numeric,
   p_name   text,
   p_phone  text,
@@ -58,11 +70,11 @@ begin
 
   insert into reservations (
     car_id, client_name, client_phone, client_email,
-    start_date, end_date, total_price, notes, status
+    start_date, end_date, pickup_time, return_time, total_price, notes, status
   )
   values (
     p_car_id, p_name, p_phone, p_email,
-    p_start, p_end, p_total, p_notes, 'pending'
+    p_start, p_end, p_pickup, p_return, p_total, p_notes, 'pending'
   )
   returning id into v_id;
 
@@ -72,7 +84,7 @@ $$;
 
 -- Don't let anon/authenticated call the function directly; only the server.
 revoke all on function create_reservation_if_available(
-  uuid, date, date, numeric, text, text, text, text
+  uuid, date, date, time, time, numeric, text, text, text, text
 ) from public, anon, authenticated;
 
 -- -----------------------------------------------------------------------------

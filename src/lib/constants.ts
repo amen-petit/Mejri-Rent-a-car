@@ -52,6 +52,30 @@ export const MONTHS_FR_SHORT = [
 
 export const DAYS_FR = ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"];
 
+// Pickup / return time slots offered to the client: 08:00–20:00 in 30-min steps.
+// Single source of truth shared by the booking UI and the server validation, so
+// the dropdown and the accepted values can never drift apart.
+export const BOOKING_TIME_START_MIN = 8 * 60; // 08:00
+export const BOOKING_TIME_END_MIN = 20 * 60; // 20:00
+export const BOOKING_TIME_STEP_MIN = 30;
+
+export const BOOKING_TIME_SLOTS: string[] = (() => {
+  const slots: string[] = [];
+  for (
+    let m = BOOKING_TIME_START_MIN;
+    m <= BOOKING_TIME_END_MIN;
+    m += BOOKING_TIME_STEP_MIN
+  ) {
+    const h = String(Math.floor(m / 60)).padStart(2, "0");
+    const min = String(m % 60).padStart(2, "0");
+    slots.push(`${h}:${min}`);
+  }
+  return slots;
+})();
+
+export const DEFAULT_PICKUP_TIME = "10:00";
+export const DEFAULT_RETURN_TIME = "10:00";
+
 export const RESERVATION_STATUS_LABEL: Record<string, string> = {
   pending: "En attente",
   confirmed: "Confirmée",

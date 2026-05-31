@@ -18,6 +18,8 @@ export type ReservationEmailPayload = {
   clientEmail?: string | null;
   startDate: string;
   endDate: string;
+  pickupTime?: string | null;
+  returnTime?: string | null;
   totalPrice: number;
   notes?: string | null;
 };
@@ -107,8 +109,8 @@ function buildAdminHtml(copy: EmailCopy, p: ReservationEmailPayload): string {
         ${row("Téléphone", p.clientPhone)}
         ${row("Email", p.clientEmail || "—")}
         ${row("Véhicule", `${p.carBrand} ${p.carName}`)}
-        ${row("Début", p.startDate)}
-        ${row("Fin", p.endDate)}
+        ${row("Début", p.pickupTime ? `${p.startDate} à ${p.pickupTime}` : p.startDate)}
+        ${row("Fin", p.returnTime ? `${p.endDate} à ${p.returnTime}` : p.endDate)}
         ${row("Prix total", `${p.totalPrice} DT`)}
         ${row("Notes", p.notes || "—")}
       </table>
@@ -120,7 +122,7 @@ function buildCustomerHtml(copy: EmailCopy, p: ReservationEmailPayload): string 
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #000;">
       <h2 style="margin:0 0 16px;">${copy.customerTitle}</h2>
       <p style="margin:0 0 12px;">${copy.customerIntro}</p>
-      <p style="margin:0 0 12px;">Période: ${escapeHtml(p.startDate)} au ${escapeHtml(p.endDate)}</p>
+      <p style="margin:0 0 12px;">Période: ${escapeHtml(p.startDate)}${p.pickupTime ? ` à ${escapeHtml(p.pickupTime)}` : ""} au ${escapeHtml(p.endDate)}${p.returnTime ? ` à ${escapeHtml(p.returnTime)}` : ""}</p>
       <p style="margin:0 0 12px;">Prix estimé: ${p.totalPrice} DT</p>
       <p style="margin:0;">${copy.customerCta}</p>
     </div>`;
