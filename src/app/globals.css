@@ -8,22 +8,21 @@
    ========================================================================= */
 @theme {
   /* Core Brand */
-  --color-primary: #9b3540; /* muted crimson accent */
-  --color-secondary: #c97d82; /* soft rose accent */
+  --color-primary: #e8a020; /* golden amber — ring & text */
+  --color-secondary: #2b6cb8; /* royal blue — car silhouette & outer ring */
 
   /* Main Dark System */
-  --color-navy: #1f1d1e; /* charcoal base */
-  --color-navy-deep: #111012; /* deepest background */
-  --color-navy-soft: #2c292b; /* elevated cards / surfaces */
+  --color-navy: #1a1a2e; /* deep navy — circle background */
+  --color-navy-deep: #0d0d1a; /* deepest background */
+  --color-navy-soft: #232340; /* elevated cards / surfaces */
 
   /* Atmospheric Layers */
-  --color-surface: #f6f2f0; /* primary UI surface */
-  --color-edge: #ded7d8; /* subtle borders */
+  --color-surface: #f5f0e8; /* warm off-white — light UI surface */
+  --color-edge: #d4af6a; /* muted gold — subtle borders */
 
   /* Typography */
-  --color-ink: #251f20; /* warm dark ink */
+  --color-ink: #1a1a2e; /* deep navy ink — warm dark text */
 }
-
 /* Premium Design System */
 
 @layer base {

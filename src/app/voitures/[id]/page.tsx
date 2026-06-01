@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import TimeSlotPicker from "@/components/TimeSlotPicker";
 import Navbar from "@/components/Navbar";
 import CarGlyph from "@/components/icons/CarGlyph";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
@@ -640,61 +641,36 @@ export default function CarDetailPage() {
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-navy/20 bg-white p-4 shadow-[0_2px_10px_color-mix(in_srgb,var(--color-primary)_6%,transparent)] sm:p-5">
-                <p className="text-xs font-bold uppercase tracking-wide text-navy">
-                  Heures de prise en charge et de retour
+              <div className="rounded-2xl border border-navy/12 bg-surface p-4 shadow-[0_2px_10px_color-mix(in_srgb,var(--color-primary)_6%,transparent)] sm:p-5">
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-slate-500">
+                  Heure de prise en charge &amp; retour
                 </p>
-                <div className="mt-3 grid grid-cols-2 gap-3">
-                  <div>
-                    <label
-                      htmlFor="pickup-time"
-                      className="mb-1 block text-[11px] font-semibold text-slate-600"
-                    >
-                      Prise en charge
-                    </label>
-                    <select
-                      id="pickup-time"
-                      value={pickupTime}
-                      onChange={(e) => setPickupTime(e.target.value)}
-                      className="w-full rounded-xl border border-navy/15 bg-white px-3 py-2 text-sm font-medium text-navy outline-none transition-colors focus:border-primary"
-                    >
-                      {pickupSlots.map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="return-time"
-                      className="mb-1 block text-[11px] font-semibold text-slate-600"
-                    >
-                      Retour
-                    </label>
-                    <select
-                      id="return-time"
-                      value={returnTime}
-                      onChange={(e) => setReturnTime(e.target.value)}
-                      className="w-full rounded-xl border border-navy/15 bg-white px-3 py-2 text-sm font-medium text-navy outline-none transition-colors focus:border-primary"
-                    >
-                      {BOOKING_TIME_SLOTS.map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <TimeSlotPicker
+                    id="pickup-time"
+                    label="Prise en charge"
+                    value={pickupTime}
+                    slots={pickupSlots}
+                    onChange={setPickupTime}
+                    disabled={noPickupSlotsToday}
+                  />
+                  <TimeSlotPicker
+                    id="return-time"
+                    label="Retour"
+                    value={returnTime}
+                    slots={BOOKING_TIME_SLOTS}
+                    onChange={setReturnTime}
+                  />
                 </div>
                 {timeOrderInvalid && (
-                  <p className="mt-2 text-xs font-medium text-rose-600">
+                  <p className="mt-3 text-xs font-medium text-rose-500">
                     Pour une location d&apos;une journée, l&apos;heure de retour
                     doit être après l&apos;heure de prise en charge.
                   </p>
                 )}
                 {noPickupSlotsToday && (
-                  <p className="mt-2 text-xs font-medium text-rose-600">
-                    Plus de créneau de prise en charge disponible aujourd&apos;hui.
+                  <p className="mt-3 text-xs font-medium text-rose-500">
+                    Plus de créneau disponible aujourd&apos;hui.
                     Choisissez une autre date.
                   </p>
                 )}
