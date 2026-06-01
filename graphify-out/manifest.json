@@ -20,9 +20,9 @@
     "semantic_hash": "a3afd73b6d1c74df415cd0b0b48e99b3"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\layout.tsx": {
-    "mtime": 1780049166.4088285,
-    "ast_hash": "e69582f073f2cf767ed157f118802993",
-    "semantic_hash": "e69582f073f2cf767ed157f118802993"
+    "mtime": 1780313636.757709,
+    "ast_hash": "eb4be1931e7376b193fccbd192e437b3",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\page.tsx": {
     "mtime": 1780049326.0119672,
@@ -115,9 +115,9 @@
     "semantic_hash": "582d806a90b1d527721ed28ef91c0257"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\voitures\\[id]\\page.tsx": {
-    "mtime": 1780261566.446725,
-    "ast_hash": "ddc0daf91d4c844eefeb4914d67ee303",
-    "semantic_hash": "ddc0daf91d4c844eefeb4914d67ee303"
+    "mtime": 1780262146.3614516,
+    "ast_hash": "ae45bc3f67d91ffed408500b2712ece2",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\ConditionalFooter.tsx": {
     "mtime": 1776244235.2668064,
@@ -253,5 +253,830 @@
     "mtime": 1780226851.490244,
     "ast_hash": "a9706e9a9766005ee1941370a64d7bb1",
     "semantic_hash": "a9706e9a9766005ee1941370a64d7bb1"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\eslint.config.mjs": {
+    "mtime": 1776244235.0432544,
+    "ast_hash": "6c4307ffa009658f5c97f5629094c0c2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\middleware.ts": {
+    "mtime": 1776244235.0446098,
+    "ast_hash": "fc14da0ac2de09a63cfb06bc095ac9a3",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\next.config.ts": {
+    "mtime": 1779979261.1471782,
+    "ast_hash": "66423c1304fd445e1a42c45edb5f27dd",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\package.json": {
+    "mtime": 1779979754.983219,
+    "ast_hash": "f50459969d5403c55da1d3d0169b7b71",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\postcss.config.mjs": {
+    "mtime": 1776244235.0476222,
+    "ast_hash": "481fac0fdecd70e1821cc30b86030c1a",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\skills-lock.json": {
+    "mtime": 1779714354.8783433,
+    "ast_hash": "7a302a983e808e74b5f76f4789f44363",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\tsconfig.json": {
+    "mtime": 1776244235.272055,
+    "ast_hash": "0a2f4ed9289b65cd3feb4fb4ab3a4fcd",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\cleanup-deprecated.mjs": {
+    "mtime": 1779714352.691632,
+    "ast_hash": "51208407b06e051bb6d8ceab244db39c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\command-metadata.json": {
+    "mtime": 1779714352.6926315,
+    "ast_hash": "b25ed9a4d6c24c83d5af46ec69b99a97",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\critique-storage.mjs": {
+    "mtime": 1779714352.6926315,
+    "ast_hash": "69825b7f6236350030e72dd7dd3212b7",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\design-parser.mjs": {
+    "mtime": 1779714352.6926315,
+    "ast_hash": "df65268bfe73ad8202ca309c2da3805c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\detect-csp.mjs": {
+    "mtime": 1779714352.6936321,
+    "ast_hash": "0d3243060e66ba0d0a64684f9684ecc7",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\detect.mjs": {
+    "mtime": 1779714352.6936321,
+    "ast_hash": "db2157bcff7ab1b222d68cf96cb8643c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\impeccable-paths.mjs": {
+    "mtime": 1779714352.6946316,
+    "ast_hash": "0e34c40e77c7a30eeabb1bac897f58a2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\is-generated.mjs": {
+    "mtime": 1779714352.6946316,
+    "ast_hash": "81ada1894b5f562b0993fdff1756d82c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-accept.mjs": {
+    "mtime": 1779714352.6956353,
+    "ast_hash": "feee297789fa52b5901e21bb354e8a4f",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-browser-session.js": {
+    "mtime": 1779714352.6956353,
+    "ast_hash": "e54c01fe1a8287f757161759beaab916",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-browser.js": {
+    "mtime": 1779714352.6976328,
+    "ast_hash": "09d5959c4f68346ac3e032a1e16f8924",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-complete.mjs": {
+    "mtime": 1779714352.6976328,
+    "ast_hash": "0ed6226feb3d80adf38f2098b6d7efd4",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-completion.mjs": {
+    "mtime": 1779714352.6976328,
+    "ast_hash": "c51f1de5c7aae5aa3f2c67f5d9875d3e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-inject.mjs": {
+    "mtime": 1779714352.6986318,
+    "ast_hash": "01365c3718e920dbeee5eeb9159093fa",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-poll.mjs": {
+    "mtime": 1779714352.6986318,
+    "ast_hash": "7b78710647b202a90d99852bdb7a5135",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-resume.mjs": {
+    "mtime": 1779714352.6986318,
+    "ast_hash": "9187fc4ae434c0573b7c84c95b05f744",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-server.mjs": {
+    "mtime": 1779714352.6996315,
+    "ast_hash": "2754268fc4579377e0d40d6a2e34679a",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-session-store.mjs": {
+    "mtime": 1779714352.6996315,
+    "ast_hash": "b0c628113419432d164204b18587d681",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-status.mjs": {
+    "mtime": 1779714352.700632,
+    "ast_hash": "f7f787396f44ef06c890f97c45d0ba75",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live-wrap.mjs": {
+    "mtime": 1779714352.7016337,
+    "ast_hash": "9612f1254ce763221690053592892110",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\live.mjs": {
+    "mtime": 1779714352.702634,
+    "ast_hash": "073965c7d10925f8ad9651a336220ee8",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\load-context.mjs": {
+    "mtime": 1779714352.702634,
+    "ast_hash": "f96317a92230153a77069e4f81bd8e11",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\modern-screenshot.umd.js": {
+    "mtime": 1779714352.7036352,
+    "ast_hash": "c6afaf6ebceb162206f6a2e5b0ed653c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\scripts\\pin.mjs": {
+    "mtime": 1779714352.7036352,
+    "ast_hash": "59e1f8315c2083fb7997e5ff3edfcb57",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\launch.json": {
+    "mtime": 1780262206.7174623,
+    "ast_hash": "64f537f85d563f28b9c8624e78157f5c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\settings.json": {
+    "mtime": 1780222267.4501784,
+    "ast_hash": "5d6ecd96cf065b16e8bb9fbf5d7d8f0d",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\settings.local.json": {
+    "mtime": 1780313714.3033063,
+    "ast_hash": "6aa4ced84576ebdfc6abd9c646e749b9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\cleanup-deprecated.mjs": {
+    "mtime": 1779714352.691632,
+    "ast_hash": "51208407b06e051bb6d8ceab244db39c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\command-metadata.json": {
+    "mtime": 1779714352.6926315,
+    "ast_hash": "b25ed9a4d6c24c83d5af46ec69b99a97",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\critique-storage.mjs": {
+    "mtime": 1779714352.6926315,
+    "ast_hash": "69825b7f6236350030e72dd7dd3212b7",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\design-parser.mjs": {
+    "mtime": 1779714352.6926315,
+    "ast_hash": "df65268bfe73ad8202ca309c2da3805c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\detect-csp.mjs": {
+    "mtime": 1779714352.6936321,
+    "ast_hash": "0d3243060e66ba0d0a64684f9684ecc7",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\detect.mjs": {
+    "mtime": 1779714352.6936321,
+    "ast_hash": "db2157bcff7ab1b222d68cf96cb8643c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\impeccable-paths.mjs": {
+    "mtime": 1779714352.6946316,
+    "ast_hash": "0e34c40e77c7a30eeabb1bac897f58a2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\is-generated.mjs": {
+    "mtime": 1779714352.6946316,
+    "ast_hash": "81ada1894b5f562b0993fdff1756d82c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-accept.mjs": {
+    "mtime": 1779714352.6956353,
+    "ast_hash": "feee297789fa52b5901e21bb354e8a4f",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-browser-session.js": {
+    "mtime": 1779714352.6956353,
+    "ast_hash": "e54c01fe1a8287f757161759beaab916",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-browser.js": {
+    "mtime": 1779714352.6976328,
+    "ast_hash": "09d5959c4f68346ac3e032a1e16f8924",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-complete.mjs": {
+    "mtime": 1779714352.6976328,
+    "ast_hash": "0ed6226feb3d80adf38f2098b6d7efd4",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-completion.mjs": {
+    "mtime": 1779714352.6976328,
+    "ast_hash": "c51f1de5c7aae5aa3f2c67f5d9875d3e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-inject.mjs": {
+    "mtime": 1779714352.6986318,
+    "ast_hash": "01365c3718e920dbeee5eeb9159093fa",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-poll.mjs": {
+    "mtime": 1779714352.6986318,
+    "ast_hash": "7b78710647b202a90d99852bdb7a5135",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-resume.mjs": {
+    "mtime": 1779714352.6986318,
+    "ast_hash": "9187fc4ae434c0573b7c84c95b05f744",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-server.mjs": {
+    "mtime": 1779714352.6996315,
+    "ast_hash": "2754268fc4579377e0d40d6a2e34679a",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-session-store.mjs": {
+    "mtime": 1779714352.6996315,
+    "ast_hash": "b0c628113419432d164204b18587d681",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-status.mjs": {
+    "mtime": 1779714352.700632,
+    "ast_hash": "f7f787396f44ef06c890f97c45d0ba75",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live-wrap.mjs": {
+    "mtime": 1779714352.7016337,
+    "ast_hash": "9612f1254ce763221690053592892110",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\live.mjs": {
+    "mtime": 1779714352.702634,
+    "ast_hash": "073965c7d10925f8ad9651a336220ee8",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\load-context.mjs": {
+    "mtime": 1779714352.702634,
+    "ast_hash": "f96317a92230153a77069e4f81bd8e11",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\modern-screenshot.umd.js": {
+    "mtime": 1779714352.7036352,
+    "ast_hash": "c6afaf6ebceb162206f6a2e5b0ed653c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\scripts\\pin.mjs": {
+    "mtime": 1779714352.7036352,
+    "ast_hash": "59e1f8315c2083fb7997e5ff3edfcb57",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\ui-ux-pro-max\\scripts\\core.py": {
+    "mtime": 1775926511.2397108,
+    "ast_hash": "3df4734a785963a8242a56c1b926adfd",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\ui-ux-pro-max\\scripts\\design_system.py": {
+    "mtime": 1775926511.2407117,
+    "ast_hash": "08f84d04608a19049c90fc2b1ef314f9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\ui-ux-pro-max\\scripts\\search.py": {
+    "mtime": 1775926511.2417116,
+    "ast_hash": "8c7e35426fe8f6f3ed91e9dce0ed7af1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.github\\prompts\\ui-ux-pro-max\\scripts\\core.py": {
+    "mtime": 1776244235.038747,
+    "ast_hash": "50e4dec705c13cc69d328c15dfbed37b",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.github\\prompts\\ui-ux-pro-max\\scripts\\design_system.py": {
+    "mtime": 1776244235.039745,
+    "ast_hash": "5b7a5311730aead50b242164e6f95858",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.github\\prompts\\ui-ux-pro-max\\scripts\\search.py": {
+    "mtime": 1776244235.040872,
+    "ast_hash": "8c7e35426fe8f6f3ed91e9dce0ed7af1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\disponibilite\\page.tsx": {
+    "mtime": 1780313629.0933623,
+    "ast_hash": "d90ea82d818867c2334bd1a0a2f0195a",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\availability\\route.ts": {
+    "mtime": 1780313569.22491,
+    "ast_hash": "650ce49ba10542dd4bcae6ebdb846fc0",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\TimeSlotPicker.tsx": {
+    "mtime": 1780262666.2598047,
+    "ast_hash": "fa6d790268d7f44afd29d107270226ac",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\availability.test.ts": {
+    "mtime": 1780313557.9764185,
+    "ast_hash": "b31405e13da2587a6abfd2e61c1e73d1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\availability.ts": {
+    "mtime": 1780313528.051592,
+    "ast_hash": "b3100756b070ed9bd6549e5e538abb55",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\supabase\\add-pickup-return-time.sql": {
+    "mtime": 1780223740.4961174,
+    "ast_hash": "a183c1e16add326361b8afa2191a10b3",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\supabase\\security-setup.sql": {
+    "mtime": 1780223730.163913,
+    "ast_hash": "256c080b37e332592ac472e29abcee1e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\SKILL.md": {
+    "mtime": 1779714352.676632,
+    "ast_hash": "259cfd39515b1b390c02c811de7491f9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\agents\\impeccable-asset-producer.md": {
+    "mtime": 1779714352.676632,
+    "ast_hash": "892906b3db9443e58267e77d4038a0fb",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\adapt.md": {
+    "mtime": 1779714352.6776323,
+    "ast_hash": "27c29f5a41c6104b89a5ac22d6476853",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\animate.md": {
+    "mtime": 1779714352.6776323,
+    "ast_hash": "b62d806becc589f6e322568dbf1643ec",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\audit.md": {
+    "mtime": 1779714352.6776323,
+    "ast_hash": "bfa673574701e2910ca2b3473aa1c6ad",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\bolder.md": {
+    "mtime": 1779714352.678633,
+    "ast_hash": "633d0f931184a8aac040a37ba0c2c0f6",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\brand.md": {
+    "mtime": 1779714352.678633,
+    "ast_hash": "74e97fbbaad8eba976b3fd29943f4424",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\clarify.md": {
+    "mtime": 1779714352.6796336,
+    "ast_hash": "9dc6a767d5bbd31e9117d36d06e1261e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\codex.md": {
+    "mtime": 1779714352.680636,
+    "ast_hash": "c044e7cf44c58dea75e9c6a3413e8d70",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\cognitive-load.md": {
+    "mtime": 1779714352.680636,
+    "ast_hash": "464d1b1b3566c74909fadcd2c13bc544",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\color-and-contrast.md": {
+    "mtime": 1779714352.6816344,
+    "ast_hash": "c51e5bca12b63f220ad15454852a8594",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\colorize.md": {
+    "mtime": 1779714352.6816344,
+    "ast_hash": "c9702b3f0c17fa6846747d369ad82699",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\craft.md": {
+    "mtime": 1779714352.6826332,
+    "ast_hash": "59729d8216df64493363d604df736563",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\critique.md": {
+    "mtime": 1779714352.6826332,
+    "ast_hash": "ccf66bd0f3b8fd0d11592290d078418e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\delight.md": {
+    "mtime": 1779714352.6836324,
+    "ast_hash": "c302379f6c88c20d4886636aaf5e6dde",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\distill.md": {
+    "mtime": 1779714352.6836324,
+    "ast_hash": "15b690d4b8f6bf9c8a0d5208f1f6f1fb",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\document.md": {
+    "mtime": 1779714352.6836324,
+    "ast_hash": "8faba1b504418148860d159448194fc9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\extract.md": {
+    "mtime": 1779714352.6836324,
+    "ast_hash": "bcbed7005945d9de131f69985cbc5e6f",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\harden.md": {
+    "mtime": 1779714352.6846325,
+    "ast_hash": "b8c6ce7f60733c8dab39b12c7957750b",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\heuristics-scoring.md": {
+    "mtime": 1779714352.6846325,
+    "ast_hash": "f1606921268571e14591682483b595ef",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\interaction-design.md": {
+    "mtime": 1779714352.6846325,
+    "ast_hash": "ea39b98601f17b5a87f7de799b953000",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\layout.md": {
+    "mtime": 1779714352.685632,
+    "ast_hash": "400e8cbbc0688d27d288f80c5b52314a",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\live.md": {
+    "mtime": 1779714352.685632,
+    "ast_hash": "443d531ec715bb64e48b660671e3ad78",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\motion-design.md": {
+    "mtime": 1779714352.685632,
+    "ast_hash": "95de769ab6e30a4214a969ebb25ebe89",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\onboard.md": {
+    "mtime": 1779714352.6866324,
+    "ast_hash": "8def483b066f2c7fb906c313e3653c10",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\optimize.md": {
+    "mtime": 1779714352.6866324,
+    "ast_hash": "613f211310d45abd984d0bd610abc1fb",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\overdrive.md": {
+    "mtime": 1779714352.6866324,
+    "ast_hash": "891190b0148e5156aa007ca5917a0bb4",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\personas.md": {
+    "mtime": 1779714352.687634,
+    "ast_hash": "3022b396ec3f0977be627875594bfa81",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\polish.md": {
+    "mtime": 1779714352.687634,
+    "ast_hash": "5ba31783c05352cbda780abd9e12d969",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\product.md": {
+    "mtime": 1779714352.6886368,
+    "ast_hash": "c073e67bbcec51f31af4ba132730aca9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\quieter.md": {
+    "mtime": 1779714352.6886368,
+    "ast_hash": "9b34ed291f042b1dad31f66f487c4137",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\responsive-design.md": {
+    "mtime": 1779714352.6896334,
+    "ast_hash": "3a0e2834961edfe9d44cef19ffc84737",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\shape.md": {
+    "mtime": 1779714352.6896334,
+    "ast_hash": "aab83193a1a58010b1de9f67074b5915",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\spatial-design.md": {
+    "mtime": 1779714352.6906319,
+    "ast_hash": "28fd3d7f36c9ad72fdc5c3a90c7f5505",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\teach.md": {
+    "mtime": 1779714352.6906319,
+    "ast_hash": "ab273dd5cd15e248ebdf7f52671e3f81",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\typeset.md": {
+    "mtime": 1779714352.6906319,
+    "ast_hash": "3b4d239361890c9db44b5484d002f2d2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\typography.md": {
+    "mtime": 1779714352.6906319,
+    "ast_hash": "841fa5dc3d8cf998ecb63b211b766c7c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\impeccable\\reference\\ux-writing.md": {
+    "mtime": 1779714352.691632,
+    "ast_hash": "74e4aac960c114a7b8761210f80a8cc5",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\SKILL.md": {
+    "mtime": 1779714352.676632,
+    "ast_hash": "259cfd39515b1b390c02c811de7491f9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\agents\\impeccable-asset-producer.md": {
+    "mtime": 1779714352.676632,
+    "ast_hash": "892906b3db9443e58267e77d4038a0fb",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\adapt.md": {
+    "mtime": 1779714352.6776323,
+    "ast_hash": "27c29f5a41c6104b89a5ac22d6476853",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\animate.md": {
+    "mtime": 1779714352.6776323,
+    "ast_hash": "b62d806becc589f6e322568dbf1643ec",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\audit.md": {
+    "mtime": 1779714352.6776323,
+    "ast_hash": "bfa673574701e2910ca2b3473aa1c6ad",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\bolder.md": {
+    "mtime": 1779714352.678633,
+    "ast_hash": "633d0f931184a8aac040a37ba0c2c0f6",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\brand.md": {
+    "mtime": 1779714352.678633,
+    "ast_hash": "74e97fbbaad8eba976b3fd29943f4424",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\clarify.md": {
+    "mtime": 1779714352.6796336,
+    "ast_hash": "9dc6a767d5bbd31e9117d36d06e1261e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\codex.md": {
+    "mtime": 1779714352.680636,
+    "ast_hash": "c044e7cf44c58dea75e9c6a3413e8d70",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\cognitive-load.md": {
+    "mtime": 1779714352.680636,
+    "ast_hash": "464d1b1b3566c74909fadcd2c13bc544",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\color-and-contrast.md": {
+    "mtime": 1779714352.6816344,
+    "ast_hash": "c51e5bca12b63f220ad15454852a8594",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\colorize.md": {
+    "mtime": 1779714352.6816344,
+    "ast_hash": "c9702b3f0c17fa6846747d369ad82699",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\craft.md": {
+    "mtime": 1779714352.6826332,
+    "ast_hash": "59729d8216df64493363d604df736563",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\critique.md": {
+    "mtime": 1779714352.6826332,
+    "ast_hash": "ccf66bd0f3b8fd0d11592290d078418e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\delight.md": {
+    "mtime": 1779714352.6836324,
+    "ast_hash": "c302379f6c88c20d4886636aaf5e6dde",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\distill.md": {
+    "mtime": 1779714352.6836324,
+    "ast_hash": "15b690d4b8f6bf9c8a0d5208f1f6f1fb",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\document.md": {
+    "mtime": 1779714352.6836324,
+    "ast_hash": "8faba1b504418148860d159448194fc9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\extract.md": {
+    "mtime": 1779714352.6836324,
+    "ast_hash": "bcbed7005945d9de131f69985cbc5e6f",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\harden.md": {
+    "mtime": 1779714352.6846325,
+    "ast_hash": "b8c6ce7f60733c8dab39b12c7957750b",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\heuristics-scoring.md": {
+    "mtime": 1779714352.6846325,
+    "ast_hash": "f1606921268571e14591682483b595ef",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\interaction-design.md": {
+    "mtime": 1779714352.6846325,
+    "ast_hash": "ea39b98601f17b5a87f7de799b953000",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\layout.md": {
+    "mtime": 1779714352.685632,
+    "ast_hash": "400e8cbbc0688d27d288f80c5b52314a",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\live.md": {
+    "mtime": 1779714352.685632,
+    "ast_hash": "443d531ec715bb64e48b660671e3ad78",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\motion-design.md": {
+    "mtime": 1779714352.685632,
+    "ast_hash": "95de769ab6e30a4214a969ebb25ebe89",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\onboard.md": {
+    "mtime": 1779714352.6866324,
+    "ast_hash": "8def483b066f2c7fb906c313e3653c10",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\optimize.md": {
+    "mtime": 1779714352.6866324,
+    "ast_hash": "613f211310d45abd984d0bd610abc1fb",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\overdrive.md": {
+    "mtime": 1779714352.6866324,
+    "ast_hash": "891190b0148e5156aa007ca5917a0bb4",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\personas.md": {
+    "mtime": 1779714352.687634,
+    "ast_hash": "3022b396ec3f0977be627875594bfa81",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\polish.md": {
+    "mtime": 1779714352.687634,
+    "ast_hash": "5ba31783c05352cbda780abd9e12d969",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\product.md": {
+    "mtime": 1779714352.6886368,
+    "ast_hash": "c073e67bbcec51f31af4ba132730aca9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\quieter.md": {
+    "mtime": 1779714352.6886368,
+    "ast_hash": "9b34ed291f042b1dad31f66f487c4137",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\responsive-design.md": {
+    "mtime": 1779714352.6896334,
+    "ast_hash": "3a0e2834961edfe9d44cef19ffc84737",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\shape.md": {
+    "mtime": 1779714352.6896334,
+    "ast_hash": "aab83193a1a58010b1de9f67074b5915",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\spatial-design.md": {
+    "mtime": 1779714352.6906319,
+    "ast_hash": "28fd3d7f36c9ad72fdc5c3a90c7f5505",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\teach.md": {
+    "mtime": 1779714352.6906319,
+    "ast_hash": "ab273dd5cd15e248ebdf7f52671e3f81",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\typeset.md": {
+    "mtime": 1779714352.6906319,
+    "ast_hash": "3b4d239361890c9db44b5484d002f2d2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\typography.md": {
+    "mtime": 1779714352.6906319,
+    "ast_hash": "841fa5dc3d8cf998ecb63b211b766c7c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\impeccable\\reference\\ux-writing.md": {
+    "mtime": 1779714352.691632,
+    "ast_hash": "74e4aac960c114a7b8761210f80a8cc5",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\ui-ux-pro-max\\SKILL.md": {
+    "mtime": 1779611427.5130527,
+    "ast_hash": "e092c3924799d4fc4194f994d8394cc3",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.github\\prompts\\ui-ux-pro-max\\PROMPT.md": {
+    "mtime": 1776244235.012069,
+    "ast_hash": "9a49d6677669c1b4d9ec1b7301de9943",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.github\\workflows\\ci.yml": {
+    "mtime": 1779979762.92627,
+    "ast_hash": "64c25e4f62f01a1030a6a1030133c1cd",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\brand-logo.png": {
+    "mtime": 1776244235.202669,
+    "ast_hash": "e10d3d20b98e756a3a54a682443387ff",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\file.svg": {
+    "mtime": 1776244235.2054849,
+    "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\globe.svg": {
+    "mtime": 1776244235.2065067,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\next.svg": {
+    "mtime": 1776244235.2125287,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\Untitled design (4).png": {
+    "mtime": 1776244235.0866177,
+    "ast_hash": "e10d3d20b98e756a3a54a682443387ff",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\Untitled design.png": {
+    "mtime": 1776244235.1326175,
+    "ast_hash": "c39e217bcd5c75f52dd692f04efb84b8",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\vercel.svg": {
+    "mtime": 1776244235.2125287,
+    "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\window.svg": {
+    "mtime": 1776244235.2137682,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\icons\\adresse.svg": {
+    "mtime": 1776244235.2075057,
+    "ast_hash": "4655f8418e2c8cd2b0c99f793c00c335",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\icons\\car.svg": {
+    "mtime": 1776244235.2088258,
+    "ast_hash": "10607b9de84d92cd17c1d2d1da49bafa",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\icons\\location.svg": {
+    "mtime": 1776244235.2088258,
+    "ast_hash": "07d47758fddcdee010b80dd8546261d2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\icons\\phone.svg": {
+    "mtime": 1776244235.2098408,
+    "ast_hash": "9c1ebb933e25a12002586662fa09530a",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\icons\\star.svg": {
+    "mtime": 1776244235.2098408,
+    "ast_hash": "f146f9cdeed9a8f0e5284c8a6c9dd3a1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\icons\\telephone.svg": {
+    "mtime": 1776244235.211172,
+    "ast_hash": "be8564741f2a0e878808e734b50cc5ce",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\public\\icons\\voiture-musclee.svg": {
+    "mtime": 1776244235.211172,
+    "ast_hash": "af0f44e1d25bf82be35132f3630cff73",
+    "semantic_hash": ""
   }
 }
