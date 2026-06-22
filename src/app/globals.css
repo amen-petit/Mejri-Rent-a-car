@@ -7,23 +7,22 @@
    inline gradients, and tints) is derived from these tokens.
    ========================================================================= */
 @theme {
-  /* Core Brand */
-  --color-primary: #e8a020; /* golden amber — ring & text */
-  --color-secondary: #2b6cb8; /* royal blue — car silhouette & outer ring */
+  /* Core Brand — Ocean Rent A Car */
+  --color-primary: #1ea7ff; /* Logo blue */
+  --color-secondary: #7fd6ff; /* Light premium blue */
 
   /* Main Dark System */
-  --color-navy: #1a1a2e; /* deep navy — circle background */
-  --color-navy-deep: #0d0d1a; /* deepest background */
-  --color-navy-soft: #232340; /* elevated cards / surfaces */
+  --color-navy: #242a33; /* Logo background */
+  --color-navy-deep: #1b2028; /* Darkest background */
+  --color-navy-soft: #313844; /* Elevated surfaces */
 
   /* Atmospheric Layers */
-  --color-surface: #f5f0e8; /* warm off-white — light UI surface */
-  --color-edge: #d4af6a; /* muted gold — subtle borders */
+  --color-surface: #eef8ff; /* Very light blue */
+  --color-edge: #a9d9ff; /* Soft border */
 
   /* Typography */
-  --color-ink: #1a1a2e; /* deep navy ink — warm dark text */
+  --color-ink: #1f2937; /* Dark slate text */
 }
-/* Premium Design System */
 
 @layer base {
   :root {
@@ -113,7 +112,7 @@
       border-radius: 1rem;
       font-size: 0.875rem;
       font-weight: 600;
-      color: var(--color-navy);
+      color: #ffffff;
       transition: all 250ms ease-out;
 
       background: linear-gradient(
@@ -122,12 +121,13 @@
         var(--color-secondary) 100%
       );
       box-shadow: 0 4px 12px
-        color-mix(in srgb, var(--color-navy) 15%, transparent);
+        color-mix(in srgb, var(--color-primary) 25%, transparent);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(89, 107, 160, 0.24);
+      box-shadow: 0 8px 24px
+        color-mix(in srgb, var(--color-primary) 35%, transparent);
     }
 
     .btn-primary:active {
@@ -155,7 +155,7 @@
 
     .btn-secondary:hover {
       transform: translateY(-2px);
-      background-color: #91607f;
+      background-color: #1446b8;
       box-shadow: 0 8px 24px
         color-mix(in srgb, var(--color-secondary) 22%, transparent);
     }
@@ -179,7 +179,7 @@
 
     .btn-outline:hover {
       transform: translateY(-2px);
-      background-color: #eef2fa;
+      background-color: #e8f0fe;
     }
 
     /* Ghost Button */
@@ -193,7 +193,7 @@
       font-weight: 600;
 
       color: var(--color-navy);
-      background-color: #eef2fa;
+      background-color: #e8f0fe;
 
       transition: all 250ms ease-out;
     }

@@ -737,7 +737,7 @@ export default async function Home() {
                 idx % 2 === 0
                   ? "var(--color-primary)"
                   : "var(--color-secondary)";
-              const accentRgb = idx % 2 === 0 ? "137,169,241" : "166,102,148";
+              const accentRgb = idx % 2 === 0 ? "26,86,219" : "96,165,250";
               return (
                 <div
                   data-reveal
@@ -1157,7 +1157,9 @@ export default async function Home() {
                 </div>
                 <div>
                   <p className="text-xs font-medium text-slate-500">Adresse</p>
-                  <p className="text-sm font-bold text-navy">Tunis, Tunisie</p>
+                  <p className="text-sm font-bold text-navy">
+                    Al Wakrah, Qatar
+                  </p>
                 </div>
               </div>
             </div>
