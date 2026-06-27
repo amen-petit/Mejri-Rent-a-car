@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\page.tsx": {
-    "mtime": 1782520880.2551794,
-    "ast_hash": "73a447552025a4b1c4530be4ac8d157a",
+    "mtime": 1782560765.6189084,
+    "ast_hash": "3b465bf2fb83fe4f8a68e474434b2fed",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\robots.ts": {
@@ -55,9 +55,9 @@
     "semantic_hash": "07393a9470495f54a9925e3f84e3938c"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\cars\\[id]\\images\\route.ts": {
-    "mtime": 1779976659.4004116,
-    "ast_hash": "57cb93e5954a36cef5678ca395e87b6c",
-    "semantic_hash": "57cb93e5954a36cef5678ca395e87b6c"
+    "mtime": 1782566035.292135,
+    "ast_hash": "9307450d38b88ed5755235c9f563db01",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\login\\route.ts": {
     "mtime": 1779976816.2387564,
@@ -265,9 +265,9 @@
     "semantic_hash": "fc14da0ac2de09a63cfb06bc095ac9a3"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\next.config.ts": {
-    "mtime": 1779979261.1471782,
-    "ast_hash": "66423c1304fd445e1a42c45edb5f27dd",
-    "semantic_hash": "66423c1304fd445e1a42c45edb5f27dd"
+    "mtime": 1782566193.1848853,
+    "ast_hash": "7b06f9165b2632945733a055a7b36454",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\package.json": {
     "mtime": 1779979754.983219,
@@ -1107,6 +1107,16 @@
   "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\review-animations\\STANDARDS.md": {
     "mtime": 1782499545.2983005,
     "ast_hash": "51943392b3346f34060956a68306a0c3",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\Hero.tsx": {
+    "mtime": 1782565013.575482,
+    "ast_hash": "adfcac919b3ecbca3f0a3b1338400d37",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\supabase\\performance-and-integrity.sql": {
+    "mtime": 1782566053.654121,
+    "ast_hash": "c9a5e020c50cef701939c20e49366362",
     "semantic_hash": ""
   }
 }

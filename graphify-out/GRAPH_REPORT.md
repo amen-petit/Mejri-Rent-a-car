@@ -1,16 +1,16 @@
 # Graph Report - new-version  (2026-06-27)
 
 ## Corpus Check
-- 205 files · ~1,019,832 words
+- 207 files · ~1,021,735 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2128 nodes · 3452 edges · 167 communities (143 shown, 24 thin omitted)
+- 2135 nodes · 3462 edges · 169 communities (146 shown, 23 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 156 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `35e30992`
+- Built from commit: `c9de99aa`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -181,6 +181,7 @@
 - [[_COMMUNITY_Community 164|Community 164]]
 - [[_COMMUNITY_Community 165|Community 165]]
 - [[_COMMUNITY_Community 166|Community 166]]
+- [[_COMMUNITY_Community 168|Community 168]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `getSupabaseAdmin()` - 23 edges
@@ -217,15 +218,15 @@
 - **Design System Documentation Pipeline** — teach_product_md, document_design_md_format, extract_design_tokens, polish_design_system_discovery [INFERRED 0.85]
 - **Visual Hierarchy Through Space & Scale** — spatial_squint_test, layout_visual_hierarchy, typeset_type_scale, distill_visual_simplification [INFERRED 0.75]
 
-## Communities (167 total, 24 thin omitted)
+## Communities (169 total, 23 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.05
-Nodes (85): isMainModule(), kebab(), listSnapshotsForSlug(), main(), nowFilenameStamp(), parseFrontmatter(), readLatestSnapshot(), readTrend() (+77 more)
+Cohesion: 0.06
+Nodes (73): firstExisting(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveAnnotationsDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath(), getLegacyLiveSessionsDir() (+65 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.06
-Nodes (55): Params, GET(), POST(), DELETE(), EXT_BY_MIME, Params, POST(), AdminSessionPayload (+47 more)
+Nodes (56): Params, GET(), POST(), DELETE(), EXT_BY_MIME, Params, POST(), sniffImageMime() (+48 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.12
@@ -240,8 +241,8 @@ Cohesion: 0.05
 Nodes (41): 1. Accessibility (CRITICAL), 2. Touch & Interaction (CRITICAL), 3. Performance (HIGH), 4. Layout & Responsive (HIGH), 5. Typography & Color (MEDIUM), 6. Animation (MEDIUM), 7. Style Selection (MEDIUM), 8. Charts & Data (LOW) (+33 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.12
-Nodes (36): brandMarkSvg(), buildCollapsible(), buildColorModels(), buildDesignHeader(), buildRadiiModels(), buildTypographyModels(), escapeHtml(), fetchDesignSystem() (+28 more)
+Cohesion: 0.11
+Nodes (40): brandMarkSvg(), buildCollapsible(), buildColorModels(), buildDesignHeader(), buildRadiiModels(), buildTypographyModels(), escapeHtml(), fetchDesignSystem() (+32 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.13
@@ -284,8 +285,8 @@ Cohesion: 0.07
 Nodes (29): Accessibility, Available Domains, Available Stacks, Common Rules for Professional UI, Example Workflow, How to Use This Workflow, Icons & Visual Elements, Interaction (+21 more)
 
 ### Community 16 - "Community 16"
-Cohesion: 0.10
-Nodes (33): bufferToBase64(), buildAnnotationsForCapture(), buildListHtml(), buildPinElement(), captureAndEmit(), captureElementToBlob(), checkpointPayload(), collectFontCssText() (+25 more)
+Cohesion: 0.11
+Nodes (29): bufferToBase64(), buildAnnotationsForCapture(), buildListHtml(), buildPinElement(), captureAndEmit(), captureElementToBlob(), checkpointPayload(), collectFontCssText() (+21 more)
 
 ### Community 17 - "Community 17"
 Cohesion: 0.13
@@ -632,15 +633,19 @@ Cohesion: 0.50
 Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
 ### Community 103 - "Community 103"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): adapt, argumentHint, description
 
 ### Community 104 - "Community 104"
 Cohesion: 1.00
 Nodes (3): Pin/Unpin Skill Shortcuts (agents), Cleanup Deprecated Skills, Command Metadata
 
+### Community 107 - "Community 107"
+Cohesion: 0.40
+Nodes (4): csp, nextConfig, securityHeaders, supabaseHostname
+
 ### Community 108 - "Community 108"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): animate, argumentHint, description
 
 ### Community 109 - "Community 109"
@@ -787,6 +792,10 @@ Nodes (4): Beauty is leverage, Core Philosophy, Taste is trained, not innate, Un
 Cohesion: 0.50
 Nodes (4): Debugging Animations, Frame-by-frame inspection, Slow motion testing, Test on real devices
 
+### Community 168 - "Community 168"
+Cohesion: 0.38
+Nodes (12): isMainModule(), kebab(), listSnapshotsForSlug(), main(), nowFilenameStamp(), parseFrontmatter(), readLatestSnapshot(), readTrend() (+4 more)
+
 ## Ambiguous Edges - Review These
 - `RootLayout Component` → `@theme Design Tokens`  [AMBIGUOUS]
   src/app/layout.tsx · relation: implements
@@ -798,9 +807,9 @@ Nodes (4): Debugging Animations, Frame-by-frame inspection, Slow motion testing,
   src/app/sitemap.ts · relation: references
 
 ## Knowledge Gaps
-- **897 isolated node(s):** `eslintConfig`, `config`, `supabaseHostname`, `nextConfig`, `name` (+892 more)
+- **899 isolated node(s):** `eslintConfig`, `config`, `supabaseHostname`, `csp`, `securityHeaders` (+894 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **24 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -815,7 +824,7 @@ _Questions this graph is uniquely positioned to answer:_
   _Edge tagged AMBIGUOUS (relation: references) - confidence is low._
 - **Why does `Design Engineering` connect `Community 155` to `Community 160`, `Community 161`, `Community 162`, `Community 163`, `Community 165`, `Community 166`, `Community 156`, `Community 157`, `Community 158`, `Community 159`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `getSupabaseAdmin()` connect `Community 1` to `Community 43`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `isAdminRequest()` connect `Community 1` to `Community 43`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
+- **Are the 2 inferred relationships involving `Impeccable Skill (SKILL.md)` (e.g. with `Typography Reference (agents mirror)` and `UX Writing Reference (agents mirror)`) actually correct?**
+  _`Impeccable Skill (SKILL.md)` has 2 INFERRED edges - model-reasoned connections that need verification._

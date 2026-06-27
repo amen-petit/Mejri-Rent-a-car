@@ -14,6 +14,42 @@ const EXT_BY_MIME: Record<string, string> = {
   "image/avif": "avif",
 };
 
+/**
+ * Verify the real file type from its magic bytes rather than trusting the
+ * client-supplied `file.type` header (which is trivially forged). Returns the
+ * canonical MIME if the signature matches an allowed image format, else null.
+ * This prevents an authenticated admin from uploading a disguised payload
+ * (e.g. an HTML/SVG/script file renamed to .png) into a public bucket.
+ */
+function sniffImageMime(bytes: Uint8Array): string | null {
+  const b = bytes;
+  // JPEG: FF D8 FF
+  if (b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff) return "image/jpeg";
+  // PNG: 89 50 4E 47 0D 0A 1A 0A
+  if (
+    b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47 &&
+    b[4] === 0x0d && b[5] === 0x0a && b[6] === 0x1a && b[7] === 0x0a
+  ) {
+    return "image/png";
+  }
+  // RIFF....WEBP  (52 49 46 46 ?? ?? ?? ?? 57 45 42 50)
+  if (
+    b[0] === 0x52 && b[1] === 0x49 && b[2] === 0x46 && b[3] === 0x46 &&
+    b[8] === 0x57 && b[9] === 0x45 && b[10] === 0x42 && b[11] === 0x50
+  ) {
+    return "image/webp";
+  }
+  // AVIF: ISO-BMFF box "ftyp" at offset 4, brand "avif"/"avis" at offset 8
+  if (
+    b[4] === 0x66 && b[5] === 0x74 && b[6] === 0x79 && b[7] === 0x70 &&
+    b[8] === 0x61 && b[9] === 0x76 && b[10] === 0x69 &&
+    (b[11] === 0x66 || b[11] === 0x73)
+  ) {
+    return "image/avif";
+  }
+  return null;
+}
+
 type Params = { params: Promise<{ id: string }> };
 
 export async function POST(req: Request, { params }: Params) {
@@ -45,15 +81,18 @@ export async function POST(req: Request, { params }: Params) {
   const urls: string[] = [...(car.images ?? [])];
 
   for (const file of files) {
-    const ext = EXT_BY_MIME[file.type];
-    if (!ext) continue; // reject non-image / disallowed types
     if (file.size > MAX_BYTES) continue;
 
-    const path = `${id}/${Date.now()}-${randomUUID()}.${ext}`;
     const buffer = Buffer.from(await file.arrayBuffer());
+    // Trust the bytes, not the header: derive the MIME from the file signature.
+    const sniffedMime = sniffImageMime(buffer.subarray(0, 12));
+    const ext = sniffedMime ? EXT_BY_MIME[sniffedMime] : undefined;
+    if (!sniffedMime || !ext) continue; // not a real allowed image
+
+    const path = `${id}/${Date.now()}-${randomUUID()}.${ext}`;
     const { error: uploadError } = await supabase.storage
       .from(BUCKET)
-      .upload(path, buffer, { contentType: file.type, upsert: false });
+      .upload(path, buffer, { contentType: sniffedMime, upsert: false });
 
     if (!uploadError) {
       const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);

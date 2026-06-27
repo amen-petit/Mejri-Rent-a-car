@@ -167,10 +167,28 @@
       "norm_label": "supabasehostname"
     },
     {
+      "label": "csp",
+      "file_type": "code",
+      "source_file": "next.config.ts",
+      "source_location": "L36",
+      "id": "new_version_next_config_csp",
+      "community": 107,
+      "norm_label": "csp"
+    },
+    {
+      "label": "securityHeaders",
+      "file_type": "code",
+      "source_file": "next.config.ts",
+      "source_location": "L52",
+      "id": "new_version_next_config_securityheaders",
+      "community": 107,
+      "norm_label": "securityheaders"
+    },
+    {
       "label": "nextConfig",
       "file_type": "code",
       "source_file": "next.config.ts",
-      "source_location": "L15",
+      "source_location": "L67",
       "id": "new_version_next_config_nextconfig",
       "community": 107,
       "norm_label": "nextconfig"
@@ -928,7 +946,7 @@
       "source_file": ".agents/skills/impeccable/scripts/command-metadata.json",
       "source_location": "L1",
       "id": "agents_skills_impeccable_scripts_command_metadata_json",
-      "community": 108,
+      "community": 103,
       "norm_label": "command-metadata.json"
     },
     {
@@ -1558,7 +1576,7 @@
       "source_file": ".agents/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L1",
       "id": "agents_skills_impeccable_scripts_critique_storage_mjs",
-      "community": 0,
+      "community": 168,
       "norm_label": "critique-storage.mjs"
     },
     {
@@ -1567,7 +1585,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L43",
       "id": "scripts_critique_storage_slugfromtarget",
-      "community": 0,
+      "community": 168,
       "norm_label": "slugfromtarget()"
     },
     {
@@ -1576,7 +1594,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L70",
       "id": "scripts_critique_storage_kebab",
-      "community": 0,
+      "community": 168,
       "norm_label": "kebab()"
     },
     {
@@ -1585,7 +1603,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L87",
       "id": "scripts_critique_storage_nowfilenamestamp",
-      "community": 0,
+      "community": 168,
       "norm_label": "nowfilenamestamp()"
     },
     {
@@ -1594,7 +1612,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L99",
       "id": "scripts_critique_storage_writesnapshot",
-      "community": 0,
+      "community": 168,
       "norm_label": "writesnapshot()"
     },
     {
@@ -1603,7 +1621,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L114",
       "id": "scripts_critique_storage_serializefrontmatter",
-      "community": 0,
+      "community": 168,
       "norm_label": "serializefrontmatter()"
     },
     {
@@ -1612,7 +1630,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L127",
       "id": "scripts_critique_storage_parsefrontmatter",
-      "community": 0,
+      "community": 168,
       "norm_label": "parsefrontmatter()"
     },
     {
@@ -1621,7 +1639,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L149",
       "id": "scripts_critique_storage_listsnapshotsforslug",
-      "community": 0,
+      "community": 168,
       "norm_label": "listsnapshotsforslug()"
     },
     {
@@ -1630,7 +1648,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L163",
       "id": "scripts_critique_storage_readlatestsnapshot",
-      "community": 0,
+      "community": 168,
       "norm_label": "readlatestsnapshot()"
     },
     {
@@ -1639,7 +1657,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L175",
       "id": "scripts_critique_storage_readtrend",
-      "community": 0,
+      "community": 168,
       "norm_label": "readtrend()"
     },
     {
@@ -1648,7 +1666,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L183",
       "id": "scripts_critique_storage_main",
-      "community": 0,
+      "community": 168,
       "norm_label": "main()"
     },
     {
@@ -1657,7 +1675,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L225",
       "id": "scripts_critique_storage_ismainmodule",
-      "community": 0,
+      "community": 168,
       "norm_label": "ismainmodule()"
     },
     {
@@ -2251,7 +2269,7 @@
       "source_file": ".claude/skills/impeccable/scripts/impeccable-paths.mjs",
       "source_location": "L100",
       "id": "scripts_impeccable_paths_getcritiquedir",
-      "community": 0,
+      "community": 168,
       "norm_label": "getcritiquedir()"
     },
     {
@@ -3556,7 +3574,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3567",
       "id": "scripts_live_browser_updateglobalbarstate",
-      "community": 16,
+      "community": 5,
       "norm_label": "updateglobalbarstate()"
     },
     {
@@ -3565,7 +3583,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3609",
       "id": "scripts_live_browser_toggledetect",
-      "community": 16,
+      "community": 5,
       "norm_label": "toggledetect()"
     },
     {
@@ -3583,7 +3601,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3647",
       "id": "scripts_live_browser_loaddetectscript",
-      "community": 16,
+      "community": 5,
       "norm_label": "loaddetectscript()"
     },
     {
@@ -3592,7 +3610,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3656",
       "id": "scripts_live_browser_ondetectmessage",
-      "community": 16,
+      "community": 5,
       "norm_label": "ondetectmessage()"
     },
     {
@@ -5707,7 +5725,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L1",
       "id": "claude_skills_impeccable_scripts_critique_storage_mjs",
-      "community": 0,
+      "community": 168,
       "norm_label": "critique-storage.mjs"
     },
     {
@@ -7019,7 +7037,7 @@
       "label": "metadata",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L16",
+      "source_location": "L17",
       "id": "app_page_metadata",
       "community": 23,
       "norm_label": "metadata"
@@ -7028,7 +7046,7 @@
       "label": "steps",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L24",
+      "source_location": "L25",
       "id": "app_page_steps",
       "community": 23,
       "norm_label": "steps"
@@ -7037,7 +7055,7 @@
       "label": "features",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L47",
+      "source_location": "L48",
       "id": "app_page_features",
       "community": 23,
       "norm_label": "features"
@@ -7046,7 +7064,7 @@
       "label": "engagements",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L66",
+      "source_location": "L67",
       "id": "app_page_engagements",
       "community": 23,
       "norm_label": "engagements"
@@ -7055,7 +7073,7 @@
       "label": "CarSilhouette()",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L84",
+      "source_location": "L85",
       "id": "app_page_carsilhouette",
       "community": 23,
       "norm_label": "carsilhouette()"
@@ -7064,7 +7082,7 @@
       "label": "Arrow()",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L92",
+      "source_location": "L93",
       "id": "app_page_arrow",
       "community": 23,
       "norm_label": "arrow()"
@@ -7073,7 +7091,7 @@
       "label": "Home()",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L100",
+      "source_location": "L101",
       "id": "app_page_home",
       "community": 23,
       "norm_label": "home()"
@@ -7457,10 +7475,19 @@
       "norm_label": "ext_by_mime"
     },
     {
+      "label": "sniffImageMime()",
+      "file_type": "code",
+      "source_file": "src/app/api/admin/cars/[id]/images/route.ts",
+      "source_location": "L24",
+      "id": "images_route_sniffimagemime",
+      "community": 1,
+      "norm_label": "sniffimagemime()"
+    },
+    {
       "label": "Params",
       "file_type": "code",
       "source_file": "src/app/api/admin/cars/[id]/images/route.ts",
-      "source_location": "L17",
+      "source_location": "L53",
       "id": "images_route_params",
       "community": 1,
       "norm_label": "params"
@@ -7469,7 +7496,7 @@
       "label": "POST()",
       "file_type": "code",
       "source_file": "src/app/api/admin/cars/[id]/images/route.ts",
-      "source_location": "L19",
+      "source_location": "L55",
       "id": "images_route_post",
       "community": 1,
       "norm_label": "post()"
@@ -7478,7 +7505,7 @@
       "label": "DELETE()",
       "file_type": "code",
       "source_file": "src/app/api/admin/cars/[id]/images/route.ts",
-      "source_location": "L76",
+      "source_location": "L115",
       "id": "images_route_delete",
       "community": 1,
       "norm_label": "delete()"
@@ -7923,6 +7950,42 @@
       "id": "components_footer_footer",
       "community": 60,
       "norm_label": "footer()"
+    },
+    {
+      "label": "Hero.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L1",
+      "id": "src_components_hero_tsx",
+      "community": 167,
+      "norm_label": "hero.tsx"
+    },
+    {
+      "label": "Arrow()",
+      "file_type": "code",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L16",
+      "id": "components_hero_arrow",
+      "community": 167,
+      "norm_label": "arrow()"
+    },
+    {
+      "label": "CarSilhouette()",
+      "file_type": "code",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L24",
+      "id": "components_hero_carsilhouette",
+      "community": 167,
+      "norm_label": "carsilhouette()"
+    },
+    {
+      "label": "Hero()",
+      "file_type": "code",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L32",
+      "id": "components_hero_hero",
+      "community": 167,
+      "norm_label": "hero()"
     },
     {
       "label": "MotionProvider.tsx",
@@ -20680,11 +20743,31 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "next.config.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "next_config_ts",
+      "target": "new_version_next_config_csp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "next.config.ts",
       "source_location": "L15",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "next_config_ts",
       "target": "new_version_next_config_nextconfig"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "next.config.ts",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "next_config_ts",
+      "target": "new_version_next_config_securityheaders",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -39937,6 +40020,17 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_app_page_tsx",
+      "target": "src_components_hero_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_page_tsx",
       "target": "src_components_icons_whatsappicon_tsx"
     },
     {
@@ -40074,9 +40168,9 @@
       "source_file": "src/app/admin/layout.tsx",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_layout_tsx",
-      "target": "admin_layout_navicon",
-      "confidence_score": 1.0
+      "target": "admin_layout_navicon"
     },
     {
       "relation": "contains",
@@ -41138,6 +41232,16 @@
       "target": "images_route_post"
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/cars/[id]/images/route.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "src_app_api_admin_cars_id_images_route_ts",
+      "target": "images_route_sniffimagemime",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -41180,6 +41284,17 @@
       "confidence_score": 1.0,
       "source": "src_app_api_admin_cars_id_images_route_ts",
       "target": "src_lib_supabase_admin_ts"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/cars/[id]/images/route.ts",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "images_route_post",
+      "target": "images_route_sniffimagemime",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -42641,6 +42756,58 @@
       "confidence_score": 1.0,
       "source": "src_components_footer_tsx",
       "target": "src_lib_constants_ts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_hero_tsx",
+      "target": "components_hero_arrow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_hero_tsx",
+      "target": "components_hero_carsilhouette"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_hero_tsx",
+      "target": "components_hero_hero"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_hero_tsx",
+      "target": "lib_types_car"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_hero_tsx",
+      "target": "src_lib_types_ts"
     },
     {
       "relation": "contains",
@@ -56187,5 +56354,5 @@
       "source_file": null
     }
   ],
-  "built_at_commit": "35e309927d0cb15c6c535d2a838a2a3704fd954f"
+  "built_at_commit": "c9de99aaf3ffaea07d49b3dff2126c1f276b0e1f"
 }
