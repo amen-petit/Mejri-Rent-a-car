@@ -51,6 +51,10 @@ const emptyTierRow = (): TierFormRow => ({
   price_per_day: "",
 });
 
+// Shared label style for the form fields.
+const fieldLabel =
+  "mb-2 block text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-stone";
+
 export default function AdminVoitures() {
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
@@ -279,35 +283,19 @@ export default function AdminVoitures() {
   }
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
-      <div
-        data-reveal
-        className="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between"
-      >
+    <div>
+      <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-navy sm:text-4xl">
+          <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
             Véhicules
           </h1>
-          <p className="mt-2 text-sm text-slate-600 sm:text-base">
+          <p className="mt-3 text-sm text-stone">
             {cars.length} véhicule{cars.length > 1 ? "s" : ""} au total
           </p>
         </div>
-        <button
-          onClick={openAdd}
-          className="btn-primary flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-2.5 text-sm font-medium shadow-soft hover:shadow-soft-lg sm:w-auto"
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 4v16m8-8H4"
-            />
+        <button onClick={openAdd} className="btn-primary w-full sm:w-auto">
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
           </svg>
           Ajouter un véhicule
         </button>
@@ -316,96 +304,88 @@ export default function AdminVoitures() {
       {loading ? (
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="h-48 bg-slate-200 rounded-3xl animate-pulse"
-            />
+            <div key={i} className="h-72 animate-pulse rounded-[var(--radius-lg)] bg-mist" />
           ))}
         </div>
       ) : cars.length === 0 ? (
-        <div className="text-center py-24 text-slate-600">
-          <div className="text-4xl mb-4">🚗</div>
-          <div className="text-2xl font-bold mb-2 text-navy">
+        <div className="border border-mist bg-cloud py-24 text-center">
+          <div className="font-display text-2xl font-medium text-ink">
             Aucun véhicule
           </div>
-          <div className="text-base">
+          <div className="mt-2 text-sm text-stone">
             Commencez par ajouter votre premier véhicule.
           </div>
         </div>
       ) : (
-        <div data-reveal className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {cars.map((car) => (
             <div
-              data-reveal
               key={car.id}
-              className="card-surface rounded-3xl overflow-hidden hover:shadow-soft-lg transition-all duration-250"
+              className="group overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud transition-colors hover:border-ink"
             >
               {/* Image */}
-              <div className="relative h-40 bg-primary/10 border-b border-slate-200 flex items-center justify-center overflow-hidden group">
+              <div className="relative flex h-44 items-center justify-center overflow-hidden border-b border-mist bg-paper">
                 {car.images?.[0] ? (
                   <Image
                     src={car.images[0]}
                     alt={car.name}
                     fill
                     unoptimized
-                    sizes="(max-width: 768px) 100vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                   />
                 ) : (
-                  <CarGlyph className="w-16 h-16 text-primary" />
+                  <CarGlyph className="h-16 w-16 text-ash" />
                 )}
                 {/* Available toggle */}
                 <button
                   onClick={() => toggleAvailable(car)}
-                  className={`absolute top-3 right-3 text-xs px-4 py-2 rounded-full border-2 font-bold transition-all shadow-soft ${
+                  className={`absolute right-3 top-3 rounded-full border px-3 py-1.5 text-[0.65rem] font-semibold backdrop-blur-sm transition-colors ${
                     car.is_available
-                      ? "bg-primary text-navy border-primary hover:bg-primary/90 hover:shadow-soft-lg"
-                      : "bg-red-500 text-white border-red-600 hover:bg-red-600 hover:shadow-soft-lg"
+                      ? "border-ink/10 bg-paper/85 text-ink hover:bg-paper"
+                      : "border-red-300 bg-red-500 text-white hover:bg-red-600"
                   }`}
                 >
-                  {car.is_available ? "✓ Disponible" : "✗ Indisponible"}
+                  {car.is_available ? "Disponible" : "Indisponible"}
                 </button>
                 {car.is_featured && (
-                  <div className="absolute top-3 left-3 text-[11px] px-3 py-1 rounded-full bg-yellow-50 text-yellow-700 border border-yellow-200 font-bold">
+                  <div className="absolute left-3 top-3 rounded-full bg-ink px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-paper">
                     À la une
                   </div>
                 )}
               </div>
 
               <div className="p-6">
-                <div className="text-xs text-navy uppercase tracking-wide font-bold mb-2">
+                <div className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-stone">
                   {car.category}
                 </div>
-                <div className="text-lg font-bold text-navy mb-1">
+                <div className="mt-1.5 font-display text-lg font-medium text-ink">
                   {car.brand} {car.name}
                 </div>
-                <div className="mb-2 text-xs font-semibold text-slate-600">
-                  Quantité: {car.quantity ?? 1}
+                <div className="mt-1 text-xs text-ash">
+                  Quantité : {car.quantity ?? 1}
                 </div>
-                <div className="text-base font-bold text-primary mb-4">
-                  {car.price_per_day}{" "}
-                  <span className="text-xs text-slate-600 font-normal">
-                    DT / jour
-                  </span>
+                <div className="mt-3 font-display text-xl text-ink">
+                  {car.price_per_day}
+                  <span className="ml-1 text-xs font-normal text-stone">DT / jour</span>
                 </div>
                 {(car.pricing_tiers?.length || 0) > 0 && (
-                  <div className="mb-4 rounded-xl border border-navy/20 bg-navy/5 px-3 py-2 text-[11px] text-navy font-medium">
-                    Tarification durée active: {car.pricing_tiers?.length}{" "}
-                    palier
+                  <div className="mt-4 rounded-[var(--radius-sm)] border border-mist bg-paper px-3 py-2 text-[0.7rem] text-stone">
+                    Tarification durée : {car.pricing_tiers?.length} palier
                     {(car.pricing_tiers?.length || 0) > 1 ? "s" : ""}
                   </div>
                 )}
-                <div className="flex gap-2">
+                <div className="mt-5 flex gap-2">
                   <button
                     onClick={() => openEdit(car)}
-                    className="flex-1 border-2 border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 py-2 rounded-lg text-xs font-medium transition-colors"
+                    className="flex-1 rounded-[var(--radius-sm)] border border-line py-2 text-xs font-medium text-ink transition-colors hover:border-ink"
                   >
                     Modifier
                   </button>
                   <button
                     onClick={() => handleDelete(car.id)}
                     disabled={deletingId === car.id}
-                    className="flex-1 border-2 border-red-200 text-red-500 hover:bg-red-50 py-2 rounded-lg text-xs font-medium transition-colors disabled:opacity-50"
+                    className="flex-1 rounded-[var(--radius-sm)] border border-red-200 py-2 text-xs font-medium text-red-500 transition-colors hover:bg-red-50 disabled:opacity-50"
                   >
                     {deletingId === car.id ? "..." : "Supprimer"}
                   </button>
@@ -418,9 +398,9 @@ export default function AdminVoitures() {
 
       {/* Add / Edit modal */}
       {showForm && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/40 px-4 py-6 sm:py-8">
-          <div className="my-auto w-full max-w-[calc(100vw-1rem)] rounded-3xl p-5 shadow-soft-xl card-surface sm:max-w-xl sm:p-8">
-            <h3 className="text-2xl font-bold text-navy mb-8">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-ink/50 px-4 py-6 backdrop-blur-sm sm:py-10">
+          <div className="card-surface my-auto w-full max-w-[calc(100vw-1rem)] p-6 sm:max-w-xl sm:p-9">
+            <h3 className="mb-8 font-display text-2xl font-medium text-ink">
               {editing ? "Modifier le véhicule" : "Ajouter un véhicule"}
             </h3>
 
@@ -428,103 +408,52 @@ export default function AdminVoitures() {
               {/* Name + Brand */}
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                  <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
-                    Marque *
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Volkswagen"
-                    value={form.brand}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, brand: e.target.value }))
-                    }
-                    className="input-premium w-full"
-                  />
+                  <label className={fieldLabel}>Marque *</label>
+                  <input type="text" placeholder="Volkswagen" value={form.brand} onChange={(e) => setForm((f) => ({ ...f, brand: e.target.value }))} className="input-premium" />
                 </div>
                 <div>
-                  <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
-                    Modèle *
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Polo"
-                    value={form.name}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, name: e.target.value }))
-                    }
-                    className="input-premium w-full"
-                  />
+                  <label className={fieldLabel}>Modèle *</label>
+                  <input type="text" placeholder="Polo" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} className="input-premium" />
                 </div>
               </div>
 
               {/* Category + Price + Quantity */}
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div>
-                  <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
-                    Catégorie
-                  </label>
-                  <select
-                    value={form.category}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, category: e.target.value }))
-                    }
-                    className="input-premium w-full appearance-none bg-white"
-                  >
+                  <label className={fieldLabel}>Catégorie</label>
+                  <select value={form.category} onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))} className="input-premium appearance-none">
                     {CAR_CATEGORIES.map((c) => (
                       <option key={c}>{c}</option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
-                    Prix / jour (DT) *
-                  </label>
-                  <input
-                    type="number"
-                    placeholder="85"
-                    value={form.price_per_day}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, price_per_day: e.target.value }))
-                    }
-                    className="input-premium w-full"
-                  />
+                  <label className={fieldLabel}>Prix / jour (DT) *</label>
+                  <input type="number" placeholder="85" value={form.price_per_day} onChange={(e) => setForm((f) => ({ ...f, price_per_day: e.target.value }))} className="input-premium" />
                 </div>
                 <div>
-                  <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
-                    Quantité *
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    step="1"
-                    placeholder="1"
-                    value={form.quantity}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, quantity: e.target.value }))
-                    }
-                    className="input-premium w-full"
-                  />
+                  <label className={fieldLabel}>Quantité *</label>
+                  <input type="number" min="1" step="1" placeholder="1" value={form.quantity} onChange={(e) => setForm((f) => ({ ...f, quantity: e.target.value }))} className="input-premium" />
                 </div>
               </div>
 
+              {/* Pricing tiers */}
               <div>
                 <div className="mb-3 flex items-center justify-between gap-3">
-                  <label className="text-xs text-slate-600 uppercase tracking-wide font-bold block">
+                  <label className={`${fieldLabel} mb-0`}>
                     Tarification par durée (optionnel)
                   </label>
                   <button
                     type="button"
-                    onClick={() =>
-                      setPricingTiers((rows) => [...rows, emptyTierRow()])
-                    }
-                    className="rounded-lg border border-navy/25 bg-white px-3 py-1.5 text-[11px] font-semibold text-navy hover:bg-navy/10 transition-colors"
+                    onClick={() => setPricingTiers((rows) => [...rows, emptyTierRow()])}
+                    className="rounded-[var(--radius-sm)] border border-line px-3 py-1.5 text-[0.7rem] font-medium text-ink transition-colors hover:border-ink"
                   >
                     + Ajouter un palier
                   </button>
                 </div>
 
                 {pricingTiers.length === 0 ? (
-                  <p className="text-xs text-slate-500 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+                  <p className="rounded-[var(--radius-sm)] border border-mist bg-paper px-3 py-2 text-xs text-ash">
                     Aucun palier défini. Le prix standard par jour sera utilisé.
                   </p>
                 ) : (
@@ -532,65 +461,15 @@ export default function AdminVoitures() {
                     {pricingTiers.map((tier, index) => (
                       <div
                         key={index}
-                        className="grid grid-cols-1 gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 sm:grid-cols-[1fr_1fr_1fr_auto]"
+                        className="grid grid-cols-1 gap-2 rounded-[var(--radius-sm)] border border-mist bg-paper p-3 sm:grid-cols-[1fr_1fr_1fr_auto]"
                       >
-                        <input
-                          type="number"
-                          min="1"
-                          placeholder="Min jours"
-                          value={tier.min_days}
-                          onChange={(e) =>
-                            setPricingTiers((rows) =>
-                              rows.map((row, rowIndex) =>
-                                rowIndex === index
-                                  ? { ...row, min_days: e.target.value }
-                                  : row,
-                              ),
-                            )
-                          }
-                          className="input-premium w-full"
-                        />
-                        <input
-                          type="number"
-                          min="1"
-                          placeholder="Max jours"
-                          value={tier.max_days}
-                          onChange={(e) =>
-                            setPricingTiers((rows) =>
-                              rows.map((row, rowIndex) =>
-                                rowIndex === index
-                                  ? { ...row, max_days: e.target.value }
-                                  : row,
-                              ),
-                            )
-                          }
-                          className="input-premium w-full"
-                        />
-                        <input
-                          type="number"
-                          min="1"
-                          step="0.01"
-                          placeholder="Prix / jour"
-                          value={tier.price_per_day}
-                          onChange={(e) =>
-                            setPricingTiers((rows) =>
-                              rows.map((row, rowIndex) =>
-                                rowIndex === index
-                                  ? { ...row, price_per_day: e.target.value }
-                                  : row,
-                              ),
-                            )
-                          }
-                          className="input-premium w-full"
-                        />
+                        <input type="number" min="1" placeholder="Min jours" value={tier.min_days} onChange={(e) => setPricingTiers((rows) => rows.map((row, ri) => (ri === index ? { ...row, min_days: e.target.value } : row)))} className="input-premium" />
+                        <input type="number" min="1" placeholder="Max jours" value={tier.max_days} onChange={(e) => setPricingTiers((rows) => rows.map((row, ri) => (ri === index ? { ...row, max_days: e.target.value } : row)))} className="input-premium" />
+                        <input type="number" min="1" step="0.01" placeholder="Prix / jour" value={tier.price_per_day} onChange={(e) => setPricingTiers((rows) => rows.map((row, ri) => (ri === index ? { ...row, price_per_day: e.target.value } : row)))} className="input-premium" />
                         <button
                           type="button"
-                          onClick={() =>
-                            setPricingTiers((rows) =>
-                              rows.filter((_, rowIndex) => rowIndex !== index),
-                            )
-                          }
-                          className="rounded-lg border border-red-200 px-3 py-2 text-xs font-semibold text-red-500 hover:bg-red-50 transition-colors"
+                          onClick={() => setPricingTiers((rows) => rows.filter((_, ri) => ri !== index))}
+                          className="rounded-[var(--radius-sm)] border border-red-200 px-3 py-2 text-xs font-medium text-red-500 transition-colors hover:bg-red-50"
                         >
                           Suppr.
                         </button>
@@ -603,104 +482,50 @@ export default function AdminVoitures() {
               {/* Transmission + Fuel + Seats */}
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div>
-                  <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
-                    Transmission
-                  </label>
-                  <select
-                    value={form.transmission}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, transmission: e.target.value }))
-                    }
-                    className="input-premium w-full appearance-none bg-white"
-                  >
+                  <label className={fieldLabel}>Transmission</label>
+                  <select value={form.transmission} onChange={(e) => setForm((f) => ({ ...f, transmission: e.target.value }))} className="input-premium appearance-none">
                     {TRANSMISSION_OPTIONS.map((t) => (
                       <option key={t}>{t}</option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
-                    Carburant
-                  </label>
-                  <select
-                    value={form.fuel_type}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, fuel_type: e.target.value }))
-                    }
-                    className="input-premium w-full appearance-none bg-white"
-                  >
+                  <label className={fieldLabel}>Carburant</label>
+                  <select value={form.fuel_type} onChange={(e) => setForm((f) => ({ ...f, fuel_type: e.target.value }))} className="input-premium appearance-none">
                     {FUEL_TYPES.map((f) => (
                       <option key={f}>{f}</option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
-                    Places
-                  </label>
-                  <input
-                    type="number"
-                    min="2"
-                    max="9"
-                    value={form.seats}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, seats: e.target.value }))
-                    }
-                    className="input-premium w-full"
-                  />
+                  <label className={fieldLabel}>Places</label>
+                  <input type="number" min="2" max="9" value={form.seats} onChange={(e) => setForm((f) => ({ ...f, seats: e.target.value }))} className="input-premium" />
                 </div>
               </div>
 
               {/* Description */}
               <div>
-                <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
-                  Description
-                </label>
-                <textarea
-                  placeholder="Description du véhicule..."
-                  value={form.description}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, description: e.target.value }))
-                  }
-                  rows={3}
-                  className="input-premium w-full resize-none"
-                />
+                <label className={fieldLabel}>Description</label>
+                <textarea placeholder="Description du véhicule..." value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} rows={3} className="input-premium resize-none" />
               </div>
 
               {/* Features */}
               <div>
-                <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
+                <label className={fieldLabel}>
                   Équipements{" "}
-                  <span className="normal-case font-normal text-slate-500">
+                  <span className="font-normal normal-case text-ash">
                     (séparés par une virgule)
                   </span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="Climatisation, GPS, Bluetooth..."
-                  value={form.features}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, features: e.target.value }))
-                  }
-                  className="input-premium w-full"
-                />
+                <input type="text" placeholder="Climatisation, GPS, Bluetooth..." value={form.features} onChange={(e) => setForm((f) => ({ ...f, features: e.target.value }))} className="input-premium" />
               </div>
 
               {/* Images */}
               <div>
-                <label className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-2 block">
-                  Photos
-                </label>
-                <input
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={(e) => setImages(e.target.files)}
-                  className="input-premium w-full"
-                />
-                {/* Existing images */}
+                <label className={fieldLabel}>Photos</label>
+                <input type="file" multiple accept="image/*" onChange={(e) => setImages(e.target.files)} className="input-premium" />
                 {editing && editing.images?.length > 0 && (
-                  <div className="flex gap-2 mt-3 flex-wrap">
+                  <div className="mt-3 flex flex-wrap gap-2">
                     {editing.images.map((url, i) => (
                       <div key={i} className="relative">
                         <Image
@@ -709,11 +534,11 @@ export default function AdminVoitures() {
                           width={64}
                           height={64}
                           unoptimized
-                          className="w-16 h-16 object-cover rounded-xl border-2 border-slate-200"
+                          className="h-16 w-16 rounded-[var(--radius-sm)] border border-mist object-cover"
                         />
                         <button
                           onClick={() => removeImage(editing, url)}
-                          className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-[11px] flex items-center justify-center font-bold hover:bg-red-600 transition-colors shadow-soft"
+                          className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[0.65rem] font-bold text-white transition-colors hover:bg-red-600"
                         >
                           ✕
                         </button>
@@ -724,37 +549,20 @@ export default function AdminVoitures() {
               </div>
 
               {/* Toggles */}
-              <div className="flex gap-8 py-2">
-                <label className="flex items-center gap-3 text-sm cursor-pointer font-medium text-slate-700">
-                  <input
-                    type="checkbox"
-                    checked={form.is_available}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, is_available: e.target.checked }))
-                    }
-                    className="accent-blue-600 w-4 h-4"
-                  />
+              <div className="flex gap-8 py-1">
+                <label className="flex cursor-pointer items-center gap-2.5 text-sm font-medium text-ink">
+                  <input type="checkbox" checked={form.is_available} onChange={(e) => setForm((f) => ({ ...f, is_available: e.target.checked }))} className="h-4 w-4 accent-ink" />
                   Disponible
                 </label>
-                <label className="flex items-center gap-3 text-sm cursor-pointer font-medium text-slate-700">
-                  <input
-                    type="checkbox"
-                    checked={form.is_featured}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, is_featured: e.target.checked }))
-                    }
-                    className="accent-blue-600 w-4 h-4"
-                  />
+                <label className="flex cursor-pointer items-center gap-2.5 text-sm font-medium text-ink">
+                  <input type="checkbox" checked={form.is_featured} onChange={(e) => setForm((f) => ({ ...f, is_featured: e.target.checked }))} className="h-4 w-4 accent-ink" />
                   Mettre à la une
                 </label>
               </div>
             </div>
 
-            <div className="flex gap-3 mt-8">
-              <button
-                onClick={() => setShowForm(false)}
-                className="flex-1 border-2 border-slate-200 text-slate-600 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors"
-              >
+            <div className="mt-8 flex gap-3">
+              <button onClick={() => setShowForm(false)} className="btn-ghost flex-1">
                 Annuler
               </button>
               <button
@@ -767,13 +575,9 @@ export default function AdminVoitures() {
                   !form.quantity ||
                   Number(form.quantity) < 1
                 }
-                className="flex-1 btn-primary py-3 rounded-xl text-sm font-medium transition-all disabled:opacity-50 shadow-soft hover:shadow-soft-lg"
+                className="btn-primary flex-1 disabled:opacity-50"
               >
-                {saving
-                  ? "Enregistrement..."
-                  : editing
-                    ? "Enregistrer"
-                    : "Ajouter"}
+                {saving ? "Enregistrement..." : editing ? "Enregistrer" : "Ajouter"}
               </button>
             </div>
           </div>

@@ -70,23 +70,22 @@ export default function TimeSlotPicker({
     <div className={disabled ? "pointer-events-none opacity-40" : ""}>
       <label
         htmlFor={id}
-        className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-slate-500"
+        className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone"
       >
         {label}
       </label>
 
       {/* Fixed-height drum — clips to 3 visible rows */}
-      <div className="relative h-[120px] overflow-hidden rounded-2xl border border-navy/12 bg-surface shadow-[inset_0_2px_8px_color-mix(in_srgb,var(--color-navy)_6%,transparent)]">
+      <div className="relative h-[120px] overflow-hidden rounded-[var(--radius)] border border-line bg-cloud">
 
         {/* Top fade */}
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-10 h-10 bg-gradient-to-b from-surface to-transparent" />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-10 h-10 bg-gradient-to-b from-cloud to-transparent" />
         {/* Bottom fade */}
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10 bg-gradient-to-t from-surface to-transparent" />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10 bg-gradient-to-t from-cloud to-transparent" />
         {/* Active-slot highlight stripe */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-2 top-1/2 z-10 h-10 -translate-y-1/2 rounded-xl border border-primary/25
-                     bg-[linear-gradient(135deg,color-mix(in_srgb,var(--color-primary)_13%,transparent),color-mix(in_srgb,var(--color-secondary)_9%,transparent))]"
+          className="pointer-events-none absolute inset-x-2 top-1/2 z-10 h-10 -translate-y-1/2 rounded-[var(--radius-sm)] border border-ink/15 bg-ink/[0.04]"
         />
 
         <ul
@@ -113,8 +112,8 @@ export default function TimeSlotPicker({
                 aria-selected={selected}
                 onClick={() => !disabled && onChange(slot)}
                 style={{ scrollSnapAlign: "center" }}
-                className={`h-10 flex cursor-pointer select-none items-center justify-center text-sm font-semibold transition-colors duration-100 ${
-                  selected ? "text-primary" : "text-navy/40 hover:text-navy/65"
+                className={`h-10 flex cursor-pointer select-none items-center justify-center font-display text-sm transition-colors duration-100 ${
+                  selected ? "text-ink" : "text-ash hover:text-stone"
                 }`}
               >
                 {slot}

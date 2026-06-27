@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BRAND_NAME } from "@/lib/constants";
+import { BRAND_SHORT } from "@/lib/constants";
 
 const navItems = [
   {
@@ -26,6 +26,14 @@ const navItems = [
     icon: "M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2",
   },
 ];
+
+function NavIcon({ d }: { d: string }) {
+  return (
+    <svg className="h-[18px] w-[18px] shrink-0" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d={d} />
+    </svg>
+  );
+}
 
 export default function AdminLayout({
   children,
@@ -90,13 +98,13 @@ export default function AdminLayout({
   }, [pathname, router]);
 
   if (pathname === "/admin/login") {
-    return <div className="min-h-screen bg-slate-50">{children}</div>;
+    return <div className="min-h-screen bg-paper">{children}</div>;
   }
 
   if (checkingAuth) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center px-6">
-        <div className="card-surface px-8 py-6 text-sm text-slate-600">
+      <div className="flex min-h-screen items-center justify-center bg-paper px-6">
+        <div className="card-surface px-8 py-6 text-sm text-stone">
           Vérification de l&apos;accès administrateur...
         </div>
       </div>
@@ -107,43 +115,36 @@ export default function AdminLayout({
     return null;
   }
 
-  return (
-    <div className="min-h-screen bg-slate-50 flex flex-col lg:flex-row">
-      <header className="lg:hidden sticky top-0 z-50 bg-navy text-white shadow-soft-lg border-b border-primary/20">
-        <div className="flex items-center justify-between px-4 py-4">
-          <div>
-            <div className="text-lg font-bold">{BRAND_NAME}</div>
-            <div className="text-[10px] uppercase tracking-widest text-[#F2F2F2]/90 font-bold">
-              Admin Panel
-            </div>
-          </div>
+  const Brand = (
+    <div className="flex items-baseline gap-2.5">
+      <span className="font-display text-xl font-medium text-paper">
+        {BRAND_SHORT}
+      </span>
+      <span className="text-[0.58rem] font-semibold uppercase tracking-[0.24em] text-paper/45">
+        Admin
+      </span>
+    </div>
+  );
 
+  return (
+    <div className="flex min-h-screen flex-col bg-paper lg:flex-row">
+      {/* Mobile header */}
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-ink text-paper lg:hidden">
+        <div className="flex items-center justify-between px-5 py-4">
+          {Brand}
           <button
             onClick={() => setMenuOpen((open) => !open)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/15 bg-white/10"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] border border-white/15"
             aria-label="Ouvrir le menu admin"
           >
-            <span className="sr-only">Menu</span>
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d={
-                  menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"
-                }
-              />
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
             </svg>
           </button>
         </div>
 
         {menuOpen && (
-          <div className="border-t border-primary/20 px-4 py-4 space-y-2">
+          <div className="space-y-1 border-t border-white/10 px-4 py-4">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -151,140 +152,76 @@ export default function AdminLayout({
                   key={item.href}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition-all ${
-                    isActive
-                      ? "bg-primary text-navy shadow-soft"
-                      : "bg-white/10 text-slate-100"
+                  className={`flex items-center gap-3 rounded-[var(--radius-sm)] px-4 py-3 text-sm font-medium transition-colors ${
+                    isActive ? "bg-paper text-ink" : "text-paper/60 hover:bg-white/5 hover:text-paper"
                   }`}
                 >
-                  <svg
-                    className="w-5 h-5 shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d={item.icon}
-                    />
-                  </svg>
+                  <NavIcon d={item.icon} />
                   {item.label}
                 </Link>
               );
             })}
-
             <button
               onClick={async () => {
                 setMenuOpen(false);
                 await handleLogout();
               }}
               disabled={loggingOut}
-              className="w-full rounded-2xl px-4 py-3 text-left text-sm font-semibold text-white bg-white/10 disabled:opacity-60"
+              className="mt-2 w-full rounded-[var(--radius-sm)] border border-white/15 px-4 py-3 text-left text-sm font-medium text-paper disabled:opacity-60"
             >
               {loggingOut ? "Déconnexion..." : "Se déconnecter"}
             </button>
-
             <Link
               href="/"
               onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 px-2 py-2 text-xs text-slate-300 hover:text-[#F2F2F2] transition-colors font-medium"
+              className="flex items-center gap-2 px-2 py-2 text-xs text-paper/50 transition-colors hover:text-paper"
             >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
-              Voir le site
+              ← Voir le site
             </Link>
           </div>
         )}
       </header>
 
-      <aside
-        data-reveal="left"
-        className="hidden lg:flex lg:flex-col w-72 text-white border-r border-primary/20 fixed top-0 left-0 h-full z-40 shadow-soft-lg"
-        style={{
-          background: "linear-gradient(180deg, var(--color-navy) 0%, var(--color-navy) 100%)",
-        }}
-      >
-        <div className="p-7 border-b border-primary/20">
-          <div className="text-2xl font-bold">{BRAND_NAME}</div>
-          <div className="mt-2 text-xs uppercase tracking-widest text-[#F2F2F2]/90 font-bold">
-            Admin Panel
-          </div>
-        </div>
-        <nav className="flex-1 p-4 flex flex-col gap-2">
+      {/* Desktop sidebar */}
+      <aside className="fixed left-0 top-0 z-40 hidden h-full w-72 flex-col border-r border-white/10 bg-ink text-paper lg:flex">
+        <div className="border-b border-white/10 p-7">{Brand}</div>
+        <nav className="flex flex-1 flex-col gap-1 p-4">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-2xl px-5 py-4 text-sm font-semibold transition-all duration-250 ${
+                className={`flex items-center gap-3 rounded-[var(--radius)] px-4 py-3 text-sm font-medium transition-colors duration-200 ${
                   isActive
-                    ? "bg-primary text-navy shadow-soft"
-                    : "text-slate-200 hover:bg-white/10 hover:text-white"
+                    ? "bg-paper text-ink"
+                    : "text-paper/55 hover:bg-white/5 hover:text-paper"
                 }`}
               >
-                <svg
-                  className="w-5 h-5 shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d={item.icon}
-                  />
-                </svg>
+                <NavIcon d={item.icon} />
                 {item.label}
               </Link>
             );
           })}
         </nav>
-        <div className="p-4 border-t border-primary/20 space-y-3">
+        <div className="space-y-3 border-t border-white/10 p-4">
           <button
             onClick={handleLogout}
             disabled={loggingOut}
-            className="w-full rounded-2xl px-5 py-4 text-left text-sm font-semibold text-white bg-white/10 hover:bg-white/15 transition-colors disabled:opacity-60"
+            className="w-full rounded-[var(--radius)] border border-white/15 px-4 py-3 text-left text-sm font-medium text-paper transition-colors hover:bg-white/5 disabled:opacity-60"
           >
             {loggingOut ? "Déconnexion..." : "Se déconnecter"}
           </button>
           <Link
             href="/"
-            className="flex items-center gap-2 text-xs text-slate-300 hover:text-[#F2F2F2] transition-colors font-medium"
+            className="flex items-center gap-2 px-1 text-xs text-paper/50 transition-colors hover:text-paper"
           >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            Voir le site
+            ← Voir le site
           </Link>
         </div>
       </aside>
 
-      <div className="flex-1 min-h-screen p-4 sm:p-6 lg:p-8 lg:ml-72 w-full overflow-x-hidden">
+      <div className="w-full flex-1 overflow-x-hidden p-5 sm:p-6 lg:ml-72 lg:p-10">
         {children}
       </div>
     </div>

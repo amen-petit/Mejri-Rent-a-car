@@ -12,7 +12,6 @@ function StatCard({
   label,
   value,
   sub,
-  color = "emerald",
 }: {
   label: string;
   value: string | number;
@@ -20,16 +19,14 @@ function StatCard({
   color?: string;
 }) {
   return (
-    <div data-reveal className="card-surface p-8">
-      <div className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-3">
+    <div data-reveal className="card-surface p-7">
+      <div className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
         {label}
       </div>
-      <div
-        className={`text-4xl font-bold ${color === "blue" ? "text-primary" : color === "red" ? "text-red-500" : color === "purple" ? "text-secondary" : "text-navy"}`}
-      >
+      <div className="mt-4 font-display text-4xl font-medium text-ink">
         {value}
       </div>
-      {sub && <div className="text-xs text-slate-500 mt-2">{sub}</div>}
+      {sub && <div className="mt-2 text-xs text-ash">{sub}</div>}
     </div>
   );
 }
@@ -93,61 +90,41 @@ export default function AdminDashboard() {
 
   if (loading)
     return (
-      <div className="space-y-6 p-4 animate-pulse sm:p-6 lg:p-8">
+      <div className="animate-pulse space-y-6">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-28 bg-slate-200 rounded-3xl" />
+            <div key={i} className="h-28 rounded-[var(--radius-lg)] bg-mist" />
           ))}
         </div>
-        <div className="h-64 bg-slate-200 rounded-3xl" />
+        <div className="h-64 rounded-[var(--radius-lg)] bg-mist" />
       </div>
     );
 
   return (
-    <div data-reveal className="p-4 sm:p-6 lg:p-8">
-      <div data-reveal className="mb-10 sm:mb-12">
-        <h1 className="text-3xl font-bold text-navy sm:text-4xl">
+    <div>
+      <div className="mb-12">
+        <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
           Tableau de bord
         </h1>
-        <p className="mt-2 text-sm text-slate-600 sm:text-base">
+        <p className="mt-3 text-sm text-stone">
           Bienvenue — voici un aperçu de votre activité.
         </p>
       </div>
 
       {/* Stat cards */}
-      <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:mb-12 xl:grid-cols-4 xl:gap-6">
-        <StatCard
-          label="Locations actives"
-          value={activeNow.length}
-          sub="aujourd'hui"
-          color="emerald"
-        />
-        <StatCard
-          label="En attente"
-          value={pending.length}
-          sub="à confirmer"
-          color="blue"
-        />
-        <StatCard
-          label="Véhicules dispo"
-          value={`${available}/${cars.length}`}
-          sub="disponibles"
-          color="navy"
-        />
-        <StatCard
-          label="Revenus confirmés"
-          value={`${revenue.toLocaleString()} DT`}
-          sub="total"
-          color="emerald"
-        />
+      <div className="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
+        <StatCard label="Locations actives" value={activeNow.length} sub="aujourd'hui" />
+        <StatCard label="En attente" value={pending.length} sub="à confirmer" />
+        <StatCard label="Véhicules dispo" value={`${available}/${cars.length}`} sub="disponibles" />
+        <StatCard label="Revenus confirmés" value={`${revenue.toLocaleString()} DT`} sub="total" />
       </div>
 
-      <div data-reveal className="grid gap-8 lg:grid-cols-2">
+      <div className="grid gap-8 lg:grid-cols-2">
         {/* Calendar */}
-        <div data-reveal="left" className="card-surface p-5 sm:p-8">
-          <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="text-2xl font-bold text-navy">Calendrier</h2>
-            <div className="flex items-center gap-3 text-base">
+        <div className="card-surface p-6 sm:p-8">
+          <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="font-display text-2xl font-medium text-ink">Calendrier</h2>
+            <div className="flex items-center gap-2">
               <button
                 onClick={() => {
                   if (calMonth === 0) {
@@ -155,11 +132,11 @@ export default function AdminDashboard() {
                     setCalYear((y) => y - 1);
                   } else setCalMonth((m) => m - 1);
                 }}
-                className="text-slate-600 hover:text-navy font-bold transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
               >
                 ←
               </button>
-              <span className="text-base font-bold w-32 text-center text-navy">
+              <span className="w-28 text-center font-display text-base text-ink">
                 {MONTHS_FR_SHORT[calMonth]} {calYear}
               </span>
               <button
@@ -169,7 +146,7 @@ export default function AdminDashboard() {
                     setCalYear((y) => y + 1);
                   } else setCalMonth((m) => m + 1);
                 }}
-                className="text-slate-600 hover:text-navy font-bold transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
               >
                 →
               </button>
@@ -180,7 +157,7 @@ export default function AdminDashboard() {
             {DAYS_FR.map((d) => (
               <div
                 key={d}
-                className="text-center text-xs text-slate-600 font-bold uppercase py-2"
+                className="py-2 text-center text-[0.6rem] font-semibold uppercase tracking-[0.1em] text-ash"
               >
                 {d}
               </div>
@@ -195,54 +172,51 @@ export default function AdminDashboard() {
               return (
                 <div
                   key={i}
-                  className={`aspect-square flex flex-col items-center justify-center rounded-lg text-xs relative transition-all duration-250 font-semibold
-                  ${isToday ? "bg-primary text-navy shadow-soft" : rsvs.length > 0 ? "bg-primary/20 text-navy" : "text-slate-600 hover:bg-slate-100"}`}
+                  className={`relative flex aspect-square flex-col items-center justify-center rounded-[var(--radius-sm)] text-xs font-medium transition-colors
+                  ${isToday ? "bg-ink text-paper" : rsvs.length > 0 ? "bg-ink/[0.07] text-ink" : "text-stone hover:bg-ink/[0.05]"}`}
                 >
                   {date.getDate()}
-                  {rsvs.length > 0 && !isToday && (
-                    <div className="w-1 h-1 rounded-full bg-primary mt-0.5" />
-                  )}
-                  {rsvs.length > 0 && isToday && (
-                    <div className="w-1 h-1 rounded-full bg-white mt-0.5" />
+                  {rsvs.length > 0 && (
+                    <div className={`mt-0.5 h-1 w-1 rounded-full ${isToday ? "bg-paper" : "bg-ink"}`} />
                   )}
                 </div>
               );
             })}
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-medium text-slate-600">
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-mist pt-5 text-xs text-stone">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-primary" />
+              <div className="h-3 w-3 rounded-[3px] bg-ink" />
               <span>Aujourd&apos;hui</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-primary/20 border-2 border-primary" />
+              <div className="h-3 w-3 rounded-[3px] bg-ink/[0.12]" />
               <span>Location active</span>
             </div>
           </div>
         </div>
 
         {/* Recent reservations */}
-        <div data-reveal="right" className="card-surface p-5 sm:p-8">
-          <h2 className="mb-8 text-2xl font-bold text-navy">
+        <div className="card-surface p-6 sm:p-8">
+          <h2 className="mb-6 font-display text-2xl font-medium text-ink">
             Dernières réservations
           </h2>
           {recent.length === 0 ? (
-            <div className="text-center py-12 text-slate-500 text-base">
+            <div className="py-12 text-center text-sm text-stone">
               Aucune réservation pour le moment.
             </div>
           ) : (
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col">
               {recent.map((r) => (
                 <div
                   key={r.id}
-                  className="flex items-center justify-between py-4 px-4 border-b border-slate-200 last:border-0 hover:bg-slate-50 rounded-lg transition-colors"
+                  className="flex items-center justify-between border-b border-mist py-4 last:border-0"
                 >
-                  <div>
-                    <div className="text-base font-semibold text-navy">
+                  <div className="min-w-0">
+                    <div className="text-sm font-medium text-ink">
                       {r.client_name}
                     </div>
-                    <div className="text-xs text-slate-600 mt-1">
+                    <div className="mt-1 truncate text-xs text-ash">
                       {r.car
                         ? `${r.car.brand} ${r.car.name} · `
                         : "Véhicule inconnu · "}
@@ -250,16 +224,13 @@ export default function AdminDashboard() {
                       {new Date(r.end_date).toLocaleDateString("fr-FR")}
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="text-base font-bold text-primary">
+                  <div className="flex shrink-0 items-center gap-3 pl-3">
+                    <div className="font-display text-base text-ink">
                       {r.total_price} DT
                     </div>
                     <span
-                      className={`text-xs px-3 py-1 rounded-full border-2 font-bold flex items-center gap-1.5 ${RESERVATION_STATUS_COLOR[r.status]}`}
+                      className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[0.65rem] font-semibold ${RESERVATION_STATUS_COLOR[r.status]}`}
                     >
-                      {r.status === "pending" && "⏳"}
-                      {r.status === "confirmed" && "✓"}
-                      {r.status === "cancelled" && "✕"}
                       {RESERVATION_STATUS_LABEL[r.status]}
                     </span>
                   </div>

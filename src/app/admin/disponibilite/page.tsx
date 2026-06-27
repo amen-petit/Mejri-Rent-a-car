@@ -34,28 +34,19 @@ function StatCard({
   label,
   value,
   sub,
-  tone = "navy",
 }: {
   label: string;
   value: string | number;
   sub?: string;
   tone?: "navy" | "emerald" | "red" | "blue";
 }) {
-  const valueColor =
-    tone === "emerald"
-      ? "text-navy"
-      : tone === "red"
-        ? "text-red-500"
-        : tone === "blue"
-          ? "text-primary"
-          : "text-navy";
   return (
-    <div data-reveal className="card-surface p-6 sm:p-8">
-      <div className="text-xs text-slate-600 uppercase tracking-wide font-bold mb-3">
+    <div className="card-surface p-6 sm:p-7">
+      <div className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
         {label}
       </div>
-      <div className={`text-4xl font-bold ${valueColor}`}>{value}</div>
-      {sub && <div className="text-xs text-slate-500 mt-2">{sub}</div>}
+      <div className="mt-4 font-display text-4xl font-medium text-ink">{value}</div>
+      {sub && <div className="mt-2 text-xs text-ash">{sub}</div>}
     </div>
   );
 }
@@ -67,61 +58,52 @@ function CarRow({ entry, isRange }: { entry: CarAvailability; isRange: boolean }
 
   const ratio = totalUnits > 0 ? availableUnits / totalUnits : 0;
   const barColor = isOffline
-    ? "bg-slate-300"
+    ? "bg-mist"
     : availableUnits === 0
       ? "bg-red-400"
       : ratio <= 0.34
         ? "bg-yellow-400"
-        : "bg-primary";
+        : "bg-ink";
 
   return (
-    <div
-      data-reveal-visible="true"
-      className="card-surface rounded-3xl bg-white border-2 border-slate-200 overflow-hidden"
-    >
+    <div className="overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud">
       <button
         onClick={() => hasReservations && setOpen((o) => !o)}
-        className={`w-full text-left p-5 transition-colors ${
-          hasReservations ? "hover:bg-slate-50 cursor-pointer" : "cursor-default"
+        className={`w-full p-5 text-left transition-colors ${
+          hasReservations ? "cursor-pointer hover:bg-ink/[0.02]" : "cursor-default"
         }`}
         aria-expanded={open}
       >
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           {/* Identity */}
-          <div className="flex items-center gap-4 min-w-0">
-            <div className="relative w-14 h-14 rounded-xl border-2 border-primary overflow-hidden shrink-0 bg-primary/10">
+          <div className="flex min-w-0 items-center gap-4">
+            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border border-mist bg-paper">
               {car.images?.[0] ? (
-                <Image
-                  src={car.images[0]}
-                  alt={car.name}
-                  fill
-                  unoptimized
-                  className="object-cover"
-                />
+                <Image src={car.images[0]} alt={car.name} fill unoptimized className="object-cover" />
               ) : (
-                <CarGlyph className="w-7 h-7 text-primary" />
+                <CarGlyph className="h-7 w-7 text-ash" />
               )}
             </div>
             <div className="min-w-0">
-              <div className="font-bold text-sm text-navy truncate">
+              <div className="truncate text-sm font-medium text-ink">
                 {car.brand} {car.name}
               </div>
               <div className="mt-1 flex flex-wrap items-center gap-2">
                 {isOffline ? (
-                  <span className="text-[11px] px-2.5 py-0.5 rounded-full border-2 font-bold bg-slate-100 text-slate-500 border-slate-200">
+                  <span className="rounded-full border border-mist bg-paper px-2.5 py-0.5 text-[0.65rem] font-semibold text-stone">
                     Hors service
                   </span>
                 ) : availableUnits === 0 ? (
-                  <span className="text-[11px] px-2.5 py-0.5 rounded-full border-2 font-bold bg-red-50 text-red-500 border-red-200">
+                  <span className="rounded-full border border-red-200 bg-red-50 px-2.5 py-0.5 text-[0.65rem] font-semibold text-red-500">
                     Complet
                   </span>
                 ) : (
-                  <span className="text-[11px] px-2.5 py-0.5 rounded-full border-2 font-bold bg-primary/20 text-navy border-primary">
+                  <span className="rounded-full border border-ink/15 bg-ink/[0.05] px-2.5 py-0.5 text-[0.65rem] font-semibold text-ink">
                     {availableUnits} dispo
                   </span>
                 )}
                 {hasReservations && (
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-ash">
                     {entry.reservations.length} réservation
                     {entry.reservations.length > 1 ? "s" : ""}
                   </span>
@@ -131,32 +113,23 @@ function CarRow({ entry, isRange }: { entry: CarAvailability; isRange: boolean }
           </div>
 
           {/* Numbers */}
-          <div className="flex items-center gap-6 shrink-0">
-            <div className="text-center">
-              <div className="text-lg font-bold text-navy">{availableUnits}</div>
-              <div className="text-[10px] uppercase tracking-wide text-slate-500 font-bold">
-                Dispo
+          <div className="flex shrink-0 items-center gap-6">
+            {[
+              [availableUnits, "Dispo"],
+              [rentedUnits, isRange ? "Pic loué" : "Loué"],
+              [totalUnits, "Total"],
+            ].map(([n, l], idx) => (
+              <div key={idx} className="text-center">
+                <div className="font-display text-lg text-ink">{n}</div>
+                <div className="text-[0.58rem] font-semibold uppercase tracking-[0.1em] text-ash">
+                  {l}
+                </div>
               </div>
-            </div>
-            <div className="text-center">
-              <div className="text-lg font-bold text-slate-700">{rentedUnits}</div>
-              <div className="text-[10px] uppercase tracking-wide text-slate-500 font-bold">
-                {isRange ? "Pic loué" : "Loué"}
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-lg font-bold text-slate-700">{totalUnits}</div>
-              <div className="text-[10px] uppercase tracking-wide text-slate-500 font-bold">
-                Total
-              </div>
-            </div>
+            ))}
             {hasReservations && (
               <svg
-                className={`w-5 h-5 text-slate-400 transition-transform ${open ? "rotate-180" : ""}`}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
+                className={`h-5 w-5 text-ash transition-transform ${open ? "rotate-180" : ""}`}
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
               >
                 <path d="M6 9l6 6 6-6" />
               </svg>
@@ -165,7 +138,7 @@ function CarRow({ entry, isRange }: { entry: CarAvailability; isRange: boolean }
         </div>
 
         {/* Capacity bar */}
-        <div className="mt-4 h-2 w-full rounded-full bg-slate-100 overflow-hidden">
+        <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-mist">
           <div
             className={`h-full rounded-full transition-all ${barColor}`}
             style={{
@@ -177,30 +150,28 @@ function CarRow({ entry, isRange }: { entry: CarAvailability; isRange: boolean }
 
       {/* Reservation details */}
       {open && hasReservations && (
-        <div className="border-t border-slate-200 bg-slate-50/60 px-5 py-4 flex flex-col gap-3">
+        <div className="flex flex-col gap-3 border-t border-mist bg-paper px-5 py-4">
           {entry.reservations.map((r) => {
             const days = getDays(r.start_date, r.end_date);
             return (
               <div
                 key={r.id}
-                className="flex flex-col gap-3 rounded-2xl bg-white border border-slate-200 p-4 sm:flex-row sm:items-center sm:justify-between"
+                className="flex flex-col gap-3 rounded-[var(--radius)] border border-mist bg-cloud p-4 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div className="min-w-0">
-                  <div className="font-bold text-sm text-navy">{r.client_name}</div>
-                  <div className="text-xs text-slate-600 mt-1">
+                  <div className="text-sm font-medium text-ink">{r.client_name}</div>
+                  <div className="mt-1 text-xs text-stone">
                     {formatFr(r.start_date)}
                     {r.pickup_time ? ` ${r.pickup_time.slice(0, 5)}` : ""} →{" "}
                     {formatFr(r.end_date)}
                     {r.return_time ? ` ${r.return_time.slice(0, 5)}` : ""} ({days}j)
                   </div>
-                  <div className="text-xs text-slate-500 mt-0.5">{r.client_phone}</div>
+                  <div className="mt-0.5 text-xs text-ash">{r.client_phone}</div>
                 </div>
-                <div className="flex items-center gap-3 shrink-0">
+                <div className="flex shrink-0 items-center gap-3">
                   <span
-                    className={`text-[11px] px-3 py-1 rounded-full border-2 font-bold flex items-center gap-1.5 ${RESERVATION_STATUS_COLOR[r.status]}`}
+                    className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[0.65rem] font-semibold ${RESERVATION_STATUS_COLOR[r.status]}`}
                   >
-                    {r.status === "pending" && "⏳"}
-                    {r.status === "confirmed" && "✓"}
                     {RESERVATION_STATUS_LABEL[r.status]}
                   </span>
                   <a
@@ -208,7 +179,7 @@ function CarRow({ entry, isRange }: { entry: CarAvailability; isRange: boolean }
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="flex items-center justify-center w-9 h-9 rounded-xl border-2 border-primary text-navy hover:bg-primary/10 transition-colors"
+                    className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] border border-ink text-ink transition-colors hover:bg-[#25D366] hover:border-[#25D366] hover:text-white"
                     title="Contacter sur WhatsApp"
                   >
                     <WhatsAppIcon size={14} />
@@ -259,32 +230,33 @@ export default function AdminAvailability() {
 
   const utilizationPct = data ? Math.round(data.utilizationRate * 100) : 0;
 
+  const dateInputCls =
+    "rounded-[var(--radius-sm)] border border-line bg-cloud px-3 py-2 text-sm font-medium text-ink focus:border-ink focus:outline-none";
+
   return (
-    <div data-reveal className="p-4 sm:p-6 lg:p-8">
-      <div data-reveal className="mb-8 sm:mb-10">
-        <h1 className="text-3xl font-bold text-navy sm:text-4xl">
+    <div>
+      <div className="mb-9">
+        <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
           Disponibilité de la flotte
         </h1>
-        <p className="mt-2 text-sm text-slate-600 sm:text-base">
+        <p className="mt-3 max-w-2xl text-sm text-stone">
           Qui loue quoi, et combien de véhicules restent disponibles — à une date
           ou sur une période.
         </p>
       </div>
 
       {/* Date controls */}
-      <div data-reveal className="card-surface p-5 sm:p-6 mb-8">
+      <div className="card-surface mb-8 p-5 sm:p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="flex flex-wrap items-end gap-4">
             {/* Mode toggle */}
-            <div className="inline-flex rounded-2xl border-2 border-slate-200 p-1">
+            <div className="inline-flex rounded-[var(--radius)] border border-line p-1">
               {(["date", "range"] as const).map((m) => (
                 <button
                   key={m}
                   onClick={() => setMode(m)}
-                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${
-                    mode === m
-                      ? "btn-primary text-white shadow-soft"
-                      : "text-slate-600 hover:bg-slate-50"
+                  className={`rounded-[var(--radius-sm)] px-4 py-2 text-sm font-medium transition-colors ${
+                    mode === m ? "bg-ink text-paper" : "text-stone hover:text-ink"
                   }`}
                 >
                   {m === "date" ? "Date" : "Période"}
@@ -294,41 +266,24 @@ export default function AdminAvailability() {
 
             {mode === "date" ? (
               <div className="flex flex-col gap-1">
-                <label className="text-[11px] uppercase tracking-wide font-bold text-slate-500">
+                <label className="text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-ash">
                   Date
                 </label>
-                <input
-                  type="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  className="rounded-xl border-2 border-slate-200 px-3 py-2 text-sm font-semibold text-navy focus:border-primary focus:outline-none"
-                />
+                <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className={dateInputCls} />
               </div>
             ) : (
               <>
                 <div className="flex flex-col gap-1">
-                  <label className="text-[11px] uppercase tracking-wide font-bold text-slate-500">
+                  <label className="text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-ash">
                     Du
                   </label>
-                  <input
-                    type="date"
-                    value={start}
-                    max={end}
-                    onChange={(e) => setStart(e.target.value)}
-                    className="rounded-xl border-2 border-slate-200 px-3 py-2 text-sm font-semibold text-navy focus:border-primary focus:outline-none"
-                  />
+                  <input type="date" value={start} max={end} onChange={(e) => setStart(e.target.value)} className={dateInputCls} />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-[11px] uppercase tracking-wide font-bold text-slate-500">
+                  <label className="text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-ash">
                     Au
                   </label>
-                  <input
-                    type="date"
-                    value={end}
-                    min={start}
-                    onChange={(e) => setEnd(e.target.value)}
-                    className="rounded-xl border-2 border-slate-200 px-3 py-2 text-sm font-semibold text-navy focus:border-primary focus:outline-none"
-                  />
+                  <input type="date" value={end} min={start} onChange={(e) => setEnd(e.target.value)} className={dateInputCls} />
                 </div>
               </>
             )}
@@ -339,25 +294,22 @@ export default function AdminAvailability() {
                 setMode("date");
                 setDate(t);
               }}
-              className="rounded-xl border-2 border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50"
+              className="rounded-[var(--radius-sm)] border border-line px-4 py-2 text-sm font-medium text-stone transition-colors hover:border-ink hover:text-ink"
             >
               Aujourd&apos;hui
             </button>
           </div>
 
           {data && !loading && (
-            <div className="text-sm text-slate-600">
+            <div className="text-sm text-stone">
               {data.isRange ? (
                 <>
-                  Du <span className="font-bold text-navy">{formatFr(data.windowStart)}</span>{" "}
-                  au <span className="font-bold text-navy">{formatFr(data.windowEnd)}</span>
+                  Du <span className="font-medium text-ink">{formatFr(data.windowStart)}</span>{" "}
+                  au <span className="font-medium text-ink">{formatFr(data.windowEnd)}</span>
                 </>
               ) : (
                 <>
-                  Le{" "}
-                  <span className="font-bold text-navy">
-                    {formatFr(data.windowStart)}
-                  </span>
+                  Le <span className="font-medium text-ink">{formatFr(data.windowStart)}</span>
                 </>
               )}
             </div>
@@ -366,26 +318,22 @@ export default function AdminAvailability() {
       </div>
 
       {loading ? (
-        <div className="space-y-6 animate-pulse">
+        <div className="animate-pulse space-y-6">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-28 bg-slate-200 rounded-3xl" />
+              <div key={i} className="h-28 rounded-[var(--radius-lg)] bg-mist" />
             ))}
           </div>
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-24 bg-slate-200 rounded-3xl" />
+            <div key={i} className="h-24 rounded-[var(--radius-lg)] bg-mist" />
           ))}
         </div>
       ) : error || !data ? (
-        <div className="text-center py-24 text-slate-600">
-          <div className="text-4xl mb-4">⚠️</div>
-          <div className="text-2xl font-bold mb-2 text-navy">
+        <div className="border border-mist bg-cloud py-24 text-center">
+          <div className="font-display text-2xl font-medium text-ink">
             Impossible de charger la disponibilité
           </div>
-          <button
-            onClick={load}
-            className="mt-4 btn-primary text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow-soft"
-          >
+          <button onClick={load} className="btn-primary mt-6">
             Réessayer
           </button>
         </div>
@@ -397,13 +345,11 @@ export default function AdminAvailability() {
               label="Unités disponibles"
               value={data.availableUnits}
               sub={`sur ${data.totalUnits - data.offlineUnits} en service`}
-              tone="emerald"
             />
             <StatCard
               label={data.isRange ? "Unités louées (pic)" : "Unités louées"}
               value={data.rentedUnits}
               sub={`${data.confirmedReservations} confirmée${data.confirmedReservations > 1 ? "s" : ""}`}
-              tone="blue"
             />
             <StatCard
               label="Clients en location"
@@ -413,27 +359,26 @@ export default function AdminAvailability() {
                   ? `${data.pendingReservations} demande${data.pendingReservations > 1 ? "s" : ""} en attente`
                   : "confirmés"
               }
-              tone="navy"
             />
             <StatCard
               label="Taux d'utilisation"
               value={`${utilizationPct}%`}
               sub={`${data.carsFullyBooked} modèle${data.carsFullyBooked > 1 ? "s" : ""} complet${data.carsFullyBooked > 1 ? "s" : ""}`}
-              tone={utilizationPct >= 80 ? "red" : "navy"}
             />
           </div>
 
           {/* Per-car list */}
           {data.cars.length === 0 ? (
-            <div className="text-center py-24 text-slate-600">
-              <div className="text-4xl mb-4">🚗</div>
-              <div className="text-2xl font-bold mb-2 text-navy">
+            <div className="border border-mist bg-cloud py-24 text-center">
+              <div className="font-display text-2xl font-medium text-ink">
                 Aucun véhicule
               </div>
-              <div className="text-base">Ajoutez des véhicules pour voir leur disponibilité.</div>
+              <div className="mt-2 text-sm text-stone">
+                Ajoutez des véhicules pour voir leur disponibilité.
+              </div>
             </div>
           ) : (
-            <div data-reveal className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4">
               {data.cars.map((entry) => (
                 <CarRow key={entry.car.id} entry={entry} isRange={data.isRange} />
               ))}

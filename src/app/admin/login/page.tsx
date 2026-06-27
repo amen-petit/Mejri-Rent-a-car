@@ -43,21 +43,21 @@ function LoginForm() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-6 py-12 bg-slate-50">
-      <div className="w-full max-w-md card-surface p-8 sm:p-10">
+    <main className="flex min-h-screen items-center justify-center bg-paper px-6 py-12">
+      <div className="card-surface w-full max-w-md p-8 sm:p-10">
         <div className="mb-8">
-          <p className="section-label">Admin Access</p>
-          <h1 className="mt-3 text-3xl font-bold text-navy">
+          <span className="eyebrow">Admin Access</span>
+          <h1 className="mt-4 font-display text-3xl font-medium text-ink">
             Connexion administrateur
           </h1>
-          <p className="mt-3 text-sm text-slate-600 leading-7">
+          <p className="mt-3 text-sm leading-7 text-stone">
             Connectez-vous pour gérer les véhicules et les réservations.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-xs uppercase tracking-widest text-navy mb-2 font-bold">
+            <label className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
               Nom d&apos;utilisateur
             </label>
             <input
@@ -72,7 +72,7 @@ function LoginForm() {
           </div>
 
           <div>
-            <label className="block text-xs uppercase tracking-widest text-navy mb-2 font-bold">
+            <label className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
               Mot de passe
             </label>
             <input
@@ -87,7 +87,7 @@ function LoginForm() {
           </div>
 
           {error && (
-            <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+            <div className="rounded-[var(--radius)] border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-600">
               {error}
             </div>
           )}

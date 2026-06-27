@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, DM_Sans } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import ConditionalFooter from "@/components/ConditionalFooter";
@@ -9,16 +9,20 @@ import { SITE_URL, BRAND_NAME } from "@/lib/constants";
 const OG_IMAGE_PATH = "/Untitled design.png";
 const BRAND_ICON_PATH = "/icons/car.svg";
 
-const spaceGrotesk = Space_Grotesk({
+// Display — optical serif for editorial headlines. Variable font, so no
+// `weight`; we opt into the optical-size axis for refined large type.
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-heading",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+  axes: ["opsz"],
 });
 
-const dmSans = DM_Sans({
+// Body / UI — quiet grotesk.
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -93,7 +97,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${spaceGrotesk.variable} ${dmSans.variable} font-body bg-surface text-[var(--color-ink)] antialiased overflow-x-hidden`}
+        className={`${fraunces.variable} ${inter.variable} bg-paper text-ink antialiased overflow-x-hidden`}
       >
         <MotionProvider />
         <div className="min-h-screen page-enter">{children}</div>

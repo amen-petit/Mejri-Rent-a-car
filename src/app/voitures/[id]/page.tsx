@@ -228,13 +228,13 @@ export default function CarDetailPage() {
           : false;
 
     if (isStart || isEnd)
-      return "bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)] text-navy rounded-lg font-semibold shadow-sm";
-    if (isInRange) return "bg-primary/12 text-navy";
+      return "bg-ink text-paper rounded-[var(--radius-sm)] font-medium";
+    if (isInRange) return "bg-ink/[0.07] text-ink";
     if (isPast)
-      return "bg-slate-100/40 text-slate-300 cursor-not-allowed line-through";
+      return "text-ash cursor-not-allowed line-through";
     if (isUnavail)
-      return "bg-slate-100/40 text-slate-300 cursor-not-allowed line-through";
-    return "hover:bg-primary/8 cursor-pointer text-navy";
+      return "text-ash cursor-not-allowed line-through";
+    return "hover:bg-ink/[0.05] cursor-pointer text-ink";
   }
 
   const totalDays =
@@ -340,15 +340,16 @@ export default function CarDetailPage() {
 
   if (loading)
     return (
-      <main className="min-h-screen bg-slate-50">
+      <main className="min-h-screen bg-paper">
         <Navbar />
-        <div className="mx-auto max-w-7xl px-4 pt-24 animate-pulse sm:px-6 sm:pt-28">
-          <div className="grid gap-8 lg:grid-cols-2">
-            <div className="h-96 bg-slate-200 rounded-3xl" />
-            <div className="space-y-4">
-              <div className="h-4 bg-slate-200 rounded w-1/4" />
-              <div className="h-8 bg-slate-200 rounded w-3/4" />
-              <div className="h-4 bg-slate-200 rounded w-full" />
+        <div className="mx-auto max-w-7xl animate-pulse px-5 pt-16 sm:px-8 sm:pt-20">
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div className="aspect-[4/3] rounded-[var(--radius-lg)] bg-mist" />
+            <div className="space-y-4 pt-4">
+              <div className="h-3 w-24 rounded bg-mist" />
+              <div className="h-9 w-3/4 rounded bg-mist" />
+              <div className="h-4 w-full rounded bg-mist" />
+              <div className="h-4 w-2/3 rounded bg-mist" />
             </div>
           </div>
         </div>
@@ -357,13 +358,15 @@ export default function CarDetailPage() {
 
   if (!car)
     return (
-      <main className="min-h-screen bg-slate-50">
+      <main className="min-h-screen bg-paper">
         <Navbar />
-        <div className="py-24 pt-24 text-center text-slate-500 sm:pt-28">
-          <div className="text-2xl font-bold mb-2">Véhicule introuvable</div>
+        <div className="px-5 py-28 text-center">
+          <div className="mb-3 font-display text-3xl font-medium text-ink">
+            Véhicule introuvable
+          </div>
           <button
             onClick={() => router.push("/voitures")}
-            className="text-sm text-primary mt-4 hover:text-primary/80 font-medium"
+            className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-stone underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             ← Retour aux véhicules
           </button>
@@ -372,23 +375,21 @@ export default function CarDetailPage() {
     );
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-paper">
       <Navbar />
 
-      <div
-        data-reveal
-        className="mx-auto max-w-7xl px-4 py-8 pt-24 sm:px-6 sm:py-10 sm:pt-28"
-      >
+      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
         <button
           onClick={() => router.back()}
-          className="text-sm text-slate-500 hover:text-slate-700 transition-colors mb-8 flex items-center gap-1 font-medium"
+          className="mb-10 flex items-center gap-1.5 text-sm font-medium text-stone transition-colors hover:text-ink"
         >
           ← Retour
         </button>
 
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          {/* Gallery */}
           <div data-reveal="left" className="reveal-d1">
-            <div className="relative mb-4 flex h-64 items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-primary/10 shadow-soft sm:h-80">
+            <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud">
               {car.images?.[activeImage] ? (
                 <Image
                   src={car.images[activeImage]}
@@ -399,16 +400,16 @@ export default function CarDetailPage() {
                   className="object-cover"
                 />
               ) : (
-                <CarGlyph className="w-32 h-32 text-primary" />
+                <CarGlyph className="h-28 w-28 text-ash" />
               )}
             </div>
             {car.images?.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto pb-2">
+              <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
                 {car.images.map((img, i) => (
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
-                    className={`relative w-16 h-16 rounded-2xl overflow-hidden border-2 transition-all duration-250 ${activeImage === i ? "border-primary shadow-soft" : "border-slate-200 hover:border-slate-300"}`}
+                    className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border transition-colors duration-200 ${activeImage === i ? "border-ink" : "border-mist hover:border-line"}`}
                   >
                     <Image
                       src={img}
@@ -422,17 +423,18 @@ export default function CarDetailPage() {
               </div>
             )}
 
-            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {/* Spec strip */}
+            <div className="mt-8 grid grid-cols-3 gap-px overflow-hidden rounded-[var(--radius)] border border-mist bg-mist">
               {[
                 ["Transmission", car.transmission],
                 ["Carburant", car.fuel_type],
-                ["Places", `${car.seats} places`],
+                ["Places", `${car.seats}`],
               ].map(([label, value]) => (
-                <div key={label} className="card-surface rounded-2xl px-5 py-4">
-                  <div className="mb-1 text-[10px] font-bold uppercase tracking-wide text-slate-600">
+                <div key={label} className="bg-paper px-4 py-4">
+                  <div className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-ash">
                     {label}
                   </div>
-                  <div className="text-base font-semibold text-navy">
+                  <div className="mt-1.5 font-display text-base text-ink">
                     {value}
                   </div>
                 </div>
@@ -440,12 +442,9 @@ export default function CarDetailPage() {
             </div>
 
             {car.features?.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-5 flex flex-wrap gap-2">
                 {car.features.map((f) => (
-                  <span
-                    key={f}
-                    className="rounded-2xl border border-primary bg-primary/20 px-4 py-2 text-xs font-medium text-navy"
-                  >
+                  <span key={f} className="chip">
                     {f}
                   </span>
                 ))}
@@ -453,24 +452,25 @@ export default function CarDetailPage() {
             )}
           </div>
 
+          {/* Summary */}
           <div data-reveal="right" className="reveal-d2">
-            <span className="section-label">{car.category}</span>
-            <h1 className="mt-3 mb-2 text-3xl font-bold text-navy sm:text-4xl">
+            <span className="eyebrow">{car.category}</span>
+            <h1 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.05] tracking-tight text-ink">
               {car.brand} {car.name}
             </h1>
-            <div className="mb-2 text-2xl font-bold text-primary sm:text-3xl">
-              {car.price_per_day}{" "}
-              <span className="text-lg text-slate-600 font-normal">
+            <div className="mt-3 font-display text-3xl text-ink">
+              {car.price_per_day}
+              <span className="ml-1.5 text-base font-normal text-stone">
                 DT / jour
               </span>
             </div>
 
             {pricingTiers.length > 0 && (
-              <div className="mb-6 rounded-2xl border border-navy/15 bg-navy/5 p-4">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-navy">
+              <div className="mt-7 rounded-[var(--radius)] border border-mist bg-cloud p-5">
+                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
                   Tarifs par durée
                 </p>
-                <div className="mt-3 space-y-2">
+                <div className="mt-4 space-y-2">
                   {pricingTiers.map((tier) => {
                     const isActive =
                       !!activeTier &&
@@ -481,30 +481,30 @@ export default function CarDetailPage() {
                     return (
                       <div
                         key={`${tier.min_days}-${tier.max_days}-${tier.price_per_day}`}
-                        className={`flex items-center justify-between rounded-xl border px-3 py-2 text-sm transition-colors ${
+                        className={`flex items-center justify-between rounded-[var(--radius-sm)] border px-3.5 py-2.5 text-sm transition-colors ${
                           isActive
-                            ? "border-primary bg-primary/15 text-navy"
-                            : "border-navy/15 bg-white text-slate-700"
+                            ? "border-ink bg-ink/[0.04] text-ink"
+                            : "border-mist bg-paper text-stone"
                         }`}
                       >
-                        <span className="font-medium">
-                          {tier.min_days} à {tier.max_days} jours
+                        <span>
+                          {tier.min_days}–{tier.max_days} jours
                         </span>
-                        <span className="font-semibold">
+                        <span className="font-display text-ink">
                           {tier.price_per_day} DT / jour
                         </span>
                       </div>
                     );
                   })}
                 </div>
-                <p className="mt-2 text-xs text-slate-500">
+                <p className="mt-3 text-xs text-ash">
                   Le tarif appliqué dépend de la durée totale sélectionnée.
                 </p>
               </div>
             )}
 
             {car.description && (
-              <p className="text-base text-slate-600 leading-8 mt-6 mb-8">
+              <p className="mt-7 text-sm leading-7 text-stone">
                 {car.description}
               </p>
             )}
@@ -513,7 +513,7 @@ export default function CarDetailPage() {
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour, je suis intéressé par la ${car.brand} ${car.name}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full border-2 border-primary text-navy hover:bg-primary hover:text-navy transition-all duration-250 rounded-2xl py-3 text-base font-semibold mb-3 shadow-soft"
+              className="mt-8 flex w-full items-center justify-center gap-2.5 rounded-[var(--radius)] border border-ink py-3.5 text-sm font-medium text-ink transition-colors duration-200 hover:border-[#25D366] hover:bg-[#25D366] hover:text-white active:scale-[0.98]"
             >
               <WhatsAppIcon size={16} />
               Contacter sur WhatsApp
@@ -521,23 +521,22 @@ export default function CarDetailPage() {
           </div>
         </div>
 
-        <div
-          data-reveal
-          className="mt-16 border-t border-slate-200 pt-12 sm:mt-20 sm:pt-16"
-        >
-          <div className="mb-10 text-center sm:mb-12">
-            <span className="section-label">Disponibilités</span>
-            <h2 className="mt-3 text-2xl font-bold text-navy sm:text-3xl">
+        {/* Booking */}
+        <div className="mt-20 border-t border-mist pt-16">
+          <div className="mb-12 max-w-2xl">
+            <span className="eyebrow">Disponibilités</span>
+            <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.5rem)] font-medium tracking-tight text-ink">
               Choisissez vos dates
             </h2>
-            <p className="mt-3 text-sm text-slate-600 sm:text-base">
+            <p className="mt-3 text-sm text-stone">
               Les dates grisées sont déjà réservées.
             </p>
           </div>
 
-          <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.45fr_0.95fr] lg:items-start">
-            <div className="rounded-3xl border border-navy/12 bg-white p-4 shadow-soft sm:p-6">
-              <div className="mb-6 flex items-center justify-between sm:mb-8">
+          <div className="grid gap-8 lg:grid-cols-[1.45fr_0.95fr] lg:items-start">
+            {/* Calendar */}
+            <div className="rounded-[var(--radius-lg)] border border-mist bg-cloud p-5 sm:p-7">
+              <div className="mb-7 flex items-center justify-between">
                 <button
                   onClick={() => {
                     if (viewMonth === 0) {
@@ -545,11 +544,11 @@ export default function CarDetailPage() {
                       setViewYear((y) => y - 1);
                     } else setViewMonth((m) => m - 1);
                   }}
-                  className="rounded-lg border border-transparent p-2 font-bold text-navy transition-colors hover:border-navy/20 hover:bg-navy/8"
+                  className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
                 >
                   ←
                 </button>
-                <span className="text-base font-bold text-navy sm:text-lg">
+                <span className="font-display text-lg font-medium text-ink">
                   {MONTHS_FR[viewMonth]} {viewYear}
                 </span>
                 <button
@@ -559,17 +558,17 @@ export default function CarDetailPage() {
                       setViewYear((y) => y + 1);
                     } else setViewMonth((m) => m + 1);
                   }}
-                  className="rounded-lg border border-transparent p-2 font-bold text-navy transition-colors hover:border-navy/20 hover:bg-navy/8"
+                  className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
                 >
                   →
                 </button>
               </div>
 
-              <div className="mb-3 grid grid-cols-7">
+              <div className="mb-2 grid grid-cols-7">
                 {DAYS_FR.map((d) => (
                   <div
                     key={d}
-                    className="py-2 text-center text-[10px] font-bold uppercase text-navy/80 sm:py-3 sm:text-xs"
+                    className="py-2 text-center text-[0.6rem] font-semibold uppercase tracking-[0.1em] text-ash"
                   >
                     {d}
                   </div>
@@ -580,7 +579,7 @@ export default function CarDetailPage() {
                 {calDays.map((date, i) => (
                   <div
                     key={i}
-                    className="aspect-square flex items-center justify-center"
+                    className="flex aspect-square items-center justify-center"
                   >
                     {date ? (
                       <button
@@ -593,7 +592,7 @@ export default function CarDetailPage() {
                           date < today ||
                           isDateUnavailable(date, unavailable, car?.quantity)
                         }
-                        className={`w-full h-full flex items-center justify-center text-sm transition-colors rounded-lg ${getDayClass(date)}`}
+                        className={`flex h-full w-full items-center justify-center rounded-[var(--radius-sm)] text-sm transition-colors ${getDayClass(date)}`}
                       >
                         {date.getDate()}
                       </button>
@@ -604,45 +603,49 @@ export default function CarDetailPage() {
                 ))}
               </div>
 
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-navy/75">
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 border-t border-mist pt-5 text-xs text-stone">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-white border border-navy/35 shadow-[0_1px_4px_color-mix(in srgb, var(--color-primary) 15%, transparent)]" />
+                  <div className="h-3 w-3 rounded-[3px] border border-line bg-paper" />
                   <span>Disponible</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)]" />
+                  <div className="h-3 w-3 rounded-[3px] bg-ink" />
                   <span>Sélectionné</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-slate-300" />
+                  <div className="h-3 w-3 rounded-[3px] bg-mist" />
                   <span>Indisponible</span>
                 </div>
               </div>
             </div>
 
+            {/* Booking rail */}
             <div className="space-y-4 lg:sticky lg:top-24">
-              <div className="rounded-2xl border border-navy/20 bg-[linear-gradient(135deg,color-mix(in srgb, var(--color-primary) 6%, transparent)_0%,color-mix(in srgb, var(--color-secondary) 8%, transparent)_100%)] p-4 sm:p-5">
-                <p className="text-xs font-bold uppercase tracking-wide text-navy">
+              <div className="rounded-[var(--radius)] border border-mist bg-cloud p-5">
+                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
                   Comment réserver
                 </p>
-                <div className="mt-3 grid gap-2">
-                  <div className="rounded-xl border border-navy/15 bg-white/90 px-3 py-2 text-xs text-navy shadow-[0_2px_10px_color-mix(in srgb, var(--color-primary) 6%, transparent)]">
-                    1. Sélectionnez le début
-                  </div>
-                  <div className="rounded-xl border border-navy/15 bg-white/90 px-3 py-2 text-xs text-navy shadow-[0_2px_10px_color-mix(in srgb, var(--color-primary) 6%, transparent)]">
-                    2. Sélectionnez la fin
-                  </div>
-                  <div className="rounded-xl border border-navy/15 bg-white/90 px-3 py-2 text-xs text-navy shadow-[0_2px_10px_color-mix(in srgb, var(--color-primary) 6%, transparent)]">
-                    3. Confirmez
-                  </div>
+                <div className="mt-4 space-y-2.5">
+                  {[
+                    "1. Sélectionnez le début",
+                    "2. Sélectionnez la fin",
+                    "3. Confirmez",
+                  ].map((step) => (
+                    <div
+                      key={step}
+                      className="border-l border-mist pl-3 text-xs text-stone"
+                    >
+                      {step}
+                    </div>
+                  ))}
                 </div>
-                <p className="mt-3 text-sm font-medium text-navy">
+                <p className="mt-4 text-sm font-medium text-ink">
                   {selectionHelp}
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-navy/12 bg-surface p-4 shadow-[0_2px_10px_color-mix(in_srgb,var(--color-primary)_6%,transparent)] sm:p-5">
-                <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-slate-500">
+              <div className="rounded-[var(--radius)] border border-mist bg-cloud p-5">
+                <p className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
                   Heure de prise en charge &amp; retour
                 </p>
                 <div className="grid grid-cols-2 gap-4">
@@ -663,68 +666,71 @@ export default function CarDetailPage() {
                   />
                 </div>
                 {timeOrderInvalid && (
-                  <p className="mt-3 text-xs font-medium text-rose-500">
+                  <p className="mt-3 text-xs font-medium text-red-600">
                     Pour une location d&apos;une journée, l&apos;heure de retour
                     doit être après l&apos;heure de prise en charge.
                   </p>
                 )}
                 {noPickupSlotsToday && (
-                  <p className="mt-3 text-xs font-medium text-rose-500">
-                    Plus de créneau disponible aujourd&apos;hui.
-                    Choisissez une autre date.
+                  <p className="mt-3 text-xs font-medium text-red-600">
+                    Plus de créneau disponible aujourd&apos;hui. Choisissez une
+                    autre date.
                   </p>
                 )}
               </div>
 
-              <div className="rounded-2xl border border-primary/40 bg-[linear-gradient(135deg,var(--color-navy)_0%,var(--color-navy)_65%,var(--color-navy)_100%)] p-4 text-white shadow-soft backdrop-blur sm:p-5">
-                <div className="mb-4 grid grid-cols-1 gap-3 sm:mb-5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-1">
-                  <div>
-                    <div className="mb-1 text-xs text-white/75">
-                      Date de début
-                    </div>
-                    <div className="font-medium text-sm">
+              {/* Summary — ink band */}
+              <div className="rounded-[var(--radius-lg)] bg-ink p-6 text-paper">
+                <div className="space-y-4 border-b border-white/10 pb-5">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
+                      Début
+                    </span>
+                    <span className="text-sm font-medium text-white">
                       {startDate
-                        ? `${startDate.toLocaleDateString("fr-FR")} à ${pickupTime}`
+                        ? `${startDate.toLocaleDateString("fr-FR")} · ${pickupTime}`
                         : "—"}
-                    </div>
+                    </span>
                   </div>
-                  <div>
-                    <div className="mb-1 text-xs text-white/75">
-                      Date de fin
-                    </div>
-                    <div className="font-medium text-sm">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
+                      Fin
+                    </span>
+                    <span className="text-sm font-medium text-white">
                       {endDate
-                        ? `${endDate.toLocaleDateString("fr-FR")} à ${returnTime}`
+                        ? `${endDate.toLocaleDateString("fr-FR")} · ${returnTime}`
                         : "—"}
-                    </div>
+                    </span>
                   </div>
+                </div>
+
+                <div className="flex items-end justify-between gap-4 pt-5">
                   <div>
-                    <div className="mb-1 text-xs text-white/75">
+                    <p className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
                       Total estimé
-                    </div>
-                    <div className="font-semibold text-sm text-[#f4e39b]">
+                    </p>
+                    <p className="mt-1 font-display text-3xl text-white">
                       {totalDays > 0 ? `${totalPrice} DT` : "—"}
-                    </div>
+                    </p>
                     {totalDays > 0 && (
-                      <div className="mt-1 text-[11px] text-white/75">
-                        Tarif appliqué: {appliedDailyRate} DT / jour
-                      </div>
+                      <p className="mt-1 text-[0.7rem] text-white/50">
+                        {appliedDailyRate} DT / jour
+                      </p>
                     )}
                   </div>
                 </div>
+
                 {endDate ? (
                   <button
                     onClick={() => setShowForm(true)}
                     disabled={bookingBlocked}
-                    className="hidden w-full bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)] hover:brightness-95 text-navy py-3 rounded-xl text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-50 sm:block"
+                    className="btn-accent mt-5 hidden w-full py-3 disabled:cursor-not-allowed disabled:opacity-40 sm:flex"
                   >
-                    Confirmer la réservation — {totalDays} jour
-                    {totalDays > 1 ? "s" : ""}
+                    Confirmer — {totalDays} jour{totalDays > 1 ? "s" : ""}
                   </button>
                 ) : (
-                  <p className="text-xs text-white/80">
-                    Choisissez maintenant une date de fin pour activer la
-                    confirmation.
+                  <p className="mt-5 text-xs text-white/55">
+                    Choisissez une date de fin pour activer la confirmation.
                   </p>
                 )}
               </div>
@@ -733,23 +739,22 @@ export default function CarDetailPage() {
         </div>
       </div>
 
+      {/* Mobile sticky confirm bar */}
       {startDate && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-primary/35 bg-[linear-gradient(135deg,var(--color-navy)_0%,var(--color-navy)_70%,var(--color-navy)_100%)] p-3 shadow-soft-lg backdrop-blur sm:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink p-3 sm:hidden">
           <div className="mx-auto flex max-w-2xl items-center justify-between gap-3">
             <div className="min-w-0">
-              <p className="text-[11px] uppercase tracking-wide text-white/75">
+              <p className="text-[0.62rem] uppercase tracking-[0.14em] text-white/45">
                 Total estimé
               </p>
-              <p className="truncate text-sm font-semibold text-[#f4e39b]">
-                {totalDays > 0
-                  ? `${totalPrice} DT`
-                  : "Choisissez une date de fin"}
+              <p className="truncate font-display text-lg text-white">
+                {totalDays > 0 ? `${totalPrice} DT` : "Choisissez une fin"}
               </p>
             </div>
             <button
               onClick={() => setShowForm(true)}
               disabled={!endDate || bookingBlocked}
-              className="rounded-xl bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)] px-4 py-2.5 text-xs font-semibold text-navy transition-all disabled:cursor-not-allowed disabled:opacity-50"
+              className="btn-accent px-5 py-2.5 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Confirmer
             </button>
@@ -757,61 +762,40 @@ export default function CarDetailPage() {
         </div>
       )}
 
+      {/* Booking form modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
-          <div className="max-h-[90vh] w-full max-w-[calc(100vw-1rem)] overflow-y-auto rounded-2xl bg-white p-5 shadow-xl sm:max-w-md sm:p-8">
-            <h3 className="mb-1 font-serif text-2xl font-medium">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 px-4 backdrop-blur-sm">
+          <div className="max-h-[90vh] w-full max-w-[calc(100vw-1rem)] overflow-y-auto rounded-[var(--radius-lg)] border border-mist bg-paper p-6 shadow-md sm:max-w-md sm:p-9">
+            <h3 className="font-display text-2xl font-medium text-ink">
               Vos informations
             </h3>
-            <p className="mb-6 text-xs text-gray-400">
+            <p className="mt-1.5 text-sm text-stone">
               Nous vous contacterons pour confirmer la réservation.
             </p>
 
-            <div className="flex flex-col gap-4">
+            <div className="mt-7 flex flex-col gap-4">
+              {[
+                { key: "name", label: "Nom complet *", type: "text", ph: "Votre nom" },
+                { key: "phone", label: "Téléphone *", type: "tel", ph: "+216 00 000 000" },
+                { key: "email", label: "Email", type: "email", ph: "votre@email.com" },
+              ].map((field) => (
+                <div key={field.key}>
+                  <label className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone">
+                    {field.label}
+                  </label>
+                  <input
+                    type={field.type}
+                    placeholder={field.ph}
+                    value={form[field.key as keyof typeof form]}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, [field.key]: e.target.value }))
+                    }
+                    className="input-premium"
+                  />
+                </div>
+              ))}
               <div>
-                <label className="text-xs text-slate-700 uppercase tracking-wide font-bold mb-2 block">
-                  Nom complet *
-                </label>
-                <input
-                  type="text"
-                  placeholder="Votre nom"
-                  value={form.name}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, name: e.target.value }))
-                  }
-                  className="input-premium"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-slate-700 uppercase tracking-wide font-bold mb-2 block">
-                  Téléphone *
-                </label>
-                <input
-                  type="tel"
-                  placeholder="+216 00 000 000"
-                  value={form.phone}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, phone: e.target.value }))
-                  }
-                  className="input-premium"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-slate-700 uppercase tracking-wide font-bold mb-2 block">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  placeholder="votre@email.com"
-                  value={form.email}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, email: e.target.value }))
-                  }
-                  className="input-premium"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-slate-700 uppercase tracking-wide font-bold mb-2 block">
+                <label className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone">
                   Notes
                 </label>
                 <textarea
@@ -829,14 +813,14 @@ export default function CarDetailPage() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={() => setShowForm(false)}
-                className="flex-1 btn-ghost"
+                className="btn-ghost flex-1"
               >
                 Annuler
               </button>
               <button
                 onClick={handleSubmit}
                 disabled={submitting || !form.name || !form.phone}
-                className="flex-1 btn-primary disabled:opacity-50"
+                className="btn-primary flex-1 disabled:opacity-40"
               >
                 {submitting ? "Envoi..." : "Envoyer la demande"}
               </button>
@@ -845,28 +829,19 @@ export default function CarDetailPage() {
         </div>
       )}
 
+      {/* Success modal */}
       {success && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
-          <div className="w-full max-w-[calc(100vw-1rem)] rounded-3xl bg-white p-6 text-center shadow-soft-xl card-surface sm:max-w-sm sm:p-10">
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-primary">
-              <svg
-                className="w-8 h-8 text-primary"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 px-4 backdrop-blur-sm">
+          <div className="w-full max-w-[calc(100vw-1rem)] rounded-[var(--radius-lg)] border border-mist bg-paper p-8 text-center shadow-md sm:max-w-sm sm:p-10">
+            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-ink">
+              <svg className="h-6 w-6 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="mb-3 text-2xl font-bold text-navy">
-              Demande envoyée !
+            <h3 className="font-display text-2xl font-medium text-ink">
+              Demande envoyée
             </h3>
-            <p className="mb-8 text-base text-slate-600">
+            <p className="mt-3 text-sm leading-7 text-stone">
               Nous vous contacterons dans les plus brefs délais pour confirmer
               votre réservation.
             </p>
@@ -876,7 +851,7 @@ export default function CarDetailPage() {
                 setStartDate(null);
                 setEndDate(null);
               }}
-              className="w-full btn-primary"
+              className="btn-primary mt-7 w-full"
             >
               Retour au véhicule
             </button>

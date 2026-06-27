@@ -1,64 +1,70 @@
-# Graph Report - .  (2026-06-26)
+# Graph Report - new-version  (2026-06-27)
 
 ## Corpus Check
-- Large corpus: 216 files · ~1,010,852 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.
+- 205 files · ~1,019,832 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2014 nodes · 3341 edges · 152 communities (129 shown, 23 thin omitted)
+- 2128 nodes · 3452 edges · 167 communities (143 shown, 24 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 156 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
+## Graph Freshness
+- Built from commit: `35e30992`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
+
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Impeccable Live Mode Core|Impeccable Live Mode Core]]
-- [[_COMMUNITY_API Route Handlers|API Route Handlers]]
-- [[_COMMUNITY_Screenshot Library Mirror|Screenshot Library Mirror]]
-- [[_COMMUNITY_Live Accept & Wrap Pipeline|Live Accept & Wrap Pipeline]]
-- [[_COMMUNITY_UIUX Pro Max Skill|UI/UX Pro Max Skill]]
-- [[_COMMUNITY_Live Browser UI (Set A)|Live Browser UI (Set A)]]
-- [[_COMMUNITY_Live Injection & Context|Live Injection & Context]]
-- [[_COMMUNITY_Live Mode Reference Guide|Live Mode Reference Guide]]
-- [[_COMMUNITY_Design Concept Library|Design Concept Library]]
-- [[_COMMUNITY_Design System Generator|Design System Generator]]
-- [[_COMMUNITY_Design System Generator Alt|Design System Generator Alt]]
-- [[_COMMUNITY_Impeccable Reference Mirror|Impeccable Reference Mirror]]
-- [[_COMMUNITY_Royal Car App Documentation|Royal Car App Documentation]]
-- [[_COMMUNITY_Design Parser Module|Design Parser Module]]
-- [[_COMMUNITY_Live Entry & Launch Config|Live Entry & Launch Config]]
-- [[_COMMUNITY_UIUX Pro Max Prompt|UI/UX Pro Max Prompt]]
-- [[_COMMUNITY_Live Browser Utilities|Live Browser Utilities]]
-- [[_COMMUNITY_Admin Dashboard|Admin Dashboard]]
-- [[_COMMUNITY_Document Reference Guide|Document Reference Guide]]
-- [[_COMMUNITY_Live Browser Action Panel|Live Browser Action Panel]]
-- [[_COMMUNITY_Live Browser Cleanup|Live Browser Cleanup]]
-- [[_COMMUNITY_Onboarding Reference|Onboarding Reference]]
-- [[_COMMUNITY_Booking & Auth Flow|Booking & Auth Flow]]
-- [[_COMMUNITY_Home Page Components|Home Page Components]]
-- [[_COMMUNITY_Overdrive Reference|Overdrive Reference]]
-- [[_COMMUNITY_Critique Reference|Critique Reference]]
-- [[_COMMUNITY_Polish Reference|Polish Reference]]
-- [[_COMMUNITY_UIUX Core Search|UI/UX Core Search]]
-- [[_COMMUNITY_UIUX Core Search Alt|UI/UX Core Search Alt]]
-- [[_COMMUNITY_TypeScript Config|TypeScript Config]]
-- [[_COMMUNITY_Delight Reference|Delight Reference]]
-- [[_COMMUNITY_Interaction Design Reference|Interaction Design Reference]]
-- [[_COMMUNITY_Animation Reference|Animation Reference]]
-- [[_COMMUNITY_Colorize Reference|Colorize Reference]]
-- [[_COMMUNITY_Live Browser Session Handlers|Live Browser Session Handlers]]
-- [[_COMMUNITY_Car Detail & Time Picker|Car Detail & Time Picker]]
-- [[_COMMUNITY_Layout & Grid System|Layout & Grid System]]
-- [[_COMMUNITY_Cognitive Load Reference|Cognitive Load Reference]]
-- [[_COMMUNITY_UX Writing Reference|UX Writing Reference]]
-- [[_COMMUNITY_Impeccable Skill Entry|Impeccable Skill Entry]]
-- [[_COMMUNITY_Color & Contrast Reference|Color & Contrast Reference]]
-- [[_COMMUNITY_Shape Reference|Shape Reference]]
-- [[_COMMUNITY_Typography Reference|Typography Reference]]
-- [[_COMMUNITY_Availability Logic|Availability Logic]]
-- [[_COMMUNITY_Adapt Reference|Adapt Reference]]
-- [[_COMMUNITY_Heuristics Scoring|Heuristics Scoring]]
-- [[_COMMUNITY_Spatial Design Reference|Spatial Design Reference]]
-- [[_COMMUNITY_DESIGN.md Format Spec|DESIGN.md Format Spec]]
-- [[_COMMUNITY_Audit Reference|Audit Reference]]
-- [[_COMMUNITY_Brand Reference|Brand Reference]]
+- [[_COMMUNITY_Community 0|Community 0]]
+- [[_COMMUNITY_Community 1|Community 1]]
+- [[_COMMUNITY_Community 2|Community 2]]
+- [[_COMMUNITY_Community 3|Community 3]]
+- [[_COMMUNITY_Community 4|Community 4]]
+- [[_COMMUNITY_Community 5|Community 5]]
+- [[_COMMUNITY_Community 6|Community 6]]
+- [[_COMMUNITY_Community 7|Community 7]]
+- [[_COMMUNITY_Community 8|Community 8]]
+- [[_COMMUNITY_Community 9|Community 9]]
+- [[_COMMUNITY_Community 10|Community 10]]
+- [[_COMMUNITY_Community 11|Community 11]]
+- [[_COMMUNITY_Community 12|Community 12]]
+- [[_COMMUNITY_Community 13|Community 13]]
+- [[_COMMUNITY_Community 14|Community 14]]
+- [[_COMMUNITY_Community 15|Community 15]]
+- [[_COMMUNITY_Community 16|Community 16]]
+- [[_COMMUNITY_Community 17|Community 17]]
+- [[_COMMUNITY_Community 18|Community 18]]
+- [[_COMMUNITY_Community 19|Community 19]]
+- [[_COMMUNITY_Community 20|Community 20]]
+- [[_COMMUNITY_Community 21|Community 21]]
+- [[_COMMUNITY_Community 22|Community 22]]
+- [[_COMMUNITY_Community 23|Community 23]]
+- [[_COMMUNITY_Community 24|Community 24]]
+- [[_COMMUNITY_Community 25|Community 25]]
+- [[_COMMUNITY_Community 26|Community 26]]
+- [[_COMMUNITY_Community 27|Community 27]]
+- [[_COMMUNITY_Community 28|Community 28]]
+- [[_COMMUNITY_Community 29|Community 29]]
+- [[_COMMUNITY_Community 30|Community 30]]
+- [[_COMMUNITY_Community 31|Community 31]]
+- [[_COMMUNITY_Community 32|Community 32]]
+- [[_COMMUNITY_Community 33|Community 33]]
+- [[_COMMUNITY_Community 34|Community 34]]
+- [[_COMMUNITY_Community 35|Community 35]]
+- [[_COMMUNITY_Community 36|Community 36]]
+- [[_COMMUNITY_Community 37|Community 37]]
+- [[_COMMUNITY_Community 38|Community 38]]
+- [[_COMMUNITY_Community 39|Community 39]]
+- [[_COMMUNITY_Community 40|Community 40]]
+- [[_COMMUNITY_Community 41|Community 41]]
+- [[_COMMUNITY_Community 42|Community 42]]
+- [[_COMMUNITY_Community 43|Community 43]]
+- [[_COMMUNITY_Community 44|Community 44]]
+- [[_COMMUNITY_Community 45|Community 45]]
+- [[_COMMUNITY_Community 46|Community 46]]
+- [[_COMMUNITY_Community 47|Community 47]]
+- [[_COMMUNITY_Community 48|Community 48]]
+- [[_COMMUNITY_Community 49|Community 49]]
 - [[_COMMUNITY_Community 50|Community 50]]
 - [[_COMMUNITY_Community 51|Community 51]]
 - [[_COMMUNITY_Community 52|Community 52]]
@@ -160,6 +166,21 @@
 - [[_COMMUNITY_Community 149|Community 149]]
 - [[_COMMUNITY_Community 150|Community 150]]
 - [[_COMMUNITY_Community 151|Community 151]]
+- [[_COMMUNITY_Community 152|Community 152]]
+- [[_COMMUNITY_Community 153|Community 153]]
+- [[_COMMUNITY_Community 154|Community 154]]
+- [[_COMMUNITY_Community 155|Community 155]]
+- [[_COMMUNITY_Community 156|Community 156]]
+- [[_COMMUNITY_Community 157|Community 157]]
+- [[_COMMUNITY_Community 158|Community 158]]
+- [[_COMMUNITY_Community 159|Community 159]]
+- [[_COMMUNITY_Community 160|Community 160]]
+- [[_COMMUNITY_Community 161|Community 161]]
+- [[_COMMUNITY_Community 162|Community 162]]
+- [[_COMMUNITY_Community 163|Community 163]]
+- [[_COMMUNITY_Community 164|Community 164]]
+- [[_COMMUNITY_Community 165|Community 165]]
+- [[_COMMUNITY_Community 166|Community 166]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `getSupabaseAdmin()` - 23 edges
@@ -169,9 +190,9 @@
 5. `handleClick()` - 17 edges
 6. `handleKeyDown()` - 17 edges
 7. `resumeSession()` - 17 edges
-8. `compilerOptions` - 16 edges
-9. `renderDesignVisual()` - 16 edges
-10. `Royal Car - App Documentation` - 16 edges
+8. `Design Engineering` - 17 edges
+9. `Animation Standards Reference` - 17 edges
+10. `compilerOptions` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `RootLayout Component` --implements--> `@theme Design Tokens`  [AMBIGUOUS]
@@ -196,205 +217,205 @@
 - **Design System Documentation Pipeline** — teach_product_md, document_design_md_format, extract_design_tokens, polish_design_system_discovery [INFERRED 0.85]
 - **Visual Hierarchy Through Space & Scale** — spatial_squint_test, layout_visual_hierarchy, typeset_type_scale, distill_visual_simplification [INFERRED 0.75]
 
-## Communities (152 total, 23 thin omitted)
+## Communities (167 total, 24 thin omitted)
 
-### Community 0 - "Impeccable Live Mode Core"
+### Community 0 - "Community 0"
 Cohesion: 0.05
 Nodes (85): isMainModule(), kebab(), listSnapshotsForSlug(), main(), nowFilenameStamp(), parseFrontmatter(), readLatestSnapshot(), readTrend() (+77 more)
 
-### Community 1 - "API Route Handlers"
+### Community 1 - "Community 1"
 Cohesion: 0.06
 Nodes (55): Params, GET(), POST(), DELETE(), EXT_BY_MIME, Params, POST(), AdminSessionPayload (+47 more)
 
-### Community 2 - "Screenshot Library Mirror"
+### Community 2 - "Community 2"
 Cohesion: 0.12
 Nodes (54): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+46 more)
 
-### Community 3 - "Live Accept & Wrap Pipeline"
+### Community 3 - "Community 3"
 Cohesion: 0.13
 Nodes (38): hasGeneratedHeader(), HEADER_MARKERS, isGeneratedFile(), isGitIgnored(), acceptCli(), argVal(), deindentContent(), detectCommentSyntax() (+30 more)
 
-### Community 4 - "UI/UX Pro Max Skill"
+### Community 4 - "Community 4"
 Cohesion: 0.05
 Nodes (41): 1. Accessibility (CRITICAL), 2. Touch & Interaction (CRITICAL), 3. Performance (HIGH), 4. Layout & Responsive (HIGH), 5. Typography & Color (MEDIUM), 6. Animation (MEDIUM), 7. Style Selection (MEDIUM), 8. Charts & Data (LOW) (+33 more)
 
-### Community 5 - "Live Browser UI (Set A)"
-Cohesion: 0.11
-Nodes (40): brandMarkSvg(), buildCollapsible(), buildColorModels(), buildDesignHeader(), buildRadiiModels(), buildTypographyModels(), escapeHtml(), fetchDesignSystem() (+32 more)
+### Community 5 - "Community 5"
+Cohesion: 0.12
+Nodes (36): brandMarkSvg(), buildCollapsible(), buildColorModels(), buildDesignHeader(), buildRadiiModels(), buildTypographyModels(), escapeHtml(), fetchDesignSystem() (+28 more)
 
-### Community 6 - "Live Injection & Context"
+### Community 6 - "Community 6"
 Cohesion: 0.13
 Nodes (33): __dirname, ensureServerRunning(), globToRegex(), appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH (+25 more)
 
-### Community 7 - "Live Mode Reference Guide"
+### Community 7 - "Community 7"
 Cohesion: 0.05
 Nodes (37): 1. Read the screenshot (if present), 2. Wrap the element, 3. Load the action's reference, 4. Plan three variants: identity first, then mode, then axes, 5. Apply the freeform prompt (if present), 6. Write all variants in a single edit, 7. Parameters (composition-sized, 0–4 per variant), 8. Signal done (+29 more)
 
-### Community 8 - "Design Concept Library"
+### Community 8 - "Community 8"
 Cohesion: 0.08
 Nodes (37): Impeccable Asset Producer Agent, AI Slop Test (design quality heuristic), Cognitive Load Checklist (8-item), Color Strategy (Restrained/Committed/Full/Drenched), OKLCH Color Space, Reflex-Reject List (font & aesthetic ban list), Register (brand vs product design mode), Working Memory Rule (<=4 items) (+29 more)
 
-### Community 9 - "Design System Generator"
+### Community 9 - "Community 9"
 Cohesion: 0.10
 Nodes (27): bool, DesignSystemGenerator, _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system() (+19 more)
 
-### Community 10 - "Design System Generator Alt"
+### Community 10 - "Community 10"
 Cohesion: 0.10
 Nodes (27): bool, DesignSystemGenerator, _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system() (+19 more)
 
-### Community 11 - "Impeccable Reference Mirror"
+### Community 11 - "Community 11"
 Cohesion: 0.10
 Nodes (35): Typography Reference (agents mirror), UX Writing Reference (agents mirror), Adapt Reference, Animate Reference, Impeccable Asset Producer Agent, Audit Reference, Bolder Reference, Brand Register Reference (+27 more)
 
-### Community 12 - "Royal Car App Documentation"
+### Community 12 - "Community 12"
 Cohesion: 0.06
 Nodes (33): 10. Static Assets, 11. Motion / Reveal System, 12. Important Notes For Another AI, 13. Short AI Handoff Summary, 1. What This App Is, 2. Stack, 3. Project Purpose, 4. Main Routes (+25 more)
 
-### Community 13 - "Design Parser Module"
+### Community 13 - "Community 13"
 Cohesion: 0.20
 Nodes (32): assessCoverage(), buildColor(), CANONICAL_SECTIONS, collectBullets(), collectColorValues(), collectParagraphs(), detectFormat(), extractColors() (+24 more)
 
-### Community 14 - "Live Entry & Launch Config"
+### Community 14 - "Community 14"
 Cohesion: 0.08
 Nodes (29): Live CLI Entry Point (agents), Load Context (agents), configurations, version, hooks, PreToolUse, permissions, allow (+21 more)
 
-### Community 15 - "UI/UX Pro Max Prompt"
+### Community 15 - "Community 15"
 Cohesion: 0.07
 Nodes (29): Accessibility, Available Domains, Available Stacks, Common Rules for Professional UI, Example Workflow, How to Use This Workflow, Icons & Visual Elements, Interaction (+21 more)
 
-### Community 16 - "Live Browser Utilities"
-Cohesion: 0.11
-Nodes (29): bufferToBase64(), buildAnnotationsForCapture(), buildListHtml(), buildPinElement(), captureAndEmit(), captureElementToBlob(), checkpointPayload(), collectFontCssText() (+21 more)
+### Community 16 - "Community 16"
+Cohesion: 0.10
+Nodes (33): bufferToBase64(), buildAnnotationsForCapture(), buildListHtml(), buildPinElement(), captureAndEmit(), captureElementToBlob(), checkpointPayload(), collectFontCssText() (+25 more)
 
-### Community 17 - "Admin Dashboard"
-Cohesion: 0.11
-Nodes (13): navItems, CAR_CATEGORIES, DAYS_FR, FUEL_TYPES, MONTHS_FR_SHORT, RESERVATION_STATUS_COLOR, RESERVATION_STATUS_LABEL, TRANSMISSION_OPTIONS (+5 more)
+### Community 17 - "Community 17"
+Cohesion: 0.13
+Nodes (12): CAR_CATEGORIES, DAYS_FR, FUEL_TYPES, MONTHS_FR_SHORT, RESERVATION_STATUS_COLOR, RESERVATION_STATUS_LABEL, TRANSMISSION_OPTIONS, Car (+4 more)
 
-### Community 18 - "Document Reference Guide"
+### Community 18 - "Community 18"
 Cohesion: 0.08
 Nodes (24): Component translation rules, Narrative mapping, Pitfalls, Scan mode (approach C: auto-extract, then confirm descriptive language), Schema, Seed mode, Step 1: Confirm seed mode, Step 1: Find the design assets (+16 more)
 
-### Community 19 - "Live Browser Action Panel"
+### Community 19 - "Community 19"
 Cohesion: 0.16
 Nodes (25): actionLabel(), barPaletteForTheme(), buildConfigureRow(), buildConfirmedRow(), buildDots(), buildGeneratingRow(), buildParamsPanel(), buildSavingRow() (+17 more)
 
-### Community 20 - "Live Browser Cleanup"
+### Community 20 - "Community 20"
 Cohesion: 0.16
 Nodes (25): cleanup(), clearAnnotations(), clearScrollY(), clearSession(), closeTunePopover(), desc(), handleClick(), handleKeyDown() (+17 more)
 
-### Community 21 - "Onboarding Reference"
+### Community 21 - "Community 21"
 Cohesion: 0.09
 Nodes (22): Assess Onboarding Needs, Context Over Ceremony, Contextual Help, Design Onboarding Experiences, Documentation & Help, Empty State Design, Feature Discovery & Adoption, Guided Tours & Walkthroughs (+14 more)
 
-### Community 22 - "Booking & Auth Flow"
+### Community 22 - "Community 22"
 Cohesion: 0.13
 Nodes (22): Admin Authentication, Atomic Booking Transaction, Availability Counting, Reservation / Booking Flow, App Documentation Overview, Pricing Tiers, Row-Level Security (RLS), Service-Role Key Access (+14 more)
 
-### Community 23 - "Home Page Components"
-Cohesion: 0.13
-Nodes (12): features, Home(), metadata, steps, testimonials, sitemap(), navLinks, generateMetadata() (+4 more)
+### Community 23 - "Community 23"
+Cohesion: 0.11
+Nodes (10): engagements, features, Home(), metadata, steps, testimonials, sitemap(), navLinks (+2 more)
 
-### Community 24 - "Overdrive Reference"
+### Community 24 - "Community 24"
 Cohesion: 0.10
 Nodes (20): Animate complex properties, Assess What "Extraordinary" Means Here, For data-heavy interfaces, For functional UI, For performance-critical UI, For visual/marketing surfaces, Implement with Discipline, Interact with the device (+12 more)
 
-### Community 25 - "Critique Reference"
+### Community 25 - "Community 25"
 Cohesion: 0.10
 Nodes (20): Action Summary, Anti-Patterns Verdict, Ask the User, Assessment A: Design Review, Assessment B: Detector + Browser Evidence, Assessment Orchestration, Design Health Score, Generate Combined Critique Report (+12 more)
 
-### Community 26 - "Polish Reference"
+### Community 26 - "Community 26"
 Cohesion: 0.10
 Nodes (19): Clean Up, Code Quality, Color & Contrast, Content & Copy, Design System Discovery, Edge Cases & Error States, Final Verification, Forms & Inputs (+11 more)
 
-### Community 27 - "UI/UX Core Search"
+### Community 27 - "Community 27"
 Cohesion: 0.15
 Nodes (15): BM25, detect_domain(), _load_csv(), Lowercase, split, remove punctuation, filter short words, Build BM25 index from documents, Score all documents against query, Load CSV and return list of dicts, Core search function using BM25 (+7 more)
 
-### Community 28 - "UI/UX Core Search Alt"
+### Community 28 - "Community 28"
 Cohesion: 0.15
 Nodes (15): BM25, detect_domain(), _load_csv(), Lowercase, split, remove punctuation, filter short words, Build BM25 index from documents, Score all documents against query, Load CSV and return list of dicts, Core search function using BM25 (+7 more)
 
-### Community 29 - "TypeScript Config"
+### Community 29 - "Community 29"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
-### Community 30 - "Delight Reference"
+### Community 30 - "Community 30"
 Cohesion: 0.11
 Nodes (18): Appropriate to Context, Assess Delight Opportunities, Celebration Moments, Compound Over Time, Delight Amplifies, Never Blocks, Delight Principles, Delight Techniques, Easter Eggs & Hidden Delights (+10 more)
 
-### Community 31 - "Interaction Design Reference"
+### Community 31 - "Community 31"
 Cohesion: 0.11
 Nodes (18): Anti-Patterns, CSS Anchor Positioning, Destructive Actions: Undo > Confirm, Dropdown & Overlay Positioning, Fixed Positioning Fallback, Focus Rings: Do Them Right, Form Design: The Non-Obvious, Gesture Discoverability (+10 more)
 
-### Community 32 - "Animation Reference"
+### Community 32 - "Community 32"
 Cohesion: 0.11
 Nodes (17): Accessibility, Assess Animation Opportunities, CSS Animations, Delight Moments, Entrance Animations, Feedback & Guidance, Implement Animations, JavaScript Animation (+9 more)
 
-### Community 33 - "Colorize Reference"
+### Community 33 - "Community 33"
 Cohesion: 0.11
 Nodes (17): Accent Color Application, Accessibility, Assess Color Opportunity, Background & Surfaces, Balance & Refinement, Borders & Accents, Cohesion, Data Visualization (+9 more)
 
-### Community 34 - "Live Browser Session Handlers"
+### Community 34 - "Community 34"
 Cohesion: 0.14
 Nodes (18): clearHandled(), cycleVariant(), extractContext(), handleGo(), id8(), isSessionHandled(), loadSession(), pickVariantContent() (+10 more)
 
-### Community 35 - "Car Detail & Time Picker"
+### Community 35 - "Community 35"
 Cohesion: 0.21
 Nodes (13): Props, CarDetailPage(), countReservationsForDate(), getDailyRateForDuration(), getDaysBetween(), getMatchingTierForDuration(), isDateUnavailable(), normalizePricingTiers() (+5 more)
 
-### Community 36 - "Layout & Grid System"
+### Community 36 - "Community 36"
 Cohesion: 0.15
 Nodes (17): Layout Density Live Param, Flexbox vs Grid Selection Rule, Flexbox vs Grid Selection, Layout Design Reference, Spacing System, Visual Rhythm Principle, Distracted Mobile User Persona (Casey), Input Method Detection (+9 more)
 
-### Community 37 - "Cognitive Load Reference"
+### Community 37 - "Community 37"
 Cohesion: 0.12
 Nodes (16): 1. The Wall of Options, 2. The Memory Bridge, 3. The Hidden Navigation, 4. The Jargon Barrier, 5. The Visual Noise Floor, 6. The Inconsistent Pattern, 7. The Multi-Task Demand, 8. The Context Switch (+8 more)
 
-### Community 38 - "UX Writing Reference"
+### Community 38 - "Community 38"
 Cohesion: 0.12
 Nodes (16): Avoid Redundant Copy, Confirmation Dialogs: Use Sparingly, Consistency: The Terminology Problem, Don't Blame the User, Empty States Are Opportunities, Error Message Templates, Error Messages: The Formula, Form Instructions (+8 more)
 
-### Community 39 - "Impeccable Skill Entry"
+### Community 39 - "Community 39"
 Cohesion: 0.12
 Nodes (15): 1. Context gathering, 2. Register, Absolute bans, Color, Commands, Copy, Layout, Motion (+7 more)
 
-### Community 40 - "Color & Contrast Reference"
+### Community 40 - "Community 40"
 Cohesion: 0.12
 Nodes (15): Alpha Is A Design Smell, Building Functional Palettes, Color & Contrast, Color Spaces: Use OKLCH, Contrast & Accessibility, Dangerous Color Combinations, Dark Mode Is Not Inverted Light Mode, Never Use Pure Gray or Pure Black (+7 more)
 
-### Community 41 - "Shape Reference"
+### Community 41 - "Community 41"
 Cohesion: 0.12
 Nodes (15): Anti-Goals, Brief Structure, Constraints, Content & Data, Design Direction, How to use the probes, Important limits, Interview cadence (+7 more)
 
-### Community 42 - "Typography Reference"
+### Community 42 - "Community 42"
 Cohesion: 0.12
 Nodes (15): Accessibility Considerations, Anti-reflexes worth defending against, Classic Typography Principles, Fluid Type, Font Selection & Pairing, Modern Web Typography, Modular Scale & Hierarchy, OpenType Features (+7 more)
 
-### Community 43 - "Availability Logic"
+### Community 43 - "Community 43"
 Cohesion: 0.28
 Nodes (9): GET(), AvailabilityCar, computeFleetAvailability(), peakConcurrentReservations(), reservationCoversDay(), reservationOverlapsWindow(), resolveAvailabilityWindow(), Reservation (+1 more)
 
-### Community 44 - "Adapt Reference"
+### Community 44 - "Community 44"
 Cohesion: 0.13
 Nodes (14): Assess Adaptation Challenge, Content Adaptation, Desktop Adaptation (Mobile → Desktop), Email Adaptation (Web → Email), Implement Adaptations, Layout Adaptation Techniques, Mobile Adaptation (Desktop → Mobile), Navigation Adaptation (+6 more)
 
-### Community 45 - "Heuristics Scoring"
+### Community 45 - "Community 45"
 Cohesion: 0.13
 Nodes (14): 10. Help and Documentation, 1. Visibility of System Status, 2. Match Between System and Real World, 3. User Control and Freedom, 4. Consistency and Standards, 5. Error Prevention, 6. Recognition Rather Than Recall, 7. Flexibility and Efficiency of Use (+6 more)
 
-### Community 46 - "Spatial Design Reference"
+### Community 46 - "Community 46"
 Cohesion: 0.13
 Nodes (14): Cards Are Not Required, Container Queries, Depth & Elevation, Grid Systems, Hierarchy Through Multiple Dimensions, Name Tokens Semantically, Optical Adjustments, Spacing Systems (+6 more)
 
-### Community 47 - "DESIGN.md Format Spec"
+### Community 47 - "Community 47"
 Cohesion: 0.17
 Nodes (15): DESIGN.md Format, Design Token Frontmatter Schema, Scan Mode Auto-Extraction, Design Sidecar JSON (.impeccable/design.json), Design Token Extraction, Live Identity Lock Phase, Design Brief Output, Shape Discovery Interview (+7 more)
 
-### Community 48 - "Audit Reference"
+### Community 48 - "Community 48"
 Cohesion: 0.13
 Nodes (14): 1. Accessibility (A11y), 2. Performance, 3. Theming, 4. Responsive Design, 5. Anti-Patterns (CRITICAL), Anti-Patterns Verdict, Audit Health Score, Detailed Findings by Severity (+6 more)
 
-### Community 49 - "Brand Reference"
+### Community 49 - "Community 49"
 Cohesion: 0.13
 Nodes (14): Brand bans (on top of the shared absolute bans), Brand permissions, Brand register, Color, Font selection procedure, Imagery, Layout, Motion (+6 more)
 
@@ -439,8 +460,8 @@ Cohesion: 0.40
 Nodes (11): buildTargetNames(), cleanSkillsLock(), cleanup(), DEPRECATED_NAMES, findProjectRoot(), findSkillsDirs(), HARNESS_DIRS, isImpeccableSkill() (+3 more)
 
 ### Community 60 - "Community 60"
-Cohesion: 0.15
-Nodes (5): dmSans, metadata, spaceGrotesk, legalItems, navItems
+Cohesion: 0.12
+Nodes (7): dmSans, fraunces, inter, metadata, spaceGrotesk, legalItems, navItems
 
 ### Community 61 - "Community 61"
 Cohesion: 0.17
@@ -563,8 +584,8 @@ Cohesion: 0.25
 Nodes (7): Extract Flow, Step 1: Discover the Design System, Step 2: Identify Patterns, Step 3: Plan Extraction, Step 4: Extract & Enrich, Step 5: Migrate, Step 6: Document
 
 ### Community 91 - "Community 91"
-Cohesion: 0.25
-Nodes (7): computedHash, skillPath, source, sourceType, skills, impeccable, version
+Cohesion: 0.11
+Nodes (17): computedHash, skillPath, source, sourceType, computedHash, skillPath, source, sourceType (+9 more)
 
 ### Community 92 - "Community 92"
 Cohesion: 0.29
@@ -611,7 +632,7 @@ Cohesion: 0.50
 Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
 ### Community 103 - "Community 103"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): adapt, argumentHint, description
 
 ### Community 104 - "Community 104"
@@ -619,7 +640,7 @@ Cohesion: 1.00
 Nodes (3): Pin/Unpin Skill Shortcuts (agents), Cleanup Deprecated Skills, Command Metadata
 
 ### Community 108 - "Community 108"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): animate, argumentHint, description
 
 ### Community 109 - "Community 109"
@@ -710,6 +731,62 @@ Nodes (3): typeset, argumentHint, description
 Cohesion: 0.67
 Nodes (3): Typography Refinement in Polish, Typography Readability Rules, Typographic Scale & Hierarchy
 
+### Community 152 - "Community 152"
+Cohesion: 0.11
+Nodes (16): Accessibility, Animation Standards Reference, Asymmetric timing, Cohesion, Debugging (recommend in reviews when feel is uncertain), Duration, Easing, Gestures & drag (+8 more)
+
+### Community 153 - "Community 153"
+Cohesion: 0.50
+Nodes (3): generateMetadata(), LayoutProps, getCarById()
+
+### Community 154 - "Community 154"
+Cohesion: 0.18
+Nodes (9): Aggressive Escalation Triggers, Guidelines, Operating Posture, Part 1 — Findings table (REQUIRED), Part 2 — Verdict (REQUIRED), Remedial Preference Hierarchy, Required Output Format, Reviewing Animations (+1 more)
+
+### Community 155 - "Community 155"
+Cohesion: 0.20
+Nodes (8): Accessibility, Design Engineering, Initial Response, prefers-reduced-motion, Review Checklist, Review Format (Required), Stagger Animations, Touch device hover states
+
+### Community 156 - "Community 156"
+Cohesion: 0.25
+Nodes (8): Animate enter states with @starting-style, Buttons must feel responsive, Component Building Principles, Make popovers origin-aware, Never animate from scale(0), Tooltips: skip delay on subsequent hovers, Use blur to mask imperfect transitions, Use CSS transitions over keyframes for interruptible UI
+
+### Community 157 - "Community 157"
+Cohesion: 0.33
+Nodes (6): 1. Should this animate at all?, 2. What is the purpose?, 3. What easing should it use?, 4. How fast should it be?, Perceived performance, The Animation Decision Framework
+
+### Community 158 - "Community 158"
+Cohesion: 0.33
+Nodes (6): clip-path for Animation, Comparison sliders, Hold-to-delete pattern, Image reveals on scroll, Tabs with perfect color transitions, The inset shape
+
+### Community 159 - "Community 159"
+Cohesion: 0.33
+Nodes (6): CSS animations beat JS under load, CSS variables are inheritable, Framer Motion hardware acceleration caveat, Only animate transform and opacity, Performance Rules, Use WAAPI for programmatic CSS animations
+
+### Community 160 - "Community 160"
+Cohesion: 0.33
+Nodes (6): Damping at boundaries, Friction instead of hard stops, Gesture and Drag Interactions, Momentum-based dismissal, Multi-touch protection, Pointer capture for drag
+
+### Community 161 - "Community 161"
+Cohesion: 0.40
+Nodes (5): 3D transforms for depth, CSS Transform Mastery, scale() scales children too, transform-origin, translateY with percentages
+
+### Community 162 - "Community 162"
+Cohesion: 0.40
+Nodes (5): Asymmetric enter/exit timing, Cohesion matters, Review your work the next day, The opacity + height combination, The Sonner Principles (Building Loved Components)
+
+### Community 163 - "Community 163"
+Cohesion: 0.40
+Nodes (5): Interruptibility advantage, Spring Animations, Spring-based mouse interactions, Spring configuration, When to use springs
+
+### Community 165 - "Community 165"
+Cohesion: 0.50
+Nodes (4): Beauty is leverage, Core Philosophy, Taste is trained, not innate, Unseen details compound
+
+### Community 166 - "Community 166"
+Cohesion: 0.50
+Nodes (4): Debugging Animations, Frame-by-frame inspection, Slow motion testing, Test on real devices
+
 ## Ambiguous Edges - Review These
 - `RootLayout Component` → `@theme Design Tokens`  [AMBIGUOUS]
   src/app/layout.tsx · relation: implements
@@ -721,9 +798,9 @@ Nodes (3): Typography Refinement in Polish, Typography Readability Rules, Typogr
   src/app/sitemap.ts · relation: references
 
 ## Knowledge Gaps
-- **813 isolated node(s):** `eslintConfig`, `config`, `supabaseHostname`, `nextConfig`, `name` (+808 more)
+- **897 isolated node(s):** `eslintConfig`, `config`, `supabaseHostname`, `nextConfig`, `name` (+892 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **24 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -736,9 +813,9 @@ _Questions this graph is uniquely positioned to answer:_
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
 - **What is the exact relationship between `Sitemap Generator` and `Environment-Variable Configuration`?**
   _Edge tagged AMBIGUOUS (relation: references) - confidence is low._
-- **Why does `readLiveServerInfo()` connect `Impeccable Live Mode Core` to `Live Injection & Context`?**
+- **Why does `Design Engineering` connect `Community 155` to `Community 160`, `Community 161`, `Community 162`, `Community 163`, `Community 165`, `Community 166`, `Community 156`, `Community 157`, `Community 158`, `Community 159`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `Design Brief Output` connect `DESIGN.md Format Spec` to `Community 57`, `Community 58`, `Layout & Grid System`?**
+- **Why does `getSupabaseAdmin()` connect `Community 1` to `Community 43`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `parseDesignMd()` connect `Design Parser Module` to `Impeccable Live Mode Core`?**
+- **Why does `isAdminRequest()` connect `Community 1` to `Community 43`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._

@@ -1,13 +1,13 @@
 {
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\layout.tsx": {
-    "mtime": 1780049166.416824,
-    "ast_hash": "06ca4c1dffb80d2cef6243bf339b47d5",
-    "semantic_hash": "06ca4c1dffb80d2cef6243bf339b47d5"
+    "mtime": 1782502906.3053887,
+    "ast_hash": "32278b9d98a6705a285af29b402edf27",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\page.tsx": {
-    "mtime": 1782135809.6579294,
-    "ast_hash": "6bafff03d7bdb988471378eb95b8648f",
-    "semantic_hash": "6bafff03d7bdb988471378eb95b8648f"
+    "mtime": 1782520880.2551794,
+    "ast_hash": "73a447552025a4b1c4530be4ac8d157a",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\robots.ts": {
     "mtime": 1779548779.0176682,
@@ -20,29 +20,29 @@
     "semantic_hash": "a3afd73b6d1c74df415cd0b0b48e99b3"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\layout.tsx": {
-    "mtime": 1780316697.3959157,
-    "ast_hash": "eb4be1931e7376b193fccbd192e437b3",
-    "semantic_hash": "eb4be1931e7376b193fccbd192e437b3"
+    "mtime": 1782522202.119557,
+    "ast_hash": "73dce9fec53a2ecb5a2ee1ef2d42fe74",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\page.tsx": {
-    "mtime": 1780049326.0119672,
-    "ast_hash": "3b990f1edf47d0da3708a9b5ee50aa11",
-    "semantic_hash": "3b990f1edf47d0da3708a9b5ee50aa11"
+    "mtime": 1782522344.731132,
+    "ast_hash": "5557409a28d16939a89b5f2dba8b79e0",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\login\\page.tsx": {
-    "mtime": 1780049326.0119672,
-    "ast_hash": "feda53eb077f463a07d624683b0c1bea",
-    "semantic_hash": "feda53eb077f463a07d624683b0c1bea"
+    "mtime": 1782522246.0459447,
+    "ast_hash": "99fe3200b186168bfbf367fab952b769",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\reservations\\page.tsx": {
-    "mtime": 1780223890.5169775,
-    "ast_hash": "34f7b01a3bf63b0f339a75997599b41d",
-    "semantic_hash": "34f7b01a3bf63b0f339a75997599b41d"
+    "mtime": 1782522592.9831696,
+    "ast_hash": "4cab59803f4315b4a78dd56b031e5050",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\voitures\\page.tsx": {
-    "mtime": 1780049326.0129676,
-    "ast_hash": "e03504755bf18286d9d8392d1f07d2f8",
-    "semantic_hash": "e03504755bf18286d9d8392d1f07d2f8"
+    "mtime": 1782522775.2106426,
+    "ast_hash": "e93558bef41d35a40438c67c71041806",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\cars\\route.ts": {
     "mtime": 1779976691.576231,
@@ -105,9 +105,9 @@
     "semantic_hash": "1ebd62492850d54636ba7166cf88092e"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\voitures\\page.tsx": {
-    "mtime": 1780049326.0149655,
-    "ast_hash": "1bbfe5d42a7f79f1341d7b564dca2260",
-    "semantic_hash": "1bbfe5d42a7f79f1341d7b564dca2260"
+    "mtime": 1782521675.6831348,
+    "ast_hash": "294fe006117be2d599ff6ed9debe6a4b",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\voitures\\[id]\\layout.tsx": {
     "mtime": 1780048765.2361567,
@@ -115,9 +115,9 @@
     "semantic_hash": "582d806a90b1d527721ed28ef91c0257"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\voitures\\[id]\\page.tsx": {
-    "mtime": 1780262146.3614516,
-    "ast_hash": "ae45bc3f67d91ffed408500b2712ece2",
-    "semantic_hash": "ae45bc3f67d91ffed408500b2712ece2"
+    "mtime": 1782521834.1752262,
+    "ast_hash": "11b801c9e099b1107c671548c9ade877",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\ConditionalFooter.tsx": {
     "mtime": 1776244235.2668064,
@@ -125,9 +125,9 @@
     "semantic_hash": "3fd3bdf63c270d758bda38a7776daa3e"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\Footer.tsx": {
-    "mtime": 1780049166.4238245,
-    "ast_hash": "506ce0f0e5f5c7f26e096ff1f281a319",
-    "semantic_hash": "506ce0f0e5f5c7f26e096ff1f281a319"
+    "mtime": 1782521403.6946337,
+    "ast_hash": "df13b5b001d2e5aea67365d1420a6cbd",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\MotionProvider.tsx": {
     "mtime": 1776244235.2668064,
@@ -135,9 +135,9 @@
     "semantic_hash": "85d4f8af188c486c17f31224ab1c8921"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\Navbar.tsx": {
-    "mtime": 1780049326.016968,
-    "ast_hash": "e3338ce95416a26a74dfe900e831bd0b",
-    "semantic_hash": "e3338ce95416a26a74dfe900e831bd0b"
+    "mtime": 1782502924.2320151,
+    "ast_hash": "38ebe8d36bfc9822d92cd5d21d42b338",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\icons\\CarGlyph.tsx": {
     "mtime": 1779978890.221463,
@@ -280,9 +280,9 @@
     "semantic_hash": "481fac0fdecd70e1821cc30b86030c1a"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\skills-lock.json": {
-    "mtime": 1779714354.8783433,
-    "ast_hash": "7a302a983e808e74b5f76f4789f44363",
-    "semantic_hash": "7a302a983e808e74b5f76f4789f44363"
+    "mtime": 1782499547.2412505,
+    "ast_hash": "ac232cb41f81345aef63f295ba0c0985",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\tsconfig.json": {
     "mtime": 1776244235.272055,
@@ -575,9 +575,9 @@
     "semantic_hash": "8c7e35426fe8f6f3ed91e9dce0ed7af1"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\admin\\disponibilite\\page.tsx": {
-    "mtime": 1780314175.5879729,
-    "ast_hash": "7ae45c150a7429e2728724552c67df0c",
-    "semantic_hash": "7ae45c150a7429e2728724552c67df0c"
+    "mtime": 1782522669.552498,
+    "ast_hash": "a0285b9b7009079b0b9cbd3d7b37001d",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\app\\api\\admin\\availability\\route.ts": {
     "mtime": 1780313569.22491,
@@ -585,9 +585,9 @@
     "semantic_hash": "650ce49ba10542dd4bcae6ebdb846fc0"
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\components\\TimeSlotPicker.tsx": {
-    "mtime": 1780262666.2598047,
-    "ast_hash": "fa6d790268d7f44afd29d107270226ac",
-    "semantic_hash": "fa6d790268d7f44afd29d107270226ac"
+    "mtime": 1782521705.0633833,
+    "ast_hash": "c0d2d512e5ad0117bd21415a88bf9f2b",
+    "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\new-version\\src\\lib\\availability.test.ts": {
     "mtime": 1780314189.0114872,
@@ -1078,5 +1078,35 @@
     "mtime": 1776244235.211172,
     "ast_hash": "af0f44e1d25bf82be35132f3630cff73",
     "semantic_hash": "af0f44e1d25bf82be35132f3630cff73"
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\emil-design-eng\\SKILL.md": {
+    "mtime": 1782499545.2968936,
+    "ast_hash": "1c9207b371c22bd1dc336b1349edeebf",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\review-animations\\SKILL.md": {
+    "mtime": 1782499545.2968936,
+    "ast_hash": "4746f2b5881d1a8aa1b98ce2f7c5ddc1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.agents\\skills\\review-animations\\STANDARDS.md": {
+    "mtime": 1782499545.2983005,
+    "ast_hash": "51943392b3346f34060956a68306a0c3",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\emil-design-eng\\SKILL.md": {
+    "mtime": 1782499545.2968936,
+    "ast_hash": "1c9207b371c22bd1dc336b1349edeebf",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\review-animations\\SKILL.md": {
+    "mtime": 1782499545.2968936,
+    "ast_hash": "4746f2b5881d1a8aa1b98ce2f7c5ddc1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\new-version\\.claude\\skills\\review-animations\\STANDARDS.md": {
+    "mtime": 1782499545.2983005,
+    "ast_hash": "51943392b3346f34060956a68306a0c3",
+    "semantic_hash": ""
   }
 }
