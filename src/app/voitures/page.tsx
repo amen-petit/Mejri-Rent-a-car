@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -27,6 +27,7 @@ function Arrow({ className }: { className?: string }) {
 export default function CarsPage() {
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
   // car_id -> number of units rented today
   const [rentedToday, setRentedToday] = useState<Record<string, number>>({});
@@ -61,24 +62,30 @@ export default function CarsPage() {
     [cars],
   );
 
-  useEffect(() => {
-    const loadCars = async () => {
-      try {
-        const [carsData, availability] = await Promise.all([
-          getCars(),
-          fetch("/api/availability/today")
-            .then((r) => r.json())
-            .catch(() => ({ counts: {} as Record<string, number> })),
-        ]);
+  const loadCars = useCallback(async () => {
+    setLoadFailed(false);
+    try {
+      const [carsData, availability] = await Promise.all([
+        getCars(),
+        fetch("/api/availability/today")
+          .then((r) => r.json())
+          .catch(() => ({ counts: {} as Record<string, number> })),
+      ]);
 
-        setCars(carsData);
-        setRentedToday(availability.counts ?? {});
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadCars();
+      setCars(carsData);
+      setRentedToday(availability.counts ?? {});
+    } catch {
+      // Distinguish a real failure from a genuinely empty catalog so we can show
+      // a "try again" message instead of the misleading "no results" state.
+      setLoadFailed(true);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    loadCars();
+  }, [loadCars]);
 
   useEffect(() => {
     setMaxPrice(maxCollectionPrice);
@@ -310,6 +317,26 @@ export default function CarsPage() {
                     </div>
                   </div>
                 ))}
+              </div>
+            ) : loadFailed ? (
+              <div className="border border-mist bg-cloud p-16 text-center">
+                <CarSilhouette className="mx-auto mb-5 h-12 w-12 text-ash" />
+                <h2 className="font-display text-2xl font-medium text-ink">
+                  Impossible de charger les véhicules
+                </h2>
+                <p className="mt-2 text-sm text-stone">
+                  Une erreur de connexion est survenue. Vérifiez votre connexion
+                  internet et réessayez.
+                </p>
+                <button
+                  onClick={() => {
+                    setLoading(true);
+                    loadCars();
+                  }}
+                  className="btn-primary mt-7"
+                >
+                  Réessayer
+                </button>
               </div>
             ) : filteredCars.length === 0 ? (
               <div className="border border-mist bg-cloud p-16 text-center">

@@ -407,3 +407,25 @@
     transition: none;
   }
 }
+
+/* Toast entrance — gentle rise + fade. Reduced-motion users get a plain fade. */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.toast-in {
+  animation: toast-in 0.26s var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-in {
+    animation: none;
+  }
+}

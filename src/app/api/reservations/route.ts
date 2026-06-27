@@ -14,7 +14,7 @@ export const runtime = "nodejs";
 
 export async function POST(req: Request) {
   const ip = getClientIp(req);
-  const limit = rateLimit(`reservation:${ip}`, 10, 60_000);
+  const limit = await rateLimit(`reservation:${ip}`, 10, 60_000);
   if (!limit.ok) {
     return NextResponse.json(
       { error: "Trop de demandes. Réessayez dans un instant." },

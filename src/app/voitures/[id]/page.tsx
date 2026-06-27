@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import TimeSlotPicker from "@/components/TimeSlotPicker";
 import Navbar from "@/components/Navbar";
+import { useToast } from "@/components/Feedback";
 import CarGlyph from "@/components/icons/CarGlyph";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { getCarById } from "@/lib/cars";
@@ -117,9 +118,14 @@ function getMatchingTierForDuration(
 }
 
 
+// Lightweight email shape check — good enough to catch typos without rejecting
+// valid-but-unusual addresses.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function CarDetailPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
+  const toast = useToast();
 
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState(true);
@@ -143,6 +149,7 @@ export default function CarDetailPage() {
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -150,7 +157,11 @@ export default function CarDetailPage() {
     notes: "",
   });
 
-  useEffect(() => {
+  // Modal focus management.
+  const firstFieldRef = useRef<HTMLInputElement>(null);
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
+
+  const loadCar = useCallback(() => {
     if (!id) return;
     Promise.all([
       getCarById(id),
@@ -165,8 +176,13 @@ export default function CarDetailPage() {
         setCar(carData);
         setUnavailable(unavailData);
       })
+      .catch(() => setCar(null))
       .finally(() => setLoading(false));
   }, [id]);
+
+  useEffect(() => {
+    loadCar();
+  }, [loadCar]);
 
   // Build calendar days
   const firstDay = new Date(viewYear, viewMonth, 1);
@@ -294,14 +310,47 @@ export default function CarDetailPage() {
       ? "Étape 2: Choisissez une date de fin disponible."
       : "Étape 3: Vérifiez le total, puis confirmez la réservation.";
 
+  // Inline form validation (shown next to the fields, not via blocking dialogs).
+  const emailInvalid =
+    form.email.trim() !== "" && !EMAIL_RE.test(form.email.trim());
+  const phoneInvalid =
+    form.phone.trim() !== "" && form.phone.replace(/\D/g, "").length < 6;
+  const formValid =
+    !!form.name.trim() && !!form.phone.trim() && !emailInvalid && !phoneInvalid;
+
+  // Booking modal: focus the first field on open, Escape to close, restore focus
+  // to the trigger on close.
+  useEffect(() => {
+    if (!showForm) return;
+    lastFocusedRef.current = document.activeElement as HTMLElement | null;
+    const focusId = requestAnimationFrame(() => {
+      setSubmitError(null);
+      firstFieldRef.current?.focus();
+    });
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && !submitting) setShowForm(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      cancelAnimationFrame(focusId);
+      window.removeEventListener("keydown", onKey);
+      lastFocusedRef.current?.focus?.();
+    };
+  }, [showForm, submitting]);
+
   async function handleSubmit() {
-    if (!car || !startDate || !endDate || !form.name || !form.phone) return;
+    if (!car || !startDate || !endDate || !formValid) return;
+    setSubmitError(null);
+
     if (timeOrderInvalid) {
-      alert("L'heure de retour doit être après l'heure de prise en charge.");
+      toast("L'heure de retour doit être après l'heure de prise en charge.", "error");
       return;
     }
     if (pickupInPast || noPickupSlotsToday) {
-      alert("L'heure de prise en charge est déjà passée. Choisissez un créneau plus tard.");
+      toast(
+        "Ce créneau de prise en charge est déjà passé. Choisissez un horaire plus tard.",
+        "error",
+      );
       return;
     }
     setSubmitting(true);
@@ -313,26 +362,36 @@ export default function CarDetailPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           car_id: car.id,
-          client_name: form.name,
-          client_phone: form.phone,
-          client_email: form.email || null,
+          client_name: form.name.trim(),
+          client_phone: form.phone.trim(),
+          client_email: form.email.trim() || null,
           start_date: toDateOnly(startDate),
           end_date: toDateOnly(endDate),
           pickup_time: pickupTime,
           return_time: returnTime,
-          notes: form.notes || null,
+          notes: form.notes.trim() || null,
         }),
       });
 
       if (res.ok) {
         setSuccess(true);
         setShowForm(false);
+        toast("Votre demande de réservation a bien été envoyée.", "success");
       } else {
         const data = (await res.json().catch(() => ({}))) as { error?: string };
-        alert(data.error || "La réservation a échoué. Veuillez réessayer.");
+        const message =
+          res.status === 429
+            ? "Vous allez un peu trop vite. Patientez un instant puis réessayez."
+            : data.error ||
+              "Nous n'avons pas pu enregistrer votre réservation. Veuillez réessayer.";
+        setSubmitError(message);
+        toast(message, "error");
       }
     } catch {
-      alert("Erreur réseau. Veuillez réessayer.");
+      const message =
+        "Problème de connexion. Vérifiez votre connexion internet et réessayez.";
+      setSubmitError(message);
+      toast(message, "error");
     } finally {
       setSubmitting(false);
     }
@@ -360,16 +419,32 @@ export default function CarDetailPage() {
     return (
       <main className="min-h-screen bg-paper">
         <Navbar />
-        <div className="px-5 py-28 text-center">
-          <div className="mb-3 font-display text-3xl font-medium text-ink">
-            Véhicule introuvable
+        <div className="mx-auto max-w-md px-5 py-28 text-center">
+          <span className="eyebrow">Véhicule indisponible</span>
+          <h1 className="mt-4 font-display text-3xl font-medium text-ink">
+            Ce véhicule est introuvable
+          </h1>
+          <p className="mt-3 text-sm leading-7 text-stone">
+            Il a peut-être été retiré, ou le lien est incorrect. Réessayez ou
+            parcourez le reste de notre flotte.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <button
+              onClick={() => {
+                setLoading(true);
+                loadCar();
+              }}
+              className="btn-primary px-6 py-3"
+            >
+              Réessayer
+            </button>
+            <button
+              onClick={() => router.push("/voitures")}
+              className="btn-outline px-6 py-3"
+            >
+              Voir les véhicules
+            </button>
           </div>
-          <button
-            onClick={() => router.push("/voitures")}
-            className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-stone underline-offset-4 transition-colors hover:text-ink hover:underline"
-          >
-            ← Retour aux véhicules
-          </button>
         </div>
       </main>
     );
@@ -764,9 +839,21 @@ export default function CarDetailPage() {
 
       {/* Booking form modal */}
       {showForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 px-4 backdrop-blur-sm">
-          <div className="max-h-[90vh] w-full max-w-[calc(100vw-1rem)] overflow-y-auto rounded-[var(--radius-lg)] border border-mist bg-paper p-6 shadow-md sm:max-w-md sm:p-9">
-            <h3 className="font-display text-2xl font-medium text-ink">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 px-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="booking-form-title"
+          onClick={() => !submitting && setShowForm(false)}
+        >
+          <div
+            className="max-h-[90vh] w-full max-w-[calc(100vw-1rem)] overflow-y-auto rounded-[var(--radius-lg)] border border-mist bg-paper p-6 shadow-md sm:max-w-md sm:p-9"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3
+              id="booking-form-title"
+              className="font-display text-2xl font-medium text-ink"
+            >
               Vos informations
             </h3>
             <p className="mt-1.5 text-sm text-stone">
@@ -774,31 +861,86 @@ export default function CarDetailPage() {
             </p>
 
             <div className="mt-7 flex flex-col gap-4">
-              {[
-                { key: "name", label: "Nom complet *", type: "text", ph: "Votre nom" },
-                { key: "phone", label: "Téléphone *", type: "tel", ph: "+216 00 000 000" },
-                { key: "email", label: "Email", type: "email", ph: "votre@email.com" },
-              ].map((field) => (
-                <div key={field.key}>
-                  <label className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone">
-                    {field.label}
-                  </label>
-                  <input
-                    type={field.type}
-                    placeholder={field.ph}
-                    value={form[field.key as keyof typeof form]}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, [field.key]: e.target.value }))
-                    }
-                    className="input-premium"
-                  />
-                </div>
-              ))}
               <div>
-                <label className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone">
+                <label
+                  htmlFor="booking-name"
+                  className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone"
+                >
+                  Nom complet *
+                </label>
+                <input
+                  id="booking-name"
+                  ref={firstFieldRef}
+                  type="text"
+                  placeholder="Votre nom"
+                  value={form.name}
+                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  className="input-premium"
+                  autoComplete="name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="booking-phone"
+                  className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone"
+                >
+                  Téléphone *
+                </label>
+                <input
+                  id="booking-phone"
+                  type="tel"
+                  placeholder="+216 00 000 000"
+                  value={form.phone}
+                  onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                  className="input-premium"
+                  autoComplete="tel"
+                  aria-invalid={phoneInvalid}
+                  aria-describedby={phoneInvalid ? "booking-phone-error" : undefined}
+                  required
+                />
+                {phoneInvalid && (
+                  <p id="booking-phone-error" className="mt-1.5 text-xs font-medium text-red-600">
+                    Veuillez saisir un numéro de téléphone valide.
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="booking-email"
+                  className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone"
+                >
+                  Email
+                </label>
+                <input
+                  id="booking-email"
+                  type="email"
+                  placeholder="votre@email.com"
+                  value={form.email}
+                  onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                  className="input-premium"
+                  autoComplete="email"
+                  aria-invalid={emailInvalid}
+                  aria-describedby={emailInvalid ? "booking-email-error" : undefined}
+                />
+                {emailInvalid && (
+                  <p id="booking-email-error" className="mt-1.5 text-xs font-medium text-red-600">
+                    Cette adresse email ne semble pas valide.
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="booking-notes"
+                  className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone"
+                >
                   Notes
                 </label>
                 <textarea
+                  id="booking-notes"
                   placeholder="Demandes particulières..."
                   value={form.notes}
                   onChange={(e) =>
@@ -810,19 +952,29 @@ export default function CarDetailPage() {
               </div>
             </div>
 
+            {submitError && (
+              <div
+                role="alert"
+                className="mt-5 rounded-[var(--radius)] border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700"
+              >
+                {submitError}
+              </div>
+            )}
+
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={() => setShowForm(false)}
-                className="btn-ghost flex-1"
+                disabled={submitting}
+                className="btn-ghost flex-1 disabled:opacity-40"
               >
                 Annuler
               </button>
               <button
                 onClick={handleSubmit}
-                disabled={submitting || !form.name || !form.phone}
+                disabled={submitting || !formValid}
                 className="btn-primary flex-1 disabled:opacity-40"
               >
-                {submitting ? "Envoi..." : "Envoyer la demande"}
+                {submitting ? "Envoi…" : "Envoyer la demande"}
               </button>
             </div>
           </div>
@@ -831,14 +983,22 @@ export default function CarDetailPage() {
 
       {/* Success modal */}
       {success && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 px-4 backdrop-blur-sm">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 px-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="booking-success-title"
+        >
           <div className="w-full max-w-[calc(100vw-1rem)] rounded-[var(--radius-lg)] border border-mist bg-paper p-8 text-center shadow-md sm:max-w-sm sm:p-10">
             <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-ink">
-              <svg className="h-6 w-6 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="h-6 w-6 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="font-display text-2xl font-medium text-ink">
+            <h3
+              id="booking-success-title"
+              className="font-display text-2xl font-medium text-ink"
+            >
               Demande envoyée
             </h3>
             <p className="mt-3 text-sm leading-7 text-stone">
@@ -848,10 +1008,12 @@ export default function CarDetailPage() {
             <button
               onClick={() => {
                 setSuccess(false);
+                setSubmitError(null);
                 setStartDate(null);
                 setEndDate(null);
               }}
               className="btn-primary mt-7 w-full"
+              autoFocus
             >
               Retour au véhicule
             </button>

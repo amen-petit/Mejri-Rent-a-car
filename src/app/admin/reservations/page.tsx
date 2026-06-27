@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import CarGlyph from "@/components/icons/CarGlyph";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
+import { useToast, useConfirm } from "@/components/Feedback";
 import { Reservation, Car } from "@/lib/types";
 import {
   RESERVATION_STATUS_LABEL,
@@ -13,6 +14,8 @@ import {
 type ReservationWithCar = Reservation & { car?: Car };
 
 export default function AdminReservations() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const PAGE_SIZE = 20;
   const EMPTY_COUNTS = { all: 0, pending: 0, confirmed: 0, cancelled: 0 };
 
@@ -62,21 +65,48 @@ export default function AdminReservations() {
   async function updateStatus(id: string, status: "confirmed" | "cancelled") {
     setUpdating(id);
     // Status change + customer email are handled server-side.
-    await fetch(`/api/admin/reservations/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
-    });
-    setUpdating(null);
-    if (selected?.id === id) setSelected((s) => (s ? { ...s, status } : null));
-    load(page, filter);
+    try {
+      const res = await fetch(`/api/admin/reservations/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status }),
+      });
+      if (!res.ok) throw new Error("update failed");
+      if (selected?.id === id) setSelected((s) => (s ? { ...s, status } : null));
+      toast(
+        status === "confirmed"
+          ? "Réservation confirmée. Le client a été notifié."
+          : "Réservation annulée. Le client a été notifié.",
+        "success",
+      );
+      load(page, filter);
+    } catch {
+      toast("La mise à jour a échoué. Veuillez réessayer.", "error");
+    } finally {
+      setUpdating(null);
+    }
   }
 
   async function handleDelete(id: string) {
-    if (!confirm("Supprimer cette réservation ?")) return;
-    await fetch(`/api/admin/reservations/${id}`, { method: "DELETE" });
-    setSelected(null);
-    load(page, filter);
+    const ok = await confirm({
+      title: "Supprimer cette réservation ?",
+      message: "Cette action est définitive et ne peut pas être annulée.",
+      confirmLabel: "Supprimer",
+      danger: true,
+    });
+    if (!ok) return;
+
+    try {
+      const res = await fetch(`/api/admin/reservations/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("delete failed");
+      setSelected(null);
+      toast("Réservation supprimée.", "success");
+      load(page, filter);
+    } catch {
+      toast("La suppression a échoué. Veuillez réessayer.", "error");
+    }
   }
 
   function getDays(start: string, end: string) {

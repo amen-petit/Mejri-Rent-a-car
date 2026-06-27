@@ -25,17 +25,32 @@ function LoginForm() {
       });
 
       if (!response.ok) {
-        const data = (await response.json().catch(() => ({}))) as {
-          error?: string;
-        };
-        throw new Error(data.error || "Login failed.");
+        // Map to human French copy; never surface the raw server/status text.
+        if (response.status === 429) {
+          throw new Error(
+            "Trop de tentatives. Patientez une minute, puis réessayez.",
+          );
+        }
+        if (response.status === 401) {
+          throw new Error("Nom d'utilisateur ou mot de passe incorrect.");
+        }
+        throw new Error(
+          "Connexion impossible pour le moment. Réessayez dans un instant.",
+        );
       }
 
       router.push(nextPath);
       router.refresh();
     } catch (loginError) {
+      // A thrown Error from above carries friendly copy; anything else is a
+      // network/unexpected failure.
+      const isFriendly =
+        loginError instanceof Error &&
+        !/fetch|network|failed to/i.test(loginError.message);
       setError(
-        loginError instanceof Error ? loginError.message : "Unable to log in.",
+        isFriendly && loginError instanceof Error
+          ? loginError.message
+          : "Problème de connexion. Vérifiez votre connexion internet et réessayez.",
       );
     } finally {
       setLoading(false);
@@ -109,8 +124,8 @@ export default function AdminLoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-slate-50">
-          <div className="w-8 h-8 border-2 border-navy border-t-transparent rounded-full animate-spin" />
+        <div className="flex min-h-screen items-center justify-center bg-paper">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-ink border-t-transparent" />
         </div>
       }
     >

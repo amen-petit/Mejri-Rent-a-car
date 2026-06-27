@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import ConditionalFooter from "@/components/ConditionalFooter";
 import MotionProvider from "@/components/MotionProvider";
+import FeedbackProvider from "@/components/Feedback";
 import { SITE_URL, BRAND_NAME } from "@/lib/constants";
 
 const OG_IMAGE_PATH = "/Untitled design.png";
@@ -100,8 +101,10 @@ export default function RootLayout({
         className={`${fraunces.variable} ${inter.variable} bg-paper text-ink antialiased overflow-x-hidden`}
       >
         <MotionProvider />
-        <div className="min-h-screen page-enter">{children}</div>
-        <ConditionalFooter />
+        <FeedbackProvider>
+          <div className="min-h-screen page-enter">{children}</div>
+          <ConditionalFooter />
+        </FeedbackProvider>
         <Analytics />
       </body>
     </html>

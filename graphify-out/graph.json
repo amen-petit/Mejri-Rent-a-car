@@ -320,10 +320,28 @@
       "norm_label": "@supabase/supabase-js"
     },
     {
-      "label": "@vercel/analytics",
+      "label": "@upstash/ratelimit",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L16",
+      "id": "new_version_package_dependencies_upstash_ratelimit",
+      "community": 86,
+      "norm_label": "@upstash/ratelimit"
+    },
+    {
+      "label": "@upstash/redis",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "id": "new_version_package_dependencies_upstash_redis",
+      "community": 86,
+      "norm_label": "@upstash/redis"
+    },
+    {
+      "label": "@vercel/analytics",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L18",
       "id": "new_version_package_dependencies_vercel_analytics",
       "community": 86,
       "norm_label": "@vercel/analytics"
@@ -332,7 +350,7 @@
       "label": "next",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L17",
+      "source_location": "L19",
       "id": "new_version_package_dependencies_next",
       "community": 86,
       "norm_label": "next"
@@ -341,7 +359,7 @@
       "label": "nodemailer",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L18",
+      "source_location": "L20",
       "id": "new_version_package_dependencies_nodemailer",
       "community": 86,
       "norm_label": "nodemailer"
@@ -350,7 +368,7 @@
       "label": "react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L19",
+      "source_location": "L21",
       "id": "new_version_package_dependencies_react",
       "community": 86,
       "norm_label": "react"
@@ -359,7 +377,7 @@
       "label": "react-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L20",
+      "source_location": "L22",
       "id": "new_version_package_dependencies_react_dom",
       "community": 86,
       "norm_label": "react-dom"
@@ -368,7 +386,7 @@
       "label": "server-only",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L21",
+      "source_location": "L23",
       "id": "new_version_package_dependencies_server_only",
       "community": 86,
       "norm_label": "server-only"
@@ -377,7 +395,7 @@
       "label": "devDependencies",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L25",
       "id": "new_version_package_devdependencies",
       "community": 68,
       "norm_label": "devdependencies"
@@ -386,7 +404,7 @@
       "label": "@tailwindcss/postcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L24",
+      "source_location": "L26",
       "id": "new_version_package_devdependencies_tailwindcss_postcss",
       "community": 68,
       "norm_label": "@tailwindcss/postcss"
@@ -395,7 +413,7 @@
       "label": "@types/node",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L25",
+      "source_location": "L27",
       "id": "new_version_package_devdependencies_types_node",
       "community": 68,
       "norm_label": "@types/node"
@@ -404,7 +422,7 @@
       "label": "@types/nodemailer",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L26",
+      "source_location": "L28",
       "id": "new_version_package_devdependencies_types_nodemailer",
       "community": 68,
       "norm_label": "@types/nodemailer"
@@ -413,7 +431,7 @@
       "label": "@types/react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L27",
+      "source_location": "L29",
       "id": "new_version_package_devdependencies_types_react",
       "community": 68,
       "norm_label": "@types/react"
@@ -422,7 +440,7 @@
       "label": "@types/react-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L28",
+      "source_location": "L30",
       "id": "new_version_package_devdependencies_types_react_dom",
       "community": 68,
       "norm_label": "@types/react-dom"
@@ -431,7 +449,7 @@
       "label": "eslint",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L29",
+      "source_location": "L31",
       "id": "new_version_package_devdependencies_eslint",
       "community": 68,
       "norm_label": "eslint"
@@ -440,7 +458,7 @@
       "label": "eslint-config-next",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L30",
+      "source_location": "L32",
       "id": "new_version_package_devdependencies_eslint_config_next",
       "community": 68,
       "norm_label": "eslint-config-next"
@@ -449,7 +467,7 @@
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L31",
+      "source_location": "L33",
       "id": "new_version_package_devdependencies_tailwindcss",
       "community": 68,
       "norm_label": "tailwindcss"
@@ -458,7 +476,7 @@
       "label": "typescript",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L32",
+      "source_location": "L34",
       "id": "new_version_package_devdependencies_typescript",
       "community": 68,
       "norm_label": "typescript"
@@ -467,7 +485,7 @@
       "label": "vitest",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L33",
+      "source_location": "L35",
       "id": "new_version_package_devdependencies_vitest",
       "community": 68,
       "norm_label": "vitest"
@@ -946,7 +964,7 @@
       "source_file": ".agents/skills/impeccable/scripts/command-metadata.json",
       "source_location": "L1",
       "id": "agents_skills_impeccable_scripts_command_metadata_json",
-      "community": 103,
+      "community": 108,
       "norm_label": "command-metadata.json"
     },
     {
@@ -1576,7 +1594,7 @@
       "source_file": ".agents/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L1",
       "id": "agents_skills_impeccable_scripts_critique_storage_mjs",
-      "community": 168,
+      "community": 0,
       "norm_label": "critique-storage.mjs"
     },
     {
@@ -1585,7 +1603,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L43",
       "id": "scripts_critique_storage_slugfromtarget",
-      "community": 168,
+      "community": 0,
       "norm_label": "slugfromtarget()"
     },
     {
@@ -1594,7 +1612,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L70",
       "id": "scripts_critique_storage_kebab",
-      "community": 168,
+      "community": 0,
       "norm_label": "kebab()"
     },
     {
@@ -1603,7 +1621,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L87",
       "id": "scripts_critique_storage_nowfilenamestamp",
-      "community": 168,
+      "community": 0,
       "norm_label": "nowfilenamestamp()"
     },
     {
@@ -1612,7 +1630,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L99",
       "id": "scripts_critique_storage_writesnapshot",
-      "community": 168,
+      "community": 0,
       "norm_label": "writesnapshot()"
     },
     {
@@ -1621,7 +1639,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L114",
       "id": "scripts_critique_storage_serializefrontmatter",
-      "community": 168,
+      "community": 0,
       "norm_label": "serializefrontmatter()"
     },
     {
@@ -1630,7 +1648,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L127",
       "id": "scripts_critique_storage_parsefrontmatter",
-      "community": 168,
+      "community": 0,
       "norm_label": "parsefrontmatter()"
     },
     {
@@ -1639,7 +1657,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L149",
       "id": "scripts_critique_storage_listsnapshotsforslug",
-      "community": 168,
+      "community": 0,
       "norm_label": "listsnapshotsforslug()"
     },
     {
@@ -1648,7 +1666,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L163",
       "id": "scripts_critique_storage_readlatestsnapshot",
-      "community": 168,
+      "community": 0,
       "norm_label": "readlatestsnapshot()"
     },
     {
@@ -1657,7 +1675,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L175",
       "id": "scripts_critique_storage_readtrend",
-      "community": 168,
+      "community": 0,
       "norm_label": "readtrend()"
     },
     {
@@ -1666,7 +1684,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L183",
       "id": "scripts_critique_storage_main",
-      "community": 168,
+      "community": 0,
       "norm_label": "main()"
     },
     {
@@ -1675,7 +1693,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L225",
       "id": "scripts_critique_storage_ismainmodule",
-      "community": 168,
+      "community": 0,
       "norm_label": "ismainmodule()"
     },
     {
@@ -2269,7 +2287,7 @@
       "source_file": ".claude/skills/impeccable/scripts/impeccable-paths.mjs",
       "source_location": "L100",
       "id": "scripts_impeccable_paths_getcritiquedir",
-      "community": 168,
+      "community": 0,
       "norm_label": "getcritiquedir()"
     },
     {
@@ -3574,7 +3592,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3567",
       "id": "scripts_live_browser_updateglobalbarstate",
-      "community": 5,
+      "community": 16,
       "norm_label": "updateglobalbarstate()"
     },
     {
@@ -3583,7 +3601,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3609",
       "id": "scripts_live_browser_toggledetect",
-      "community": 5,
+      "community": 16,
       "norm_label": "toggledetect()"
     },
     {
@@ -3601,7 +3619,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3647",
       "id": "scripts_live_browser_loaddetectscript",
-      "community": 5,
+      "community": 16,
       "norm_label": "loaddetectscript()"
     },
     {
@@ -3610,7 +3628,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3656",
       "id": "scripts_live_browser_ondetectmessage",
-      "community": 5,
+      "community": 16,
       "norm_label": "ondetectmessage()"
     },
     {
@@ -5725,7 +5743,7 @@
       "source_file": ".claude/skills/impeccable/scripts/critique-storage.mjs",
       "source_location": "L1",
       "id": "claude_skills_impeccable_scripts_critique_storage_mjs",
-      "community": 168,
+      "community": 0,
       "norm_label": "critique-storage.mjs"
     },
     {
@@ -6980,6 +6998,42 @@
       "norm_label": "format results for claude consumption (token-optimized)"
     },
     {
+      "label": "error.tsx",
+      "file_type": "code",
+      "source_file": "src/app/error.tsx",
+      "source_location": "L1",
+      "id": "src_app_error_tsx",
+      "community": 169,
+      "norm_label": "error.tsx"
+    },
+    {
+      "label": "Error()",
+      "file_type": "code",
+      "source_file": "src/app/error.tsx",
+      "source_location": "L11",
+      "id": "app_error_error",
+      "community": 169,
+      "norm_label": "error()"
+    },
+    {
+      "label": "global-error.tsx",
+      "file_type": "code",
+      "source_file": "src/app/global-error.tsx",
+      "source_location": "L1",
+      "id": "src_app_global_error_tsx",
+      "community": 170,
+      "norm_label": "global-error.tsx"
+    },
+    {
+      "label": "GlobalError()",
+      "file_type": "code",
+      "source_file": "src/app/global-error.tsx",
+      "source_location": "L10",
+      "id": "app_global_error_globalerror",
+      "community": 170,
+      "norm_label": "globalerror()"
+    },
+    {
       "label": "layout.tsx",
       "file_type": "code",
       "source_file": "src/app/layout.tsx",
@@ -6992,7 +7046,7 @@
       "label": "fraunces",
       "file_type": "code",
       "source_file": "src/app/layout.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "id": "app_layout_fraunces",
       "community": 60,
       "norm_label": "fraunces"
@@ -7001,7 +7055,7 @@
       "label": "inter",
       "file_type": "code",
       "source_file": "src/app/layout.tsx",
-      "source_location": "L22",
+      "source_location": "L23",
       "id": "app_layout_inter",
       "community": 60,
       "norm_label": "inter"
@@ -7010,7 +7064,7 @@
       "label": "metadata",
       "file_type": "code",
       "source_file": "src/app/layout.tsx",
-      "source_location": "L28",
+      "source_location": "L29",
       "id": "app_layout_metadata",
       "community": 60,
       "norm_label": "metadata"
@@ -7019,10 +7073,55 @@
       "label": "RootLayout()",
       "file_type": "code",
       "source_file": "src/app/layout.tsx",
-      "source_location": "L92",
+      "source_location": "L93",
       "id": "app_layout_rootlayout",
       "community": 60,
       "norm_label": "rootlayout()"
+    },
+    {
+      "label": "loading.tsx",
+      "file_type": "code",
+      "source_file": "src/app/loading.tsx",
+      "source_location": "L1",
+      "id": "src_app_loading_tsx",
+      "community": 171,
+      "norm_label": "loading.tsx"
+    },
+    {
+      "label": "Loading()",
+      "file_type": "code",
+      "source_file": "src/app/loading.tsx",
+      "source_location": "L5",
+      "id": "app_loading_loading",
+      "community": 171,
+      "norm_label": "loading()"
+    },
+    {
+      "label": "not-found.tsx",
+      "file_type": "code",
+      "source_file": "src/app/not-found.tsx",
+      "source_location": "L1",
+      "id": "src_app_not_found_tsx",
+      "community": 168,
+      "norm_label": "not-found.tsx"
+    },
+    {
+      "label": "metadata",
+      "file_type": "code",
+      "source_file": "src/app/not-found.tsx",
+      "source_location": "L3",
+      "id": "app_not_found_metadata",
+      "community": 168,
+      "norm_label": "metadata"
+    },
+    {
+      "label": "NotFound()",
+      "file_type": "code",
+      "source_file": "src/app/not-found.tsx",
+      "source_location": "L7",
+      "id": "app_not_found_notfound",
+      "community": 168,
+      "norm_label": "notfound()"
     },
     {
       "label": "page.tsx",
@@ -7138,7 +7237,7 @@
       "source_file": "src/app/admin/layout.tsx",
       "source_location": "L1",
       "id": "src_app_admin_layout_tsx",
-      "community": 164,
+      "community": 167,
       "norm_label": "layout.tsx"
     },
     {
@@ -7147,7 +7246,7 @@
       "source_file": "src/app/admin/layout.tsx",
       "source_location": "L7",
       "id": "admin_layout_navitems",
-      "community": 164,
+      "community": 167,
       "norm_label": "navitems"
     },
     {
@@ -7156,7 +7255,7 @@
       "source_file": "src/app/admin/layout.tsx",
       "source_location": "L30",
       "id": "admin_layout_navicon",
-      "community": 164,
+      "community": 167,
       "norm_label": "navicon()"
     },
     {
@@ -7165,7 +7264,7 @@
       "source_file": "src/app/admin/layout.tsx",
       "source_location": "L38",
       "id": "admin_layout_adminlayout",
-      "community": 164,
+      "community": 167,
       "norm_label": "adminlayout()"
     },
     {
@@ -7289,7 +7388,7 @@
       "label": "AdminLoginPage()",
       "file_type": "code",
       "source_file": "src/app/admin/login/page.tsx",
-      "source_location": "L108",
+      "source_location": "L123",
       "id": "login_page_adminloginpage",
       "community": 131,
       "norm_label": "adminloginpage()"
@@ -7300,25 +7399,25 @@
       "source_file": "src/app/admin/reservations/page.tsx",
       "source_location": "L1",
       "id": "src_app_admin_reservations_page_tsx",
-      "community": 17,
+      "community": 153,
       "norm_label": "page.tsx"
     },
     {
       "label": "ReservationWithCar",
       "file_type": "code",
       "source_file": "src/app/admin/reservations/page.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "id": "reservations_page_reservationwithcar",
-      "community": 17,
+      "community": 153,
       "norm_label": "reservationwithcar"
     },
     {
       "label": "AdminReservations()",
       "file_type": "code",
       "source_file": "src/app/admin/reservations/page.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "id": "reservations_page_adminreservations",
-      "community": 55,
+      "community": 153,
       "norm_label": "adminreservations()"
     },
     {
@@ -7334,7 +7433,7 @@
       "label": "FormState",
       "file_type": "code",
       "source_file": "src/app/admin/voitures/page.tsx",
-      "source_location": "L12",
+      "source_location": "L13",
       "id": "voitures_page_formstate",
       "community": 17,
       "norm_label": "formstate"
@@ -7343,7 +7442,7 @@
       "label": "emptyForm",
       "file_type": "code",
       "source_file": "src/app/admin/voitures/page.tsx",
-      "source_location": "L27",
+      "source_location": "L28",
       "id": "voitures_page_emptyform",
       "community": 17,
       "norm_label": "emptyform"
@@ -7352,7 +7451,7 @@
       "label": "TierFormRow",
       "file_type": "code",
       "source_file": "src/app/admin/voitures/page.tsx",
-      "source_location": "L42",
+      "source_location": "L43",
       "id": "voitures_page_tierformrow",
       "community": 17,
       "norm_label": "tierformrow"
@@ -7361,7 +7460,7 @@
       "label": "emptyTierRow()",
       "file_type": "code",
       "source_file": "src/app/admin/voitures/page.tsx",
-      "source_location": "L48",
+      "source_location": "L49",
       "id": "voitures_page_emptytierrow",
       "community": 17,
       "norm_label": "emptytierrow()"
@@ -7370,9 +7469,9 @@
       "label": "AdminVoitures()",
       "file_type": "code",
       "source_file": "src/app/admin/voitures/page.tsx",
-      "source_location": "L58",
+      "source_location": "L59",
       "id": "voitures_page_adminvoitures",
-      "community": 17,
+      "community": 153,
       "norm_label": "adminvoitures()"
     },
     {
@@ -7768,7 +7867,7 @@
       "source_file": "src/app/voitures/[id]/layout.tsx",
       "source_location": "L1",
       "id": "src_app_voitures_id_layout_tsx",
-      "community": 153,
+      "community": 164,
       "norm_label": "layout.tsx"
     },
     {
@@ -7777,7 +7876,7 @@
       "source_file": "src/app/voitures/[id]/layout.tsx",
       "source_location": "L7",
       "id": "id_layout_layoutprops",
-      "community": 153,
+      "community": 164,
       "norm_label": "layoutprops"
     },
     {
@@ -7786,7 +7885,7 @@
       "source_file": "src/app/voitures/[id]/layout.tsx",
       "source_location": "L12",
       "id": "id_layout_generatemetadata",
-      "community": 153,
+      "community": 164,
       "norm_label": "generatemetadata()"
     },
     {
@@ -7795,7 +7894,7 @@
       "source_file": "src/app/voitures/[id]/layout.tsx",
       "source_location": "L62",
       "id": "id_layout_cardetaillayout",
-      "community": 153,
+      "community": 164,
       "norm_label": "cardetaillayout()"
     },
     {
@@ -7811,7 +7910,7 @@
       "label": "isDateInRange()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L25",
+      "source_location": "L26",
       "id": "id_page_isdateinrange",
       "community": 35,
       "norm_label": "isdateinrange()"
@@ -7820,7 +7919,7 @@
       "label": "countReservationsForDate()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L29",
+      "source_location": "L30",
       "id": "id_page_countreservationsfordate",
       "community": 35,
       "norm_label": "countreservationsfordate()"
@@ -7829,7 +7928,7 @@
       "label": "isDateUnavailable()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L42",
+      "source_location": "L43",
       "id": "id_page_isdateunavailable",
       "community": 35,
       "norm_label": "isdateunavailable()"
@@ -7838,7 +7937,7 @@
       "label": "getDaysBetween()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L50",
+      "source_location": "L51",
       "id": "id_page_getdaysbetween",
       "community": 35,
       "norm_label": "getdaysbetween()"
@@ -7847,7 +7946,7 @@
       "label": "toDateOnly()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L56",
+      "source_location": "L57",
       "id": "id_page_todateonly",
       "community": 35,
       "norm_label": "todateonly()"
@@ -7856,7 +7955,7 @@
       "label": "normalizePricingTiers()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L63",
+      "source_location": "L64",
       "id": "id_page_normalizepricingtiers",
       "community": 35,
       "norm_label": "normalizepricingtiers()"
@@ -7865,7 +7964,7 @@
       "label": "getDailyRateForDuration()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L77",
+      "source_location": "L78",
       "id": "id_page_getdailyrateforduration",
       "community": 35,
       "norm_label": "getdailyrateforduration()"
@@ -7874,7 +7973,7 @@
       "label": "getMatchingTierForDuration()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L98",
+      "source_location": "L99",
       "id": "id_page_getmatchingtierforduration",
       "community": 35,
       "norm_label": "getmatchingtierforduration()"
@@ -7883,7 +7982,7 @@
       "label": "CarDetailPage()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L120",
+      "source_location": "L125",
       "id": "id_page_cardetailpage",
       "community": 35,
       "norm_label": "cardetailpage()"
@@ -7905,6 +8004,105 @@
       "id": "components_conditionalfooter_conditionalfooter",
       "community": 60,
       "norm_label": "conditionalfooter()"
+    },
+    {
+      "label": "Feedback.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L1",
+      "id": "src_components_feedback_tsx",
+      "community": 153,
+      "norm_label": "feedback.tsx"
+    },
+    {
+      "label": "ToastVariant",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L24",
+      "id": "components_feedback_toastvariant",
+      "community": 153,
+      "norm_label": "toastvariant"
+    },
+    {
+      "label": "ToastItem",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L26",
+      "id": "components_feedback_toastitem",
+      "community": 153,
+      "norm_label": "toastitem"
+    },
+    {
+      "label": "ConfirmOptions",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L32",
+      "id": "components_feedback_confirmoptions",
+      "community": 153,
+      "norm_label": "confirmoptions"
+    },
+    {
+      "label": "ConfirmState",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L40",
+      "id": "components_feedback_confirmstate",
+      "community": 153,
+      "norm_label": "confirmstate"
+    },
+    {
+      "label": "FeedbackContextValue",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L44",
+      "id": "components_feedback_feedbackcontextvalue",
+      "community": 153,
+      "norm_label": "feedbackcontextvalue"
+    },
+    {
+      "label": "FeedbackContext",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L49",
+      "id": "components_feedback_feedbackcontext",
+      "community": 153,
+      "norm_label": "feedbackcontext"
+    },
+    {
+      "label": "useToast()",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L51",
+      "id": "components_feedback_usetoast",
+      "community": 153,
+      "norm_label": "usetoast()"
+    },
+    {
+      "label": "useConfirm()",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L57",
+      "id": "components_feedback_useconfirm",
+      "community": 153,
+      "norm_label": "useconfirm()"
+    },
+    {
+      "label": "ToastIcon()",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L65",
+      "id": "components_feedback_toasticon",
+      "community": 153,
+      "norm_label": "toasticon()"
+    },
+    {
+      "label": "FeedbackProvider()",
+      "file_type": "code",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L89",
+      "id": "components_feedback_feedbackprovider",
+      "community": 153,
+      "norm_label": "feedbackprovider()"
     },
     {
       "label": "Footer.tsx",
@@ -7957,7 +8155,7 @@
       "source_file": "src/components/Hero.tsx",
       "source_location": "L1",
       "id": "src_components_hero_tsx",
-      "community": 167,
+      "community": 23,
       "norm_label": "hero.tsx"
     },
     {
@@ -7966,7 +8164,7 @@
       "source_file": "src/components/Hero.tsx",
       "source_location": "L16",
       "id": "components_hero_arrow",
-      "community": 167,
+      "community": 23,
       "norm_label": "arrow()"
     },
     {
@@ -7975,7 +8173,7 @@
       "source_file": "src/components/Hero.tsx",
       "source_location": "L24",
       "id": "components_hero_carsilhouette",
-      "community": 167,
+      "community": 23,
       "norm_label": "carsilhouette()"
     },
     {
@@ -7984,7 +8182,7 @@
       "source_file": "src/components/Hero.tsx",
       "source_location": "L32",
       "id": "components_hero_hero",
-      "community": 167,
+      "community": 23,
       "norm_label": "hero()"
     },
     {
@@ -8074,7 +8272,7 @@
       "source_file": "src/components/icons/CarGlyph.tsx",
       "source_location": "L1",
       "id": "src_components_icons_carglyph_tsx",
-      "community": 17,
+      "community": 55,
       "norm_label": "carglyph.tsx"
     },
     {
@@ -8083,7 +8281,7 @@
       "source_file": "src/components/icons/CarGlyph.tsx",
       "source_location": "L2",
       "id": "icons_carglyph_carglyph",
-      "community": 17,
+      "community": 55,
       "norm_label": "carglyph()"
     },
     {
@@ -8353,7 +8551,7 @@
       "source_file": "src/lib/cars.ts",
       "source_location": "L14",
       "id": "lib_cars_getcarbyid",
-      "community": 153,
+      "community": 164,
       "norm_label": "getcarbyid()"
     },
     {
@@ -8371,7 +8569,7 @@
       "source_file": "src/lib/constants.ts",
       "source_location": "L23",
       "id": "lib_constants_months_fr",
-      "community": 35,
+      "community": 17,
       "norm_label": "months_fr"
     },
     {
@@ -8398,7 +8596,7 @@
       "source_file": "src/lib/constants.ts",
       "source_location": "L62",
       "id": "lib_constants_booking_time_slots",
-      "community": 1,
+      "community": 17,
       "norm_label": "booking_time_slots"
     },
     {
@@ -8636,10 +8834,19 @@
       "norm_label": "rate-limit.ts"
     },
     {
+      "label": "RateLimitResult",
+      "file_type": "code",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L18",
+      "id": "lib_rate_limit_ratelimitresult",
+      "community": 1,
+      "norm_label": "ratelimitresult"
+    },
+    {
       "label": "Bucket",
       "file_type": "code",
       "source_file": "src/lib/rate-limit.ts",
-      "source_location": "L7",
+      "source_location": "L23",
       "id": "lib_rate_limit_bucket",
       "community": 1,
       "norm_label": "bucket"
@@ -8648,16 +8855,52 @@
       "label": "buckets",
       "file_type": "code",
       "source_file": "src/lib/rate-limit.ts",
-      "source_location": "L9",
+      "source_location": "L24",
       "id": "lib_rate_limit_buckets",
       "community": 1,
       "norm_label": "buckets"
     },
     {
+      "label": "memoryRateLimit()",
+      "file_type": "code",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L26",
+      "id": "lib_rate_limit_memoryratelimit",
+      "community": 1,
+      "norm_label": "memoryratelimit()"
+    },
+    {
+      "label": "getRedis()",
+      "file_type": "code",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L52",
+      "id": "lib_rate_limit_getredis",
+      "community": 1,
+      "norm_label": "getredis()"
+    },
+    {
+      "label": "limiters",
+      "file_type": "code",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L74",
+      "id": "lib_rate_limit_limiters",
+      "community": 1,
+      "norm_label": "limiters"
+    },
+    {
+      "label": "getLimiter()",
+      "file_type": "code",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L76",
+      "id": "lib_rate_limit_getlimiter",
+      "community": 1,
+      "norm_label": "getlimiter()"
+    },
+    {
       "label": "rateLimit()",
       "file_type": "code",
       "source_file": "src/lib/rate-limit.ts",
-      "source_location": "L11",
+      "source_location": "L98",
       "id": "lib_rate_limit_ratelimit",
       "community": 1,
       "norm_label": "ratelimit()"
@@ -8666,7 +8909,7 @@
       "label": "getClientIp()",
       "file_type": "code",
       "source_file": "src/lib/rate-limit.ts",
-      "source_location": "L32",
+      "source_location": "L131",
       "id": "lib_rate_limit_getclientip",
       "community": 1,
       "norm_label": "getclientip()"
@@ -8767,7 +9010,7 @@
       "source_file": "src/lib/types.ts",
       "source_location": "L7",
       "id": "lib_types_car",
-      "community": 17,
+      "community": 23,
       "norm_label": "car"
     },
     {
@@ -8785,7 +9028,7 @@
       "source_file": "src/lib/validation.ts",
       "source_location": "L1",
       "id": "src_lib_validation_ts",
-      "community": 1,
+      "community": 17,
       "norm_label": "validation.ts"
     },
     {
@@ -8794,7 +9037,7 @@
       "source_file": "src/lib/validation.ts",
       "source_location": "L13",
       "id": "lib_validation_pricingtierschema",
-      "community": 1,
+      "community": 17,
       "norm_label": "pricingtierschema"
     },
     {
@@ -8812,7 +9055,7 @@
       "source_file": "src/lib/validation.ts",
       "source_location": "L39",
       "id": "lib_validation_carinput",
-      "community": 1,
+      "community": 17,
       "norm_label": "carinput"
     },
     {
@@ -8821,7 +9064,7 @@
       "source_file": "src/lib/validation.ts",
       "source_location": "L41",
       "id": "lib_validation_dateonly",
-      "community": 1,
+      "community": 17,
       "norm_label": "dateonly"
     },
     {
@@ -8830,7 +9073,7 @@
       "source_file": "src/lib/validation.ts",
       "source_location": "L48",
       "id": "lib_validation_bookingtime",
-      "community": 1,
+      "community": 17,
       "norm_label": "bookingtime"
     },
     {
@@ -8848,7 +9091,7 @@
       "source_file": "src/lib/validation.ts",
       "source_location": "L79",
       "id": "lib_validation_reservationinput",
-      "community": 1,
+      "community": 17,
       "norm_label": "reservationinput"
     },
     {
@@ -20745,9 +20988,9 @@
       "source_file": "next.config.ts",
       "source_location": "L36",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "next_config_ts",
-      "target": "new_version_next_config_csp",
-      "confidence_score": 1.0
+      "target": "new_version_next_config_csp"
     },
     {
       "relation": "contains",
@@ -20765,9 +21008,9 @@
       "source_file": "next.config.ts",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "next_config_ts",
-      "target": "new_version_next_config_securityheaders",
-      "confidence_score": 1.0
+      "target": "new_version_next_config_securityheaders"
     },
     {
       "relation": "contains",
@@ -21008,6 +21251,26 @@
       "confidence_score": 1.0,
       "source": "new_version_package_dependencies",
       "target": "new_version_package_dependencies_supabase_supabase_js"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "new_version_package_dependencies",
+      "target": "new_version_package_dependencies_upstash_ratelimit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "new_version_package_dependencies",
+      "target": "new_version_package_dependencies_upstash_redis"
     },
     {
       "relation": "contains",
@@ -39830,6 +40093,26 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/app/error.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "src_app_error_tsx",
+      "target": "app_error_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/global-error.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_app_global_error_tsx",
+      "target": "app_global_error_globalerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/app/layout.tsx",
       "source_location": "L18",
       "weight": 1.0,
@@ -39903,6 +40186,17 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/layout.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_app_layout_tsx",
+      "target": "src_components_feedback_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/layout.tsx",
       "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -39919,6 +40213,36 @@
       "confidence_score": 1.0,
       "source": "src_app_layout_tsx",
       "target": "src_lib_constants_ts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/loading.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_app_loading_tsx",
+      "target": "app_loading_loading",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/not-found.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_app_not_found_tsx",
+      "target": "app_not_found_metadata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/not-found.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_app_not_found_tsx",
+      "target": "app_not_found_notfound",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -40506,6 +40830,28 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "src_app_admin_reservations_page_tsx",
+      "target": "components_feedback_useconfirm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "src_app_admin_reservations_page_tsx",
+      "target": "components_feedback_usetoast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/reservations/page.tsx",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -40570,6 +40916,17 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "src_app_admin_reservations_page_tsx",
+      "target": "src_components_feedback_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/reservations/page.tsx",
       "source_location": "L4",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -40608,6 +40965,50 @@
       "confidence_score": 1.0,
       "source": "src_app_admin_reservations_page_tsx",
       "target": "src_lib_types_ts"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "reservations_page_adminreservations",
+      "target": "components_feedback_useconfirm"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "reservations_page_adminreservations",
+      "target": "components_feedback_usetoast"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/voitures/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_app_admin_voitures_page_tsx",
+      "target": "components_feedback_useconfirm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/voitures/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_app_admin_voitures_page_tsx",
+      "target": "components_feedback_usetoast",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -40663,6 +41064,17 @@
       "confidence_score": 1.0,
       "source": "src_app_admin_voitures_page_tsx",
       "target": "lib_types_pricingtier"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/voitures/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_app_admin_voitures_page_tsx",
+      "target": "src_components_feedback_tsx",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -40746,6 +41158,28 @@
       "confidence_score": 1.0,
       "source": "src_app_admin_voitures_page_tsx",
       "target": "voitures_page_tierformrow"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/admin/voitures/page.tsx",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "voitures_page_adminvoitures",
+      "target": "components_feedback_useconfirm"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/admin/voitures/page.tsx",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "voitures_page_adminvoitures",
+      "target": "components_feedback_usetoast"
     },
     {
       "relation": "contains",
@@ -41237,9 +41671,9 @@
       "source_file": "src/app/api/admin/cars/[id]/images/route.ts",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_api_admin_cars_id_images_route_ts",
-      "target": "images_route_sniffimagemime",
-      "confidence_score": 1.0
+      "target": "images_route_sniffimagemime"
     },
     {
       "relation": "imports",
@@ -41292,9 +41726,9 @@
       "source_file": "src/app/api/admin/cars/[id]/images/route.ts",
       "source_location": "L88",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "images_route_post",
-      "target": "images_route_sniffimagemime",
-      "confidence_score": 1.0
+      "target": "images_route_sniffimagemime"
     },
     {
       "relation": "calls",
@@ -42299,6 +42733,17 @@
       "target": "lib_cars_getcarbyid"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_app_voitures_id_page_tsx",
+      "target": "components_feedback_usetoast",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/voitures/[id]/page.tsx",
@@ -42494,6 +42939,17 @@
       "source_file": "src/app/voitures/[id]/page.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "source": "src_app_voitures_id_page_tsx",
+      "target": "src_components_feedback_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_app_voitures_id_page_tsx",
       "target": "src_components_icons_carglyph_tsx"
@@ -42668,6 +43124,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L128",
+      "weight": 1.0,
+      "source": "id_page_cardetailpage",
+      "target": "components_feedback_usetoast"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "app/voitures/[id]/page.tsx",
       "source_location": "L270",
       "weight": 1.0,
@@ -42705,6 +43172,106 @@
       "confidence_score": 1.0,
       "source": "src_components_conditionalfooter_tsx",
       "target": "src_components_footer_tsx"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "src_components_feedback_tsx",
+      "target": "components_feedback_confirmoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "src_components_feedback_tsx",
+      "target": "components_feedback_confirmstate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "src_components_feedback_tsx",
+      "target": "components_feedback_feedbackcontext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "src_components_feedback_tsx",
+      "target": "components_feedback_feedbackcontextvalue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L89",
+      "weight": 1.0,
+      "source": "src_components_feedback_tsx",
+      "target": "components_feedback_feedbackprovider",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "src_components_feedback_tsx",
+      "target": "components_feedback_toasticon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "src_components_feedback_tsx",
+      "target": "components_feedback_toastitem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "src_components_feedback_tsx",
+      "target": "components_feedback_toastvariant",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "src_components_feedback_tsx",
+      "target": "components_feedback_useconfirm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Feedback.tsx",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "src_components_feedback_tsx",
+      "target": "components_feedback_usetoast",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -44106,11 +44673,94 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L76",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_rate_limit_ts",
+      "target": "lib_rate_limit_getlimiter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_rate_limit_ts",
+      "target": "lib_rate_limit_getredis"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_rate_limit_ts",
+      "target": "lib_rate_limit_limiters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_rate_limit_ts",
+      "target": "lib_rate_limit_memoryratelimit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/rate-limit.ts",
       "source_location": "L11",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_lib_rate_limit_ts",
       "target": "lib_rate_limit_ratelimit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_lib_rate_limit_ts",
+      "target": "lib_rate_limit_ratelimitresult"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L104",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_rate_limit_ratelimit",
+      "target": "lib_rate_limit_memoryratelimit"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L77",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_rate_limit_getlimiter",
+      "target": "lib_rate_limit_getredis"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/rate-limit.ts",
+      "source_location": "L103",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_rate_limit_ratelimit",
+      "target": "lib_rate_limit_getlimiter"
     },
     {
       "relation": "contains",
@@ -56354,5 +57004,5 @@
       "source_file": null
     }
   ],
-  "built_at_commit": "c9de99aaf3ffaea07d49b3dff2126c1f276b0e1f"
+  "built_at_commit": "10e844ad15e67716a84c4e0db92d71585dc85370"
 }

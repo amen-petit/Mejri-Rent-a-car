@@ -45,9 +45,12 @@ export default function Hero({ car }: { car?: Car }) {
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
     const okMotion = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setInteractive(fine && okMotion);
-    // Trigger entrance on the next frame so transitions actually play.
-    const id = requestAnimationFrame(() => setMounted(true));
+    // Apply on the next frame so the state writes happen in a callback (not
+    // synchronously in the effect body) and the entrance transition plays.
+    const id = requestAnimationFrame(() => {
+      setInteractive(fine && okMotion);
+      setMounted(true);
+    });
     return () => cancelAnimationFrame(id);
   }, []);
 
@@ -101,23 +104,27 @@ export default function Hero({ car }: { car?: Car }) {
     };
   }, [interactive]);
 
-  // Price count-up on mount (motion-allowed only).
+  // Price count-up on mount (motion-allowed only). All state writes happen
+  // inside rAF callbacks (never synchronously in the effect body) so we don't
+  // trigger cascading renders.
   useEffect(() => {
     const price = car?.price_per_day ?? 0;
-    if (!interactive || price <= 0) {
-      setShownPrice(price);
-      return;
-    }
     let raf = 0;
+
+    // No animation: snap to the final value on the next frame.
+    if (!interactive || price <= 0) {
+      raf = requestAnimationFrame(() => setShownPrice(price));
+      return () => cancelAnimationFrame(raf);
+    }
+
     const start = performance.now();
     const dur = 950;
     const run = (t: number) => {
       const p = Math.min(1, (t - start) / dur);
       const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
-      setShownPrice(Math.round(price * eased));
+      setShownPrice(Math.round(price * eased)); // first frame ≈ 0, then counts up
       if (p < 1) raf = requestAnimationFrame(run);
     };
-    setShownPrice(0);
     raf = requestAnimationFrame(run);
     return () => cancelAnimationFrame(raf);
   }, [interactive, car?.price_per_day]);

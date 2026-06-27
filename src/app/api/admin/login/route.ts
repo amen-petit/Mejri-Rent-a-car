@@ -18,7 +18,7 @@ export async function POST(req: Request) {
   try {
     // Brute-force protection: 5 attempts per IP per minute.
     const ip = getClientIp(req);
-    const limit = rateLimit(`login:${ip}`, 5, 60_000);
+    const limit = await rateLimit(`login:${ip}`, 5, 60_000);
     if (!limit.ok) {
       return NextResponse.json(
         { error: "Too many attempts. Try again shortly." },

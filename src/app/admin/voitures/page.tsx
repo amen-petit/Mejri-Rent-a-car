@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CarGlyph from "@/components/icons/CarGlyph";
+import { useToast, useConfirm } from "@/components/Feedback";
 import { Car, PricingTier } from "@/lib/types";
 import {
   CAR_CATEGORIES,
@@ -56,8 +57,11 @@ const fieldLabel =
   "mb-2 block text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-stone";
 
 export default function AdminVoitures() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<Car | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
@@ -66,19 +70,23 @@ export default function AdminVoitures() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [pricingTiers, setPricingTiers] = useState<TierFormRow[]>([]);
 
-  async function load() {
-    const res = await fetch("/api/admin/cars", { cache: "no-store" });
-    const data = res.ok ? await res.json() : { cars: [] };
-    setCars(data.cars || []);
-    setLoading(false);
-  }
+  const load = useCallback(async () => {
+    try {
+      const res = await fetch("/api/admin/cars", { cache: "no-store" });
+      if (!res.ok) throw new Error("request failed");
+      const data = await res.json();
+      setCars(data.cars || []);
+      setLoadFailed(false);
+    } catch {
+      setLoadFailed(true);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    // Initial fetch on mount. load() only sets state after awaiting fetch,
-    // so there is no synchronous render cascade.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
-  }, []);
+  }, [load]);
 
   function openAdd() {
     setEditing(null);
@@ -115,16 +123,41 @@ export default function AdminVoitures() {
     setShowForm(true);
   }
 
+  const MAX_IMAGE_BYTES = 5 * 1024 * 1024; // mirrors the server limit
+
   async function uploadImages(carId: string): Promise<void> {
     if (!images || images.length === 0) return;
+
+    // Pre-validate on the client so the user gets clear feedback instead of files
+    // being silently dropped by the server.
     const fd = new FormData();
+    let queued = 0;
+    const skipped: string[] = [];
     for (let i = 0; i < images.length; i++) {
-      fd.append("files", images[i]);
+      const file = images[i];
+      if (!file.type.startsWith("image/") || file.size > MAX_IMAGE_BYTES) {
+        skipped.push(file.name);
+        continue;
+      }
+      fd.append("files", file);
+      queued += 1;
     }
-    await fetch(`/api/admin/cars/${carId}/images`, {
+
+    if (skipped.length > 0) {
+      toast(
+        `${skipped.length} fichier(s) ignoré(s) : formats image uniquement, 5 Mo maximum.`,
+        "info",
+      );
+    }
+    if (queued === 0) return;
+
+    const res = await fetch(`/api/admin/cars/${carId}/images`, {
       method: "POST",
       body: fd,
     });
+    if (!res.ok) {
+      throw new Error("image upload failed");
+    }
   }
 
   async function handleSave() {
@@ -142,8 +175,9 @@ export default function AdminVoitures() {
     if (hasTierInput) {
       for (const tier of pricingTiers) {
         if (!tier.min_days || !tier.max_days || !tier.price_per_day) {
-          alert(
+          toast(
             "Complétez tous les champs des paliers de durée, ou supprimez les lignes incomplètes.",
+            "error",
           );
           return;
         }
@@ -160,8 +194,9 @@ export default function AdminVoitures() {
           !Number.isFinite(tierPrice) ||
           tierPrice <= 0
         ) {
-          alert(
-            "Chaque palier doit avoir des jours valides (min <= max) et un prix > 0.",
+          toast(
+            "Chaque palier doit avoir des jours valides (min ≤ max) et un prix supérieur à 0.",
+            "error",
           );
           return;
         }
@@ -179,8 +214,9 @@ export default function AdminVoitures() {
         const prev = normalizedTiers[i - 1];
         const current = normalizedTiers[i];
         if (current.min_days <= prev.max_days) {
-          alert(
+          toast(
             "Les paliers se chevauchent. Ajustez les intervalles de durée.",
+            "error",
           );
           return;
         }
@@ -212,74 +248,90 @@ export default function AdminVoitures() {
       pricing_tiers: normalizedTiers.length > 0 ? normalizedTiers : null,
     };
 
-    if (editing) {
-      const res = await fetch(`/api/admin/cars/${editing.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        const data = (await res.json().catch(() => ({}))) as { error?: string };
-        alert(`Erreur lors de la sauvegarde: ${data.error || res.status}`);
-        setSaving(false);
-        return;
+    try {
+      if (editing) {
+        const res = await fetch(`/api/admin/cars/${editing.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error("save failed");
+        if (images && images.length > 0) await uploadImages(editing.id);
+        toast("Véhicule enregistré.", "success");
+      } else {
+        const res = await fetch("/api/admin/cars", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error("create failed");
+        const { id } = (await res.json()) as { id: string };
+        if (id && images && images.length > 0) await uploadImages(id);
+        toast("Véhicule ajouté.", "success");
       }
 
-      if (images && images.length > 0) {
-        await uploadImages(editing.id);
-      }
-    } else {
-      const res = await fetch("/api/admin/cars", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        const data = (await res.json().catch(() => ({}))) as { error?: string };
-        alert(`Erreur lors de la création: ${data.error || res.status}`);
-        setSaving(false);
-        return;
-      }
-
-      const { id } = (await res.json()) as { id: string };
-      if (id && images && images.length > 0) {
-        await uploadImages(id);
-      }
+      setShowForm(false);
+      load();
+    } catch {
+      toast(
+        "Impossible d'enregistrer le véhicule. Vérifiez votre connexion et réessayez.",
+        "error",
+      );
+    } finally {
+      setSaving(false);
     }
-
-    setSaving(false);
-    setShowForm(false);
-    load();
   }
 
   async function handleDelete(id: string) {
-    if (!confirm("Supprimer ce véhicule ?")) return;
+    const ok = await confirm({
+      title: "Supprimer ce véhicule ?",
+      message: "Cette action est définitive et ne peut pas être annulée.",
+      confirmLabel: "Supprimer",
+      danger: true,
+    });
+    if (!ok) return;
+
     setDeletingId(id);
-    await fetch(`/api/admin/cars/${id}`, { method: "DELETE" });
-    setDeletingId(null);
-    load();
+    try {
+      const res = await fetch(`/api/admin/cars/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("delete failed");
+      toast("Véhicule supprimé.", "success");
+      load();
+    } catch {
+      toast("La suppression a échoué. Veuillez réessayer.", "error");
+    } finally {
+      setDeletingId(null);
+    }
   }
 
   async function toggleAvailable(car: Car) {
-    await fetch(`/api/admin/cars/${car.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ is_available: !car.is_available }),
-    });
-    load();
+    try {
+      const res = await fetch(`/api/admin/cars/${car.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ is_available: !car.is_available }),
+      });
+      if (!res.ok) throw new Error("toggle failed");
+      load();
+    } catch {
+      toast("Impossible de mettre à jour la disponibilité.", "error");
+    }
   }
 
   async function removeImage(car: Car, url: string) {
     const updated = car.images.filter((i) => i !== url);
-    await fetch(`/api/admin/cars/${car.id}/images`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url }),
-    });
-    load();
-    if (editing) setEditing({ ...car, images: updated });
+    try {
+      const res = await fetch(`/api/admin/cars/${car.id}/images`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      });
+      if (!res.ok) throw new Error("remove failed");
+      load();
+      if (editing) setEditing({ ...car, images: updated });
+    } catch {
+      toast("Impossible de supprimer la photo. Veuillez réessayer.", "error");
+    }
   }
 
   return (
@@ -306,6 +358,24 @@ export default function AdminVoitures() {
           {[...Array(6)].map((_, i) => (
             <div key={i} className="h-72 animate-pulse rounded-[var(--radius-lg)] bg-mist" />
           ))}
+        </div>
+      ) : loadFailed ? (
+        <div className="border border-mist bg-cloud py-24 text-center">
+          <div className="font-display text-2xl font-medium text-ink">
+            Impossible de charger les véhicules
+          </div>
+          <div className="mt-2 text-sm text-stone">
+            Une erreur est survenue. Vérifiez votre connexion et réessayez.
+          </div>
+          <button
+            onClick={() => {
+              setLoading(true);
+              load();
+            }}
+            className="btn-primary mt-7"
+          >
+            Réessayer
+          </button>
         </div>
       ) : cars.length === 0 ? (
         <div className="border border-mist bg-cloud py-24 text-center">
