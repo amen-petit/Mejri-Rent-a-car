@@ -1,6 +1,7 @@
 export type PricingTier = {
   min_days: number;
-  max_days: number;
+  /** Upper bound (inclusive). `null` means open-ended — "from min_days and up". */
+  max_days: number | null;
   price_per_day: number;
 };
 

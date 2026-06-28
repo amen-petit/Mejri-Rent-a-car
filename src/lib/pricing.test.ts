@@ -114,6 +114,16 @@ describe("getMatchingTierForDuration", () => {
     const high: PricingTier[] = [{ min_days: 3, max_days: 5, price_per_day: 90 }];
     expect(getMatchingTierForDuration(1, high)).toEqual(high[0]);
   });
+
+  it("matches an open-ended tier (null max) for any duration at/above its min", () => {
+    const openEnded: PricingTier[] = [
+      { min_days: 1, max_days: 14, price_per_day: 100 },
+      { min_days: 15, max_days: null, price_per_day: 60 }, // 15 and up
+    ];
+    expect(getMatchingTierForDuration(15, openEnded)).toEqual(openEnded[1]);
+    expect(getMatchingTierForDuration(400, openEnded)).toEqual(openEnded[1]);
+    expect(getMatchingTierForDuration(10, openEnded)).toEqual(openEnded[0]);
+  });
 });
 
 describe("getDailyRateForDuration", () => {
@@ -174,6 +184,22 @@ describe("computeQuote", () => {
     expect(q.totalDays).toBe(0);
     expect(q.totalPrice).toBe(0);
     expect(q.tier).toBeNull();
+  });
+
+  it("applies an open-ended tier for a long rental", () => {
+    const openEnded: PricingTier[] = [
+      { min_days: 1, max_days: 14, price_per_day: 100 },
+      { min_days: 15, max_days: null, price_per_day: 60 },
+    ];
+    const q = computeQuote(
+      { price_per_day: 120, pricing_tiers: openEnded },
+      "2025-01-01",
+      "2025-01-20", // 20 days
+    );
+    expect(q.totalDays).toBe(20);
+    expect(q.dailyRate).toBe(60);
+    expect(q.totalPrice).toBe(1200);
+    expect(q.tier).toEqual(openEnded[1]);
   });
 
   it("returns a zero quote for invalid dates", () => {

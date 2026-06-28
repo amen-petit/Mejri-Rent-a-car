@@ -494,7 +494,9 @@ export default function CarDetailPage() {
                         }`}
                       >
                         <span>
-                          {tier.min_days}–{tier.max_days} jours
+                          {tier.max_days === null
+                            ? `${tier.min_days} jours et +`
+                            : `${tier.min_days}–${tier.max_days} jours`}
                         </span>
                         <span className="font-display text-ink">
                           {tier.price_per_day} DT / jour

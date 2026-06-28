@@ -16,11 +16,13 @@ export function normalizePricingTiers(
     .filter(
       (tier) =>
         Number.isFinite(tier.min_days) &&
-        Number.isFinite(tier.max_days) &&
         Number.isFinite(tier.price_per_day) &&
         tier.min_days >= 1 &&
-        tier.max_days >= tier.min_days &&
-        tier.price_per_day > 0,
+        tier.price_per_day > 0 &&
+        // max_days may be null (open-ended); otherwise it must be a finite
+        // number not smaller than min_days.
+        (tier.max_days === null ||
+          (Number.isFinite(tier.max_days) && tier.max_days >= tier.min_days)),
     )
     .sort((a, b) => a.min_days - b.min_days);
 }
@@ -34,7 +36,9 @@ export function getMatchingTierForDuration(
   if (normalized.length === 0) return null;
 
   const exactMatch = normalized.find(
-    (tier) => durationDays >= tier.min_days && durationDays <= tier.max_days,
+    (tier) =>
+      durationDays >= tier.min_days &&
+      (tier.max_days === null || durationDays <= tier.max_days),
   );
   if (exactMatch) return exactMatch;
 

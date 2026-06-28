@@ -1,16 +1,16 @@
 # Graph Report - new-version  (2026-06-28)
 
 ## Corpus Check
-- 219 files · ~1,027,547 words
+- 220 files · ~1,028,080 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2194 nodes · 3594 edges · 172 communities (149 shown, 23 thin omitted)
+- 2195 nodes · 3596 edges · 171 communities (148 shown, 23 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 156 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `baa30266`
+- Built from commit: `8f2deb9b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -32,7 +32,6 @@
 - [[_COMMUNITY_Community 14|Community 14]]
 - [[_COMMUNITY_Community 15|Community 15]]
 - [[_COMMUNITY_Community 16|Community 16]]
-- [[_COMMUNITY_Community 17|Community 17]]
 - [[_COMMUNITY_Community 18|Community 18]]
 - [[_COMMUNITY_Community 19|Community 19]]
 - [[_COMMUNITY_Community 20|Community 20]]
@@ -219,7 +218,7 @@
 - **Design System Documentation Pipeline** — teach_product_md, document_design_md_format, extract_design_tokens, polish_design_system_discovery [INFERRED 0.85]
 - **Visual Hierarchy Through Space & Scale** — spatial_squint_test, layout_visual_hierarchy, typeset_type_scale, distill_visual_simplification [INFERRED 0.75]
 
-## Communities (172 total, 23 thin omitted)
+## Communities (171 total, 23 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.05
@@ -288,10 +287,6 @@ Nodes (29): Accessibility, Available Domains, Available Stacks, Common Rules for
 ### Community 16 - "Community 16"
 Cohesion: 0.11
 Nodes (29): bufferToBase64(), buildAnnotationsForCapture(), buildListHtml(), buildPinElement(), captureAndEmit(), captureElementToBlob(), checkpointPayload(), collectFontCssText() (+21 more)
-
-### Community 17 - "Community 17"
-Cohesion: 0.14
-Nodes (9): navItems, DAYS_FR, MONTHS_FR, MONTHS_FR_SHORT, RESERVATION_STATUS_COLOR, RESERVATION_STATUS_LABEL, DateField(), parseDate() (+1 more)
 
 ### Community 18 - "Community 18"
 Cohesion: 0.08
@@ -362,8 +357,8 @@ Cohesion: 0.14
 Nodes (18): clearHandled(), cycleVariant(), extractContext(), handleGo(), id8(), isSessionHandled(), loadSession(), pickVariantContent() (+10 more)
 
 ### Community 35 - "Community 35"
-Cohesion: 0.19
-Nodes (16): useToast(), Props, CarDetailPage(), countReservationsForDate(), getDailyRateForDuration(), getDaysBetween(), getMatchingTierForDuration(), isDateUnavailable() (+8 more)
+Cohesion: 0.14
+Nodes (20): useToast(), Props, CarDetailPage(), countReservationsForDate(), getDailyRateForDuration(), getDaysBetween(), getMatchingTierForDuration(), isDateUnavailable() (+12 more)
 
 ### Community 36 - "Community 36"
 Cohesion: 0.15
@@ -462,8 +457,8 @@ Cohesion: 0.40
 Nodes (11): buildTargetNames(), cleanSkillsLock(), cleanup(), DEPRECATED_NAMES, findProjectRoot(), findSkillsDirs(), HARNESS_DIRS, isImpeccableSkill() (+3 more)
 
 ### Community 60 - "Community 60"
-Cohesion: 0.08
-Nodes (13): dmSans, fraunces, inter, metadata, spaceGrotesk, ConfirmOptions, ConfirmState, FeedbackContext (+5 more)
+Cohesion: 0.12
+Nodes (7): dmSans, fraunces, inter, metadata, spaceGrotesk, legalItems, navItems
 
 ### Community 61 - "Community 61"
 Cohesion: 0.17
@@ -634,7 +629,7 @@ Cohesion: 0.50
 Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
 ### Community 103 - "Community 103"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): adapt, argumentHint, description
 
 ### Community 104 - "Community 104"
@@ -654,7 +649,7 @@ Cohesion: 0.67
 Nodes (3): audit, argumentHint, description
 
 ### Community 110 - "Community 110"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): bolder, argumentHint, description
 
 ### Community 111 - "Community 111"
@@ -742,8 +737,8 @@ Cohesion: 0.11
 Nodes (16): Accessibility, Animation Standards Reference, Asymmetric timing, Cohesion, Debugging (recommend in reviews when feel is uncertain), Duration, Easing, Gestures & drag (+8 more)
 
 ### Community 153 - "Community 153"
-Cohesion: 0.14
-Nodes (9): Props, Counts, EMPTY_COUNTS, PAGE_SIZE_OPTIONS, ReservationWithCar, SORT_OPTIONS, SortKey, StatusFilter (+1 more)
+Cohesion: 0.08
+Nodes (17): ConfirmOptions, ConfirmState, FeedbackContext, FeedbackContextValue, ToastItem, ToastVariant, useConfirm(), Props (+9 more)
 
 ### Community 154 - "Community 154"
 Cohesion: 0.18
@@ -798,8 +793,8 @@ Cohesion: 0.50
 Nodes (4): Debugging Animations, Frame-by-frame inspection, Slow motion testing, Test on real devices
 
 ### Community 175 - "Community 175"
-Cohesion: 0.13
-Nodes (15): useConfirm(), BOOKING_TIME_SLOTS, CAR_CATEGORIES, FUEL_TYPES, TRANSMISSION_OPTIONS, bookingTime, CarInput, dateOnly (+7 more)
+Cohesion: 0.09
+Nodes (18): navItems, BOOKING_TIME_SLOTS, CAR_CATEGORIES, DAYS_FR, FUEL_TYPES, MONTHS_FR_SHORT, RESERVATION_STATUS_COLOR, RESERVATION_STATUS_LABEL (+10 more)
 
 ## Ambiguous Edges - Review These
 - `RootLayout Component` → `@theme Design Tokens`  [AMBIGUOUS]
@@ -812,7 +807,7 @@ Nodes (15): useConfirm(), BOOKING_TIME_SLOTS, CAR_CATEGORIES, FUEL_TYPES, TRANSM
   src/app/sitemap.ts · relation: references
 
 ## Knowledge Gaps
-- **921 isolated node(s):** `eslintConfig`, `config`, `supabaseHostname`, `csp`, `securityHeaders` (+916 more)
+- **920 isolated node(s):** `eslintConfig`, `config`, `supabaseHostname`, `csp`, `securityHeaders` (+915 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -831,5 +826,5 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Why does `Design Engineering` connect `Community 155` to `Community 160`, `Community 161`, `Community 162`, `Community 163`, `Community 165`, `Community 166`, `Community 156`, `Community 157`, `Community 158`, `Community 159`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `formatDateFr()` connect `Community 35` to `Community 1`, `Community 73`, `Community 17`, `Community 55`, `Community 153`?**
+- **Why does `readLiveServerInfo()` connect `Community 0` to `Community 6`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._

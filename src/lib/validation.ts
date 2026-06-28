@@ -13,10 +13,11 @@ import {
 export const pricingTierSchema = z
   .object({
     min_days: z.number().int().min(1).max(3650),
-    max_days: z.number().int().min(1).max(3650),
+    // null = open-ended ("from min_days and up").
+    max_days: z.number().int().min(1).max(3650).nullable(),
     price_per_day: z.number().positive().max(1_000_000),
   })
-  .refine((tier) => tier.max_days >= tier.min_days, {
+  .refine((tier) => tier.max_days === null || tier.max_days >= tier.min_days, {
     message: "max_days must be greater than or equal to min_days",
   });
 

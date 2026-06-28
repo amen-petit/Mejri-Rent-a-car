@@ -115,7 +115,7 @@ export default function AdminVoitures() {
     setPricingTiers(
       (car.pricing_tiers || []).map((tier) => ({
         min_days: String(tier.min_days),
-        max_days: String(tier.max_days),
+        max_days: tier.max_days === null ? "" : String(tier.max_days),
         price_per_day: String(tier.price_per_day),
       })),
     );
@@ -174,28 +174,31 @@ export default function AdminVoitures() {
     const normalizedTiers: PricingTier[] = [];
     if (hasTierInput) {
       for (const tier of pricingTiers) {
-        if (!tier.min_days || !tier.max_days || !tier.price_per_day) {
+        // The maximum is optional: leaving it empty makes an open-ended
+        // "and up" tier. Only the minimum and the price are required.
+        if (!tier.min_days || !tier.price_per_day) {
           toast(
-            "Complétez tous les champs des paliers de durée, ou supprimez les lignes incomplètes.",
+            "Indiquez au moins un minimum de jours et un prix pour chaque palier (le maximum peut rester vide pour « et plus »).",
             "error",
           );
           return;
         }
 
         const minDays = Number(tier.min_days);
-        const maxDays = Number(tier.max_days);
+        const maxDays =
+          tier.max_days.trim() === "" ? null : Number(tier.max_days);
         const tierPrice = Number(tier.price_per_day);
 
         if (
           !Number.isInteger(minDays) ||
-          !Number.isInteger(maxDays) ||
           minDays < 1 ||
-          maxDays < minDays ||
+          (maxDays !== null &&
+            (!Number.isInteger(maxDays) || maxDays < minDays)) ||
           !Number.isFinite(tierPrice) ||
           tierPrice <= 0
         ) {
           toast(
-            "Chaque palier doit avoir des jours valides (min ≤ max) et un prix supérieur à 0.",
+            "Chaque palier doit avoir un minimum valide, un maximum ≥ minimum (ou vide), et un prix supérieur à 0.",
             "error",
           );
           return;
@@ -213,9 +216,13 @@ export default function AdminVoitures() {
       for (let i = 1; i < normalizedTiers.length; i++) {
         const prev = normalizedTiers[i - 1];
         const current = normalizedTiers[i];
-        if (current.min_days <= prev.max_days) {
+        // An open-ended tier (null max) covers everything from its min upward,
+        // so it must be the last one — anything after it overlaps.
+        if (prev.max_days === null || current.min_days <= prev.max_days) {
           toast(
-            "Les paliers se chevauchent. Ajustez les intervalles de durée.",
+            prev.max_days === null
+              ? "Un palier « et plus » (sans maximum) doit être le dernier. Donnez un maximum aux autres paliers."
+              : "Les paliers se chevauchent. Ajustez les intervalles de durée.",
             "error",
           );
           return;
@@ -534,7 +541,7 @@ export default function AdminVoitures() {
                         className="grid grid-cols-1 gap-2 rounded-[var(--radius-sm)] border border-mist bg-paper p-3 sm:grid-cols-[1fr_1fr_1fr_auto]"
                       >
                         <input type="number" min="1" placeholder="Min jours" value={tier.min_days} onChange={(e) => setPricingTiers((rows) => rows.map((row, ri) => (ri === index ? { ...row, min_days: e.target.value } : row)))} className="input-premium" />
-                        <input type="number" min="1" placeholder="Max jours" value={tier.max_days} onChange={(e) => setPricingTiers((rows) => rows.map((row, ri) => (ri === index ? { ...row, max_days: e.target.value } : row)))} className="input-premium" />
+                        <input type="number" min="1" placeholder="Max (∞ si vide)" value={tier.max_days} onChange={(e) => setPricingTiers((rows) => rows.map((row, ri) => (ri === index ? { ...row, max_days: e.target.value } : row)))} className="input-premium" />
                         <input type="number" min="1" step="0.01" placeholder="Prix / jour" value={tier.price_per_day} onChange={(e) => setPricingTiers((rows) => rows.map((row, ri) => (ri === index ? { ...row, price_per_day: e.target.value } : row)))} className="input-premium" />
                         <button
                           type="button"
@@ -545,6 +552,10 @@ export default function AdminVoitures() {
                         </button>
                       </div>
                     ))}
+                    <p className="text-[0.7rem] text-ash">
+                      Laissez le maximum vide pour un palier « et plus » (ex. 15
+                      jours et +). Un seul palier sans maximum, en dernier.
+                    </p>
                   </div>
                 )}
               </div>

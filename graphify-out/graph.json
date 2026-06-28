@@ -964,7 +964,7 @@
       "source_file": ".agents/skills/impeccable/scripts/command-metadata.json",
       "source_location": "L1",
       "id": "agents_skills_impeccable_scripts_command_metadata_json",
-      "community": 110,
+      "community": 103,
       "norm_label": "command-metadata.json"
     },
     {
@@ -7136,7 +7136,7 @@
       "label": "metadata",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L19",
+      "source_location": "L17",
       "id": "app_page_metadata",
       "community": 23,
       "norm_label": "metadata"
@@ -7145,7 +7145,7 @@
       "label": "steps",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L27",
+      "source_location": "L25",
       "id": "app_page_steps",
       "community": 23,
       "norm_label": "steps"
@@ -7154,7 +7154,7 @@
       "label": "features",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L50",
+      "source_location": "L48",
       "id": "app_page_features",
       "community": 23,
       "norm_label": "features"
@@ -7163,16 +7163,34 @@
       "label": "engagements",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L69",
+      "source_location": "L67",
       "id": "app_page_engagements",
       "community": 23,
       "norm_label": "engagements"
     },
     {
+      "label": "CarSilhouette()",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L85",
+      "id": "app_page_carsilhouette",
+      "community": 23,
+      "norm_label": "carsilhouette()"
+    },
+    {
+      "label": "Arrow()",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L93",
+      "id": "app_page_arrow",
+      "community": 23,
+      "norm_label": "arrow()"
+    },
+    {
       "label": "Home()",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L87",
+      "source_location": "L101",
       "id": "app_page_home",
       "community": 23,
       "norm_label": "home()"
@@ -7183,7 +7201,7 @@
       "source_file": "src/app/robots.ts",
       "source_location": "L1",
       "id": "src_app_robots_ts",
-      "community": 17,
+      "community": 175,
       "norm_label": "robots.ts"
     },
     {
@@ -7192,7 +7210,7 @@
       "source_file": "src/app/robots.ts",
       "source_location": "L4",
       "id": "app_robots_robots",
-      "community": 17,
+      "community": 175,
       "norm_label": "robots()"
     },
     {
@@ -7219,7 +7237,7 @@
       "source_file": "src/app/admin/layout.tsx",
       "source_location": "L1",
       "id": "src_app_admin_layout_tsx",
-      "community": 17,
+      "community": 175,
       "norm_label": "layout.tsx"
     },
     {
@@ -7228,7 +7246,7 @@
       "source_file": "src/app/admin/layout.tsx",
       "source_location": "L7",
       "id": "admin_layout_navitems",
-      "community": 17,
+      "community": 175,
       "norm_label": "navitems"
     },
     {
@@ -7237,7 +7255,7 @@
       "source_file": "src/app/admin/layout.tsx",
       "source_location": "L30",
       "id": "admin_layout_navicon",
-      "community": 17,
+      "community": 175,
       "norm_label": "navicon()"
     },
     {
@@ -7246,7 +7264,7 @@
       "source_file": "src/app/admin/layout.tsx",
       "source_location": "L38",
       "id": "admin_layout_adminlayout",
-      "community": 17,
+      "community": 175,
       "norm_label": "adminlayout()"
     },
     {
@@ -7255,7 +7273,7 @@
       "source_file": "src/app/admin/page.tsx",
       "source_location": "L1",
       "id": "src_app_admin_page_tsx",
-      "community": 17,
+      "community": 175,
       "norm_label": "page.tsx"
     },
     {
@@ -7264,7 +7282,7 @@
       "source_file": "src/app/admin/page.tsx",
       "source_location": "L12",
       "id": "admin_page_statcard",
-      "community": 17,
+      "community": 175,
       "norm_label": "statcard()"
     },
     {
@@ -7273,7 +7291,7 @@
       "source_file": "src/app/admin/page.tsx",
       "source_location": "L35",
       "id": "admin_page_admindashboard",
-      "community": 17,
+      "community": 175,
       "norm_label": "admindashboard()"
     },
     {
@@ -7489,7 +7507,7 @@
       "source_file": "src/app/admin/voitures/page.tsx",
       "source_location": "L59",
       "id": "voitures_page_adminvoitures",
-      "community": 175,
+      "community": 153,
       "norm_label": "adminvoitures()"
     },
     {
@@ -8002,7 +8020,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L1",
       "id": "src_components_feedback_tsx",
-      "community": 60,
+      "community": 153,
       "norm_label": "feedback.tsx"
     },
     {
@@ -8011,7 +8029,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L24",
       "id": "components_feedback_toastvariant",
-      "community": 60,
+      "community": 153,
       "norm_label": "toastvariant"
     },
     {
@@ -8020,7 +8038,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L26",
       "id": "components_feedback_toastitem",
-      "community": 60,
+      "community": 153,
       "norm_label": "toastitem"
     },
     {
@@ -8029,7 +8047,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L32",
       "id": "components_feedback_confirmoptions",
-      "community": 60,
+      "community": 153,
       "norm_label": "confirmoptions"
     },
     {
@@ -8038,7 +8056,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L40",
       "id": "components_feedback_confirmstate",
-      "community": 60,
+      "community": 153,
       "norm_label": "confirmstate"
     },
     {
@@ -8047,7 +8065,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L44",
       "id": "components_feedback_feedbackcontextvalue",
-      "community": 60,
+      "community": 153,
       "norm_label": "feedbackcontextvalue"
     },
     {
@@ -8056,7 +8074,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L49",
       "id": "components_feedback_feedbackcontext",
-      "community": 60,
+      "community": 153,
       "norm_label": "feedbackcontext"
     },
     {
@@ -8074,7 +8092,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L57",
       "id": "components_feedback_useconfirm",
-      "community": 175,
+      "community": 153,
       "norm_label": "useconfirm()"
     },
     {
@@ -8083,7 +8101,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L65",
       "id": "components_feedback_toasticon",
-      "community": 60,
+      "community": 153,
       "norm_label": "toasticon()"
     },
     {
@@ -8092,7 +8110,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L89",
       "id": "components_feedback_feedbackprovider",
-      "community": 60,
+      "community": 153,
       "norm_label": "feedbackprovider()"
     },
     {
@@ -8326,7 +8344,7 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L1",
       "id": "src_components_ui_datefield_tsx",
-      "community": 17,
+      "community": 35,
       "norm_label": "datefield.tsx"
     },
     {
@@ -8335,7 +8353,7 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L14",
       "id": "ui_datefield_parselocaldate",
-      "community": 17,
+      "community": 35,
       "norm_label": "parselocaldate()"
     },
     {
@@ -8344,7 +8362,7 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L23",
       "id": "ui_datefield_datefield",
-      "community": 17,
+      "community": 35,
       "norm_label": "datefield()"
     },
     {
@@ -8659,7 +8677,7 @@
       "source_file": "src/lib/constants.ts",
       "source_location": "L1",
       "id": "src_lib_constants_ts",
-      "community": 17,
+      "community": 175,
       "norm_label": "constants.ts"
     },
     {
@@ -8668,7 +8686,7 @@
       "source_file": "src/lib/constants.ts",
       "source_location": "L28",
       "id": "lib_constants_months_fr",
-      "community": 17,
+      "community": 35,
       "norm_label": "months_fr"
     },
     {
@@ -8677,7 +8695,7 @@
       "source_file": "src/lib/constants.ts",
       "source_location": "L43",
       "id": "lib_constants_months_fr_short",
-      "community": 17,
+      "community": 175,
       "norm_label": "months_fr_short"
     },
     {
@@ -8686,7 +8704,7 @@
       "source_file": "src/lib/constants.ts",
       "source_location": "L58",
       "id": "lib_constants_days_fr",
-      "community": 17,
+      "community": 175,
       "norm_label": "days_fr"
     },
     {
@@ -8704,7 +8722,7 @@
       "source_file": "src/lib/constants.ts",
       "source_location": "L84",
       "id": "lib_constants_reservation_status_label",
-      "community": 17,
+      "community": 175,
       "norm_label": "reservation_status_label"
     },
     {
@@ -8713,7 +8731,7 @@
       "source_file": "src/lib/constants.ts",
       "source_location": "L90",
       "id": "lib_constants_reservation_status_color",
-      "community": 17,
+      "community": 175,
       "norm_label": "reservation_status_color"
     },
     {
@@ -8927,7 +8945,7 @@
       "label": "getMatchingTierForDuration()",
       "file_type": "code",
       "source_file": "src/lib/pricing.ts",
-      "source_location": "L28",
+      "source_location": "L30",
       "id": "lib_pricing_getmatchingtierforduration",
       "community": 73,
       "norm_label": "getmatchingtierforduration()"
@@ -8936,7 +8954,7 @@
       "label": "getDailyRateForDuration()",
       "file_type": "code",
       "source_file": "src/lib/pricing.ts",
-      "source_location": "L49",
+      "source_location": "L53",
       "id": "lib_pricing_getdailyrateforduration",
       "community": 73,
       "norm_label": "getdailyrateforduration()"
@@ -8945,7 +8963,7 @@
       "label": "Quote",
       "file_type": "code",
       "source_file": "src/lib/pricing.ts",
-      "source_location": "L59",
+      "source_location": "L63",
       "id": "lib_pricing_quote",
       "community": 73,
       "norm_label": "quote"
@@ -8954,7 +8972,7 @@
       "label": "computeQuote()",
       "file_type": "code",
       "source_file": "src/lib/pricing.ts",
-      "source_location": "L71",
+      "source_location": "L75",
       "id": "lib_pricing_computequote",
       "community": 73,
       "norm_label": "computequote()"
@@ -9143,7 +9161,7 @@
       "label": "Car",
       "file_type": "code",
       "source_file": "src/lib/types.ts",
-      "source_location": "L7",
+      "source_location": "L8",
       "id": "lib_types_car",
       "community": 23,
       "norm_label": "car"
@@ -9152,10 +9170,19 @@
       "label": "Reservation",
       "file_type": "code",
       "source_file": "src/lib/types.ts",
-      "source_location": "L26",
+      "source_location": "L27",
       "id": "lib_types_reservation",
       "community": 43,
       "norm_label": "reservation"
+    },
+    {
+      "label": "validation.test.ts",
+      "file_type": "code",
+      "source_file": "src/lib/validation.test.ts",
+      "source_location": "L1",
+      "id": "src_lib_validation_test_ts",
+      "community": 175,
+      "norm_label": "validation.test.ts"
     },
     {
       "label": "validation.ts",
@@ -9179,7 +9206,7 @@
       "label": "carInputSchema",
       "file_type": "code",
       "source_file": "src/lib/validation.ts",
-      "source_location": "L23",
+      "source_location": "L24",
       "id": "lib_validation_carinputschema",
       "community": 1,
       "norm_label": "carinputschema"
@@ -9188,7 +9215,7 @@
       "label": "CarInput",
       "file_type": "code",
       "source_file": "src/lib/validation.ts",
-      "source_location": "L39",
+      "source_location": "L40",
       "id": "lib_validation_carinput",
       "community": 175,
       "norm_label": "carinput"
@@ -9197,7 +9224,7 @@
       "label": "dateOnly",
       "file_type": "code",
       "source_file": "src/lib/validation.ts",
-      "source_location": "L41",
+      "source_location": "L42",
       "id": "lib_validation_dateonly",
       "community": 175,
       "norm_label": "dateonly"
@@ -9206,7 +9233,7 @@
       "label": "bookingTime",
       "file_type": "code",
       "source_file": "src/lib/validation.ts",
-      "source_location": "L48",
+      "source_location": "L49",
       "id": "lib_validation_bookingtime",
       "community": 175,
       "norm_label": "bookingtime"
@@ -9215,7 +9242,7 @@
       "label": "reservationInputSchema",
       "file_type": "code",
       "source_file": "src/lib/validation.ts",
-      "source_location": "L54",
+      "source_location": "L55",
       "id": "lib_validation_reservationinputschema",
       "community": 73,
       "norm_label": "reservationinputschema"
@@ -9224,7 +9251,7 @@
       "label": "ReservationInput",
       "file_type": "code",
       "source_file": "src/lib/validation.ts",
-      "source_location": "L79",
+      "source_location": "L80",
       "id": "lib_validation_reservationinput",
       "community": 175,
       "norm_label": "reservationinput"
@@ -9233,7 +9260,7 @@
       "label": "reservationStatusSchema",
       "file_type": "code",
       "source_file": "src/lib/validation.ts",
-      "source_location": "L81",
+      "source_location": "L82",
       "id": "lib_validation_reservationstatusschema",
       "community": 175,
       "norm_label": "reservationstatusschema"
@@ -16583,24 +16610,6 @@
       "norm_label": "accessibility"
     },
     {
-      "label": "CarSilhouette()",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L85",
-      "community": 23,
-      "norm_label": "carsilhouette()",
-      "id": "app_page_carsilhouette"
-    },
-    {
-      "label": "Arrow()",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L93",
-      "community": 23,
-      "norm_label": "arrow()",
-      "id": "app_page_arrow"
-    },
-    {
       "label": "formatFr()",
       "file_type": "code",
       "source_file": "src/app/admin/disponibilite/page.tsx",
@@ -16704,7 +16713,7 @@
       "file_type": "code",
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L11",
-      "community": 17,
+      "community": 35,
       "norm_label": "parsedate()",
       "id": "ui_datefield_parsedate"
     },
@@ -16713,7 +16722,7 @@
       "file_type": "code",
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L20",
-      "community": 17,
+      "community": 35,
       "norm_label": "tostr()",
       "id": "ui_datefield_tostr"
     },
@@ -40641,9 +40650,9 @@
       "source_file": "src/app/page.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_page_tsx",
-      "target": "src_components_icons_arrow_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_icons_arrow_tsx"
     },
     {
       "relation": "imports_from",
@@ -40652,9 +40661,9 @@
       "source_file": "src/app/page.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_page_tsx",
-      "target": "src_components_icons_carsilhouette_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_icons_carsilhouette_tsx"
     },
     {
       "relation": "imports_from",
@@ -40898,9 +40907,9 @@
       "source_file": "src/app/admin/page.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_page_tsx",
-      "target": "lib_dates_formatdatefr",
-      "confidence_score": 1.0
+      "target": "lib_dates_formatdatefr"
     },
     {
       "relation": "imports",
@@ -40942,9 +40951,9 @@
       "source_file": "src/app/admin/page.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_page_tsx",
-      "target": "src_lib_dates_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_dates_ts"
     },
     {
       "relation": "imports_from",
@@ -41078,9 +41087,9 @@
       "source_file": "src/app/admin/disponibilite/page.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_disponibilite_page_tsx",
-      "target": "lib_dates_formatdatefr",
-      "confidence_score": 1.0
+      "target": "lib_dates_formatdatefr"
     },
     {
       "relation": "imports",
@@ -41089,9 +41098,9 @@
       "source_file": "src/app/admin/disponibilite/page.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_disponibilite_page_tsx",
-      "target": "lib_dates_getdaysbetweenstrings",
-      "confidence_score": 1.0
+      "target": "lib_dates_getdaysbetweenstrings"
     },
     {
       "relation": "imports_from",
@@ -41144,9 +41153,9 @@
       "source_file": "src/app/admin/disponibilite/page.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_disponibilite_page_tsx",
-      "target": "src_lib_dates_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_dates_ts"
     },
     {
       "relation": "calls",
@@ -41241,9 +41250,9 @@
       "source_file": "src/app/admin/reservations/page.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_reservations_page_tsx",
-      "target": "lib_dates_formatdatefr",
-      "confidence_score": 1.0
+      "target": "lib_dates_formatdatefr"
     },
     {
       "relation": "imports",
@@ -41252,9 +41261,9 @@
       "source_file": "src/app/admin/reservations/page.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_reservations_page_tsx",
-      "target": "lib_dates_getdaysbetweenstrings",
-      "confidence_score": 1.0
+      "target": "lib_dates_getdaysbetweenstrings"
     },
     {
       "relation": "imports",
@@ -41431,9 +41440,9 @@
       "source_file": "src/app/admin/reservations/page.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_reservations_page_tsx",
-      "target": "src_lib_dates_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_dates_ts"
     },
     {
       "relation": "imports_from",
@@ -42615,9 +42624,9 @@
       "source_file": "src/app/api/admin/reservations/[id]/route.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_api_admin_reservations_id_route_ts",
-      "target": "lib_dates_formatdatefr",
-      "confidence_score": 1.0
+      "target": "lib_dates_formatdatefr"
     },
     {
       "relation": "imports",
@@ -42722,9 +42731,9 @@
       "source_file": "src/app/api/admin/reservations/[id]/route.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_api_admin_reservations_id_route_ts",
-      "target": "src_lib_dates_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_dates_ts"
     },
     {
       "relation": "imports_from",
@@ -43102,9 +43111,9 @@
       "source_file": "src/app/api/reservations/route.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_api_reservations_route_ts",
-      "target": "src_lib_constants_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_constants_ts"
     },
     {
       "relation": "imports_from",
@@ -43287,9 +43296,9 @@
       "source_file": "src/app/voitures/page.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_voitures_page_tsx",
-      "target": "src_components_icons_arrow_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_icons_arrow_tsx"
     },
     {
       "relation": "imports_from",
@@ -43298,9 +43307,9 @@
       "source_file": "src/app/voitures/page.tsx",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_voitures_page_tsx",
-      "target": "src_components_icons_carsilhouette_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_icons_carsilhouette_tsx"
     },
     {
       "relation": "imports_from",
@@ -43591,9 +43600,9 @@
       "source_file": "src/app/voitures/[id]/page.tsx",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_voitures_id_page_tsx",
-      "target": "lib_dates_formatdatefr",
-      "confidence_score": 1.0
+      "target": "lib_dates_formatdatefr"
     },
     {
       "relation": "imports",
@@ -43602,9 +43611,9 @@
       "source_file": "src/app/voitures/[id]/page.tsx",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_voitures_id_page_tsx",
-      "target": "lib_dates_formatdateonly",
-      "confidence_score": 1.0
+      "target": "lib_dates_formatdateonly"
     },
     {
       "relation": "imports",
@@ -43613,9 +43622,9 @@
       "source_file": "src/app/voitures/[id]/page.tsx",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_voitures_id_page_tsx",
-      "target": "lib_pricing_computequote",
-      "confidence_score": 1.0
+      "target": "lib_pricing_computequote"
     },
     {
       "relation": "imports",
@@ -43624,9 +43633,9 @@
       "source_file": "src/app/voitures/[id]/page.tsx",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_voitures_id_page_tsx",
-      "target": "lib_pricing_normalizepricingtiers",
-      "confidence_score": 1.0
+      "target": "lib_pricing_normalizepricingtiers"
     },
     {
       "relation": "imports",
@@ -43767,9 +43776,9 @@
       "source_file": "src/app/voitures/[id]/page.tsx",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_voitures_id_page_tsx",
-      "target": "src_lib_dates_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_dates_ts"
     },
     {
       "relation": "imports_from",
@@ -43778,9 +43787,9 @@
       "source_file": "src/app/voitures/[id]/page.tsx",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_voitures_id_page_tsx",
-      "target": "src_lib_pricing_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_pricing_ts"
     },
     {
       "relation": "imports_from",
@@ -44167,9 +44176,9 @@
       "source_file": "src/components/Hero.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_hero_tsx",
-      "target": "src_components_icons_arrow_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_icons_arrow_tsx"
     },
     {
       "relation": "imports_from",
@@ -44178,9 +44187,9 @@
       "source_file": "src/components/Hero.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_hero_tsx",
-      "target": "src_components_icons_carsilhouette_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_icons_carsilhouette_tsx"
     },
     {
       "relation": "imports_from",
@@ -44270,9 +44279,9 @@
       "source_file": "src/components/icons/Arrow.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_icons_arrow_tsx",
-      "target": "icons_arrow_arrow",
-      "confidence_score": 1.0
+      "target": "icons_arrow_arrow"
     },
     {
       "relation": "contains",
@@ -44290,9 +44299,9 @@
       "source_file": "src/components/icons/CarSilhouette.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_icons_carsilhouette_tsx",
-      "target": "icons_carsilhouette_carsilhouette",
-      "confidence_score": 1.0
+      "target": "icons_carsilhouette_carsilhouette"
     },
     {
       "relation": "contains",
@@ -44343,9 +44352,9 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_datefield_tsx",
-      "target": "lib_dates_formatdatefr",
-      "confidence_score": 1.0
+      "target": "lib_dates_formatdatefr"
     },
     {
       "relation": "imports",
@@ -44354,9 +44363,9 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_datefield_tsx",
-      "target": "lib_dates_formatdateonly",
-      "confidence_score": 1.0
+      "target": "lib_dates_formatdateonly"
     },
     {
       "relation": "imports_from",
@@ -44376,9 +44385,9 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_datefield_tsx",
-      "target": "src_lib_dates_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_dates_ts"
     },
     {
       "relation": "contains",
@@ -44406,9 +44415,9 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_datefield_tsx",
-      "target": "ui_datefield_parselocaldate",
-      "confidence_score": 1.0
+      "target": "ui_datefield_parselocaldate"
     },
     {
       "relation": "contains",
@@ -44427,9 +44436,9 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ui_datefield_datefield",
-      "target": "ui_datefield_parselocaldate",
-      "confidence_score": 1.0
+      "target": "ui_datefield_parselocaldate"
     },
     {
       "relation": "calls",
@@ -44930,9 +44939,9 @@
       "source_file": "src/lib/availability.ts",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_availability_ts",
-      "target": "lib_dates_parsedateonly",
-      "confidence_score": 1.0
+      "target": "lib_dates_parsedateonly"
     },
     {
       "relation": "imports",
@@ -44963,9 +44972,9 @@
       "source_file": "src/lib/availability.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_availability_ts",
-      "target": "src_lib_constants_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_constants_ts"
     },
     {
       "relation": "imports_from",
@@ -44974,9 +44983,9 @@
       "source_file": "src/lib/availability.ts",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_availability_ts",
-      "target": "src_lib_dates_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_dates_ts"
     },
     {
       "relation": "imports_from",
@@ -45249,9 +45258,9 @@
       "source_file": "src/lib/dates.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_dates_ts",
-      "target": "src_lib_constants_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_constants_ts"
     },
     {
       "relation": "imports",
@@ -45303,9 +45312,9 @@
       "source_file": "src/lib/dates.ts",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_dates_ts",
-      "target": "lib_dates_formatdatefr",
-      "confidence_score": 1.0
+      "target": "lib_dates_formatdatefr"
     },
     {
       "relation": "contains",
@@ -45313,9 +45322,9 @@
       "source_file": "src/lib/dates.ts",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_dates_ts",
-      "target": "lib_dates_formatdateonly",
-      "confidence_score": 1.0
+      "target": "lib_dates_formatdateonly"
     },
     {
       "relation": "contains",
@@ -45323,9 +45332,9 @@
       "source_file": "src/lib/dates.ts",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_dates_ts",
-      "target": "lib_dates_getdaysbetween",
-      "confidence_score": 1.0
+      "target": "lib_dates_getdaysbetween"
     },
     {
       "relation": "contains",
@@ -45333,9 +45342,9 @@
       "source_file": "src/lib/dates.ts",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_dates_ts",
-      "target": "lib_dates_getdaysbetweenstrings",
-      "confidence_score": 1.0
+      "target": "lib_dates_getdaysbetweenstrings"
     },
     {
       "relation": "contains",
@@ -45343,9 +45352,9 @@
       "source_file": "src/lib/dates.ts",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_dates_ts",
-      "target": "lib_dates_parsedateonly",
-      "confidence_score": 1.0
+      "target": "lib_dates_parsedateonly"
     },
     {
       "relation": "imports_from",
@@ -45354,9 +45363,9 @@
       "source_file": "src/lib/pricing.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_pricing_test_ts",
-      "target": "src_lib_dates_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_dates_ts"
     },
     {
       "relation": "imports_from",
@@ -45365,9 +45374,9 @@
       "source_file": "src/lib/pricing.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_pricing_ts",
-      "target": "src_lib_dates_ts",
-      "confidence_score": 1.0
+      "target": "src_lib_dates_ts"
     },
     {
       "relation": "calls",
@@ -45376,9 +45385,9 @@
       "source_file": "src/lib/dates.ts",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_dates_getdaysbetweenstrings",
-      "target": "lib_dates_parsedateonly",
-      "confidence_score": 1.0
+      "target": "lib_dates_parsedateonly"
     },
     {
       "relation": "calls",
@@ -45398,9 +45407,9 @@
       "source_file": "src/lib/pricing.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_pricing_test_ts",
-      "target": "lib_dates_parsedateonly",
-      "confidence_score": 1.0
+      "target": "lib_dates_parsedateonly"
     },
     {
       "relation": "imports",
@@ -45409,9 +45418,9 @@
       "source_file": "src/lib/pricing.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_pricing_ts",
-      "target": "lib_dates_parsedateonly",
-      "confidence_score": 1.0
+      "target": "lib_dates_parsedateonly"
     },
     {
       "relation": "calls",
@@ -45420,9 +45429,9 @@
       "source_file": "src/lib/dates.ts",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_dates_getdaysbetweenstrings",
-      "target": "lib_dates_getdaysbetween",
-      "confidence_score": 1.0
+      "target": "lib_dates_getdaysbetween"
     },
     {
       "relation": "calls",
@@ -45442,9 +45451,9 @@
       "source_file": "src/lib/pricing.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_pricing_test_ts",
-      "target": "lib_dates_getdaysbetween",
-      "confidence_score": 1.0
+      "target": "lib_dates_getdaysbetween"
     },
     {
       "relation": "imports",
@@ -45453,9 +45462,9 @@
       "source_file": "src/lib/pricing.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_lib_pricing_ts",
-      "target": "lib_dates_getdaysbetween",
-      "confidence_score": 1.0
+      "target": "lib_dates_getdaysbetween"
     },
     {
       "relation": "contains",
@@ -46126,6 +46135,28 @@
       "confidence_score": 1.0,
       "source": "src_lib_types_ts",
       "target": "lib_types_reservation"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/validation.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_lib_validation_test_ts",
+      "target": "lib_validation_pricingtierschema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/validation.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_lib_validation_test_ts",
+      "target": "src_lib_validation_ts",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -58289,5 +58320,5 @@
       "source_file": null
     }
   ],
-  "built_at_commit": "baa30266c0b4909c40d0f811d38b15ea06715497"
+  "built_at_commit": "8f2deb9b79cd87dc5a7ab706f34d16d1bed456f2"
 }
