@@ -127,7 +127,7 @@
       "source_file": "middleware.ts",
       "source_location": "L1",
       "id": "middleware_ts",
-      "community": 172,
+      "community": 1,
       "norm_label": "middleware.ts"
     },
     {
@@ -136,7 +136,7 @@
       "source_file": "middleware.ts",
       "source_location": "L7",
       "id": "new_version_middleware_middleware",
-      "community": 172,
+      "community": 1,
       "norm_label": "middleware()"
     },
     {
@@ -145,7 +145,7 @@
       "source_file": "middleware.ts",
       "source_location": "L54",
       "id": "new_version_middleware_config",
-      "community": 172,
+      "community": 1,
       "norm_label": "config"
     },
     {
@@ -964,7 +964,7 @@
       "source_file": ".agents/skills/impeccable/scripts/command-metadata.json",
       "source_location": "L1",
       "id": "agents_skills_impeccable_scripts_command_metadata_json",
-      "community": 103,
+      "community": 110,
       "norm_label": "command-metadata.json"
     },
     {
@@ -3592,7 +3592,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3567",
       "id": "scripts_live_browser_updateglobalbarstate",
-      "community": 16,
+      "community": 5,
       "norm_label": "updateglobalbarstate()"
     },
     {
@@ -3601,7 +3601,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3609",
       "id": "scripts_live_browser_toggledetect",
-      "community": 16,
+      "community": 5,
       "norm_label": "toggledetect()"
     },
     {
@@ -3619,7 +3619,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3647",
       "id": "scripts_live_browser_loaddetectscript",
-      "community": 16,
+      "community": 5,
       "norm_label": "loaddetectscript()"
     },
     {
@@ -3628,7 +3628,7 @@
       "source_file": ".claude/skills/impeccable/scripts/live-browser.js",
       "source_location": "L3656",
       "id": "scripts_live_browser_ondetectmessage",
-      "community": 16,
+      "community": 5,
       "norm_label": "ondetectmessage()"
     },
     {
@@ -7136,7 +7136,7 @@
       "label": "metadata",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L17",
+      "source_location": "L19",
       "id": "app_page_metadata",
       "community": 23,
       "norm_label": "metadata"
@@ -7145,7 +7145,7 @@
       "label": "steps",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L25",
+      "source_location": "L27",
       "id": "app_page_steps",
       "community": 23,
       "norm_label": "steps"
@@ -7154,7 +7154,7 @@
       "label": "features",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L48",
+      "source_location": "L50",
       "id": "app_page_features",
       "community": 23,
       "norm_label": "features"
@@ -7163,34 +7163,16 @@
       "label": "engagements",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L67",
+      "source_location": "L69",
       "id": "app_page_engagements",
       "community": 23,
       "norm_label": "engagements"
     },
     {
-      "label": "CarSilhouette()",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L85",
-      "id": "app_page_carsilhouette",
-      "community": 23,
-      "norm_label": "carsilhouette()"
-    },
-    {
-      "label": "Arrow()",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L93",
-      "id": "app_page_arrow",
-      "community": 23,
-      "norm_label": "arrow()"
-    },
-    {
       "label": "Home()",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
-      "source_location": "L101",
+      "source_location": "L87",
       "id": "app_page_home",
       "community": 23,
       "norm_label": "home()"
@@ -7280,7 +7262,7 @@
       "label": "StatCard()",
       "file_type": "code",
       "source_file": "src/app/admin/page.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "id": "admin_page_statcard",
       "community": 17,
       "norm_label": "statcard()"
@@ -7289,7 +7271,7 @@
       "label": "AdminDashboard()",
       "file_type": "code",
       "source_file": "src/app/admin/page.tsx",
-      "source_location": "L34",
+      "source_location": "L35",
       "id": "admin_page_admindashboard",
       "community": 17,
       "norm_label": "admindashboard()"
@@ -7322,28 +7304,10 @@
       "norm_label": "todaystr()"
     },
     {
-      "label": "formatFr()",
-      "file_type": "code",
-      "source_file": "src/app/admin/disponibilite/page.tsx",
-      "source_location": "L22",
-      "id": "disponibilite_page_formatfr",
-      "community": 55,
-      "norm_label": "formatfr()"
-    },
-    {
-      "label": "getDays()",
-      "file_type": "code",
-      "source_file": "src/app/admin/disponibilite/page.tsx",
-      "source_location": "L26",
-      "id": "disponibilite_page_getdays",
-      "community": 153,
-      "norm_label": "getdays()"
-    },
-    {
       "label": "StatCard()",
       "file_type": "code",
       "source_file": "src/app/admin/disponibilite/page.tsx",
-      "source_location": "L33",
+      "source_location": "L22",
       "id": "disponibilite_page_statcard",
       "community": 55,
       "norm_label": "statcard()"
@@ -7352,7 +7316,7 @@
       "label": "CarRow()",
       "file_type": "code",
       "source_file": "src/app/admin/disponibilite/page.tsx",
-      "source_location": "L54",
+      "source_location": "L43",
       "id": "disponibilite_page_carrow",
       "community": 55,
       "norm_label": "carrow()"
@@ -7361,7 +7325,7 @@
       "label": "AdminAvailability()",
       "file_type": "code",
       "source_file": "src/app/admin/disponibilite/page.tsx",
-      "source_location": "L197",
+      "source_location": "L186",
       "id": "disponibilite_page_adminavailability",
       "community": 55,
       "norm_label": "adminavailability()"
@@ -7471,7 +7435,7 @@
       "source_file": "src/app/admin/reservations/page.tsx",
       "source_location": "L42",
       "id": "reservations_page_adminreservations",
-      "community": 153,
+      "community": 35,
       "norm_label": "adminreservations()"
     },
     {
@@ -7480,7 +7444,7 @@
       "source_file": "src/app/admin/voitures/page.tsx",
       "source_location": "L1",
       "id": "src_app_admin_voitures_page_tsx",
-      "community": 17,
+      "community": 175,
       "norm_label": "page.tsx"
     },
     {
@@ -7489,7 +7453,7 @@
       "source_file": "src/app/admin/voitures/page.tsx",
       "source_location": "L13",
       "id": "voitures_page_formstate",
-      "community": 17,
+      "community": 175,
       "norm_label": "formstate"
     },
     {
@@ -7498,7 +7462,7 @@
       "source_file": "src/app/admin/voitures/page.tsx",
       "source_location": "L28",
       "id": "voitures_page_emptyform",
-      "community": 17,
+      "community": 175,
       "norm_label": "emptyform"
     },
     {
@@ -7507,7 +7471,7 @@
       "source_file": "src/app/admin/voitures/page.tsx",
       "source_location": "L43",
       "id": "voitures_page_tierformrow",
-      "community": 17,
+      "community": 175,
       "norm_label": "tierformrow"
     },
     {
@@ -7516,7 +7480,7 @@
       "source_file": "src/app/admin/voitures/page.tsx",
       "source_location": "L49",
       "id": "voitures_page_emptytierrow",
-      "community": 17,
+      "community": 175,
       "norm_label": "emptytierrow()"
     },
     {
@@ -7525,7 +7489,7 @@
       "source_file": "src/app/admin/voitures/page.tsx",
       "source_location": "L59",
       "id": "voitures_page_adminvoitures",
-      "community": 153,
+      "community": 175,
       "norm_label": "adminvoitures()"
     },
     {
@@ -7669,7 +7633,7 @@
       "source_file": "src/app/api/admin/login/route.ts",
       "source_location": "L1",
       "id": "src_app_api_admin_login_route_ts",
-      "community": 167,
+      "community": 1,
       "norm_label": "route.ts"
     },
     {
@@ -7678,7 +7642,7 @@
       "source_file": "src/app/api/admin/login/route.ts",
       "source_location": "L12",
       "id": "login_route_loginbody",
-      "community": 167,
+      "community": 1,
       "norm_label": "loginbody"
     },
     {
@@ -7687,7 +7651,7 @@
       "source_file": "src/app/api/admin/login/route.ts",
       "source_location": "L17",
       "id": "login_route_post",
-      "community": 167,
+      "community": 1,
       "norm_label": "post()"
     },
     {
@@ -7696,7 +7660,7 @@
       "source_file": "src/app/api/admin/logout/route.ts",
       "source_location": "L1",
       "id": "src_app_api_admin_logout_route_ts",
-      "community": 172,
+      "community": 1,
       "norm_label": "route.ts"
     },
     {
@@ -7705,7 +7669,7 @@
       "source_file": "src/app/api/admin/logout/route.ts",
       "source_location": "L6",
       "id": "logout_route_post",
-      "community": 172,
+      "community": 1,
       "norm_label": "post()"
     },
     {
@@ -7714,7 +7678,7 @@
       "source_file": "src/app/api/admin/reservations/route.ts",
       "source_location": "L1",
       "id": "src_app_api_admin_reservations_route_ts",
-      "community": 176,
+      "community": 1,
       "norm_label": "route.ts"
     },
     {
@@ -7723,7 +7687,7 @@
       "source_file": "src/app/api/admin/reservations/route.ts",
       "source_location": "L8",
       "id": "reservations_route_statuses",
-      "community": 176,
+      "community": 1,
       "norm_label": "statuses"
     },
     {
@@ -7732,7 +7696,7 @@
       "source_file": "src/app/api/admin/reservations/route.ts",
       "source_location": "L9",
       "id": "reservations_route_status",
-      "community": 176,
+      "community": 1,
       "norm_label": "status"
     },
     {
@@ -7741,7 +7705,7 @@
       "source_file": "src/app/api/admin/reservations/route.ts",
       "source_location": "L18",
       "id": "reservations_route_sort_fields",
-      "community": 176,
+      "community": 1,
       "norm_label": "sort_fields"
     },
     {
@@ -7750,7 +7714,7 @@
       "source_file": "src/app/api/admin/reservations/route.ts",
       "source_location": "L24",
       "id": "reservations_route_sortfield",
-      "community": 176,
+      "community": 1,
       "norm_label": "sortfield"
     },
     {
@@ -7759,7 +7723,7 @@
       "source_file": "src/app/api/admin/reservations/route.ts",
       "source_location": "L32",
       "id": "reservations_route_sanitizesearch",
-      "community": 176,
+      "community": 1,
       "norm_label": "sanitizesearch()"
     },
     {
@@ -7768,7 +7732,7 @@
       "source_file": "src/app/api/admin/reservations/route.ts",
       "source_location": "L36",
       "id": "reservations_route_get",
-      "community": 176,
+      "community": 1,
       "norm_label": "get()"
     },
     {
@@ -7777,34 +7741,34 @@
       "source_file": "src/app/api/admin/reservations/[id]/route.ts",
       "source_location": "L1",
       "id": "src_app_api_admin_reservations_id_route_ts",
-      "community": 174,
+      "community": 1,
       "norm_label": "route.ts"
     },
     {
       "label": "Params",
       "file_type": "code",
       "source_file": "src/app/api/admin/reservations/[id]/route.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "id": "src_app_api_admin_reservations_id_route_ts_id_route_params",
-      "community": 174,
+      "community": 1,
       "norm_label": "params"
     },
     {
       "label": "PATCH()",
       "file_type": "code",
       "source_file": "src/app/api/admin/reservations/[id]/route.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "id": "src_app_api_admin_reservations_id_route_ts_id_route_patch",
-      "community": 174,
+      "community": 1,
       "norm_label": "patch()"
     },
     {
       "label": "DELETE()",
       "file_type": "code",
       "source_file": "src/app/api/admin/reservations/[id]/route.ts",
-      "source_location": "L74",
+      "source_location": "L75",
       "id": "src_app_api_admin_reservations_id_route_ts_id_route_delete",
-      "community": 174,
+      "community": 1,
       "norm_label": "delete()"
     },
     {
@@ -7813,7 +7777,7 @@
       "source_file": "src/app/api/admin/session/route.ts",
       "source_location": "L1",
       "id": "src_app_api_admin_session_route_ts",
-      "community": 172,
+      "community": 1,
       "norm_label": "route.ts"
     },
     {
@@ -7822,7 +7786,7 @@
       "source_file": "src/app/api/admin/session/route.ts",
       "source_location": "L9",
       "id": "session_route_get",
-      "community": 172,
+      "community": 1,
       "norm_label": "get()"
     },
     {
@@ -7876,16 +7840,16 @@
       "source_file": "src/app/api/reservations/route.ts",
       "source_location": "L1",
       "id": "src_app_api_reservations_route_ts",
-      "community": 167,
+      "community": 73,
       "norm_label": "route.ts"
     },
     {
       "label": "POST()",
       "file_type": "code",
       "source_file": "src/app/api/reservations/route.ts",
-      "source_location": "L15",
+      "source_location": "L12",
       "id": "reservations_route_post",
-      "community": 167,
+      "community": 73,
       "norm_label": "post()"
     },
     {
@@ -7925,28 +7889,10 @@
       "norm_label": "page.tsx"
     },
     {
-      "label": "CarSilhouette()",
-      "file_type": "code",
-      "source_file": "src/app/voitures/page.tsx",
-      "source_location": "L11",
-      "id": "voitures_page_carsilhouette",
-      "community": 23,
-      "norm_label": "carsilhouette()"
-    },
-    {
-      "label": "Arrow()",
-      "file_type": "code",
-      "source_file": "src/app/voitures/page.tsx",
-      "source_location": "L19",
-      "id": "voitures_page_arrow",
-      "community": 23,
-      "norm_label": "arrow()"
-    },
-    {
       "label": "CarsPage()",
       "file_type": "code",
       "source_file": "src/app/voitures/page.tsx",
-      "source_location": "L27",
+      "source_location": "L13",
       "id": "voitures_page_carspage",
       "community": 23,
       "norm_label": "carspage()"
@@ -8000,7 +7946,7 @@
       "label": "isDateInRange()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L26",
+      "source_location": "L25",
       "id": "id_page_isdateinrange",
       "community": 35,
       "norm_label": "isdateinrange()"
@@ -8009,7 +7955,7 @@
       "label": "countReservationsForDate()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L30",
+      "source_location": "L29",
       "id": "id_page_countreservationsfordate",
       "community": 35,
       "norm_label": "countreservationsfordate()"
@@ -8018,61 +7964,16 @@
       "label": "isDateUnavailable()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L43",
+      "source_location": "L42",
       "id": "id_page_isdateunavailable",
       "community": 35,
       "norm_label": "isdateunavailable()"
     },
     {
-      "label": "getDaysBetween()",
-      "file_type": "code",
-      "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L51",
-      "id": "id_page_getdaysbetween",
-      "community": 35,
-      "norm_label": "getdaysbetween()"
-    },
-    {
-      "label": "toDateOnly()",
-      "file_type": "code",
-      "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L57",
-      "id": "id_page_todateonly",
-      "community": 35,
-      "norm_label": "todateonly()"
-    },
-    {
-      "label": "normalizePricingTiers()",
-      "file_type": "code",
-      "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L64",
-      "id": "id_page_normalizepricingtiers",
-      "community": 35,
-      "norm_label": "normalizepricingtiers()"
-    },
-    {
-      "label": "getDailyRateForDuration()",
-      "file_type": "code",
-      "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L78",
-      "id": "id_page_getdailyrateforduration",
-      "community": 35,
-      "norm_label": "getdailyrateforduration()"
-    },
-    {
-      "label": "getMatchingTierForDuration()",
-      "file_type": "code",
-      "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L99",
-      "id": "id_page_getmatchingtierforduration",
-      "community": 35,
-      "norm_label": "getmatchingtierforduration()"
-    },
-    {
       "label": "CarDetailPage()",
       "file_type": "code",
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L125",
+      "source_location": "L54",
       "id": "id_page_cardetailpage",
       "community": 35,
       "norm_label": "cardetailpage()"
@@ -8101,7 +8002,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L1",
       "id": "src_components_feedback_tsx",
-      "community": 153,
+      "community": 60,
       "norm_label": "feedback.tsx"
     },
     {
@@ -8110,7 +8011,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L24",
       "id": "components_feedback_toastvariant",
-      "community": 153,
+      "community": 60,
       "norm_label": "toastvariant"
     },
     {
@@ -8119,7 +8020,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L26",
       "id": "components_feedback_toastitem",
-      "community": 153,
+      "community": 60,
       "norm_label": "toastitem"
     },
     {
@@ -8128,7 +8029,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L32",
       "id": "components_feedback_confirmoptions",
-      "community": 153,
+      "community": 60,
       "norm_label": "confirmoptions"
     },
     {
@@ -8137,7 +8038,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L40",
       "id": "components_feedback_confirmstate",
-      "community": 153,
+      "community": 60,
       "norm_label": "confirmstate"
     },
     {
@@ -8146,7 +8047,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L44",
       "id": "components_feedback_feedbackcontextvalue",
-      "community": 153,
+      "community": 60,
       "norm_label": "feedbackcontextvalue"
     },
     {
@@ -8155,7 +8056,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L49",
       "id": "components_feedback_feedbackcontext",
-      "community": 153,
+      "community": 60,
       "norm_label": "feedbackcontext"
     },
     {
@@ -8173,7 +8074,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L57",
       "id": "components_feedback_useconfirm",
-      "community": 153,
+      "community": 175,
       "norm_label": "useconfirm()"
     },
     {
@@ -8182,7 +8083,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L65",
       "id": "components_feedback_toasticon",
-      "community": 153,
+      "community": 60,
       "norm_label": "toasticon()"
     },
     {
@@ -8191,7 +8092,7 @@
       "source_file": "src/components/Feedback.tsx",
       "source_location": "L89",
       "id": "components_feedback_feedbackprovider",
-      "community": 153,
+      "community": 60,
       "norm_label": "feedbackprovider()"
     },
     {
@@ -8249,28 +8150,10 @@
       "norm_label": "hero.tsx"
     },
     {
-      "label": "Arrow()",
-      "file_type": "code",
-      "source_file": "src/components/Hero.tsx",
-      "source_location": "L16",
-      "id": "components_hero_arrow",
-      "community": 23,
-      "norm_label": "arrow()"
-    },
-    {
-      "label": "CarSilhouette()",
-      "file_type": "code",
-      "source_file": "src/components/Hero.tsx",
-      "source_location": "L24",
-      "id": "components_hero_carsilhouette",
-      "community": 23,
-      "norm_label": "carsilhouette()"
-    },
-    {
       "label": "Hero()",
       "file_type": "code",
       "source_file": "src/components/Hero.tsx",
-      "source_location": "L32",
+      "source_location": "L18",
       "id": "components_hero_hero",
       "community": 23,
       "norm_label": "hero()"
@@ -8357,12 +8240,30 @@
       "norm_label": "timeslotpicker()"
     },
     {
+      "label": "Arrow.tsx",
+      "file_type": "code",
+      "source_file": "src/components/icons/Arrow.tsx",
+      "source_location": "L1",
+      "id": "src_components_icons_arrow_tsx",
+      "community": 23,
+      "norm_label": "arrow.tsx"
+    },
+    {
+      "label": "Arrow()",
+      "file_type": "code",
+      "source_file": "src/components/icons/Arrow.tsx",
+      "source_location": "L2",
+      "id": "icons_arrow_arrow",
+      "community": 23,
+      "norm_label": "arrow()"
+    },
+    {
       "label": "CarGlyph.tsx",
       "file_type": "code",
       "source_file": "src/components/icons/CarGlyph.tsx",
       "source_location": "L1",
       "id": "src_components_icons_carglyph_tsx",
-      "community": 153,
+      "community": 55,
       "norm_label": "carglyph.tsx"
     },
     {
@@ -8371,8 +8272,26 @@
       "source_file": "src/components/icons/CarGlyph.tsx",
       "source_location": "L2",
       "id": "icons_carglyph_carglyph",
-      "community": 153,
+      "community": 55,
       "norm_label": "carglyph()"
+    },
+    {
+      "label": "CarSilhouette.tsx",
+      "file_type": "code",
+      "source_file": "src/components/icons/CarSilhouette.tsx",
+      "source_location": "L1",
+      "id": "src_components_icons_carsilhouette_tsx",
+      "community": 23,
+      "norm_label": "carsilhouette.tsx"
+    },
+    {
+      "label": "CarSilhouette()",
+      "file_type": "code",
+      "source_file": "src/components/icons/CarSilhouette.tsx",
+      "source_location": "L2",
+      "id": "icons_carsilhouette_carsilhouette",
+      "community": 23,
+      "norm_label": "carsilhouette()"
     },
     {
       "label": "WhatsAppIcon.tsx",
@@ -8380,7 +8299,7 @@
       "source_file": "src/components/icons/WhatsAppIcon.tsx",
       "source_location": "L1",
       "id": "src_components_icons_whatsappicon_tsx",
-      "community": 55,
+      "community": 153,
       "norm_label": "whatsappicon.tsx"
     },
     {
@@ -8389,7 +8308,7 @@
       "source_file": "src/components/icons/WhatsAppIcon.tsx",
       "source_location": "L1",
       "id": "icons_whatsappicon_props",
-      "community": 55,
+      "community": 153,
       "norm_label": "props"
     },
     {
@@ -8398,7 +8317,7 @@
       "source_file": "src/components/icons/WhatsAppIcon.tsx",
       "source_location": "L6",
       "id": "icons_whatsappicon_whatsappicon",
-      "community": 55,
+      "community": 153,
       "norm_label": "whatsappicon()"
     },
     {
@@ -8411,28 +8330,19 @@
       "norm_label": "datefield.tsx"
     },
     {
-      "label": "parseDate()",
+      "label": "parseLocalDate()",
       "file_type": "code",
       "source_file": "src/components/ui/DateField.tsx",
-      "source_location": "L11",
-      "id": "ui_datefield_parsedate",
+      "source_location": "L14",
+      "id": "ui_datefield_parselocaldate",
       "community": 17,
-      "norm_label": "parsedate()"
-    },
-    {
-      "label": "toStr()",
-      "file_type": "code",
-      "source_file": "src/components/ui/DateField.tsx",
-      "source_location": "L20",
-      "id": "ui_datefield_tostr",
-      "community": 17,
-      "norm_label": "tostr()"
+      "norm_label": "parselocaldate()"
     },
     {
       "label": "DateField()",
       "file_type": "code",
       "source_file": "src/components/ui/DateField.tsx",
-      "source_location": "L27",
+      "source_location": "L23",
       "id": "ui_datefield_datefield",
       "community": 17,
       "norm_label": "datefield()"
@@ -8470,7 +8380,7 @@
       "source_file": "src/lib/admin-auth.ts",
       "source_location": "L1",
       "id": "src_lib_admin_auth_ts",
-      "community": 172,
+      "community": 1,
       "norm_label": "admin-auth.ts"
     },
     {
@@ -8479,7 +8389,7 @@
       "source_file": "src/lib/admin-auth.ts",
       "source_location": "L4",
       "id": "lib_admin_auth_adminsessionpayload",
-      "community": 172,
+      "community": 1,
       "norm_label": "adminsessionpayload"
     },
     {
@@ -8488,7 +8398,7 @@
       "source_file": "src/lib/admin-auth.ts",
       "source_location": "L9",
       "id": "lib_admin_auth_tobase64url",
-      "community": 172,
+      "community": 1,
       "norm_label": "tobase64url()"
     },
     {
@@ -8497,7 +8407,7 @@
       "source_file": "src/lib/admin-auth.ts",
       "source_location": "L18",
       "id": "lib_admin_auth_frombase64url",
-      "community": 172,
+      "community": 1,
       "norm_label": "frombase64url()"
     },
     {
@@ -8506,7 +8416,7 @@
       "source_file": "src/lib/admin-auth.ts",
       "source_location": "L29",
       "id": "lib_admin_auth_importsecretkey",
-      "community": 172,
+      "community": 1,
       "norm_label": "importsecretkey()"
     },
     {
@@ -8515,7 +8425,7 @@
       "source_file": "src/lib/admin-auth.ts",
       "source_location": "L44",
       "id": "lib_admin_auth_constanttimeequal",
-      "community": 167,
+      "community": 1,
       "norm_label": "constanttimeequal()"
     },
     {
@@ -8524,7 +8434,7 @@
       "source_file": "src/lib/admin-auth.ts",
       "source_location": "L55",
       "id": "lib_admin_auth_signvalue",
-      "community": 172,
+      "community": 1,
       "norm_label": "signvalue()"
     },
     {
@@ -8533,7 +8443,7 @@
       "source_file": "src/lib/admin-auth.ts",
       "source_location": "L65",
       "id": "lib_admin_auth_createadminsessiontoken",
-      "community": 172,
+      "community": 1,
       "norm_label": "createadminsessiontoken()"
     },
     {
@@ -8542,7 +8452,7 @@
       "source_file": "src/lib/admin-auth.ts",
       "source_location": "L81",
       "id": "lib_admin_auth_verifyadminsessiontoken",
-      "community": 172,
+      "community": 1,
       "norm_label": "verifyadminsessiontoken()"
     },
     {
@@ -8569,7 +8479,7 @@
       "source_file": "src/lib/admin-guard.ts",
       "source_location": "L24",
       "id": "lib_admin_guard_getadminidentity",
-      "community": 174,
+      "community": 1,
       "norm_label": "getadminidentity()"
     },
     {
@@ -8578,7 +8488,7 @@
       "source_file": "src/lib/audit.ts",
       "source_location": "L1",
       "id": "src_lib_audit_ts",
-      "community": 174,
+      "community": 1,
       "norm_label": "audit.ts"
     },
     {
@@ -8587,7 +8497,7 @@
       "source_file": "src/lib/audit.ts",
       "source_location": "L14",
       "id": "lib_audit_auditentry",
-      "community": 174,
+      "community": 1,
       "norm_label": "auditentry"
     },
     {
@@ -8596,7 +8506,7 @@
       "source_file": "src/lib/audit.ts",
       "source_location": "L21",
       "id": "lib_audit_auditlog",
-      "community": 174,
+      "community": 1,
       "norm_label": "auditlog()"
     },
     {
@@ -8639,7 +8549,7 @@
       "label": "AvailabilityCar",
       "file_type": "code",
       "source_file": "src/lib/availability.ts",
-      "source_location": "L27",
+      "source_location": "L28",
       "id": "lib_availability_availabilitycar",
       "community": 43,
       "norm_label": "availabilitycar"
@@ -8648,7 +8558,7 @@
       "label": "CarAvailability",
       "file_type": "code",
       "source_file": "src/lib/availability.ts",
-      "source_location": "L36",
+      "source_location": "L37",
       "id": "lib_availability_caravailability",
       "community": 55,
       "norm_label": "caravailability"
@@ -8657,7 +8567,7 @@
       "label": "FleetAvailabilitySummary",
       "file_type": "code",
       "source_file": "src/lib/availability.ts",
-      "source_location": "L50",
+      "source_location": "L51",
       "id": "lib_availability_fleetavailabilitysummary",
       "community": 55,
       "norm_label": "fleetavailabilitysummary"
@@ -8666,7 +8576,7 @@
       "label": "reservationOverlapsWindow()",
       "file_type": "code",
       "source_file": "src/lib/availability.ts",
-      "source_location": "L80",
+      "source_location": "L81",
       "id": "lib_availability_reservationoverlapswindow",
       "community": 43,
       "norm_label": "reservationoverlapswindow()"
@@ -8675,7 +8585,7 @@
       "label": "reservationCoversDay()",
       "file_type": "code",
       "source_file": "src/lib/availability.ts",
-      "source_location": "L89",
+      "source_location": "L90",
       "id": "lib_availability_reservationcoversday",
       "community": 43,
       "norm_label": "reservationcoversday()"
@@ -8684,7 +8594,7 @@
       "label": "peakConcurrentReservations()",
       "file_type": "code",
       "source_file": "src/lib/availability.ts",
-      "source_location": "L104",
+      "source_location": "L105",
       "id": "lib_availability_peakconcurrentreservations",
       "community": 43,
       "norm_label": "peakconcurrentreservations()"
@@ -8693,7 +8603,7 @@
       "label": "normalizePhone()",
       "file_type": "code",
       "source_file": "src/lib/availability.ts",
-      "source_location": "L133",
+      "source_location": "L134",
       "id": "lib_availability_normalizephone",
       "community": 43,
       "norm_label": "normalizephone()"
@@ -8702,7 +8612,7 @@
       "label": "computeFleetAvailability()",
       "file_type": "code",
       "source_file": "src/lib/availability.ts",
-      "source_location": "L142",
+      "source_location": "L143",
       "id": "lib_availability_computefleetavailability",
       "community": 43,
       "norm_label": "computefleetavailability()"
@@ -8711,7 +8621,7 @@
       "label": "resolveAvailabilityWindow()",
       "file_type": "code",
       "source_file": "src/lib/availability.ts",
-      "source_location": "L236",
+      "source_location": "L237",
       "id": "lib_availability_resolveavailabilitywindow",
       "community": 43,
       "norm_label": "resolveavailabilitywindow()"
@@ -8756,7 +8666,7 @@
       "label": "MONTHS_FR",
       "file_type": "code",
       "source_file": "src/lib/constants.ts",
-      "source_location": "L23",
+      "source_location": "L28",
       "id": "lib_constants_months_fr",
       "community": 17,
       "norm_label": "months_fr"
@@ -8765,7 +8675,7 @@
       "label": "MONTHS_FR_SHORT",
       "file_type": "code",
       "source_file": "src/lib/constants.ts",
-      "source_location": "L38",
+      "source_location": "L43",
       "id": "lib_constants_months_fr_short",
       "community": 17,
       "norm_label": "months_fr_short"
@@ -8774,7 +8684,7 @@
       "label": "DAYS_FR",
       "file_type": "code",
       "source_file": "src/lib/constants.ts",
-      "source_location": "L53",
+      "source_location": "L58",
       "id": "lib_constants_days_fr",
       "community": 17,
       "norm_label": "days_fr"
@@ -8783,7 +8693,7 @@
       "label": "BOOKING_TIME_SLOTS",
       "file_type": "code",
       "source_file": "src/lib/constants.ts",
-      "source_location": "L62",
+      "source_location": "L67",
       "id": "lib_constants_booking_time_slots",
       "community": 175,
       "norm_label": "booking_time_slots"
@@ -8792,7 +8702,7 @@
       "label": "RESERVATION_STATUS_LABEL",
       "file_type": "code",
       "source_file": "src/lib/constants.ts",
-      "source_location": "L79",
+      "source_location": "L84",
       "id": "lib_constants_reservation_status_label",
       "community": 17,
       "norm_label": "reservation_status_label"
@@ -8801,7 +8711,7 @@
       "label": "RESERVATION_STATUS_COLOR",
       "file_type": "code",
       "source_file": "src/lib/constants.ts",
-      "source_location": "L85",
+      "source_location": "L90",
       "id": "lib_constants_reservation_status_color",
       "community": 17,
       "norm_label": "reservation_status_color"
@@ -8810,28 +8720,82 @@
       "label": "CAR_CATEGORIES",
       "file_type": "code",
       "source_file": "src/lib/constants.ts",
-      "source_location": "L91",
+      "source_location": "L96",
       "id": "lib_constants_car_categories",
-      "community": 17,
+      "community": 175,
       "norm_label": "car_categories"
     },
     {
       "label": "TRANSMISSION_OPTIONS",
       "file_type": "code",
       "source_file": "src/lib/constants.ts",
-      "source_location": "L99",
+      "source_location": "L104",
       "id": "lib_constants_transmission_options",
-      "community": 17,
+      "community": 175,
       "norm_label": "transmission_options"
     },
     {
       "label": "FUEL_TYPES",
       "file_type": "code",
       "source_file": "src/lib/constants.ts",
-      "source_location": "L101",
+      "source_location": "L106",
       "id": "lib_constants_fuel_types",
-      "community": 17,
+      "community": 175,
       "norm_label": "fuel_types"
+    },
+    {
+      "label": "dates.ts",
+      "file_type": "code",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L1",
+      "id": "src_lib_dates_ts",
+      "community": 73,
+      "norm_label": "dates.ts"
+    },
+    {
+      "label": "parseDateOnly()",
+      "file_type": "code",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L16",
+      "id": "lib_dates_parsedateonly",
+      "community": 73,
+      "norm_label": "parsedateonly()"
+    },
+    {
+      "label": "getDaysBetween()",
+      "file_type": "code",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L34",
+      "id": "lib_dates_getdaysbetween",
+      "community": 73,
+      "norm_label": "getdaysbetween()"
+    },
+    {
+      "label": "getDaysBetweenStrings()",
+      "file_type": "code",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L43",
+      "id": "lib_dates_getdaysbetweenstrings",
+      "community": 73,
+      "norm_label": "getdaysbetweenstrings()"
+    },
+    {
+      "label": "formatDateOnly()",
+      "file_type": "code",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L54",
+      "id": "lib_dates_formatdateonly",
+      "community": 35,
+      "norm_label": "formatdateonly()"
+    },
+    {
+      "label": "formatDateFr()",
+      "file_type": "code",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L62",
+      "id": "lib_dates_formatdatefr",
+      "community": 35,
+      "norm_label": "formatdatefr()"
     },
     {
       "label": "email.ts",
@@ -8839,7 +8803,7 @@
       "source_file": "src/lib/email.ts",
       "source_location": "L1",
       "id": "src_lib_email_ts",
-      "community": 173,
+      "community": 1,
       "norm_label": "email.ts"
     },
     {
@@ -8848,7 +8812,7 @@
       "source_file": "src/lib/email.ts",
       "source_location": "L11",
       "id": "lib_email_reservationevent",
-      "community": 173,
+      "community": 1,
       "norm_label": "reservationevent"
     },
     {
@@ -8857,7 +8821,7 @@
       "source_file": "src/lib/email.ts",
       "source_location": "L13",
       "id": "lib_email_reservationemailpayload",
-      "community": 173,
+      "community": 1,
       "norm_label": "reservationemailpayload"
     },
     {
@@ -8866,7 +8830,7 @@
       "source_file": "src/lib/email.ts",
       "source_location": "L27",
       "id": "lib_email_escapehtml",
-      "community": 173,
+      "community": 1,
       "norm_label": "escapehtml()"
     },
     {
@@ -8875,7 +8839,7 @@
       "source_file": "src/lib/email.ts",
       "source_location": "L41",
       "id": "lib_email_emailcopy",
-      "community": 173,
+      "community": 1,
       "norm_label": "emailcopy"
     },
     {
@@ -8884,7 +8848,7 @@
       "source_file": "src/lib/email.ts",
       "source_location": "L52",
       "id": "lib_email_buildemailcopy",
-      "community": 173,
+      "community": 1,
       "norm_label": "buildemailcopy()"
     },
     {
@@ -8893,7 +8857,7 @@
       "source_file": "src/lib/email.ts",
       "source_location": "L100",
       "id": "lib_email_buildadminhtml",
-      "community": 173,
+      "community": 1,
       "norm_label": "buildadminhtml()"
     },
     {
@@ -8902,7 +8866,7 @@
       "source_file": "src/lib/email.ts",
       "source_location": "L120",
       "id": "lib_email_buildcustomerhtml",
-      "community": 173,
+      "community": 1,
       "norm_label": "buildcustomerhtml()"
     },
     {
@@ -8911,7 +8875,7 @@
       "source_file": "src/lib/email.ts",
       "source_location": "L131",
       "id": "lib_email_createtransport",
-      "community": 173,
+      "community": 1,
       "norm_label": "createtransport()"
     },
     {
@@ -8920,7 +8884,7 @@
       "source_file": "src/lib/email.ts",
       "source_location": "L156",
       "id": "lib_email_sendreservationemails",
-      "community": 173,
+      "community": 1,
       "norm_label": "sendreservationemails()"
     },
     {
@@ -8936,7 +8900,7 @@
       "label": "tiers",
       "file_type": "code",
       "source_file": "src/lib/pricing.test.ts",
-      "source_location": "L12",
+      "source_location": "L11",
       "id": "lib_pricing_test_tiers",
       "community": 73,
       "norm_label": "tiers"
@@ -8951,28 +8915,10 @@
       "norm_label": "pricing.ts"
     },
     {
-      "label": "parseDateOnly()",
-      "file_type": "code",
-      "source_file": "src/lib/pricing.ts",
-      "source_location": "L15",
-      "id": "lib_pricing_parsedateonly",
-      "community": 73,
-      "norm_label": "parsedateonly()"
-    },
-    {
-      "label": "getDaysBetween()",
-      "file_type": "code",
-      "source_file": "src/lib/pricing.ts",
-      "source_location": "L33",
-      "id": "lib_pricing_getdaysbetween",
-      "community": 73,
-      "norm_label": "getdaysbetween()"
-    },
-    {
       "label": "normalizePricingTiers()",
       "file_type": "code",
       "source_file": "src/lib/pricing.ts",
-      "source_location": "L37",
+      "source_location": "L12",
       "id": "lib_pricing_normalizepricingtiers",
       "community": 73,
       "norm_label": "normalizepricingtiers()"
@@ -8981,7 +8927,7 @@
       "label": "getMatchingTierForDuration()",
       "file_type": "code",
       "source_file": "src/lib/pricing.ts",
-      "source_location": "L53",
+      "source_location": "L28",
       "id": "lib_pricing_getmatchingtierforduration",
       "community": 73,
       "norm_label": "getmatchingtierforduration()"
@@ -8990,7 +8936,7 @@
       "label": "getDailyRateForDuration()",
       "file_type": "code",
       "source_file": "src/lib/pricing.ts",
-      "source_location": "L74",
+      "source_location": "L49",
       "id": "lib_pricing_getdailyrateforduration",
       "community": 73,
       "norm_label": "getdailyrateforduration()"
@@ -8999,7 +8945,7 @@
       "label": "Quote",
       "file_type": "code",
       "source_file": "src/lib/pricing.ts",
-      "source_location": "L84",
+      "source_location": "L59",
       "id": "lib_pricing_quote",
       "community": 73,
       "norm_label": "quote"
@@ -9008,7 +8954,7 @@
       "label": "computeQuote()",
       "file_type": "code",
       "source_file": "src/lib/pricing.ts",
-      "source_location": "L96",
+      "source_location": "L71",
       "id": "lib_pricing_computequote",
       "community": 73,
       "norm_label": "computequote()"
@@ -9019,7 +8965,7 @@
       "source_file": "src/lib/rate-limit.ts",
       "source_location": "L1",
       "id": "src_lib_rate_limit_ts",
-      "community": 167,
+      "community": 1,
       "norm_label": "rate-limit.ts"
     },
     {
@@ -9028,7 +8974,7 @@
       "source_file": "src/lib/rate-limit.ts",
       "source_location": "L18",
       "id": "lib_rate_limit_ratelimitresult",
-      "community": 167,
+      "community": 1,
       "norm_label": "ratelimitresult"
     },
     {
@@ -9037,7 +8983,7 @@
       "source_file": "src/lib/rate-limit.ts",
       "source_location": "L23",
       "id": "lib_rate_limit_bucket",
-      "community": 167,
+      "community": 1,
       "norm_label": "bucket"
     },
     {
@@ -9046,7 +8992,7 @@
       "source_file": "src/lib/rate-limit.ts",
       "source_location": "L24",
       "id": "lib_rate_limit_buckets",
-      "community": 167,
+      "community": 1,
       "norm_label": "buckets"
     },
     {
@@ -9055,7 +9001,7 @@
       "source_file": "src/lib/rate-limit.ts",
       "source_location": "L26",
       "id": "lib_rate_limit_memoryratelimit",
-      "community": 167,
+      "community": 1,
       "norm_label": "memoryratelimit()"
     },
     {
@@ -9064,7 +9010,7 @@
       "source_file": "src/lib/rate-limit.ts",
       "source_location": "L52",
       "id": "lib_rate_limit_getredis",
-      "community": 167,
+      "community": 1,
       "norm_label": "getredis()"
     },
     {
@@ -9073,7 +9019,7 @@
       "source_file": "src/lib/rate-limit.ts",
       "source_location": "L74",
       "id": "lib_rate_limit_limiters",
-      "community": 167,
+      "community": 1,
       "norm_label": "limiters"
     },
     {
@@ -9082,7 +9028,7 @@
       "source_file": "src/lib/rate-limit.ts",
       "source_location": "L76",
       "id": "lib_rate_limit_getlimiter",
-      "community": 167,
+      "community": 1,
       "norm_label": "getlimiter()"
     },
     {
@@ -9091,7 +9037,7 @@
       "source_file": "src/lib/rate-limit.ts",
       "source_location": "L98",
       "id": "lib_rate_limit_ratelimit",
-      "community": 167,
+      "community": 1,
       "norm_label": "ratelimit()"
     },
     {
@@ -9100,7 +9046,7 @@
       "source_file": "src/lib/rate-limit.ts",
       "source_location": "L131",
       "id": "lib_rate_limit_getclientip",
-      "community": 167,
+      "community": 1,
       "norm_label": "getclientip()"
     },
     {
@@ -9271,7 +9217,7 @@
       "source_file": "src/lib/validation.ts",
       "source_location": "L54",
       "id": "lib_validation_reservationinputschema",
-      "community": 167,
+      "community": 73,
       "norm_label": "reservationinputschema"
     },
     {
@@ -16635,6 +16581,159 @@
       "id": "ui_ux_pro_max_prompt_accessibility",
       "community": 15,
       "norm_label": "accessibility"
+    },
+    {
+      "label": "CarSilhouette()",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L85",
+      "community": 23,
+      "norm_label": "carsilhouette()",
+      "id": "app_page_carsilhouette"
+    },
+    {
+      "label": "Arrow()",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L93",
+      "community": 23,
+      "norm_label": "arrow()",
+      "id": "app_page_arrow"
+    },
+    {
+      "label": "formatFr()",
+      "file_type": "code",
+      "source_file": "src/app/admin/disponibilite/page.tsx",
+      "source_location": "L22",
+      "community": 55,
+      "norm_label": "formatfr()",
+      "id": "disponibilite_page_formatfr"
+    },
+    {
+      "label": "getDays()",
+      "file_type": "code",
+      "source_file": "src/app/admin/disponibilite/page.tsx",
+      "source_location": "L26",
+      "community": 55,
+      "norm_label": "getdays()",
+      "id": "disponibilite_page_getdays"
+    },
+    {
+      "label": "CarSilhouette()",
+      "file_type": "code",
+      "source_file": "src/app/voitures/page.tsx",
+      "source_location": "L11",
+      "community": 23,
+      "norm_label": "carsilhouette()",
+      "id": "voitures_page_carsilhouette"
+    },
+    {
+      "label": "Arrow()",
+      "file_type": "code",
+      "source_file": "src/app/voitures/page.tsx",
+      "source_location": "L19",
+      "community": 23,
+      "norm_label": "arrow()",
+      "id": "voitures_page_arrow"
+    },
+    {
+      "label": "getDaysBetween()",
+      "file_type": "code",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L51",
+      "community": 35,
+      "norm_label": "getdaysbetween()",
+      "id": "id_page_getdaysbetween"
+    },
+    {
+      "label": "toDateOnly()",
+      "file_type": "code",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L57",
+      "community": 35,
+      "norm_label": "todateonly()",
+      "id": "id_page_todateonly"
+    },
+    {
+      "label": "normalizePricingTiers()",
+      "file_type": "code",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L64",
+      "community": 35,
+      "norm_label": "normalizepricingtiers()",
+      "id": "id_page_normalizepricingtiers"
+    },
+    {
+      "label": "getDailyRateForDuration()",
+      "file_type": "code",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L78",
+      "community": 35,
+      "norm_label": "getdailyrateforduration()",
+      "id": "id_page_getdailyrateforduration"
+    },
+    {
+      "label": "getMatchingTierForDuration()",
+      "file_type": "code",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L99",
+      "community": 35,
+      "norm_label": "getmatchingtierforduration()",
+      "id": "id_page_getmatchingtierforduration"
+    },
+    {
+      "label": "Arrow()",
+      "file_type": "code",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L16",
+      "community": 23,
+      "norm_label": "arrow()",
+      "id": "components_hero_arrow"
+    },
+    {
+      "label": "CarSilhouette()",
+      "file_type": "code",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L24",
+      "community": 23,
+      "norm_label": "carsilhouette()",
+      "id": "components_hero_carsilhouette"
+    },
+    {
+      "label": "parseDate()",
+      "file_type": "code",
+      "source_file": "src/components/ui/DateField.tsx",
+      "source_location": "L11",
+      "community": 17,
+      "norm_label": "parsedate()",
+      "id": "ui_datefield_parsedate"
+    },
+    {
+      "label": "toStr()",
+      "file_type": "code",
+      "source_file": "src/components/ui/DateField.tsx",
+      "source_location": "L20",
+      "community": 17,
+      "norm_label": "tostr()",
+      "id": "ui_datefield_tostr"
+    },
+    {
+      "label": "parseDateOnly()",
+      "file_type": "code",
+      "source_file": "src/lib/pricing.ts",
+      "source_location": "L15",
+      "community": 73,
+      "norm_label": "parsedateonly()",
+      "id": "lib_pricing_parsedateonly"
+    },
+    {
+      "label": "getDaysBetween()",
+      "file_type": "code",
+      "source_file": "src/lib/pricing.ts",
+      "source_location": "L33",
+      "community": 73,
+      "norm_label": "getdaysbetween()",
+      "id": "lib_pricing_getdaysbetween"
     },
     {
       "label": "SKILL.md",
@@ -40540,6 +40639,28 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_app_page_tsx",
+      "target": "src_components_icons_arrow_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_app_page_tsx",
+      "target": "src_components_icons_carsilhouette_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
       "source_location": "L2",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -40775,6 +40896,17 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/admin/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_app_admin_page_tsx",
+      "target": "lib_dates_formatdatefr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/page.tsx",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -40802,6 +40934,17 @@
       "confidence_score": 1.0,
       "source": "src_app_admin_page_tsx",
       "target": "src_lib_constants_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_app_admin_page_tsx",
+      "target": "src_lib_dates_ts",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -40929,6 +41072,28 @@
       "target": "lib_constants_reservation_status_label"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/disponibilite/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_app_admin_disponibilite_page_tsx",
+      "target": "lib_dates_formatdatefr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/disponibilite/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_app_admin_disponibilite_page_tsx",
+      "target": "lib_dates_getdaysbetweenstrings",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -40973,6 +41138,17 @@
       "target": "src_lib_constants_ts"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/disponibilite/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_app_admin_disponibilite_page_tsx",
+      "target": "src_lib_dates_ts",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -40986,13 +41162,13 @@
     {
       "relation": "calls",
       "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "src/app/admin/reservations/page.tsx",
-      "source_location": "L324",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/admin/disponibilite/page.tsx",
+      "source_location": "L296",
       "weight": 1.0,
-      "source": "disponibilite_page_getdays",
-      "target": "reservations_page_adminreservations"
+      "source": "disponibilite_page_adminavailability",
+      "target": "lib_dates_formatdatefr"
     },
     {
       "relation": "contains",
@@ -41057,6 +41233,28 @@
       "confidence_score": 1.0,
       "source": "src_app_admin_reservations_page_tsx",
       "target": "lib_constants_reservation_status_label"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_app_admin_reservations_page_tsx",
+      "target": "lib_dates_formatdatefr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_app_admin_reservations_page_tsx",
+      "target": "lib_dates_getdaysbetweenstrings",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -41200,9 +41398,9 @@
       "source_file": "src/app/admin/reservations/page.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_reservations_page_tsx",
-      "target": "src_components_ui_datefield_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_ui_datefield_tsx"
     },
     {
       "relation": "imports_from",
@@ -41211,9 +41409,9 @@
       "source_file": "src/app/admin/reservations/page.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_admin_reservations_page_tsx",
-      "target": "src_components_ui_select_tsx",
-      "confidence_score": 1.0
+      "target": "src_components_ui_select_tsx"
     },
     {
       "relation": "imports_from",
@@ -41231,11 +41429,33 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_app_admin_reservations_page_tsx",
+      "target": "src_lib_dates_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/admin/reservations/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_app_admin_reservations_page_tsx",
       "target": "src_lib_types_ts"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L324",
+      "weight": 1.0,
+      "source": "disponibilite_page_getdays",
+      "target": "reservations_page_adminreservations"
     },
     {
       "relation": "calls",
@@ -41258,6 +41478,28 @@
       "weight": 1.0,
       "source": "reservations_page_adminreservations",
       "target": "components_feedback_usetoast"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L618",
+      "weight": 1.0,
+      "source": "reservations_page_adminreservations",
+      "target": "lib_dates_formatdatefr"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/admin/reservations/page.tsx",
+      "source_location": "L626",
+      "weight": 1.0,
+      "source": "reservations_page_adminreservations",
+      "target": "lib_dates_getdaysbetweenstrings"
     },
     {
       "relation": "imports",
@@ -42371,6 +42613,17 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/api/admin/reservations/[id]/route.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_app_api_admin_reservations_id_route_ts",
+      "target": "lib_dates_formatdatefr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/reservations/[id]/route.ts",
       "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -42467,6 +42720,17 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/api/admin/reservations/[id]/route.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_app_api_admin_reservations_id_route_ts",
+      "target": "src_lib_dates_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/reservations/[id]/route.ts",
       "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -42527,6 +42791,17 @@
       "weight": 1.0,
       "source": "src_app_api_admin_reservations_id_route_ts_id_route_patch",
       "target": "lib_audit_auditlog"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/reservations/[id]/route.ts",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "src_app_api_admin_reservations_id_route_ts_id_route_patch",
+      "target": "lib_dates_formatdatefr"
     },
     {
       "relation": "calls",
@@ -42825,6 +43100,17 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/api/reservations/route.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "src_app_api_reservations_route_ts",
+      "target": "src_lib_constants_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/reservations/route.ts",
       "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -42993,6 +43279,28 @@
       "confidence_score": 1.0,
       "source": "src_app_voitures_page_tsx",
       "target": "lib_types_car"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "src_app_voitures_page_tsx",
+      "target": "src_components_icons_arrow_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "src_app_voitures_page_tsx",
+      "target": "src_components_icons_carsilhouette_tsx",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -43281,6 +43589,50 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "src_app_voitures_id_page_tsx",
+      "target": "lib_dates_formatdatefr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "src_app_voitures_id_page_tsx",
+      "target": "lib_dates_formatdateonly",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "src_app_voitures_id_page_tsx",
+      "target": "lib_pricing_computequote",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "src_app_voitures_id_page_tsx",
+      "target": "lib_pricing_normalizepricingtiers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
       "source_location": "L20",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -43413,6 +43765,28 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "src_app_voitures_id_page_tsx",
+      "target": "src_lib_dates_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "src_app_voitures_id_page_tsx",
+      "target": "src_lib_pricing_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
       "source_location": "L20",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -43445,56 +43819,12 @@
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L241",
-      "weight": 1.0,
       "confidence_score": 1.0,
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L128",
+      "weight": 1.0,
       "source": "id_page_cardetailpage",
-      "target": "id_page_getdaysbetween"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L261",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page_cardetailpage",
-      "target": "id_page_todateonly"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L242",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page_cardetailpage",
-      "target": "id_page_normalizepricingtiers"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L82",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page_getdailyrateforduration",
-      "target": "id_page_normalizepricingtiers"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L103",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page_getmatchingtierforduration",
-      "target": "id_page_normalizepricingtiers"
+      "target": "components_feedback_usetoast"
     },
     {
       "relation": "calls",
@@ -43512,6 +43842,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L241",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page_cardetailpage",
+      "target": "id_page_getdaysbetween"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
       "source_location": "L243",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -43522,12 +43863,67 @@
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L242",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page_cardetailpage",
+      "target": "id_page_normalizepricingtiers"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L261",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page_cardetailpage",
+      "target": "id_page_todateonly"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/voitures/[id]/page.tsx",
-      "source_location": "L128",
+      "source_location": "L697",
       "weight": 1.0,
       "source": "id_page_cardetailpage",
-      "target": "components_feedback_usetoast"
+      "target": "lib_dates_formatdatefr"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L189",
+      "weight": 1.0,
+      "source": "id_page_cardetailpage",
+      "target": "lib_dates_formatdateonly"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L189",
+      "weight": 1.0,
+      "source": "id_page_cardetailpage",
+      "target": "lib_pricing_computequote"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L192",
+      "weight": 1.0,
+      "source": "id_page_cardetailpage",
+      "target": "lib_pricing_normalizepricingtiers"
     },
     {
       "relation": "calls",
@@ -43769,6 +44165,28 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/Hero.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_components_hero_tsx",
+      "target": "src_components_icons_arrow_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "src_components_hero_tsx",
+      "target": "src_components_icons_carsilhouette_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Hero.tsx",
       "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -43849,12 +44267,32 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/icons/Arrow.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_components_icons_arrow_tsx",
+      "target": "icons_arrow_arrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/components/icons/CarGlyph.tsx",
       "source_location": "L2",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_components_icons_carglyph_tsx",
       "target": "icons_carglyph_carglyph"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/icons/CarSilhouette.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_components_icons_carsilhouette_tsx",
+      "target": "icons_carsilhouette_carsilhouette",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43883,9 +44321,9 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_datefield_tsx",
-      "target": "lib_constants_days_fr",
-      "confidence_score": 1.0
+      "target": "lib_constants_days_fr"
     },
     {
       "relation": "imports",
@@ -43894,8 +44332,30 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_datefield_tsx",
-      "target": "lib_constants_months_fr",
+      "target": "lib_constants_months_fr"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ui/DateField.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_components_ui_datefield_tsx",
+      "target": "lib_dates_formatdatefr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ui/DateField.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_components_ui_datefield_tsx",
+      "target": "lib_dates_formatdateonly",
       "confidence_score": 1.0
     },
     {
@@ -43905,8 +44365,19 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_datefield_tsx",
-      "target": "src_lib_constants_ts",
+      "target": "src_lib_constants_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ui/DateField.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_components_ui_datefield_tsx",
+      "target": "src_lib_dates_ts",
       "confidence_score": 1.0
     },
     {
@@ -43915,9 +44386,9 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_datefield_tsx",
-      "target": "ui_datefield_datefield",
-      "confidence_score": 1.0
+      "target": "ui_datefield_datefield"
     },
     {
       "relation": "contains",
@@ -43925,8 +44396,18 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_datefield_tsx",
-      "target": "ui_datefield_parsedate",
+      "target": "ui_datefield_parsedate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ui/DateField.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_components_ui_datefield_tsx",
+      "target": "ui_datefield_parselocaldate",
       "confidence_score": 1.0
     },
     {
@@ -43935,9 +44416,31 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_datefield_tsx",
-      "target": "ui_datefield_tostr",
+      "target": "ui_datefield_tostr"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ui/DateField.tsx",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "ui_datefield_datefield",
+      "target": "ui_datefield_parselocaldate",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/ui/DateField.tsx",
+      "source_location": "L111",
+      "weight": 1.0,
+      "source": "ui_datefield_datefield",
+      "target": "lib_dates_formatdatefr"
     },
     {
       "relation": "calls",
@@ -43946,9 +44449,9 @@
       "source_file": "src/components/ui/DateField.tsx",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ui_datefield_datefield",
-      "target": "ui_datefield_parsedate",
-      "confidence_score": 1.0
+      "target": "ui_datefield_parsedate"
     },
     {
       "relation": "contains",
@@ -43956,9 +44459,9 @@
       "source_file": "src/components/ui/Select.tsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_select_tsx",
-      "target": "ui_select_select",
-      "confidence_score": 1.0
+      "target": "ui_select_select"
     },
     {
       "relation": "contains",
@@ -43966,9 +44469,9 @@
       "source_file": "src/components/ui/Select.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_ui_select_tsx",
-      "target": "ui_select_selectoption",
-      "confidence_score": 1.0
+      "target": "ui_select_selectoption"
     },
     {
       "relation": "contains",
@@ -44427,6 +44930,17 @@
       "source_file": "src/lib/availability.ts",
       "source_location": "L22",
       "weight": 1.0,
+      "source": "src_lib_availability_ts",
+      "target": "lib_dates_parsedateonly",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/availability.ts",
+      "source_location": "L22",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_lib_availability_ts",
       "target": "lib_pricing_parsedateonly"
@@ -44441,6 +44955,28 @@
       "confidence_score": 1.0,
       "source": "src_lib_availability_ts",
       "target": "lib_types_reservation"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/availability.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "src_lib_availability_ts",
+      "target": "src_lib_constants_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/availability.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "src_lib_availability_ts",
+      "target": "src_lib_dates_ts",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -44507,6 +45043,17 @@
       "weight": 1.0,
       "source": "availability_route_get",
       "target": "lib_availability_resolveavailabilitywindow"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/availability.ts",
+      "source_location": "L247",
+      "weight": 1.0,
+      "source": "lib_availability_resolveavailabilitywindow",
+      "target": "lib_dates_parsedateonly"
     },
     {
       "relation": "calls",
@@ -44696,6 +45243,17 @@
       "target": "src_lib_validation_ts"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_lib_dates_ts",
+      "target": "src_lib_constants_ts",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -44738,6 +45296,166 @@
       "confidence_score": 1.0,
       "source": "lib_constants_fuel_types",
       "target": "src_lib_validation_ts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "src_lib_dates_ts",
+      "target": "lib_dates_formatdatefr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "src_lib_dates_ts",
+      "target": "lib_dates_formatdateonly",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "src_lib_dates_ts",
+      "target": "lib_dates_getdaysbetween",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "src_lib_dates_ts",
+      "target": "lib_dates_getdaysbetweenstrings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "src_lib_dates_ts",
+      "target": "lib_dates_parsedateonly",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/pricing.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_lib_pricing_test_ts",
+      "target": "src_lib_dates_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/pricing.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_lib_pricing_ts",
+      "target": "src_lib_dates_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "lib_dates_getdaysbetweenstrings",
+      "target": "lib_dates_parsedateonly",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/pricing.ts",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "lib_pricing_computequote",
+      "target": "lib_dates_parsedateonly"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/pricing.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_lib_pricing_test_ts",
+      "target": "lib_dates_parsedateonly",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/pricing.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_lib_pricing_ts",
+      "target": "lib_dates_parsedateonly",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/dates.ts",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "lib_dates_getdaysbetweenstrings",
+      "target": "lib_dates_getdaysbetween",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/pricing.ts",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "lib_pricing_computequote",
+      "target": "lib_dates_getdaysbetween"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/pricing.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_lib_pricing_test_ts",
+      "target": "lib_dates_getdaysbetween",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/pricing.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_lib_pricing_ts",
+      "target": "lib_dates_getdaysbetween",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -45112,28 +45830,6 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/pricing.ts",
-      "source_location": "L101",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_pricing_computequote",
-      "target": "lib_pricing_parsedateonly"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/pricing.ts",
-      "source_location": "L108",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_pricing_computequote",
-      "target": "lib_pricing_getdaysbetween"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/pricing.ts",
       "source_location": "L109",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -45183,6 +45879,28 @@
       "confidence_score": 1.0,
       "source": "lib_pricing_computequote",
       "target": "lib_pricing_getdailyrateforduration"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/pricing.ts",
+      "source_location": "L108",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_pricing_computequote",
+      "target": "lib_pricing_getdaysbetween"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/pricing.ts",
+      "source_location": "L101",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_pricing_computequote",
+      "target": "lib_pricing_parsedateonly"
     },
     {
       "relation": "contains",
@@ -53180,6 +53898,28 @@
       "target": "ui_ux_pro_max_prompt_visual_quality"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L82",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page_getdailyrateforduration",
+      "target": "id_page_normalizepricingtiers"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/voitures/[id]/page.tsx",
+      "source_location": "L103",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page_getmatchingtierforduration",
+      "target": "id_page_normalizepricingtiers"
+    },
+    {
       "relation": "implements",
       "confidence": "AMBIGUOUS",
       "confidence_score": 0.3,
@@ -57549,5 +58289,5 @@
       "source_file": null
     }
   ],
-  "built_at_commit": "ca96d45435eb278cb927c15cea6d3f970daa356f"
+  "built_at_commit": "baa30266c0b4909c40d0f811d38b15ea06715497"
 }

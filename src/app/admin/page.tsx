@@ -7,6 +7,7 @@ import {
   RESERVATION_STATUS_LABEL,
   RESERVATION_STATUS_COLOR,
 } from "@/lib/constants";
+import { formatDateFr } from "@/lib/dates";
 
 function StatCard({
   label,
@@ -220,8 +221,8 @@ export default function AdminDashboard() {
                       {r.car
                         ? `${r.car.brand} ${r.car.name} · `
                         : "Véhicule inconnu · "}
-                      {new Date(r.start_date).toLocaleDateString("fr-FR")} →{" "}
-                      {new Date(r.end_date).toLocaleDateString("fr-FR")}
+                      {formatDateFr(r.start_date)} →{" "}
+                      {formatDateFr(r.end_date)}
                     </div>
                   </div>
                   <div className="flex shrink-0 items-center gap-3 pl-3">

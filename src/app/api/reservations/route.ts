@@ -5,10 +5,7 @@ import { computeQuote } from "@/lib/pricing";
 import { sendReservationEmails } from "@/lib/email";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
 import { isPickupInPast } from "@/lib/time";
-
-// Require the pickup to be at least this far ahead when booking for "today",
-// so a customer can't reserve a slot that is effectively the current moment.
-const PICKUP_LEAD_MINUTES = 30;
+import { PICKUP_LEAD_MINUTES } from "@/lib/constants";
 
 export const runtime = "nodejs";
 

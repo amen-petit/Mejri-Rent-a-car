@@ -8,20 +8,19 @@ import { useToast } from "@/components/Feedback";
 import CarGlyph from "@/components/icons/CarGlyph";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { getCarById } from "@/lib/cars";
-import { Car, PricingTier } from "@/lib/types";
+import { Car } from "@/lib/types";
 import {
   MONTHS_FR,
   DAYS_FR,
-  MS_PER_DAY,
   WHATSAPP_NUMBER,
   BOOKING_TIME_SLOTS,
   DEFAULT_PICKUP_TIME,
   DEFAULT_RETURN_TIME,
+  PICKUP_LEAD_MINUTES,
 } from "@/lib/constants";
+import { computeQuote, normalizePricingTiers } from "@/lib/pricing";
+import { formatDateOnly, formatDateFr } from "@/lib/dates";
 import { isPickupInPast, nowInTimezone, timeToMinutes } from "@/lib/time";
-
-// Matches the server's lead buffer in src/app/api/reservations/route.ts.
-const PICKUP_LEAD_MINUTES = 30;
 
 function isDateInRange(date: Date, start: Date, end: Date) {
   return date >= start && date <= end;
@@ -47,76 +46,6 @@ function isDateUnavailable(
 ): boolean {
   return countReservationsForDate(date, reservations) >= quantity;
 }
-
-function getDaysBetween(start: Date, end: Date) {
-  return Math.ceil((end.getTime() - start.getTime()) / MS_PER_DAY) + 1;
-}
-
-// Format a Date as YYYY-MM-DD using LOCAL parts (not UTC), so the calendar date
-// the user picked is preserved regardless of timezone.
-function toDateOnly(d: Date): string {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
-}
-
-function normalizePricingTiers(tiers?: PricingTier[] | null): PricingTier[] {
-  return (tiers || [])
-    .filter(
-      (tier) =>
-        Number.isFinite(tier.min_days) &&
-        Number.isFinite(tier.max_days) &&
-        Number.isFinite(tier.price_per_day) &&
-        tier.min_days >= 1 &&
-        tier.max_days >= tier.min_days &&
-        tier.price_per_day > 0,
-    )
-    .sort((a, b) => a.min_days - b.min_days);
-}
-
-function getDailyRateForDuration(
-  durationDays: number,
-  defaultRate: number,
-  tiers?: PricingTier[] | null,
-): number {
-  const normalized = normalizePricingTiers(tiers);
-  if (durationDays <= 0 || normalized.length === 0) return defaultRate;
-
-  const exactMatch = normalized.find(
-    (tier) => durationDays >= tier.min_days && durationDays <= tier.max_days,
-  );
-  if (exactMatch) return exactMatch.price_per_day;
-
-  const lowerTier = [...normalized]
-    .reverse()
-    .find((tier) => durationDays >= tier.min_days);
-  if (lowerTier) return lowerTier.price_per_day;
-
-  return normalized[0].price_per_day;
-}
-
-function getMatchingTierForDuration(
-  durationDays: number,
-  tiers?: PricingTier[] | null,
-): PricingTier | null {
-  if (durationDays <= 0) return null;
-  const normalized = normalizePricingTiers(tiers);
-  if (normalized.length === 0) return null;
-
-  const exactMatch = normalized.find(
-    (tier) => durationDays >= tier.min_days && durationDays <= tier.max_days,
-  );
-  if (exactMatch) return exactMatch;
-
-  const lowerTier = [...normalized]
-    .reverse()
-    .find((tier) => durationDays >= tier.min_days);
-  if (lowerTier) return lowerTier;
-
-  return normalized[0];
-}
-
 
 // Lightweight email shape check — good enough to catch typos without rejecting
 // valid-but-unusual addresses.
@@ -253,15 +182,17 @@ export default function CarDetailPage() {
     return "hover:bg-ink/[0.05] cursor-pointer text-ink";
   }
 
-  const totalDays =
-    startDate && endDate ? getDaysBetween(startDate, endDate) : 0;
+  // Authoritative quote shared with the server (single source of truth for
+  // pricing). Recomputed from the selected range; cheap, pure, no need to memo.
+  const quote =
+    car && startDate && endDate
+      ? computeQuote(car, formatDateOnly(startDate), formatDateOnly(endDate))
+      : null;
+  const totalDays = quote?.totalDays ?? 0;
   const pricingTiers = normalizePricingTiers(car?.pricing_tiers);
-  const activeTier = getMatchingTierForDuration(totalDays, pricingTiers);
-  const appliedDailyRate =
-    car && totalDays > 0
-      ? getDailyRateForDuration(totalDays, car.price_per_day, pricingTiers)
-      : (car?.price_per_day ?? 0);
-  const totalPrice = car && totalDays > 0 ? totalDays * appliedDailyRate : 0;
+  const activeTier = quote?.tier ?? null;
+  const appliedDailyRate = quote?.dailyRate ?? car?.price_per_day ?? 0;
+  const totalPrice = quote?.totalPrice ?? 0;
 
   // On a single-day rental the return time must be strictly after the pickup.
   const isSameDay =
@@ -274,7 +205,7 @@ export default function CarDetailPage() {
   // slots that are still ahead by the lead buffer. Mirrors the server check so
   // the customer can't pick a time that will be rejected on submit.
   const agencyNow = nowInTimezone();
-  const startDateStr = startDate ? toDateOnly(startDate) : null;
+  const startDateStr = startDate ? formatDateOnly(startDate) : null;
   const startIsToday = startDateStr === agencyNow.dateStr;
   const pickupSlots = startIsToday
     ? BOOKING_TIME_SLOTS.filter(
@@ -365,8 +296,8 @@ export default function CarDetailPage() {
           client_name: form.name.trim(),
           client_phone: form.phone.trim(),
           client_email: form.email.trim() || null,
-          start_date: toDateOnly(startDate),
-          end_date: toDateOnly(endDate),
+          start_date: formatDateOnly(startDate),
+          end_date: formatDateOnly(endDate),
           pickup_time: pickupTime,
           return_time: returnTime,
           notes: form.notes.trim() || null,
@@ -763,7 +694,7 @@ export default function CarDetailPage() {
                     </span>
                     <span className="text-sm font-medium text-white">
                       {startDate
-                        ? `${startDate.toLocaleDateString("fr-FR")} · ${pickupTime}`
+                        ? `${formatDateFr(startDate)} · ${pickupTime}`
                         : "—"}
                     </span>
                   </div>
@@ -773,7 +704,7 @@ export default function CarDetailPage() {
                     </span>
                     <span className="text-sm font-medium text-white">
                       {endDate
-                        ? `${endDate.toLocaleDateString("fr-FR")} · ${returnTime}`
+                        ? `${formatDateFr(endDate)} · ${returnTime}`
                         : "—"}
                     </span>
                   </div>

@@ -18,6 +18,11 @@ export const FEATURED_CARS_LIMIT = 3;
 
 export const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
+// Minimum lead time (minutes) required for a same-day pickup. Shared by the
+// booking UI (to filter selectable slots) and the API (to reject stale slots),
+// so both sides agree on what counts as "too soon".
+export const PICKUP_LEAD_MINUTES = 30;
+
 export const EMAIL_DEFAULT_PORT = 587;
 
 export const MONTHS_FR = [

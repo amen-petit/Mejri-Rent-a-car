@@ -7,21 +7,17 @@
  */
 import { useEffect, useRef, useState } from "react";
 import { MONTHS_FR, DAYS_FR } from "@/lib/constants";
+import { formatDateFr, formatDateOnly } from "@/lib/dates";
 
-function parseDate(value?: string): Date | null {
+// Parse a YYYY-MM-DD string to a LOCAL midnight Date — the calendar renders in
+// the user's own timezone, which is what a date picker should show.
+function parseLocalDate(value?: string): Date | null {
   if (!value) return null;
   const [y, m, d] = value.split("-").map(Number);
   if (!y || !m || !d) return null;
   const date = new Date(y, m - 1, d);
   date.setHours(0, 0, 0, 0);
   return date;
-}
-
-function toStr(d: Date): string {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
 }
 
 export default function DateField({
@@ -44,9 +40,9 @@ export default function DateField({
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const selected = parseDate(value);
-  const minDate = parseDate(min);
-  const maxDate = parseDate(max);
+  const selected = parseLocalDate(value);
+  const minDate = parseLocalDate(min);
+  const maxDate = parseLocalDate(max);
 
   const initial = selected ?? new Date();
   const [viewYear, setViewYear] = useState(initial.getFullYear());
@@ -112,7 +108,7 @@ export default function DateField({
   }
 
   const label = selected
-    ? selected.toLocaleDateString("fr-FR")
+    ? formatDateFr(selected)
     : placeholder;
 
   return (
@@ -183,7 +179,7 @@ export default function DateField({
                   type="button"
                   disabled={disabled}
                   onClick={() => {
-                    onChange(toStr(date));
+                    onChange(formatDateOnly(date));
                     setOpen(false);
                   }}
                   className={`flex aspect-square items-center justify-center rounded-[var(--radius-sm)] text-sm transition-colors ${

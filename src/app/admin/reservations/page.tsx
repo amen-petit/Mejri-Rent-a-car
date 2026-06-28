@@ -10,8 +10,8 @@ import { Reservation, Car } from "@/lib/types";
 import {
   RESERVATION_STATUS_LABEL,
   RESERVATION_STATUS_COLOR,
-  MS_PER_DAY,
 } from "@/lib/constants";
+import { getDaysBetweenStrings, formatDateFr } from "@/lib/dates";
 
 type ReservationWithCar = Reservation & { car?: Car };
 type StatusFilter = "all" | "pending" | "confirmed" | "cancelled";
@@ -233,13 +233,6 @@ export default function AdminReservations() {
     }
   }
 
-  function getDays(start: string, end: string) {
-    return (
-      Math.ceil(
-        (new Date(end).getTime() - new Date(start).getTime()) / MS_PER_DAY,
-      ) + 1
-    );
-  }
 
   // Skeleton only on the very first load (no data yet); later refetches keep the
   // current list visible under a subtle busy overlay so the view doesn't flash.
@@ -481,7 +474,7 @@ export default function AdminReservations() {
             aria-busy={showBusy}
           >
             {reservations.map((r) => {
-              const days = getDays(r.start_date, r.end_date);
+              const days = getDaysBetweenStrings(r.start_date, r.end_date);
               const car = r.car;
               return (
                 <div
@@ -518,8 +511,8 @@ export default function AdminReservations() {
                         <div className="mt-1 text-xs text-stone">
                           {car ? `${car.brand} ${car.name}` : "Véhicule supprimé"}{" "}
                           ·{" "}
-                          {new Date(r.start_date).toLocaleDateString("fr-FR")} →{" "}
-                          {new Date(r.end_date).toLocaleDateString("fr-FR")} ({days}j)
+                          {formatDateFr(r.start_date)} →{" "}
+                          {formatDateFr(r.end_date)} ({days}j)
                         </div>
                         <div className="text-xs text-ash">{r.client_phone}</div>
                       </div>
@@ -622,19 +615,19 @@ export default function AdminReservations() {
                       ["Email", selected.client_email || "—"],
                       [
                         "Arrivée",
-                        `${new Date(selected.start_date).toLocaleDateString("fr-FR")}${selected.pickup_time ? ` à ${selected.pickup_time.slice(0, 5)}` : ""}`,
+                        `${formatDateFr(selected.start_date)}${selected.pickup_time ? ` à ${selected.pickup_time.slice(0, 5)}` : ""}`,
                       ],
                       [
                         "Départ",
-                        `${new Date(selected.end_date).toLocaleDateString("fr-FR")}${selected.return_time ? ` à ${selected.return_time.slice(0, 5)}` : ""}`,
+                        `${formatDateFr(selected.end_date)}${selected.return_time ? ` à ${selected.return_time.slice(0, 5)}` : ""}`,
                       ],
                       [
                         "Durée",
-                        `${getDays(selected.start_date, selected.end_date)} jour${getDays(selected.start_date, selected.end_date) > 1 ? "s" : ""}`,
+                        `${getDaysBetweenStrings(selected.start_date, selected.end_date)} jour${getDaysBetweenStrings(selected.start_date, selected.end_date) > 1 ? "s" : ""}`,
                       ],
                       [
                         "Demande le",
-                        new Date(selected.created_at).toLocaleDateString("fr-FR"),
+                        formatDateFr(selected.created_at),
                       ],
                     ].map(([label, value]) => (
                       <div

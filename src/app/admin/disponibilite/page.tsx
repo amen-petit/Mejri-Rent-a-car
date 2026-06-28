@@ -10,24 +10,13 @@ import type {
 import {
   RESERVATION_STATUS_LABEL,
   RESERVATION_STATUS_COLOR,
-  MS_PER_DAY,
 } from "@/lib/constants";
+import { getDaysBetweenStrings, formatDateFr } from "@/lib/dates";
 
 type Mode = "date" | "range";
 
 function todayStr(): string {
   return new Date().toISOString().split("T")[0];
-}
-
-function formatFr(date: string): string {
-  return new Date(date).toLocaleDateString("fr-FR");
-}
-
-function getDays(start: string, end: string): number {
-  return (
-    Math.round((new Date(end).getTime() - new Date(start).getTime()) / MS_PER_DAY) +
-    1
-  );
 }
 
 function StatCard({
@@ -152,7 +141,7 @@ function CarRow({ entry, isRange }: { entry: CarAvailability; isRange: boolean }
       {open && hasReservations && (
         <div className="flex flex-col gap-3 border-t border-mist bg-paper px-5 py-4">
           {entry.reservations.map((r) => {
-            const days = getDays(r.start_date, r.end_date);
+            const days = getDaysBetweenStrings(r.start_date, r.end_date);
             return (
               <div
                 key={r.id}
@@ -161,9 +150,9 @@ function CarRow({ entry, isRange }: { entry: CarAvailability; isRange: boolean }
                 <div className="min-w-0">
                   <div className="text-sm font-medium text-ink">{r.client_name}</div>
                   <div className="mt-1 text-xs text-stone">
-                    {formatFr(r.start_date)}
+                    {formatDateFr(r.start_date)}
                     {r.pickup_time ? ` ${r.pickup_time.slice(0, 5)}` : ""} →{" "}
-                    {formatFr(r.end_date)}
+                    {formatDateFr(r.end_date)}
                     {r.return_time ? ` ${r.return_time.slice(0, 5)}` : ""} ({days}j)
                   </div>
                   <div className="mt-0.5 text-xs text-ash">{r.client_phone}</div>
@@ -304,12 +293,12 @@ export default function AdminAvailability() {
             <div className="text-sm text-stone">
               {data.isRange ? (
                 <>
-                  Du <span className="font-medium text-ink">{formatFr(data.windowStart)}</span>{" "}
-                  au <span className="font-medium text-ink">{formatFr(data.windowEnd)}</span>
+                  Du <span className="font-medium text-ink">{formatDateFr(data.windowStart)}</span>{" "}
+                  au <span className="font-medium text-ink">{formatDateFr(data.windowEnd)}</span>
                 </>
               ) : (
                 <>
-                  Le <span className="font-medium text-ink">{formatFr(data.windowStart)}</span>
+                  Le <span className="font-medium text-ink">{formatDateFr(data.windowStart)}</span>
                 </>
               )}
             </div>

@@ -4,6 +4,7 @@ import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { reservationStatusSchema } from "@/lib/validation";
 import { sendReservationEmails } from "@/lib/email";
 import { auditLog } from "@/lib/audit";
+import { formatDateFr } from "@/lib/dates";
 import { BRAND_NAME } from "@/lib/constants";
 
 export const runtime = "nodejs";
@@ -56,8 +57,8 @@ export async function PATCH(req: Request, { params }: Params) {
       clientName: updated.client_name,
       clientPhone: updated.client_phone,
       clientEmail: updated.client_email ?? null,
-      startDate: new Date(updated.start_date).toLocaleDateString("fr-FR"),
-      endDate: new Date(updated.end_date).toLocaleDateString("fr-FR"),
+      startDate: formatDateFr(updated.start_date),
+      endDate: formatDateFr(updated.end_date),
       totalPrice: updated.total_price,
       notes: updated.notes ?? null,
     }).catch((emailError) =>
