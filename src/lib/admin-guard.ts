@@ -13,12 +13,22 @@ import {
 } from "@/lib/admin-auth";
 
 export async function isAdminRequest(): Promise<boolean> {
+  return Boolean(await getAdminIdentity());
+}
+
+/**
+ * Returns the authenticated admin's identity (the session `sub`, i.e. the
+ * username) or null if the caller is not a valid admin. Use this when an action
+ * needs to be attributed to an actor — e.g. audit logging of mutations.
+ */
+export async function getAdminIdentity(): Promise<string | null> {
   const secret = process.env.ADMIN_SESSION_SECRET;
-  if (!secret) return false;
+  if (!secret) return null;
 
   const store = await cookies();
   const token = store.get(ADMIN_SESSION_COOKIE)?.value;
-  if (!token) return false;
+  if (!token) return null;
 
-  return Boolean(await verifyAdminSessionToken(token, secret));
+  const payload = await verifyAdminSessionToken(token, secret);
+  return payload?.sub ?? null;
 }

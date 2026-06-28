@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { isAdminRequest } from "@/lib/admin-guard";
+import { getAdminIdentity } from "@/lib/admin-guard";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { reservationStatusSchema } from "@/lib/validation";
 import { sendReservationEmails } from "@/lib/email";
+import { auditLog } from "@/lib/audit";
 import { BRAND_NAME } from "@/lib/constants";
 
 export const runtime = "nodejs";
@@ -10,7 +11,8 @@ export const runtime = "nodejs";
 type Params = { params: Promise<{ id: string }> };
 
 export async function PATCH(req: Request, { params }: Params) {
-  if (!(await isAdminRequest())) {
+  const actor = await getAdminIdentity();
+  if (!actor) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const { id } = await params;
@@ -39,6 +41,13 @@ export async function PATCH(req: Request, { params }: Params) {
     return NextResponse.json({ error: "Failed to update." }, { status: 500 });
   }
 
+  auditLog({
+    actor,
+    action: "reservation.status_change",
+    target: id,
+    details: { status: parsed.data.status },
+  });
+
   // Customer recipient comes from the server-loaded row, never from client input.
   if (parsed.data.status === "confirmed" || parsed.data.status === "cancelled") {
     void sendReservationEmails(parsed.data.status, {
@@ -63,7 +72,8 @@ export async function PATCH(req: Request, { params }: Params) {
 }
 
 export async function DELETE(_req: Request, { params }: Params) {
-  if (!(await isAdminRequest())) {
+  const actor = await getAdminIdentity();
+  if (!actor) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const { id } = await params;
@@ -74,6 +84,8 @@ export async function DELETE(_req: Request, { params }: Params) {
   if (error) {
     return NextResponse.json({ error: "Failed to delete." }, { status: 500 });
   }
+
+  auditLog({ actor, action: "reservation.delete", target: id });
 
   return NextResponse.json({ ok: true });
 }

@@ -1,16 +1,16 @@
-# Graph Report - new-version  (2026-06-27)
+# Graph Report - new-version  (2026-06-28)
 
 ## Corpus Check
-- 212 files · ~1,024,432 words
+- 216 files · ~1,027,695 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2162 nodes · 3501 edges · 172 communities (148 shown, 24 thin omitted)
+- 2183 nodes · 3535 edges · 177 communities (154 shown, 23 thin omitted)
 - Extraction: 95% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 156 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `10e844ad`
+- Built from commit: `ca96d454`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -183,12 +183,17 @@
 - [[_COMMUNITY_Community 166|Community 166]]
 - [[_COMMUNITY_Community 167|Community 167]]
 - [[_COMMUNITY_Community 168|Community 168]]
+- [[_COMMUNITY_Community 172|Community 172]]
+- [[_COMMUNITY_Community 173|Community 173]]
+- [[_COMMUNITY_Community 174|Community 174]]
+- [[_COMMUNITY_Community 175|Community 175]]
+- [[_COMMUNITY_Community 176|Community 176]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `getSupabaseAdmin()` - 23 edges
 2. `Impeccable Skill (SKILL.md)` - 20 edges
-3. `readLiveServerInfo()` - 18 edges
-4. `isAdminRequest()` - 18 edges
+3. `isAdminRequest()` - 19 edges
+4. `readLiveServerInfo()` - 18 edges
 5. `handleClick()` - 17 edges
 6. `handleKeyDown()` - 17 edges
 7. `resumeSession()` - 17 edges
@@ -219,15 +224,15 @@
 - **Design System Documentation Pipeline** — teach_product_md, document_design_md_format, extract_design_tokens, polish_design_system_discovery [INFERRED 0.85]
 - **Visual Hierarchy Through Space & Scale** — spatial_squint_test, layout_visual_hierarchy, typeset_type_scale, distill_visual_simplification [INFERRED 0.75]
 
-## Communities (172 total, 24 thin omitted)
+## Communities (177 total, 23 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.05
 Nodes (85): isMainModule(), kebab(), listSnapshotsForSlug(), main(), nowFilenameStamp(), parseFrontmatter(), readLatestSnapshot(), readTrend() (+77 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.06
-Nodes (55): Params, GET(), POST(), DELETE(), EXT_BY_MIME, Params, POST(), sniffImageMime() (+47 more)
+Cohesion: 0.19
+Nodes (16): Params, GET(), POST(), DELETE(), EXT_BY_MIME, Params, POST(), sniffImageMime() (+8 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.12
@@ -290,8 +295,8 @@ Cohesion: 0.10
 Nodes (33): bufferToBase64(), buildAnnotationsForCapture(), buildListHtml(), buildPinElement(), captureAndEmit(), captureElementToBlob(), checkpointPayload(), collectFontCssText() (+25 more)
 
 ### Community 17 - "Community 17"
-Cohesion: 0.11
-Nodes (17): BOOKING_TIME_SLOTS, CAR_CATEGORIES, DAYS_FR, FUEL_TYPES, MONTHS_FR, MONTHS_FR_SHORT, RESERVATION_STATUS_COLOR, RESERVATION_STATUS_LABEL (+9 more)
+Cohesion: 0.10
+Nodes (14): navItems, CAR_CATEGORIES, DAYS_FR, FUEL_TYPES, MONTHS_FR, MONTHS_FR_SHORT, RESERVATION_STATUS_COLOR, RESERVATION_STATUS_LABEL (+6 more)
 
 ### Community 18 - "Community 18"
 Cohesion: 0.08
@@ -362,8 +367,8 @@ Cohesion: 0.14
 Nodes (18): clearHandled(), cycleVariant(), extractContext(), handleGo(), id8(), isSessionHandled(), loadSession(), pickVariantContent() (+10 more)
 
 ### Community 35 - "Community 35"
-Cohesion: 0.23
-Nodes (12): Props, CarDetailPage(), countReservationsForDate(), getDailyRateForDuration(), getDaysBetween(), getMatchingTierForDuration(), isDateUnavailable(), normalizePricingTiers() (+4 more)
+Cohesion: 0.22
+Nodes (13): useToast(), Props, CarDetailPage(), countReservationsForDate(), getDailyRateForDuration(), getDaysBetween(), getMatchingTierForDuration(), isDateUnavailable() (+5 more)
 
 ### Community 36 - "Community 36"
 Cohesion: 0.15
@@ -442,8 +447,8 @@ Cohesion: 0.14
 Nodes (13): Accessibility & Inclusion, Brand & Personality, Interview mode, not confirmation mode, Minimum viable interview, Register (ask first; it shapes everything below), Step 1: Load current state, Step 2: Explore the codebase, Step 3: Ask strategic questions (for PRODUCT.md) (+5 more)
 
 ### Community 55 - "Community 55"
-Cohesion: 0.14
-Nodes (7): AdminAvailability(), formatFr(), getDays(), Mode, Props, CarAvailability, FleetAvailabilitySummary
+Cohesion: 0.18
+Nodes (6): AdminAvailability(), formatFr(), Mode, Props, CarAvailability, FleetAvailabilitySummary
 
 ### Community 56 - "Community 56"
 Cohesion: 0.17
@@ -634,7 +639,7 @@ Cohesion: 0.50
 Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
 ### Community 103 - "Community 103"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): adapt, argumentHint, description
 
 ### Community 104 - "Community 104"
@@ -646,7 +651,7 @@ Cohesion: 0.40
 Nodes (4): csp, nextConfig, securityHeaders, supabaseHostname
 
 ### Community 108 - "Community 108"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): animate, argumentHint, description
 
 ### Community 109 - "Community 109"
@@ -742,8 +747,8 @@ Cohesion: 0.11
 Nodes (16): Accessibility, Animation Standards Reference, Asymmetric timing, Cohesion, Debugging (recommend in reviews when feel is uncertain), Duration, Easing, Gestures & drag (+8 more)
 
 ### Community 153 - "Community 153"
-Cohesion: 0.18
-Nodes (11): ConfirmOptions, ConfirmState, FeedbackContext, FeedbackContextValue, ToastItem, ToastVariant, useConfirm(), useToast() (+3 more)
+Cohesion: 0.08
+Nodes (18): ConfirmOptions, ConfirmState, FeedbackContext, FeedbackContextValue, ToastItem, ToastVariant, useConfirm(), getDays() (+10 more)
 
 ### Community 154 - "Community 154"
 Cohesion: 0.18
@@ -797,6 +802,30 @@ Nodes (4): Beauty is leverage, Core Philosophy, Taste is trained, not innate, Un
 Cohesion: 0.50
 Nodes (4): Debugging Animations, Frame-by-frame inspection, Slow motion testing, Test on real devices
 
+### Community 167 - "Community 167"
+Cohesion: 0.21
+Nodes (14): constantTimeEqual(), Bucket, buckets, getClientIp(), getLimiter(), getRedis(), limiters, memoryRateLimit() (+6 more)
+
+### Community 172 - "Community 172"
+Cohesion: 0.23
+Nodes (10): AdminSessionPayload, createAdminSessionToken(), fromBase64Url(), importSecretKey(), signValue(), toBase64Url(), verifyAdminSessionToken(), config (+2 more)
+
+### Community 173 - "Community 173"
+Cohesion: 0.33
+Nodes (9): buildAdminHtml(), buildCustomerHtml(), buildEmailCopy(), createTransport(), EmailCopy, escapeHtml(), ReservationEmailPayload, ReservationEvent (+1 more)
+
+### Community 174 - "Community 174"
+Cohesion: 0.43
+Nodes (6): getAdminIdentity(), AuditEntry, auditLog(), DELETE(), Params, PATCH()
+
+### Community 175 - "Community 175"
+Cohesion: 0.25
+Nodes (7): BOOKING_TIME_SLOTS, bookingTime, CarInput, dateOnly, pricingTierSchema, ReservationInput, reservationStatusSchema
+
+### Community 176 - "Community 176"
+Cohesion: 0.33
+Nodes (6): GET(), sanitizeSearch(), SORT_FIELDS, SortField, Status, STATUSES
+
 ## Ambiguous Edges - Review These
 - `RootLayout Component` → `@theme Design Tokens`  [AMBIGUOUS]
   src/app/layout.tsx · relation: implements
@@ -808,9 +837,9 @@ Nodes (4): Debugging Animations, Frame-by-frame inspection, Slow motion testing,
   src/app/sitemap.ts · relation: references
 
 ## Knowledge Gaps
-- **910 isolated node(s):** `eslintConfig`, `config`, `supabaseHostname`, `csp`, `securityHeaders` (+905 more)
+- **921 isolated node(s):** `eslintConfig`, `config`, `supabaseHostname`, `csp`, `securityHeaders` (+916 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **24 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -825,7 +854,7 @@ _Questions this graph is uniquely positioned to answer:_
   _Edge tagged AMBIGUOUS (relation: references) - confidence is low._
 - **Why does `Design Engineering` connect `Community 155` to `Community 160`, `Community 161`, `Community 162`, `Community 163`, `Community 165`, `Community 166`, `Community 156`, `Community 157`, `Community 158`, `Community 159`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
+- **Why does `getSupabaseAdmin()` connect `Community 1` to `Community 176`, `Community 43`, `Community 174`, `Community 167`?**
+  _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Why does `readLiveServerInfo()` connect `Community 0` to `Community 6`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `Spring Animations` connect `Community 163` to `Community 155`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._

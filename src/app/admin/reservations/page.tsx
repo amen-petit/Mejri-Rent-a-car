@@ -1,9 +1,11 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import CarGlyph from "@/components/icons/CarGlyph";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { useToast, useConfirm } from "@/components/Feedback";
+import Select from "@/components/ui/Select";
+import DateField from "@/components/ui/DateField";
 import { Reservation, Car } from "@/lib/types";
 import {
   RESERVATION_STATUS_LABEL,
@@ -12,54 +14,176 @@ import {
 } from "@/lib/constants";
 
 type ReservationWithCar = Reservation & { car?: Car };
+type StatusFilter = "all" | "pending" | "confirmed" | "cancelled";
+type Counts = { all: number; pending: number; confirmed: number; cancelled: number };
+
+const EMPTY_COUNTS: Counts = { all: 0, pending: 0, confirmed: 0, cancelled: 0 };
+const PAGE_SIZE_OPTIONS = [10, 20, 50, 100] as const;
+const SEARCH_DEBOUNCE_MS = 300;
+
+// UI sort presets → (column, direction). Keeps the control simple while the
+// server validates the underlying field against its own whitelist.
+const SORT_OPTIONS = [
+  { key: "recent", label: "Plus récentes", field: "created_at", dir: "desc" },
+  { key: "oldest", label: "Plus anciennes", field: "created_at", dir: "asc" },
+  { key: "start", label: "Date de début", field: "start_date", dir: "asc" },
+  { key: "price", label: "Prix (élevé → bas)", field: "total_price", dir: "desc" },
+  { key: "name", label: "Nom du client (A → Z)", field: "client_name", dir: "asc" },
+] as const;
+type SortKey = (typeof SORT_OPTIONS)[number]["key"];
+
+// Shared control styling for the filter toolbar — uniform height, hairline
+// border, ink focus ring. Keeps every field visually aligned.
+const controlCls =
+  "h-10 rounded-[var(--radius-sm)] border border-line bg-paper px-3 text-sm text-ink transition-colors focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10";
+const capCls =
+  "text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-ash";
 
 export default function AdminReservations() {
   const toast = useToast();
   const confirm = useConfirm();
-  const PAGE_SIZE = 20;
-  const EMPTY_COUNTS = { all: 0, pending: 0, confirmed: 0, cancelled: 0 };
 
   const [reservations, setReservations] = useState<ReservationWithCar[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<
-    "all" | "pending" | "confirmed" | "cancelled"
-  >("all");
+  const [error, setError] = useState(false);
+
+  // Filters / query state
+  const [filter, setFilter] = useState<StatusFilter>("all");
+  const [searchInput, setSearchInput] = useState("");
+  const [search, setSearch] = useState(""); // debounced value sent to the API
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [sortKey, setSortKey] = useState<SortKey>("recent");
+  const [pageSize, setPageSize] = useState<number>(20);
   const [page, setPage] = useState(1);
+  const [refreshTick, setRefreshTick] = useState(0);
+
+  // Server response state
   const [total, setTotal] = useState(0);
-  const [counts, setCounts] = useState(EMPTY_COUNTS);
+  const [counts, setCounts] = useState<Counts>(EMPTY_COUNTS);
+
+  // Interaction state
   const [selected, setSelected] = useState<ReservationWithCar | null>(null);
   const [updating, setUpdating] = useState<string | null>(null);
 
-  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  // Concurrency guards: ignore out-of-order responses + abort superseded fetches.
+  const reqIdRef = useRef(0);
+  const abortRef = useRef<AbortController | null>(null);
+  // Signature of the inputs the tab counts depend on (NOT status/sort/page/size).
+  // We only re-request the 4 count queries when this changes; updated once a
+  // response carrying counts is applied, so it's robust to strict-mode double
+  // effects and out-of-order responses.
+  const countsSigRef = useRef<string | null>(null);
 
-  async function load(targetPage = page, targetFilter = filter) {
-    setLoading(true);
-    const params = new URLSearchParams({
-      status: targetFilter,
-      page: String(targetPage),
-      pageSize: String(PAGE_SIZE),
-    });
-    const res = await fetch(`/api/admin/reservations?${params}`, {
-      cache: "no-store",
-    });
-    const data = res.ok
-      ? await res.json()
-      : { reservations: [], total: 0, counts: EMPTY_COUNTS };
-    setReservations(data.reservations || []);
-    setTotal(data.total || 0);
-    setCounts(data.counts || EMPTY_COUNTS);
-    setLoading(false);
-  }
+  const sort = useMemo(
+    () => SORT_OPTIONS.find((o) => o.key === sortKey) ?? SORT_OPTIONS[0],
+    [sortKey],
+  );
+
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const rangeStart = total === 0 ? 0 : (page - 1) * pageSize + 1;
+  const rangeEnd = Math.min(page * pageSize, total);
+
+  const hasActiveFilters =
+    filter !== "all" ||
+    search !== "" ||
+    dateFrom !== "" ||
+    dateTo !== "" ||
+    sortKey !== "recent";
+
+  // Debounce the search box so we don't fire a request on every keystroke.
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setSearch(searchInput.trim());
+      setPage(1);
+    }, SEARCH_DEBOUNCE_MS);
+    return () => clearTimeout(t);
+  }, [searchInput]);
+
+  // What the tab counts depend on (search + date window + manual refresh). They
+  // are independent of status/sort/page/pageSize, so switching tabs or paging
+  // never needs the 4 extra count queries.
+  const countsSig = JSON.stringify({ search, dateFrom, dateTo, refreshTick });
+  // Everything that should trigger a refetch of the list page.
+  const fetchSig = JSON.stringify({
+    filter,
+    search,
+    dateFrom,
+    dateTo,
+    sortKey,
+    pageSize,
+    page,
+    refreshTick,
+  });
 
   useEffect(() => {
-    load(page, filter);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, filter]);
+    const includeCounts = countsSigRef.current !== countsSig;
 
-  function changeFilter(next: typeof filter) {
+    const reqId = ++reqIdRef.current;
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    setLoading(true);
+    setError(false);
+
+    const params = new URLSearchParams({
+      status: filter,
+      page: String(page),
+      pageSize: String(pageSize),
+      sort: sort.field,
+      dir: sort.dir,
+    });
+    if (search) params.set("q", search);
+    if (dateFrom) params.set("from", dateFrom);
+    if (dateTo) params.set("to", dateTo);
+    if (includeCounts) params.set("includeCounts", "1");
+
+    fetch(`/api/admin/reservations?${params}`, {
+      cache: "no-store",
+      signal: controller.signal,
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new Error("request failed");
+        return res.json();
+      })
+      .then((data) => {
+        if (reqId !== reqIdRef.current) return; // a newer request won
+        setReservations(data.reservations || []);
+        setTotal(data.total || 0);
+        if (data.counts) {
+          setCounts(data.counts);
+          countsSigRef.current = countsSig; // counts now match this filter context
+        }
+      })
+      .catch((err) => {
+        if (controller.signal.aborted || reqId !== reqIdRef.current) return;
+        if (err?.name === "AbortError") return;
+        setError(true);
+      })
+      .finally(() => {
+        if (reqId === reqIdRef.current) setLoading(false);
+      });
+
+    return () => controller.abort();
+    // fetchSig/countsSig encode all the inputs read above.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchSig]);
+
+  function changeFilter(next: StatusFilter) {
     setSelected(null);
     setPage(1);
     setFilter(next);
+  }
+
+  function resetFilters() {
+    setFilter("all");
+    setSearchInput("");
+    setSearch("");
+    setDateFrom("");
+    setDateTo("");
+    setSortKey("recent");
+    setPage(1);
   }
 
   async function updateStatus(id: string, status: "confirmed" | "cancelled") {
@@ -79,7 +203,7 @@ export default function AdminReservations() {
           : "Réservation annulée. Le client a été notifié.",
         "success",
       );
-      load(page, filter);
+      setRefreshTick((t) => t + 1);
     } catch {
       toast("La mise à jour a échoué. Veuillez réessayer.", "error");
     } finally {
@@ -103,7 +227,7 @@ export default function AdminReservations() {
       if (!res.ok) throw new Error("delete failed");
       setSelected(null);
       toast("Réservation supprimée.", "success");
-      load(page, filter);
+      setRefreshTick((t) => t + 1);
     } catch {
       toast("La suppression a échoué. Veuillez réessayer.", "error");
     }
@@ -117,23 +241,172 @@ export default function AdminReservations() {
     );
   }
 
+  // Skeleton only on the very first load (no data yet); later refetches keep the
+  // current list visible under a subtle busy overlay so the view doesn't flash.
+  const showSkeleton = loading && reservations.length === 0 && !error;
+  const showBusy = loading && reservations.length > 0;
+
   return (
     <div>
-      <div className="mb-10">
-        <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
-          Réservations
-        </h1>
-        <p className="mt-3 text-sm text-stone">
-          {counts.all} réservation{counts.all > 1 ? "s" : ""} au total
-        </p>
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
+            Réservations
+          </h1>
+          <p className="mt-3 text-sm text-stone">
+            {counts.all} réservation{counts.all > 1 ? "s" : ""} au total
+          </p>
+        </div>
+        <button
+          onClick={() => setRefreshTick((t) => t + 1)}
+          disabled={loading}
+          className="inline-flex items-center gap-2 rounded-[var(--radius-sm)] border border-line px-3.5 py-2 text-sm font-medium text-stone transition-colors hover:border-ink hover:text-ink disabled:opacity-50"
+        >
+          <svg
+            className={`h-4 w-4 ${loading ? "animate-spin" : ""}`}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 12a9 9 0 1 1-3-6.7L21 8" />
+            <path d="M21 3v5h-5" />
+          </svg>
+          Actualiser
+        </button>
+      </div>
+
+      {/* Filter toolbar */}
+      <div className="card-surface mb-6 p-4 sm:p-5">
+        {/* Search — prominent, full width */}
+        <div className="relative">
+          <svg
+            className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ash"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input
+            type="search"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Rechercher un client, un téléphone, un email…"
+            aria-label="Rechercher une réservation"
+            className={`${controlCls} h-11 w-full pl-10 pr-10 [&::-webkit-search-cancel-button]:hidden`}
+          />
+          {searchInput && (
+            <button
+              onClick={() => setSearchInput("")}
+              aria-label="Effacer la recherche"
+              className="absolute right-2.5 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full text-ash transition-colors hover:bg-ink/5 hover:text-ink"
+            >
+              <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          )}
+        </div>
+
+        {/* Controls row */}
+        <div className="mt-4 flex flex-wrap items-end gap-x-5 gap-y-4">
+          {/* Period */}
+          <div className="flex items-end gap-2">
+            <div className="flex flex-col gap-1.5">
+              <span className={capCls}>Période · du</span>
+              <DateField
+                value={dateFrom}
+                max={dateTo || undefined}
+                onChange={(v) => {
+                  setDateFrom(v);
+                  setPage(1);
+                }}
+                ariaLabel="Date de début de la période"
+                className="w-36"
+              />
+            </div>
+            <span className="pb-2.5 text-ash">→</span>
+            <div className="flex flex-col gap-1.5">
+              <span className={capCls}>Au</span>
+              <DateField
+                value={dateTo}
+                min={dateFrom || undefined}
+                onChange={(v) => {
+                  setDateTo(v);
+                  setPage(1);
+                }}
+                ariaLabel="Date de fin de la période"
+                className="w-36"
+              />
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="hidden h-10 w-px self-end bg-mist sm:block" />
+
+          {/* Sort */}
+          <div className="flex flex-col gap-1.5">
+            <span className={capCls}>Trier par</span>
+            <Select
+              value={sortKey}
+              onChange={(v) => {
+                setSortKey(v as SortKey);
+                setPage(1);
+              }}
+              options={SORT_OPTIONS.map((o) => ({ value: o.key, label: o.label }))}
+              ariaLabel="Trier les réservations"
+              className="w-52"
+            />
+          </div>
+
+          {/* Page size */}
+          <div className="flex flex-col gap-1.5">
+            <span className={capCls}>Par page</span>
+            <Select
+              value={String(pageSize)}
+              onChange={(v) => {
+                setPageSize(Number(v));
+                setPage(1);
+              }}
+              options={PAGE_SIZE_OPTIONS.map((n) => ({
+                value: String(n),
+                label: String(n),
+              }))}
+              ariaLabel="Réservations par page"
+              className="w-24"
+            />
+          </div>
+
+          {/* Reset */}
+          {hasActiveFilters && (
+            <button
+              onClick={resetFilters}
+              className="ml-auto inline-flex h-10 items-center gap-1.5 self-end rounded-[var(--radius-sm)] px-3 text-xs font-medium text-stone transition-colors hover:bg-ink/[0.04] hover:text-ink"
+            >
+              <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+                <path d="M3 3v5h5" />
+              </svg>
+              Réinitialiser
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Filter tabs */}
-      <div className="mb-8 flex flex-wrap gap-2">
+      <div className="mb-6 flex flex-wrap gap-2">
         {(["all", "pending", "confirmed", "cancelled"] as const).map((f) => (
           <button
             key={f}
             onClick={() => changeFilter(f)}
+            aria-pressed={filter === f}
             className={`flex items-center gap-2 rounded-[var(--radius-sm)] px-4 py-2 text-sm font-medium transition-colors active:scale-[0.97] ${
               filter === f
                 ? "bg-ink text-paper"
@@ -152,25 +425,61 @@ export default function AdminReservations() {
         ))}
       </div>
 
-      {loading ? (
+      {/* Result summary */}
+      {!showSkeleton && !error && total > 0 && (
+        <p className="mb-4 text-xs text-ash" aria-live="polite">
+          {rangeStart}–{rangeEnd} sur {total}
+        </p>
+      )}
+
+      {showSkeleton ? (
         <div className="space-y-3">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="h-20 animate-pulse rounded-[var(--radius-lg)] bg-mist" />
           ))}
         </div>
+      ) : error ? (
+        <div className="border border-mist bg-cloud py-24 text-center">
+          <div className="font-display text-2xl font-medium text-ink">
+            Impossible de charger les réservations
+          </div>
+          <div className="mt-2 text-sm text-stone">
+            Une erreur est survenue. Vérifiez votre connexion, puis réessayez.
+          </div>
+          <button
+            onClick={() => setRefreshTick((t) => t + 1)}
+            className="btn-primary mt-7"
+          >
+            Réessayer
+          </button>
+        </div>
       ) : reservations.length === 0 ? (
         <div className="border border-mist bg-cloud py-24 text-center">
           <div className="font-display text-2xl font-medium text-ink">
-            Aucune réservation
+            {hasActiveFilters
+              ? "Aucune réservation trouvée"
+              : "Aucune réservation"}
           </div>
           <div className="mt-2 text-sm text-stone">
-            Les réservations apparaîtront ici.
+            {hasActiveFilters
+              ? "Essayez d'ajuster votre recherche ou vos filtres."
+              : "Les réservations apparaîtront ici."}
           </div>
+          {hasActiveFilters && (
+            <button onClick={resetFilters} className="btn-outline mt-7">
+              Réinitialiser les filtres
+            </button>
+          )}
         </div>
       ) : (
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
           {/* List */}
-          <div className="flex min-w-0 flex-col gap-3">
+          <div
+            className={`flex min-w-0 flex-col gap-3 transition-opacity ${
+              showBusy ? "pointer-events-none opacity-60" : "opacity-100"
+            }`}
+            aria-busy={showBusy}
+          >
             {reservations.map((r) => {
               const days = getDays(r.start_date, r.end_date);
               const car = r.car;
@@ -178,7 +487,15 @@ export default function AdminReservations() {
                 <div
                   key={r.id}
                   onClick={() => setSelected(r)}
-                  className={`cursor-pointer rounded-[var(--radius-lg)] border bg-cloud p-5 transition-colors ${
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelected(r);
+                    }
+                  }}
+                  className={`cursor-pointer rounded-[var(--radius-lg)] border bg-cloud p-5 transition-colors focus:outline-none focus-visible:border-ink focus-visible:ring-2 focus-visible:ring-ink/20 ${
                     selected?.id === r.id
                       ? "border-ink bg-ink/[0.03]"
                       : "border-mist hover:border-ink"
@@ -194,12 +511,13 @@ export default function AdminReservations() {
                         )}
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <div className="text-sm font-medium text-ink">
-                          {r.client_name}
+                          {r.client_name || "Client inconnu"}
                         </div>
                         <div className="mt-1 text-xs text-stone">
-                          {car?.brand} {car?.name} ·{" "}
+                          {car ? `${car.brand} ${car.name}` : "Véhicule supprimé"}{" "}
+                          ·{" "}
                           {new Date(r.start_date).toLocaleDateString("fr-FR")} →{" "}
                           {new Date(r.end_date).toLocaleDateString("fr-FR")} ({days}j)
                         </div>
@@ -267,6 +585,7 @@ export default function AdminReservations() {
                       onClick={() => setSelected(null)}
                       className="flex h-8 w-8 items-center justify-center rounded-full text-ash transition-colors hover:bg-ink/5 hover:text-ink"
                       title="Fermer"
+                      aria-label="Fermer les détails"
                     >
                       <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
                         <path d="M18 6L6 18M6 6l12 12" />
@@ -285,7 +604,9 @@ export default function AdminReservations() {
                     </div>
                     <div>
                       <div className="text-sm font-medium text-ink">
-                        {selected.car?.brand} {selected.car?.name}
+                        {selected.car
+                          ? `${selected.car.brand} ${selected.car.name}`
+                          : "Véhicule supprimé"}
                       </div>
                       <div className="mt-0.5 font-display text-base text-ink">
                         {selected.total_price} DT
