@@ -4,10 +4,16 @@
  * Accessible custom date input. The native date picker's calendar popup can't
  * be styled, so we render our own editorial calendar popover. Value is a
  * "YYYY-MM-DD" string (or "" when empty); min/max bound the selectable range.
+ *
+ * The popover is rendered in a PORTAL with fixed positioning so it can never be
+ * clipped by an ancestor's `overflow-hidden` (e.g. the hero section) or trapped
+ * behind a sibling's stacking context. It follows the trigger on scroll/resize.
  */
 import { useEffect, useRef, useState } from "react";
-import { MONTHS_FR, DAYS_FR } from "@/lib/constants";
-import { formatDateFr, formatDateOnly } from "@/lib/dates";
+import { createPortal } from "react-dom";
+import { formatDateOnly } from "@/lib/dates";
+import { useI18n } from "@/i18n/client";
+import { formatDate, monthName, weekdayLabels } from "@/i18n/format";
 
 // Parse a YYYY-MM-DD string to a LOCAL midnight Date — the calendar renders in
 // the user's own timezone, which is what a date picker should show.
@@ -20,13 +26,16 @@ function parseLocalDate(value?: string): Date | null {
   return date;
 }
 
+const POPOVER_WIDTH = 288; // px (18rem)
+const POPOVER_EST_HEIGHT = 380; // px, only to decide whether to flip upward
+
 export default function DateField({
   value,
   onChange,
   min,
   max,
   ariaLabel,
-  placeholder = "jj/mm/aaaa",
+  placeholder,
   className = "",
 }: {
   value: string;
@@ -37,8 +46,13 @@ export default function DateField({
   placeholder?: string;
   className?: string;
 }) {
+  const { t, locale } = useI18n();
   const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState<{ top: number; left: number } | null>(
+    null,
+  );
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
 
   const selected = parseLocalDate(value);
   const minDate = parseLocalDate(min);
@@ -48,13 +62,49 @@ export default function DateField({
   const [viewYear, setViewYear] = useState(initial.getFullYear());
   const [viewMonth, setViewMonth] = useState(initial.getMonth());
 
-  // Close on outside click / Escape.
+  // Position the portalled popover under (or above) the trigger, clamped to the
+  // viewport, and keep it attached while open.
+  useEffect(() => {
+    if (!open) {
+      setCoords(null);
+      return;
+    }
+    const update = () => {
+      const el = triggerRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const gap = 6;
+      const width = Math.min(POPOVER_WIDTH, window.innerWidth - 16);
+      let left = Math.min(rect.left, window.innerWidth - width - 8);
+      left = Math.max(8, left);
+      let top = rect.bottom + gap;
+      // Flip above the field if there isn't room below but there is above.
+      if (
+        top + POPOVER_EST_HEIGHT > window.innerHeight &&
+        rect.top - gap - POPOVER_EST_HEIGHT > 0
+      ) {
+        top = rect.top - gap - POPOVER_EST_HEIGHT;
+      }
+      top = Math.max(8, top);
+      setCoords({ top, left });
+    };
+    update();
+    window.addEventListener("scroll", update, true);
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update, true);
+      window.removeEventListener("resize", update);
+    };
+  }, [open]);
+
+  // Close on outside click (accounting for the portalled popover) / Escape.
   useEffect(() => {
     if (!open) return;
     const onDoc = (e: MouseEvent) => {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
+      const target = e.target as Node;
+      if (triggerRef.current?.contains(target)) return;
+      if (popoverRef.current?.contains(target)) return;
+      setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
@@ -108,12 +158,115 @@ export default function DateField({
   }
 
   const label = selected
-    ? formatDateFr(selected)
-    : placeholder;
+    ? formatDate(selected, locale)
+    : (placeholder ?? t.booking.datePlaceholder);
+
+  const popover =
+    open && coords
+      ? createPortal(
+          <div
+            ref={popoverRef}
+            role="dialog"
+            aria-label={ariaLabel}
+            style={{
+              position: "fixed",
+              top: coords.top,
+              left: coords.left,
+              width: POPOVER_WIDTH,
+            }}
+            className="z-[60] max-w-[calc(100vw-1rem)] rounded-[var(--radius)] border border-mist bg-paper p-3 shadow-md"
+          >
+            {/* Month nav */}
+            <div className="mb-2 flex items-center justify-between">
+              <button
+                type="button"
+                onClick={prevMonth}
+                aria-label={t.carDetail.prevMonth}
+                className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
+              >
+                <svg className="h-4 w-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+              </button>
+              <span className="font-display text-sm font-medium capitalize text-ink">
+                {monthName(viewYear, viewMonth, locale)} {viewYear}
+              </span>
+              <button
+                type="button"
+                onClick={nextMonth}
+                aria-label={t.carDetail.nextMonth}
+                className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
+              >
+                <svg className="h-4 w-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+              </button>
+            </div>
+
+            {/* Weekday header */}
+            <div className="mb-1 grid grid-cols-7">
+              {weekdayLabels(locale).map((d, i) => (
+                <div key={i} className="py-1 text-center text-[0.55rem] font-semibold uppercase tracking-[0.08em] text-ash">
+                  {d}
+                </div>
+              ))}
+            </div>
+
+            {/* Days */}
+            <div className="grid grid-cols-7 gap-0.5">
+              {calDays.map((date, i) => {
+                if (!date) return <span key={i} />;
+                const isSelected =
+                  selected && date.toDateString() === selected.toDateString();
+                const disabled = isDisabled(date);
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => {
+                      onChange(formatDateOnly(date));
+                      setOpen(false);
+                    }}
+                    className={`flex aspect-square items-center justify-center rounded-[var(--radius-sm)] text-sm transition-colors ${
+                      isSelected
+                        ? "bg-ink font-medium text-paper"
+                        : disabled
+                          ? "cursor-not-allowed text-ash/50"
+                          : "text-ink hover:bg-ink/[0.06]"
+                    }`}
+                  >
+                    {date.getDate()}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Footer */}
+            <div className="mt-2 flex items-center justify-between border-t border-mist pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  onChange("");
+                  setOpen(false);
+                }}
+                className="text-xs font-medium text-stone transition-colors hover:text-ink"
+              >
+                {t.booking.clear}
+              </button>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="text-xs font-medium text-stone transition-colors hover:text-ink"
+              >
+                {t.booking.close}
+              </button>
+            </div>
+          </div>,
+          document.body,
+        )
+      : null;
 
   return (
-    <div ref={rootRef} className={`relative ${className}`}>
+    <div className={`relative ${className}`}>
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="dialog"
@@ -128,96 +281,7 @@ export default function DateField({
         </svg>
       </button>
 
-      {open && (
-        <div
-          role="dialog"
-          aria-label={ariaLabel}
-          className="absolute z-30 mt-1.5 w-[18rem] rounded-[var(--radius)] border border-mist bg-paper p-3 shadow-md"
-        >
-          {/* Month nav */}
-          <div className="mb-2 flex items-center justify-between">
-            <button
-              type="button"
-              onClick={prevMonth}
-              aria-label="Mois précédent"
-              className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
-            >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
-            </button>
-            <span className="font-display text-sm font-medium text-ink">
-              {MONTHS_FR[viewMonth]} {viewYear}
-            </span>
-            <button
-              type="button"
-              onClick={nextMonth}
-              aria-label="Mois suivant"
-              className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
-            >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
-            </button>
-          </div>
-
-          {/* Weekday header */}
-          <div className="mb-1 grid grid-cols-7">
-            {DAYS_FR.map((d) => (
-              <div key={d} className="py-1 text-center text-[0.55rem] font-semibold uppercase tracking-[0.08em] text-ash">
-                {d}
-              </div>
-            ))}
-          </div>
-
-          {/* Days */}
-          <div className="grid grid-cols-7 gap-0.5">
-            {calDays.map((date, i) => {
-              if (!date) return <span key={i} />;
-              const isSelected =
-                selected && date.toDateString() === selected.toDateString();
-              const disabled = isDisabled(date);
-              return (
-                <button
-                  key={i}
-                  type="button"
-                  disabled={disabled}
-                  onClick={() => {
-                    onChange(formatDateOnly(date));
-                    setOpen(false);
-                  }}
-                  className={`flex aspect-square items-center justify-center rounded-[var(--radius-sm)] text-sm transition-colors ${
-                    isSelected
-                      ? "bg-ink font-medium text-paper"
-                      : disabled
-                        ? "cursor-not-allowed text-ash/50"
-                        : "text-ink hover:bg-ink/[0.06]"
-                  }`}
-                >
-                  {date.getDate()}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Footer */}
-          <div className="mt-2 flex items-center justify-between border-t border-mist pt-2">
-            <button
-              type="button"
-              onClick={() => {
-                onChange("");
-                setOpen(false);
-              }}
-              className="text-xs font-medium text-stone transition-colors hover:text-ink"
-            >
-              Effacer
-            </button>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="text-xs font-medium text-stone transition-colors hover:text-ink"
-            >
-              Fermer
-            </button>
-          </div>
-        </div>
-      )}
+      {popover}
     </div>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import TimeSlotPicker from "@/components/TimeSlotPicker";
 import Navbar from "@/components/Navbar";
+import SegmentedControl from "@/components/ui/SegmentedControl";
 import { useToast } from "@/components/Feedback";
 import CarGlyph from "@/components/icons/CarGlyph";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
@@ -15,9 +16,13 @@ import {
   DEFAULT_PICKUP_TIME,
   DEFAULT_RETURN_TIME,
   PICKUP_LEAD_MINUTES,
+  RENTAL_LOCATIONS,
+  DEFAULT_RENTAL_LOCATION,
+  type RentalLocation,
 } from "@/lib/constants";
 import { computeQuote, normalizePricingTiers } from "@/lib/pricing";
 import { formatDateOnly } from "@/lib/dates";
+import { parseBookingSearch } from "@/lib/booking-search";
 import { isPickupInPast, nowInTimezone, timeToMinutes } from "@/lib/time";
 import { useI18n } from "@/i18n/client";
 import {
@@ -27,6 +32,15 @@ import {
   plural,
   weekdayLabels,
 } from "@/i18n/format";
+
+/** Parse "YYYY-MM-DD" to a LOCAL-midnight Date (the calendar works in local time). */
+function parseLocalYmd(value: string): Date | null {
+  const [y, m, d] = value.split("-").map(Number);
+  if (!y || !m || !d) return null;
+  const date = new Date(y, m - 1, d);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
 
 function isDateInRange(date: Date, start: Date, end: Date) {
   return date >= start && date <= end;
@@ -57,11 +71,19 @@ function isDateUnavailable(
 // valid-but-unusual addresses.
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function CarDetailPage() {
+function CarDetailPageContent() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const toast = useToast();
   const { t, locale } = useI18n();
+
+  // Search carried over from the hero/results (dates + locations). Used to
+  // pre-fill the calendar and location choices; still fully editable here.
+  const presetSearch = useMemo(
+    () => parseBookingSearch((key) => searchParams.get(key)),
+    [searchParams],
+  );
 
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState(true);
@@ -80,6 +102,18 @@ export default function CarDetailPage() {
   const [hoverDate, setHoverDate] = useState<Date | null>(null);
   const [pickupTime, setPickupTime] = useState<string>(DEFAULT_PICKUP_TIME);
   const [returnTime, setReturnTime] = useState<string>(DEFAULT_RETURN_TIME);
+
+  // Pickup / return locations (prefilled from the search, editable here).
+  const [pickupLocation, setPickupLocation] = useState<RentalLocation>(
+    presetSearch?.pickup ?? DEFAULT_RENTAL_LOCATION,
+  );
+  const [returnLocation, setReturnLocation] = useState<RentalLocation>(
+    presetSearch?.return ?? presetSearch?.pickup ?? DEFAULT_RENTAL_LOCATION,
+  );
+  const [differentReturn, setDifferentReturn] = useState(
+    !!presetSearch && presetSearch.return !== presetSearch.pickup,
+  );
+  const presetAppliedRef = useRef(false);
 
   // Booking form
   const [showForm, setShowForm] = useState(false);
@@ -119,6 +153,21 @@ export default function CarDetailPage() {
   useEffect(() => {
     loadCar();
   }, [loadCar]);
+
+  // Prefill the calendar from the search (once). The results page already
+  // guaranteed this car is available for that window, so the dates are safe.
+  useEffect(() => {
+    if (presetAppliedRef.current || !presetSearch) return;
+    const start = parseLocalYmd(presetSearch.start);
+    const end = parseLocalYmd(presetSearch.end);
+    if (start && end) {
+      setStartDate(start);
+      setEndDate(end);
+      setViewYear(start.getFullYear());
+      setViewMonth(start.getMonth());
+    }
+    presetAppliedRef.current = true;
+  }, [presetSearch]);
 
   // Build calendar days
   const firstDay = new Date(viewYear, viewMonth, 1);
@@ -304,6 +353,8 @@ export default function CarDetailPage() {
           end_date: formatDateOnly(endDate),
           pickup_time: pickupTime,
           return_time: returnTime,
+          pickup_location: pickupLocation,
+          return_location: differentReturn ? returnLocation : pickupLocation,
           notes: form.notes.trim() || null,
         }),
       });
@@ -386,6 +437,14 @@ export default function CarDetailPage() {
     [t.carDetail.fuel, t.enums.fuel[car.fuel_type] ?? car.fuel_type],
     [t.carDetail.seats, `${car.seats}`],
   ];
+
+  const locationOptions = RENTAL_LOCATIONS.map((value) => ({
+    value,
+    label: t.booking.locations[value] ?? value,
+  }));
+  const effectiveReturnLocation = differentReturn
+    ? returnLocation
+    : pickupLocation;
 
   return (
     <main className="min-h-screen bg-paper">
@@ -701,6 +760,57 @@ export default function CarDetailPage() {
                 )}
               </div>
 
+              {/* Pickup / return locations */}
+              <div className="rounded-[var(--radius)] border border-mist bg-cloud p-5">
+                <p className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
+                  {t.booking.locationsLabel}
+                </p>
+                <div className="space-y-4">
+                  <div>
+                    <label className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone">
+                      {t.booking.pickupLocation}
+                    </label>
+                    <SegmentedControl
+                      options={locationOptions}
+                      value={pickupLocation}
+                      onChange={(value) => {
+                        setPickupLocation(value);
+                        if (!differentReturn) setReturnLocation(value);
+                      }}
+                      ariaLabel={t.booking.pickupLocation}
+                    />
+                  </div>
+
+                  <label className="inline-flex cursor-pointer items-center gap-2.5 text-sm text-stone">
+                    <input
+                      type="checkbox"
+                      checked={differentReturn}
+                      onChange={(e) => {
+                        const on = e.target.checked;
+                        setDifferentReturn(on);
+                        if (!on) setReturnLocation(pickupLocation);
+                      }}
+                      className="h-4 w-4 accent-[var(--color-ink)]"
+                    />
+                    {t.booking.differentReturn}
+                  </label>
+
+                  {differentReturn && (
+                    <div>
+                      <label className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone">
+                        {t.booking.returnLocation}
+                      </label>
+                      <SegmentedControl
+                        options={locationOptions}
+                        value={returnLocation}
+                        onChange={setReturnLocation}
+                        ariaLabel={t.booking.returnLocation}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+
               {/* Summary — ink band */}
               <div className="rounded-[var(--radius-lg)] bg-ink p-6 text-paper">
                 <div className="space-y-4 border-b border-white/10 pb-5">
@@ -722,6 +832,17 @@ export default function CarDetailPage() {
                       {endDate
                         ? `${formatDate(endDate, locale)} · ${returnTime}`
                         : "—"}
+                    </span>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
+                      {t.booking.locationsLabel}
+                    </span>
+                    <span className="text-end text-sm font-medium text-white">
+                      {t.booking.locations[pickupLocation] ?? pickupLocation}
+                      {effectiveReturnLocation !== pickupLocation
+                        ? ` → ${t.booking.locations[returnLocation] ?? returnLocation}`
+                        : ""}
                     </span>
                   </div>
                 </div>
@@ -976,5 +1097,34 @@ export default function CarDetailPage() {
         </div>
       )}
     </main>
+  );
+}
+
+// useSearchParams() (for the carried-over booking search) requires a Suspense
+// boundary. The fallback shows the same branded loading frame as the page.
+function CarDetailFallback() {
+  return (
+    <main className="min-h-screen bg-paper">
+      <Navbar />
+      <div className="mx-auto max-w-7xl animate-pulse px-5 pt-16 sm:px-8 sm:pt-20">
+        <div className="grid gap-10 lg:grid-cols-2">
+          <div className="aspect-[4/3] rounded-[var(--radius-lg)] bg-mist" />
+          <div className="space-y-4 pt-4">
+            <div className="h-3 w-24 rounded bg-mist" />
+            <div className="h-9 w-3/4 rounded bg-mist" />
+            <div className="h-4 w-full rounded bg-mist" />
+            <div className="h-4 w-2/3 rounded bg-mist" />
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default function CarDetailPage() {
+  return (
+    <Suspense fallback={<CarDetailFallback />}>
+      <CarDetailPageContent />
+    </Suspense>
   );
 }

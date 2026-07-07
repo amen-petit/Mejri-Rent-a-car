@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Car } from "@/lib/types";
 import Arrow from "@/components/icons/Arrow";
 import CarSilhouette from "@/components/icons/CarSilhouette";
+import BookingSearchCard from "@/components/BookingSearchCard";
 import { useI18n } from "@/i18n/client";
 import { interpolate } from "@/i18n/format";
 
@@ -193,7 +194,7 @@ export default function Hero({ car }: { car?: Car }) {
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-16 pt-14 sm:px-10 lg:pt-20">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center gap-10 px-5 pb-16 pt-14 sm:px-10 lg:gap-12 lg:pt-20">
         <div className="grid w-full items-center gap-y-12 lg:grid-cols-12 lg:gap-x-8">
           {/* Headline block */}
           <div ref={headlineRef} className="lg:col-span-7 will-change-transform">
@@ -369,6 +370,11 @@ export default function Hero({ car }: { car?: Car }) {
               )}
             </div>
           </div>
+        </div>
+
+        {/* Booking search card — the hero's primary action */}
+        <div style={line(720)}>
+          <BookingSearchCard variant="hero" />
         </div>
       </div>
 

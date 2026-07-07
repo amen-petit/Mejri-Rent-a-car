@@ -132,6 +132,24 @@ export const RESERVATION_STATUS_COLOR: Record<string, string> = {
   cancelled: "bg-red-50 text-red-500 border-red-200",
 };
 
+// ── Rental pickup / return locations ─────────────────────────────────────────
+// Only two fixed points exist for this agency. Modeled as a config enum (with a
+// matching DB CHECK constraint) rather than a table — simple now, and extended
+// by adding a value here + the migration. Labels are localized in the i18n
+// dictionaries (booking.locations); these are the canonical stored values.
+export const RENTAL_LOCATIONS = ["agency", "airport"] as const;
+
+export type RentalLocation = (typeof RENTAL_LOCATIONS)[number];
+
+export const DEFAULT_RENTAL_LOCATION: RentalLocation = "agency";
+
+export function isRentalLocation(value: unknown): value is RentalLocation {
+  return (
+    typeof value === "string" &&
+    (RENTAL_LOCATIONS as readonly string[]).includes(value)
+  );
+}
+
 export const CAR_CATEGORIES = [
   "Citadine",
   "Berline",

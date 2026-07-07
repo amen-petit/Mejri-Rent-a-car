@@ -130,6 +130,60 @@ export function peakConcurrentReservations(
   return peak;
 }
 
+/**
+ * Statuses that consume a physical unit for CUSTOMER-FACING availability.
+ * This mirrors the atomic booking RPC (`create_reservation_if_available`), which
+ * blocks on pending + confirmed — so the public search can never advertise a car
+ * that would then be rejected at checkout. (The admin owner view separately
+ * counts confirmed-only, because it answers a different, committed-occupancy
+ * question.)
+ */
+export const BOOKING_BLOCKING_STATUSES = ["pending", "confirmed"] as const;
+
+/**
+ * How many units of each car are still bookable for the whole [start, end]
+ * window. Pure and framework-agnostic; the search endpoint groups DB rows and
+ * calls this so the site and the booking guard agree on availability.
+ *
+ * An offline car (is_available = false) yields 0. Otherwise availableUnits =
+ * quantity − peak concurrent blocking reservations across the window.
+ */
+export function computeCarWindowAvailability<
+  C extends { id: string; quantity: number; is_available: boolean },
+>(
+  cars: C[],
+  reservations: Pick<
+    Reservation,
+    "car_id" | "start_date" | "end_date" | "status"
+  >[],
+  windowStart: string,
+  windowEnd: string,
+): { car: C; availableUnits: number }[] {
+  const blockingByCar = new Map<
+    string,
+    Pick<Reservation, "start_date" | "end_date">[]
+  >();
+  for (const r of reservations) {
+    if (!(BOOKING_BLOCKING_STATUSES as readonly string[]).includes(r.status)) {
+      continue;
+    }
+    const list = blockingByCar.get(r.car_id) ?? [];
+    list.push(r);
+    blockingByCar.set(r.car_id, list);
+  }
+
+  return cars.map((car) => {
+    if (!car.is_available) return { car, availableUnits: 0 };
+    const totalUnits = Math.max(0, Math.floor(car.quantity ?? 0));
+    const peak = peakConcurrentReservations(
+      blockingByCar.get(car.id) ?? [],
+      windowStart,
+      windowEnd,
+    );
+    return { car, availableUnits: Math.max(0, totalUnits - peak) };
+  });
+}
+
 /** Strip whitespace so "28 538 910" and "28538910" count as one customer. */
 function normalizePhone(phone: string): string {
   return phone.replace(/\s/g, "");

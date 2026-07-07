@@ -24,6 +24,8 @@ export type Car = {
   created_at: string;
 };
 
+import type { RentalLocation } from "./constants";
+
 export type Reservation = {
   id: string;
   car_id: string;
@@ -34,6 +36,8 @@ export type Reservation = {
   end_date: string;
   pickup_time: string | null;
   return_time: string | null;
+  pickup_location: RentalLocation;
+  return_location: RentalLocation;
   total_price: number;
   status: "pending" | "confirmed" | "cancelled";
   notes: string | null;

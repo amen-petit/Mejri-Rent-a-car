@@ -8,6 +8,7 @@ import {
   TRANSMISSION_OPTIONS,
   FUEL_TYPES,
   BOOKING_TIME_SLOTS,
+  RENTAL_LOCATIONS,
 } from "./constants";
 
 export const pricingTierSchema = z
@@ -52,6 +53,8 @@ const bookingTime = z
     message: "Heure invalide",
   });
 
+const rentalLocation = z.enum(RENTAL_LOCATIONS);
+
 export const reservationInputSchema = z
   .object({
     car_id: z.string().uuid(),
@@ -62,6 +65,8 @@ export const reservationInputSchema = z
     end_date: dateOnly,
     pickup_time: bookingTime,
     return_time: bookingTime,
+    pickup_location: rentalLocation,
+    return_location: rentalLocation,
     notes: z.string().trim().max(2000).nullable().optional(),
   })
   .refine((r) => r.end_date >= r.start_date, {
@@ -82,3 +87,18 @@ export type ReservationInput = z.infer<typeof reservationInputSchema>;
 export const reservationStatusSchema = z.object({
   status: z.enum(["confirmed", "cancelled", "pending"]),
 });
+
+// Availability search (hero booking card → GET /api/cars/search). Locations are
+// intentionally NOT part of this schema: they don't affect which cars are
+// available, only how the resulting reservation is fulfilled.
+export const availabilitySearchSchema = z
+  .object({
+    start: dateOnly,
+    end: dateOnly,
+  })
+  .refine((s) => s.end >= s.start, {
+    message: "end must be on or after start",
+    path: ["end"],
+  });
+
+export type AvailabilitySearch = z.infer<typeof availabilitySearchSchema>;

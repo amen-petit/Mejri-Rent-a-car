@@ -20,6 +20,8 @@ function res(overrides: Partial<Reservation> = {}): Reservation {
     end_date: "2026-06-12",
     pickup_time: null,
     return_time: null,
+    pickup_location: "agency",
+    return_location: "agency",
     total_price: 300,
     status: "confirmed",
     notes: null,

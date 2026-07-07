@@ -7,6 +7,13 @@
 import "server-only";
 import nodemailer from "nodemailer";
 import { EMAIL_DEFAULT_PORT } from "./constants";
+import { fr } from "./../i18n/dictionaries/fr";
+
+/** Localize a stored location value for the (French) notification emails. */
+function locationLabel(value?: string | null): string {
+  if (!value) return "—";
+  return fr.booking.locations[value] ?? value;
+}
 
 export type ReservationEvent = "created" | "confirmed" | "cancelled";
 
@@ -20,6 +27,8 @@ export type ReservationEmailPayload = {
   endDate: string;
   pickupTime?: string | null;
   returnTime?: string | null;
+  pickupLocation?: string | null;
+  returnLocation?: string | null;
   totalPrice: number;
   notes?: string | null;
 };
@@ -111,6 +120,8 @@ function buildAdminHtml(copy: EmailCopy, p: ReservationEmailPayload): string {
         ${row("Véhicule", `${p.carBrand} ${p.carName}`)}
         ${row("Début", p.pickupTime ? `${p.startDate} à ${p.pickupTime}` : p.startDate)}
         ${row("Fin", p.returnTime ? `${p.endDate} à ${p.returnTime}` : p.endDate)}
+        ${row("Lieu de départ", locationLabel(p.pickupLocation))}
+        ${row("Lieu de retour", locationLabel(p.returnLocation))}
         ${row("Prix total", `${p.totalPrice} DT`)}
         ${row("Notes", p.notes || "—")}
       </table>
@@ -123,6 +134,7 @@ function buildCustomerHtml(copy: EmailCopy, p: ReservationEmailPayload): string 
       <h2 style="margin:0 0 16px;">${copy.customerTitle}</h2>
       <p style="margin:0 0 12px;">${copy.customerIntro}</p>
       <p style="margin:0 0 12px;">Période: ${escapeHtml(p.startDate)}${p.pickupTime ? ` à ${escapeHtml(p.pickupTime)}` : ""} au ${escapeHtml(p.endDate)}${p.returnTime ? ` à ${escapeHtml(p.returnTime)}` : ""}</p>
+      <p style="margin:0 0 12px;">Lieu: ${escapeHtml(locationLabel(p.pickupLocation))}${p.returnLocation && p.returnLocation !== p.pickupLocation ? ` → ${escapeHtml(locationLabel(p.returnLocation))}` : ""}</p>
       <p style="margin:0 0 12px;">Prix estimé: ${p.totalPrice} DT</p>
       <p style="margin:0;">${copy.customerCta}</p>
     </div>`;

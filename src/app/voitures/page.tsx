@@ -1,23 +1,42 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import Navbar from "@/components/Navbar";
 import Arrow from "@/components/icons/Arrow";
 import CarSilhouette from "@/components/icons/CarSilhouette";
+import BookingSearchCard from "@/components/BookingSearchCard";
 import { getCars } from "@/lib/cars";
 import { Car } from "@/lib/types";
 import { useI18n } from "@/i18n/client";
 import { interpolate, plural, pluralSuffix } from "@/i18n/format";
+import {
+  buildBookingSearchParams,
+  parseBookingSearch,
+} from "@/lib/booking-search";
 
 // Internal sentinel for the "all" filter option. Kept language-independent so
 // filter logic never depends on the displayed (translated) label.
 const ALL = "__all__";
 
-export default function CarsPage() {
+function CarsPageContent() {
   const { t, locale } = useI18n();
+  const searchParams = useSearchParams();
+
+  // When the hero booking card routes here, the URL carries a validated
+  // date+location search. Its presence switches the page into "search mode":
+  // results come from the availability endpoint and links carry the search
+  // forward into the car detail page.
+  const bookingSearch = useMemo(
+    () => parseBookingSearch((key) => searchParams.get(key)),
+    [searchParams],
+  );
+  const linkSuffix = bookingSearch
+    ? `?${buildBookingSearchParams(bookingSearch)}`
+    : "";
 
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
@@ -55,16 +74,28 @@ export default function CarsPage() {
 
   const loadCars = useCallback(async () => {
     setLoadFailed(false);
+    setLoading(true);
     try {
-      const [carsData, availability] = await Promise.all([
-        getCars(),
-        fetch("/api/availability/today")
-          .then((r) => r.json())
-          .catch(() => ({ counts: {} as Record<string, number> })),
-      ]);
-
-      setCars(carsData);
-      setRentedToday(availability.counts ?? {});
+      if (bookingSearch) {
+        // Search mode: the server returns only cars bookable for the window,
+        // using the same (pending+confirmed) semantics as the booking guard.
+        const res = await fetch(
+          `/api/cars/search?start=${bookingSearch.start}&end=${bookingSearch.end}`,
+        );
+        if (!res.ok) throw new Error("search_failed");
+        const data = (await res.json()) as { cars?: Car[] };
+        setCars(data.cars ?? []);
+        setRentedToday({});
+      } else {
+        const [carsData, availability] = await Promise.all([
+          getCars(),
+          fetch("/api/availability/today")
+            .then((r) => r.json())
+            .catch(() => ({ counts: {} as Record<string, number> })),
+        ]);
+        setCars(carsData);
+        setRentedToday(availability.counts ?? {});
+      }
     } catch {
       // Distinguish a real failure from a genuinely empty catalog so we can show
       // a "try again" message instead of the misleading "no results" state.
@@ -72,7 +103,7 @@ export default function CarsPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [bookingSearch]);
 
   useEffect(() => {
     loadCars();
@@ -252,7 +283,9 @@ export default function CarsPage() {
               </p>
             </div>
 
-            {/* Live availability — hairline-separated stats */}
+            {/* Live availability — hidden in search mode, where window-specific
+                results replace today's fleet snapshot. */}
+            {!bookingSearch && (
             <div className="flex items-stretch gap-8 border-t border-mist pt-6 lg:border-t-0 lg:pt-0">
               <div className="flex flex-col justify-end">
                 <span className="inline-flex items-center gap-2 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-stone">
@@ -284,9 +317,21 @@ export default function CarsPage() {
                 </>
               )}
             </div>
+            )}
           </div>
         </div>
       </section>
+
+      {bookingSearch && (
+        <section className="border-b border-mist bg-cloud">
+          <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
+            <span className="eyebrow">{t.booking.resultsEyebrow}</span>
+            <div className="mt-4">
+              <BookingSearchCard variant="plain" initial={bookingSearch} />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Main content */}
       <section className="pb-20 pt-10">
@@ -350,16 +395,29 @@ export default function CarsPage() {
                 </button>
               </div>
             ) : filteredCars.length === 0 ? (
-              <div className="border border-mist bg-cloud p-16 text-center">
-                <CarSilhouette className="mx-auto mb-5 h-12 w-12 text-ash" />
-                <h2 className="font-display text-2xl font-medium text-ink">
-                  {t.cars.noResultsTitle}
-                </h2>
-                <p className="mt-2 text-sm text-stone">{t.cars.noResultsDesc}</p>
-                <button onClick={resetFilters} className="btn-primary mt-7">
-                  {t.cars.resetFilters}
-                </button>
-              </div>
+              bookingSearch && cars.length === 0 ? (
+                <div className="border border-mist bg-cloud p-16 text-center">
+                  <CarSilhouette className="mx-auto mb-5 h-12 w-12 text-ash" />
+                  <h2 className="font-display text-2xl font-medium text-ink">
+                    {t.booking.emptyTitle}
+                  </h2>
+                  <p className="mt-2 text-sm text-stone">{t.booking.emptyDesc}</p>
+                  <Link href="/voitures" className="btn-primary mt-7">
+                    {t.booking.seeAllFleet}
+                  </Link>
+                </div>
+              ) : (
+                <div className="border border-mist bg-cloud p-16 text-center">
+                  <CarSilhouette className="mx-auto mb-5 h-12 w-12 text-ash" />
+                  <h2 className="font-display text-2xl font-medium text-ink">
+                    {t.cars.noResultsTitle}
+                  </h2>
+                  <p className="mt-2 text-sm text-stone">{t.cars.noResultsDesc}</p>
+                  <button onClick={resetFilters} className="btn-primary mt-7">
+                    {t.cars.resetFilters}
+                  </button>
+                </div>
+              )
             ) : (
               <>
                 <p className="mb-8 text-sm text-stone">
@@ -373,7 +431,7 @@ export default function CarsPage() {
                 <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
                   {filteredCars.map((car) => (
                     <Link
-                      href={`/voitures/${car.id}`}
+                      href={`/voitures/${car.id}${linkSuffix}`}
                       key={car.id}
                       className="group block"
                     >
@@ -437,5 +495,31 @@ export default function CarsPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+// useSearchParams() requires a Suspense boundary; the fallback keeps the navbar
+// and page frame stable while the client reads the URL search.
+function CarsPageFallback() {
+  return (
+    <main className="min-h-screen overflow-x-hidden bg-paper">
+      <Navbar />
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+        <div className="h-8 w-56 animate-pulse rounded bg-mist" />
+        <div className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
+          {[...Array(6)].map((_, idx) => (
+            <div key={idx} className="aspect-[4/3] animate-pulse rounded-[var(--radius-lg)] bg-mist" />
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default function CarsPage() {
+  return (
+    <Suspense fallback={<CarsPageFallback />}>
+      <CarsPageContent />
+    </Suspense>
   );
 }

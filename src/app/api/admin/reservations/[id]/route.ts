@@ -59,6 +59,8 @@ export async function PATCH(req: Request, { params }: Params) {
       clientEmail: updated.client_email ?? null,
       startDate: formatDateFr(updated.start_date),
       endDate: formatDateFr(updated.end_date),
+      pickupLocation: updated.pickup_location ?? null,
+      returnLocation: updated.return_location ?? null,
       totalPrice: updated.total_price,
       notes: updated.notes ?? null,
     }).catch((emailError) =>

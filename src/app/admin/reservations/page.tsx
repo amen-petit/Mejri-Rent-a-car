@@ -12,6 +12,13 @@ import {
   RESERVATION_STATUS_COLOR,
 } from "@/lib/constants";
 import { getDaysBetweenStrings, formatDateFr } from "@/lib/dates";
+import { fr } from "@/i18n/dictionaries/fr";
+
+/** French label for a stored pickup/return location (admin is French-only). */
+function locationLabel(value?: string | null): string {
+  if (!value) return "—";
+  return fr.booking.locations[value] ?? value;
+}
 
 type ReservationWithCar = Reservation & { car?: Car };
 type StatusFilter = "all" | "pending" | "confirmed" | "cancelled";
@@ -621,6 +628,8 @@ export default function AdminReservations() {
                         "Départ",
                         `${formatDateFr(selected.end_date)}${selected.return_time ? ` à ${selected.return_time.slice(0, 5)}` : ""}`,
                       ],
+                      ["Lieu de départ", locationLabel(selected.pickup_location)],
+                      ["Lieu de retour", locationLabel(selected.return_location)],
                       [
                         "Durée",
                         `${getDaysBetweenStrings(selected.start_date, selected.end_date)} jour${getDaysBetweenStrings(selected.start_date, selected.end_date) > 1 ? "s" : ""}`,

@@ -74,6 +74,8 @@ export async function POST(req: Request) {
       p_end: input.end_date,
       p_pickup: input.pickup_time,
       p_return: input.return_time,
+      p_pickup_location: input.pickup_location,
+      p_return_location: input.return_location,
       p_total: quote.totalPrice,
       p_name: input.client_name,
       p_phone: input.client_phone,
@@ -100,6 +102,8 @@ export async function POST(req: Request) {
     endDate: input.end_date,
     pickupTime: input.pickup_time,
     returnTime: input.return_time,
+    pickupLocation: input.pickup_location,
+    returnLocation: input.return_location,
     totalPrice: quote.totalPrice,
     notes: input.notes ?? null,
   }).catch((error) =>
