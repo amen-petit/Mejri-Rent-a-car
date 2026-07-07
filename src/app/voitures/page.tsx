@@ -9,8 +9,16 @@ import Arrow from "@/components/icons/Arrow";
 import CarSilhouette from "@/components/icons/CarSilhouette";
 import { getCars } from "@/lib/cars";
 import { Car } from "@/lib/types";
+import { useI18n } from "@/i18n/client";
+import { interpolate, plural, pluralSuffix } from "@/i18n/format";
+
+// Internal sentinel for the "all" filter option. Kept language-independent so
+// filter logic never depends on the displayed (translated) label.
+const ALL = "__all__";
 
 export default function CarsPage() {
+  const { t, locale } = useI18n();
+
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadFailed, setLoadFailed] = useState(false);
@@ -19,9 +27,9 @@ export default function CarsPage() {
   const [rentedToday, setRentedToday] = useState<Record<string, number>>({});
 
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("Tous");
-  const [transmission, setTransmission] = useState("Tous");
-  const [fuel, setFuel] = useState("Tous");
+  const [category, setCategory] = useState(ALL);
+  const [transmission, setTransmission] = useState(ALL);
+  const [fuel, setFuel] = useState(ALL);
   const [maxPrice, setMaxPrice] = useState(500);
 
   const maxCollectionPrice = useMemo(() => {
@@ -30,21 +38,18 @@ export default function CarsPage() {
   }, [cars]);
 
   const categories = useMemo(
-    () => ["Tous", ...new Set(cars.map((car) => car.category).filter(Boolean))],
+    () => [ALL, ...new Set(cars.map((car) => car.category).filter(Boolean))],
     [cars],
   );
   const transmissions = useMemo(
     () => [
-      "Tous",
+      ALL,
       ...new Set(cars.map((car) => car.transmission).filter(Boolean)),
     ],
     [cars],
   );
   const fuels = useMemo(
-    () => [
-      "Tous",
-      ...new Set(cars.map((car) => car.fuel_type).filter(Boolean)),
-    ],
+    () => [ALL, ...new Set(cars.map((car) => car.fuel_type).filter(Boolean))],
     [cars],
   );
 
@@ -85,11 +90,11 @@ export default function CarsPage() {
         car.name.toLowerCase().includes(searchValue) ||
         car.brand.toLowerCase().includes(searchValue);
       const matchesCategory =
-        category === "Tous" ||
+        category === ALL ||
         car.category.toLowerCase() === category.toLowerCase();
       const matchesTransmission =
-        transmission === "Tous" || car.transmission === transmission;
-      const matchesFuel = fuel === "Tous" || car.fuel_type === fuel;
+        transmission === ALL || car.transmission === transmission;
+      const matchesFuel = fuel === ALL || car.fuel_type === fuel;
       const matchesPrice = car.price_per_day <= maxPrice;
 
       return (
@@ -104,9 +109,9 @@ export default function CarsPage() {
 
   const resetFilters = () => {
     setSearch("");
-    setCategory("Tous");
-    setTransmission("Tous");
-    setFuel("Tous");
+    setCategory(ALL);
+    setTransmission(ALL);
+    setFuel(ALL);
     setMaxPrice(maxCollectionPrice);
   };
 
@@ -115,6 +120,7 @@ export default function CarsPage() {
     options: string[],
     selected: string,
     onSelect: (value: string) => void,
+    translateValue: (value: string) => string,
   ) => (
     <div>
       <label className="mb-2.5 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
@@ -134,7 +140,7 @@ export default function CarsPage() {
                   : "border border-line text-stone hover:border-ink hover:text-ink"
               }`}
             >
-              {item}
+              {item === ALL ? t.cars.all : translateValue(item)}
             </button>
           );
         })}
@@ -145,41 +151,59 @@ export default function CarsPage() {
   const filterPanel = (
     <div className="card-surface p-6">
       <div className="mb-6 flex items-center justify-between border-b border-mist pb-4">
-        <h2 className="font-display text-lg font-medium text-ink">Filtres</h2>
+        <h2 className="font-display text-lg font-medium text-ink">
+          {t.cars.filters}
+        </h2>
         <button
           onClick={resetFilters}
           className="text-xs font-medium text-stone underline-offset-4 transition-colors hover:text-ink hover:underline"
         >
-          Réinitialiser
+          {t.cars.reset}
         </button>
       </div>
 
       <div className="space-y-6">
         <div>
           <label className="mb-2.5 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-            Recherche
+            {t.cars.search}
           </label>
           <input
             type="text"
-            placeholder="Marque ou modèle"
+            placeholder={t.cars.searchPlaceholder}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="input-premium"
           />
         </div>
 
-        {renderOptionGroup("Catégorie", categories, category, setCategory)}
         {renderOptionGroup(
-          "Transmission",
+          t.cars.category,
+          categories,
+          category,
+          setCategory,
+          (v) => t.enums.category[v] ?? v,
+        )}
+        {renderOptionGroup(
+          t.cars.transmission,
           transmissions,
           transmission,
           setTransmission,
+          (v) => t.enums.transmission[v] ?? v,
         )}
-        {renderOptionGroup("Carburant", fuels, fuel, setFuel)}
+        {renderOptionGroup(
+          t.cars.fuel,
+          fuels,
+          fuel,
+          setFuel,
+          (v) => t.enums.fuel[v] ?? v,
+        )}
 
         <div>
           <label className="mb-2.5 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-            Prix max — <span className="font-display text-sm text-ink">{maxPrice} DT</span>
+            {t.cars.maxPrice} —{" "}
+            <span className="font-display text-sm text-ink">
+              {maxPrice} {t.common.currency}
+            </span>
           </label>
           <input
             type="range"
@@ -191,8 +215,10 @@ export default function CarsPage() {
             className="w-full accent-ink"
           />
           <div className="mt-1.5 flex justify-between text-xs text-ash">
-            <span>50 DT</span>
-            <span>{maxCollectionPrice} DT</span>
+            <span>50 {t.common.currency}</span>
+            <span>
+              {maxCollectionPrice} {t.common.currency}
+            </span>
           </div>
         </div>
       </div>
@@ -217,12 +243,12 @@ export default function CarsPage() {
         <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-16">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <span className="eyebrow">Notre flotte</span>
+              <span className="eyebrow">{t.cars.eyebrow}</span>
               <h1 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.5rem)] font-medium tracking-tight text-ink">
-                Trouvez votre voiture
+                {t.cars.title}
               </h1>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-stone">
-                Véhicules récents, prix transparents, réservation instantanée.
+                {t.cars.subtitle}
               </p>
             </div>
 
@@ -231,7 +257,7 @@ export default function CarsPage() {
               <div className="flex flex-col justify-end">
                 <span className="inline-flex items-center gap-2 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-stone">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  En direct
+                  {t.cars.live}
                 </span>
               </div>
               {loading ? (
@@ -241,16 +267,18 @@ export default function CarsPage() {
                 </div>
               ) : (
                 <>
-                  <div className="border-l border-mist pl-8">
+                  <div className="border-s border-mist ps-8">
                     <p className="font-display text-2xl text-ink">{availableUnits}</p>
                     <p className="mt-1 text-[0.62rem] uppercase tracking-[0.16em] text-stone">
-                      Disponibles / {totalUnits}
+                      {interpolate(t.cars.availableOf, { total: totalUnits })}
                     </p>
                   </div>
-                  <div className="border-l border-mist pl-8">
-                    <p className="font-display text-2xl text-ink">{minPrice} DT</p>
+                  <div className="border-s border-mist ps-8">
+                    <p className="font-display text-2xl text-ink">
+                      {minPrice} {t.common.currency}
+                    </p>
                     <p className="mt-1 text-[0.62rem] uppercase tracking-[0.16em] text-stone">
-                      Dès / jour
+                      {t.cars.fromPerDay}
                     </p>
                   </div>
                 </>
@@ -275,10 +303,10 @@ export default function CarsPage() {
                   <line x1="8" y1="12" x2="20" y2="12" />
                   <line x1="12" y1="18" x2="20" y2="18" />
                 </svg>
-                Filtres
+                {t.cars.filters}
               </span>
               <span className="text-xs text-stone">
-                {filtersOpen ? "Masquer ↑" : "Afficher ↓"}
+                {filtersOpen ? t.cars.hideFilters : t.cars.showFilters}
               </span>
             </button>
             {filtersOpen && <div className="mb-4">{filterPanel}</div>}
@@ -308,12 +336,9 @@ export default function CarsPage() {
               <div className="border border-mist bg-cloud p-16 text-center">
                 <CarSilhouette className="mx-auto mb-5 h-12 w-12 text-ash" />
                 <h2 className="font-display text-2xl font-medium text-ink">
-                  Impossible de charger les véhicules
+                  {t.cars.loadFailedTitle}
                 </h2>
-                <p className="mt-2 text-sm text-stone">
-                  Une erreur de connexion est survenue. Vérifiez votre connexion
-                  internet et réessayez.
-                </p>
+                <p className="mt-2 text-sm text-stone">{t.cars.loadFailedDesc}</p>
                 <button
                   onClick={() => {
                     setLoading(true);
@@ -321,30 +346,28 @@ export default function CarsPage() {
                   }}
                   className="btn-primary mt-7"
                 >
-                  Réessayer
+                  {t.common.retry}
                 </button>
               </div>
             ) : filteredCars.length === 0 ? (
               <div className="border border-mist bg-cloud p-16 text-center">
                 <CarSilhouette className="mx-auto mb-5 h-12 w-12 text-ash" />
                 <h2 className="font-display text-2xl font-medium text-ink">
-                  Aucun véhicule trouvé
+                  {t.cars.noResultsTitle}
                 </h2>
-                <p className="mt-2 text-sm text-stone">
-                  Essayez d&apos;ajuster vos filtres.
-                </p>
+                <p className="mt-2 text-sm text-stone">{t.cars.noResultsDesc}</p>
                 <button onClick={resetFilters} className="btn-primary mt-7">
-                  Réinitialiser les filtres
+                  {t.cars.resetFilters}
                 </button>
               </div>
             ) : (
               <>
                 <p className="mb-8 text-sm text-stone">
-                  <span className="font-display text-base text-ink">
-                    {filteredCars.length}
-                  </span>{" "}
-                  véhicule{filteredCars.length > 1 ? "s" : ""} disponible
-                  {filteredCars.length > 1 ? "s" : ""}
+                  {interpolate(t.cars.countAvailable, {
+                    count: filteredCars.length,
+                    unit: plural(filteredCars.length, t.units.vehicle, locale),
+                    plural: pluralSuffix(filteredCars.length, locale),
+                  })}
                 </p>
 
                 <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
@@ -368,12 +391,12 @@ export default function CarsPage() {
                             <CarSilhouette className="h-14 w-14 text-ash" />
                           </div>
                         )}
-                        <span className="absolute right-3 top-3 rounded-full border border-ink/10 bg-paper/85 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.1em] text-stone backdrop-blur-sm">
-                          {car.category}
+                        <span className="absolute end-3 top-3 rounded-full border border-ink/10 bg-paper/85 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.1em] text-stone backdrop-blur-sm">
+                          {t.enums.category[car.category] ?? car.category}
                         </span>
                         {car.is_featured && (
-                          <span className="absolute left-3 top-3 rounded-full bg-ink px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-paper">
-                            Vedette
+                          <span className="absolute start-3 top-3 rounded-full bg-ink px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-paper">
+                            {t.fleet.featured}
                           </span>
                         )}
                       </div>
@@ -386,17 +409,22 @@ export default function CarsPage() {
                           {car.name}
                         </h2>
                         <p className="mt-2 text-xs text-ash">
-                          {car.transmission} · {car.fuel_type} · {car.seats} places
+                          {t.enums.transmission[car.transmission] ??
+                            car.transmission}{" "}
+                          · {t.enums.fuel[car.fuel_type] ?? car.fuel_type} ·{" "}
+                          {car.seats} {t.common.seats}
                         </p>
 
                         <div className="mt-5 flex items-end justify-between border-t border-mist pt-4">
                           <p className="font-display text-2xl text-ink">
                             {car.price_per_day}
-                            <span className="ml-1 text-sm text-ash">DT/jour</span>
+                            <span className="ms-1 text-sm text-ash">
+                              {t.common.perDay}
+                            </span>
                           </p>
                           <span className="inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors duration-200 group-hover:text-accent">
-                            Réserver
-                            <Arrow className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                            {t.cars.book}
+                            <Arrow className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
                           </span>
                         </div>
                       </div>

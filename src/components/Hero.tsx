@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import type { Car } from "@/lib/types";
 import Arrow from "@/components/icons/Arrow";
 import CarSilhouette from "@/components/icons/CarSilhouette";
+import { useI18n } from "@/i18n/client";
+import { interpolate } from "@/i18n/format";
 
 // Subtle film grain — inline SVG, desaturated fractal noise. No external asset,
 // no license risk. Gives the dark stage a tactile, "shot-on-film" quality.
@@ -16,6 +18,7 @@ const GRAIN =
   );
 
 export default function Hero({ car }: { car?: Car }) {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -185,7 +188,7 @@ export default function Hero({ car }: { car?: Car }) {
         style={{ writingMode: "vertical-rl" }}
       >
         <span className="text-[0.62rem] font-semibold uppercase tracking-[0.42em] text-white/30">
-          Location Premium — Tunisie — Est. 2019
+          {t.hero.spine}
         </span>
       </div>
 
@@ -200,7 +203,7 @@ export default function Hero({ car }: { car?: Car }) {
             >
               <span className="h-px w-8 bg-white/40" />
               <span className="text-[0.66rem] font-semibold uppercase tracking-[0.3em] text-white/55">
-                La liberté de rouler
+                {t.hero.kicker}
               </span>
             </div>
 
@@ -209,22 +212,22 @@ export default function Hero({ car }: { car?: Car }) {
                 className="block text-[clamp(3rem,8.5vw,7.5rem)]"
                 style={line(160)}
               >
-                La liberté
+                {t.hero.title1}
               </span>
               <span
-                className="block text-[clamp(3rem,8.5vw,7.5rem)] text-transparent"
+                className="hero-stroke block text-[clamp(3rem,8.5vw,7.5rem)] text-transparent"
                 style={{
                   ...line(280),
                   WebkitTextStroke: "1.4px rgba(246,244,240,0.62)",
                 }}
               >
-                de la route,
+                {t.hero.title2}
               </span>
               <span
                 className="block text-[clamp(3rem,8.5vw,7.5rem)]"
                 style={line(400)}
               >
-                sans limites
+                {t.hero.title3}
                 <span className="text-accent">.</span>
               </span>
             </h1>
@@ -233,8 +236,7 @@ export default function Hero({ car }: { car?: Car }) {
               className="mt-9 max-w-md text-base leading-relaxed text-white/60"
               style={line(560)}
             >
-              Une flotte récente, une réservation en ligne sans friction et une
-              assistance à toute heure. Choisissez. Réservez. Roulez.
+              {t.hero.subtitle}
             </p>
 
             <div
@@ -242,8 +244,8 @@ export default function Hero({ car }: { car?: Car }) {
               style={line(660)}
             >
               <Link href="/voitures" className="btn-accent px-8 py-4 text-[0.95rem]">
-                Réservez maintenant
-                <Arrow />
+                {t.hero.bookNow}
+                <Arrow className="rtl:rotate-180" />
               </Link>
               {car && (
                 <Link
@@ -251,9 +253,9 @@ export default function Hero({ car }: { car?: Car }) {
                   className="group inline-flex items-center gap-2 px-2 py-2 text-sm text-white/70 transition-colors hover:text-white"
                 >
                   <span className="border-b border-white/25 pb-0.5 transition-colors group-hover:border-white">
-                    Découvrir la {car.name}
+                    {interpolate(t.hero.discover, { name: car.name })}
                   </span>
-                  <Arrow className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                  <Arrow className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
                 </Link>
               )}
             </div>
@@ -322,7 +324,7 @@ export default function Hero({ car }: { car?: Car }) {
                     {/* Status chip */}
                     <span className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-ink/70 px-3 py-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-md">
                       <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      Disponible
+                      {t.hero.available}
                     </span>
                   </Link>
 
@@ -337,23 +339,25 @@ export default function Hero({ car }: { car?: Car }) {
                       </p>
                     </div>
                     <div className="flex shrink-0 items-center gap-4 sm:gap-5">
-                      <div className="hidden text-right sm:block">
+                      <div className="hidden text-end sm:block">
                         <p className="text-[0.55rem] uppercase tracking-[0.18em] text-white/40">
-                          {car.transmission}
+                          {t.enums.transmission[car.transmission] ??
+                            car.transmission}
                         </p>
                         <p className="mt-0.5 text-xs text-white/65">
-                          {car.fuel_type} · {car.seats} places
+                          {t.enums.fuel[car.fuel_type] ?? car.fuel_type} ·{" "}
+                          {car.seats} {t.common.seats}
                         </p>
                       </div>
                       <div className="h-9 w-px bg-white/12" />
-                      <div className="text-right">
+                      <div className="text-end">
                         <p className="text-[0.55rem] uppercase tracking-[0.18em] text-white/40">
-                          Dès
+                          {t.hero.from}
                         </p>
                         <p className="font-display text-2xl leading-none text-white">
                           {shownPrice}
-                          <span className="ml-1 text-xs font-normal text-white/50">
-                            DT/j
+                          <span className="ms-1 text-xs font-normal text-white/50">
+                            {t.hero.perDayShort}
                           </span>
                         </p>
                       </div>
@@ -380,9 +384,9 @@ export default function Hero({ car }: { car?: Car }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-5 sm:px-10">
           <dl className="flex items-center gap-8 sm:gap-12">
             {[
-              { k: "Flotte", v: "Récente" },
-              { k: "Assistance", v: "24 / 7" },
-              { k: "Réponse", v: "< 30 min" },
+              { k: t.hero.stats.fleet, v: t.hero.stats.fleetValue },
+              { k: t.hero.stats.support, v: t.hero.stats.supportValue },
+              { k: t.hero.stats.response, v: t.hero.stats.responseValue },
             ].map((s) => (
               <div key={s.k} className="flex flex-col">
                 <dt className="text-[0.55rem] font-semibold uppercase tracking-[0.2em] text-white/35">
@@ -398,7 +402,7 @@ export default function Hero({ car }: { car?: Car }) {
             href="#how"
             className="group hidden items-center gap-2 text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-white/40 transition-colors hover:text-white sm:inline-flex"
           >
-            Défiler
+            {t.hero.scroll}
             <svg className="h-4 w-4 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 5v14M19 12l-7 7-7-7" />
             </svg>

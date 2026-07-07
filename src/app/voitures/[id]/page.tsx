@@ -10,8 +10,6 @@ import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { getCarById } from "@/lib/cars";
 import { Car } from "@/lib/types";
 import {
-  MONTHS_FR,
-  DAYS_FR,
   WHATSAPP_NUMBER,
   BOOKING_TIME_SLOTS,
   DEFAULT_PICKUP_TIME,
@@ -19,8 +17,16 @@ import {
   PICKUP_LEAD_MINUTES,
 } from "@/lib/constants";
 import { computeQuote, normalizePricingTiers } from "@/lib/pricing";
-import { formatDateOnly, formatDateFr } from "@/lib/dates";
+import { formatDateOnly } from "@/lib/dates";
 import { isPickupInPast, nowInTimezone, timeToMinutes } from "@/lib/time";
+import { useI18n } from "@/i18n/client";
+import {
+  formatDate,
+  interpolate,
+  monthName,
+  plural,
+  weekdayLabels,
+} from "@/i18n/format";
 
 function isDateInRange(date: Date, start: Date, end: Date) {
   return date >= start && date <= end;
@@ -55,6 +61,7 @@ export default function CarDetailPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
   const toast = useToast();
+  const { t, locale } = useI18n();
 
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState(true);
@@ -209,7 +216,7 @@ export default function CarDetailPage() {
   const startIsToday = startDateStr === agencyNow.dateStr;
   const pickupSlots = startIsToday
     ? BOOKING_TIME_SLOTS.filter(
-        (t) => timeToMinutes(t) > agencyNow.minutes + PICKUP_LEAD_MINUTES,
+        (slot) => timeToMinutes(slot) > agencyNow.minutes + PICKUP_LEAD_MINUTES,
       )
     : BOOKING_TIME_SLOTS;
   const noPickupSlotsToday = startIsToday && pickupSlots.length === 0;
@@ -226,7 +233,7 @@ export default function CarDetailPage() {
   useEffect(() => {
     if (!startIsToday) return;
     const valid = BOOKING_TIME_SLOTS.filter(
-      (t) => timeToMinutes(t) > agencyNow.minutes + PICKUP_LEAD_MINUTES,
+      (slot) => timeToMinutes(slot) > agencyNow.minutes + PICKUP_LEAD_MINUTES,
     );
     if (valid.length > 0 && !valid.includes(pickupTime)) {
       setPickupTime(valid[0]);
@@ -236,10 +243,10 @@ export default function CarDetailPage() {
   const bookingBlocked = timeOrderInvalid || pickupInPast || noPickupSlotsToday;
 
   const selectionHelp = !startDate
-    ? "Étape 1: Choisissez une date de début disponible."
+    ? t.carDetail.selectStart
     : !endDate
-      ? "Étape 2: Choisissez une date de fin disponible."
-      : "Étape 3: Vérifiez le total, puis confirmez la réservation.";
+      ? t.carDetail.selectEnd
+      : t.carDetail.confirmStep;
 
   // Inline form validation (shown next to the fields, not via blocking dialogs).
   const emailInvalid =
@@ -274,14 +281,11 @@ export default function CarDetailPage() {
     setSubmitError(null);
 
     if (timeOrderInvalid) {
-      toast("L'heure de retour doit être après l'heure de prise en charge.", "error");
+      toast(t.carDetail.toastReturnAfterPickup, "error");
       return;
     }
     if (pickupInPast || noPickupSlotsToday) {
-      toast(
-        "Ce créneau de prise en charge est déjà passé. Choisissez un horaire plus tard.",
-        "error",
-      );
+      toast(t.carDetail.toastSlotPassed, "error");
       return;
     }
     setSubmitting(true);
@@ -307,20 +311,18 @@ export default function CarDetailPage() {
       if (res.ok) {
         setSuccess(true);
         setShowForm(false);
-        toast("Votre demande de réservation a bien été envoyée.", "success");
+        toast(t.carDetail.toastRequestSent, "success");
       } else {
         const data = (await res.json().catch(() => ({}))) as { error?: string };
         const message =
           res.status === 429
-            ? "Vous allez un peu trop vite. Patientez un instant puis réessayez."
-            : data.error ||
-              "Nous n'avons pas pu enregistrer votre réservation. Veuillez réessayer.";
+            ? t.carDetail.toastRateLimited
+            : data.error || t.carDetail.toastSaveFailed;
         setSubmitError(message);
         toast(message, "error");
       }
     } catch {
-      const message =
-        "Problème de connexion. Vérifiez votre connexion internet et réessayez.";
+      const message = t.carDetail.toastConnection;
       setSubmitError(message);
       toast(message, "error");
     } finally {
@@ -351,13 +353,12 @@ export default function CarDetailPage() {
       <main className="min-h-screen bg-paper">
         <Navbar />
         <div className="mx-auto max-w-md px-5 py-28 text-center">
-          <span className="eyebrow">Véhicule indisponible</span>
+          <span className="eyebrow">{t.carDetail.unavailableEyebrow}</span>
           <h1 className="mt-4 font-display text-3xl font-medium text-ink">
-            Ce véhicule est introuvable
+            {t.carDetail.notFoundTitle}
           </h1>
           <p className="mt-3 text-sm leading-7 text-stone">
-            Il a peut-être été retiré, ou le lien est incorrect. Réessayez ou
-            parcourez le reste de notre flotte.
+            {t.carDetail.notFoundDesc}
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <button
@@ -367,18 +368,24 @@ export default function CarDetailPage() {
               }}
               className="btn-primary px-6 py-3"
             >
-              Réessayer
+              {t.common.retry}
             </button>
             <button
               onClick={() => router.push("/voitures")}
               className="btn-outline px-6 py-3"
             >
-              Voir les véhicules
+              {t.carDetail.viewVehicles}
             </button>
           </div>
         </div>
       </main>
     );
+
+  const specStrip: [string, string][] = [
+    [t.carDetail.transmission, t.enums.transmission[car.transmission] ?? car.transmission],
+    [t.carDetail.fuel, t.enums.fuel[car.fuel_type] ?? car.fuel_type],
+    [t.carDetail.seats, `${car.seats}`],
+  ];
 
   return (
     <main className="min-h-screen bg-paper">
@@ -389,7 +396,10 @@ export default function CarDetailPage() {
           onClick={() => router.back()}
           className="mb-10 flex items-center gap-1.5 text-sm font-medium text-stone transition-colors hover:text-ink"
         >
-          ← Retour
+          <svg className="h-4 w-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          {t.carDetail.back}
         </button>
 
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
@@ -431,11 +441,7 @@ export default function CarDetailPage() {
 
             {/* Spec strip */}
             <div className="mt-8 grid grid-cols-3 gap-px overflow-hidden rounded-[var(--radius)] border border-mist bg-mist">
-              {[
-                ["Transmission", car.transmission],
-                ["Carburant", car.fuel_type],
-                ["Places", `${car.seats}`],
-              ].map(([label, value]) => (
+              {specStrip.map(([label, value]) => (
                 <div key={label} className="bg-paper px-4 py-4">
                   <div className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-ash">
                     {label}
@@ -460,21 +466,23 @@ export default function CarDetailPage() {
 
           {/* Summary */}
           <div data-reveal="right" className="reveal-d2">
-            <span className="eyebrow">{car.category}</span>
+            <span className="eyebrow">
+              {t.enums.category[car.category] ?? car.category}
+            </span>
             <h1 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.05] tracking-tight text-ink">
               {car.brand} {car.name}
             </h1>
             <div className="mt-3 font-display text-3xl text-ink">
               {car.price_per_day}
-              <span className="ml-1.5 text-base font-normal text-stone">
-                DT / jour
+              <span className="ms-1.5 text-base font-normal text-stone">
+                {t.common.perDayFull}
               </span>
             </div>
 
             {pricingTiers.length > 0 && (
               <div className="mt-7 rounded-[var(--radius)] border border-mist bg-cloud p-5">
                 <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-                  Tarifs par durée
+                  {t.carDetail.pricingTiers}
                 </p>
                 <div className="mt-4 space-y-2">
                   {pricingTiers.map((tier) => {
@@ -495,19 +503,22 @@ export default function CarDetailPage() {
                       >
                         <span>
                           {tier.max_days === null
-                            ? `${tier.min_days} jours et +`
-                            : `${tier.min_days}–${tier.max_days} jours`}
+                            ? interpolate(t.carDetail.daysAndUp, {
+                                min: tier.min_days,
+                              })
+                            : interpolate(t.carDetail.daysRange, {
+                                min: tier.min_days,
+                                max: tier.max_days,
+                              })}
                         </span>
                         <span className="font-display text-ink">
-                          {tier.price_per_day} DT / jour
+                          {tier.price_per_day} {t.carDetail.perDayFull}
                         </span>
                       </div>
                     );
                   })}
                 </div>
-                <p className="mt-3 text-xs text-ash">
-                  Le tarif appliqué dépend de la durée totale sélectionnée.
-                </p>
+                <p className="mt-3 text-xs text-ash">{t.carDetail.tierNote}</p>
               </div>
             )}
 
@@ -518,13 +529,18 @@ export default function CarDetailPage() {
             )}
 
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour, je suis intéressé par la ${car.brand} ${car.name}`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                interpolate(t.carDetail.whatsappInterest, {
+                  brand: car.brand,
+                  name: car.name,
+                }),
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 flex w-full items-center justify-center gap-2.5 rounded-[var(--radius)] border border-ink py-3.5 text-sm font-medium text-ink transition-colors duration-200 hover:border-[#25D366] hover:bg-[#25D366] hover:text-white active:scale-[0.98]"
             >
               <WhatsAppIcon size={16} />
-              Contacter sur WhatsApp
+              {t.carDetail.contactWhatsapp}
             </a>
           </div>
         </div>
@@ -532,13 +548,11 @@ export default function CarDetailPage() {
         {/* Booking */}
         <div className="mt-20 border-t border-mist pt-16">
           <div className="mb-12 max-w-2xl">
-            <span className="eyebrow">Disponibilités</span>
+            <span className="eyebrow">{t.carDetail.availabilityEyebrow}</span>
             <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.5rem)] font-medium tracking-tight text-ink">
-              Choisissez vos dates
+              {t.carDetail.chooseDates}
             </h2>
-            <p className="mt-3 text-sm text-stone">
-              Les dates grisées sont déjà réservées.
-            </p>
+            <p className="mt-3 text-sm text-stone">{t.carDetail.greyedBooked}</p>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-[1.45fr_0.95fr] lg:items-start">
@@ -552,12 +566,15 @@ export default function CarDetailPage() {
                       setViewYear((y) => y - 1);
                     } else setViewMonth((m) => m - 1);
                   }}
+                  aria-label={t.carDetail.prevMonth}
                   className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
                 >
-                  ←
+                  <svg className="h-4 w-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" />
+                  </svg>
                 </button>
-                <span className="font-display text-lg font-medium text-ink">
-                  {MONTHS_FR[viewMonth]} {viewYear}
+                <span className="font-display text-lg font-medium capitalize text-ink">
+                  {monthName(viewYear, viewMonth, locale)} {viewYear}
                 </span>
                 <button
                   onClick={() => {
@@ -566,16 +583,19 @@ export default function CarDetailPage() {
                       setViewYear((y) => y + 1);
                     } else setViewMonth((m) => m + 1);
                   }}
+                  aria-label={t.carDetail.nextMonth}
                   className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
                 >
-                  →
+                  <svg className="h-4 w-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
                 </button>
               </div>
 
               <div className="mb-2 grid grid-cols-7">
-                {DAYS_FR.map((d) => (
+                {weekdayLabels(locale).map((d, i) => (
                   <div
-                    key={d}
+                    key={i}
                     className="py-2 text-center text-[0.6rem] font-semibold uppercase tracking-[0.1em] text-ash"
                   >
                     {d}
@@ -614,15 +634,15 @@ export default function CarDetailPage() {
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 border-t border-mist pt-5 text-xs text-stone">
                 <div className="flex items-center gap-2">
                   <div className="h-3 w-3 rounded-[3px] border border-line bg-paper" />
-                  <span>Disponible</span>
+                  <span>{t.common.available}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-3 w-3 rounded-[3px] bg-ink" />
-                  <span>Sélectionné</span>
+                  <span>{t.common.selected}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-3 w-3 rounded-[3px] bg-mist" />
-                  <span>Indisponible</span>
+                  <span>{t.common.unavailable}</span>
                 </div>
               </div>
             </div>
@@ -631,17 +651,13 @@ export default function CarDetailPage() {
             <div className="space-y-4 lg:sticky lg:top-24">
               <div className="rounded-[var(--radius)] border border-mist bg-cloud p-5">
                 <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-                  Comment réserver
+                  {t.carDetail.howToBook}
                 </p>
                 <div className="mt-4 space-y-2.5">
-                  {[
-                    "1. Sélectionnez le début",
-                    "2. Sélectionnez la fin",
-                    "3. Confirmez",
-                  ].map((step) => (
+                  {t.carDetail.bookSteps.map((step) => (
                     <div
                       key={step}
-                      className="border-l border-mist pl-3 text-xs text-stone"
+                      className="border-s border-mist ps-3 text-xs text-stone"
                     >
                       {step}
                     </div>
@@ -654,12 +670,12 @@ export default function CarDetailPage() {
 
               <div className="rounded-[var(--radius)] border border-mist bg-cloud p-5">
                 <p className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-                  Heure de prise en charge &amp; retour
+                  {t.carDetail.pickupReturnTime}
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                   <TimeSlotPicker
                     id="pickup-time"
-                    label="Prise en charge"
+                    label={t.carDetail.pickup}
                     value={pickupTime}
                     slots={pickupSlots}
                     onChange={setPickupTime}
@@ -667,7 +683,7 @@ export default function CarDetailPage() {
                   />
                   <TimeSlotPicker
                     id="return-time"
-                    label="Retour"
+                    label={t.carDetail.return}
                     value={returnTime}
                     slots={BOOKING_TIME_SLOTS}
                     onChange={setReturnTime}
@@ -675,14 +691,12 @@ export default function CarDetailPage() {
                 </div>
                 {timeOrderInvalid && (
                   <p className="mt-3 text-xs font-medium text-red-600">
-                    Pour une location d&apos;une journée, l&apos;heure de retour
-                    doit être après l&apos;heure de prise en charge.
+                    {t.carDetail.timeOrderInvalid}
                   </p>
                 )}
                 {noPickupSlotsToday && (
                   <p className="mt-3 text-xs font-medium text-red-600">
-                    Plus de créneau disponible aujourd&apos;hui. Choisissez une
-                    autre date.
+                    {t.carDetail.noSlotsToday}
                   </p>
                 )}
               </div>
@@ -692,21 +706,21 @@ export default function CarDetailPage() {
                 <div className="space-y-4 border-b border-white/10 pb-5">
                   <div className="flex items-baseline justify-between gap-4">
                     <span className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
-                      Début
+                      {t.carDetail.start}
                     </span>
                     <span className="text-sm font-medium text-white">
                       {startDate
-                        ? `${formatDateFr(startDate)} · ${pickupTime}`
+                        ? `${formatDate(startDate, locale)} · ${pickupTime}`
                         : "—"}
                     </span>
                   </div>
                   <div className="flex items-baseline justify-between gap-4">
                     <span className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
-                      Fin
+                      {t.carDetail.end}
                     </span>
                     <span className="text-sm font-medium text-white">
                       {endDate
-                        ? `${formatDateFr(endDate)} · ${returnTime}`
+                        ? `${formatDate(endDate, locale)} · ${returnTime}`
                         : "—"}
                     </span>
                   </div>
@@ -715,14 +729,16 @@ export default function CarDetailPage() {
                 <div className="flex items-end justify-between gap-4 pt-5">
                   <div>
                     <p className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
-                      Total estimé
+                      {t.carDetail.totalEstimate}
                     </p>
                     <p className="mt-1 font-display text-3xl text-white">
-                      {totalDays > 0 ? `${totalPrice} DT` : "—"}
+                      {totalDays > 0 ? `${totalPrice} ${t.common.currency}` : "—"}
                     </p>
                     {totalDays > 0 && (
                       <p className="mt-1 text-[0.7rem] text-white/50">
-                        {appliedDailyRate} DT / jour
+                        {interpolate(t.carDetail.perDayRate, {
+                          rate: appliedDailyRate,
+                        })}
                       </p>
                     )}
                   </div>
@@ -734,11 +750,14 @@ export default function CarDetailPage() {
                     disabled={bookingBlocked}
                     className="btn-accent mt-5 hidden w-full py-3 disabled:cursor-not-allowed disabled:opacity-40 sm:flex"
                   >
-                    Confirmer — {totalDays} jour{totalDays > 1 ? "s" : ""}
+                    {interpolate(t.carDetail.confirmDays, {
+                      days: totalDays,
+                      unit: plural(totalDays, t.units.day, locale),
+                    })}
                   </button>
                 ) : (
                   <p className="mt-5 text-xs text-white/55">
-                    Choisissez une date de fin pour activer la confirmation.
+                    {t.carDetail.chooseEndToActivate}
                   </p>
                 )}
               </div>
@@ -753,10 +772,12 @@ export default function CarDetailPage() {
           <div className="mx-auto flex max-w-2xl items-center justify-between gap-3">
             <div className="min-w-0">
               <p className="text-[0.62rem] uppercase tracking-[0.14em] text-white/45">
-                Total estimé
+                {t.carDetail.totalEstimate}
               </p>
               <p className="truncate font-display text-lg text-white">
-                {totalDays > 0 ? `${totalPrice} DT` : "Choisissez une fin"}
+                {totalDays > 0
+                  ? `${totalPrice} ${t.common.currency}`
+                  : t.carDetail.chooseEnd}
               </p>
             </div>
             <button
@@ -764,7 +785,7 @@ export default function CarDetailPage() {
               disabled={!endDate || bookingBlocked}
               className="btn-accent px-5 py-2.5 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Confirmer
+              {t.carDetail.confirm}
             </button>
           </div>
         </div>
@@ -787,10 +808,10 @@ export default function CarDetailPage() {
               id="booking-form-title"
               className="font-display text-2xl font-medium text-ink"
             >
-              Vos informations
+              {t.carDetail.yourInfo}
             </h3>
             <p className="mt-1.5 text-sm text-stone">
-              Nous vous contacterons pour confirmer la réservation.
+              {t.carDetail.weWillContact}
             </p>
 
             <div className="mt-7 flex flex-col gap-4">
@@ -799,13 +820,13 @@ export default function CarDetailPage() {
                   htmlFor="booking-name"
                   className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone"
                 >
-                  Nom complet *
+                  {t.carDetail.fullName}
                 </label>
                 <input
                   id="booking-name"
                   ref={firstFieldRef}
                   type="text"
-                  placeholder="Votre nom"
+                  placeholder={t.carDetail.yourName}
                   value={form.name}
                   onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                   className="input-premium"
@@ -819,23 +840,24 @@ export default function CarDetailPage() {
                   htmlFor="booking-phone"
                   className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone"
                 >
-                  Téléphone *
+                  {t.carDetail.phone}
                 </label>
                 <input
                   id="booking-phone"
                   type="tel"
-                  placeholder="+216 00 000 000"
+                  placeholder={t.carDetail.phonePlaceholder}
                   value={form.phone}
                   onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
                   className="input-premium"
                   autoComplete="tel"
+                  dir="ltr"
                   aria-invalid={phoneInvalid}
                   aria-describedby={phoneInvalid ? "booking-phone-error" : undefined}
                   required
                 />
                 {phoneInvalid && (
                   <p id="booking-phone-error" className="mt-1.5 text-xs font-medium text-red-600">
-                    Veuillez saisir un numéro de téléphone valide.
+                    {t.carDetail.phoneInvalid}
                   </p>
                 )}
               </div>
@@ -845,22 +867,23 @@ export default function CarDetailPage() {
                   htmlFor="booking-email"
                   className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone"
                 >
-                  Email
+                  {t.carDetail.email}
                 </label>
                 <input
                   id="booking-email"
                   type="email"
-                  placeholder="votre@email.com"
+                  placeholder={t.carDetail.emailPlaceholder}
                   value={form.email}
                   onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                   className="input-premium"
                   autoComplete="email"
+                  dir="ltr"
                   aria-invalid={emailInvalid}
                   aria-describedby={emailInvalid ? "booking-email-error" : undefined}
                 />
                 {emailInvalid && (
                   <p id="booking-email-error" className="mt-1.5 text-xs font-medium text-red-600">
-                    Cette adresse email ne semble pas valide.
+                    {t.carDetail.emailInvalid}
                   </p>
                 )}
               </div>
@@ -870,11 +893,11 @@ export default function CarDetailPage() {
                   htmlFor="booking-notes"
                   className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone"
                 >
-                  Notes
+                  {t.carDetail.notes}
                 </label>
                 <textarea
                   id="booking-notes"
-                  placeholder="Demandes particulières..."
+                  placeholder={t.carDetail.notesPlaceholder}
                   value={form.notes}
                   onChange={(e) =>
                     setForm((f) => ({ ...f, notes: e.target.value }))
@@ -900,14 +923,14 @@ export default function CarDetailPage() {
                 disabled={submitting}
                 className="btn-ghost flex-1 disabled:opacity-40"
               >
-                Annuler
+                {t.carDetail.cancel}
               </button>
               <button
                 onClick={handleSubmit}
                 disabled={submitting || !formValid}
                 className="btn-primary flex-1 disabled:opacity-40"
               >
-                {submitting ? "Envoi…" : "Envoyer la demande"}
+                {submitting ? t.carDetail.submitting : t.carDetail.submit}
               </button>
             </div>
           </div>
@@ -932,11 +955,10 @@ export default function CarDetailPage() {
               id="booking-success-title"
               className="font-display text-2xl font-medium text-ink"
             >
-              Demande envoyée
+              {t.carDetail.requestSentTitle}
             </h3>
             <p className="mt-3 text-sm leading-7 text-stone">
-              Nous vous contacterons dans les plus brefs délais pour confirmer
-              votre réservation.
+              {t.carDetail.requestSentDesc}
             </p>
             <button
               onClick={() => {
@@ -948,7 +970,7 @@ export default function CarDetailPage() {
               className="btn-primary mt-7 w-full"
               autoFocus
             >
-              Retour au véhicule
+              {t.carDetail.backToVehicle}
             </button>
           </div>
         </div>

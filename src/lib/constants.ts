@@ -14,6 +14,45 @@ export const PHONE_DISPLAY =
 export const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "21628538910";
 
+// E.164 tel: target. The WhatsApp number already carries the country code, so we
+// derive the dialable number from it and prefix "+". Keep a single source so the
+// navbar, footer and CTA can never drift from the displayed number.
+export const PHONE_TEL = `+${WHATSAPP_NUMBER.replace(/\D/g, "")}`;
+
+// ── Social media ────────────────────────────────────────────────────────────
+// Central place for outbound social URLs. Empty string = link hidden, so a
+// client without an Instagram page simply doesn't render that icon.
+export const SOCIAL_LINKS = {
+  facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || "",
+  instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "",
+} as const;
+
+// ── Location / Google Maps ──────────────────────────────────────────────────
+// Driven by a single query (address or business name). The embed uses Google's
+// keyless `output=embed` endpoint; the button opens the Maps search UI. Set
+// NEXT_PUBLIC_MAPS_QUERY to the agency's real address/place for production.
+export const MAPS_QUERY =
+  process.env.NEXT_PUBLIC_MAPS_QUERY || `${BRAND_NAME}, Tunisie`;
+
+// Human-readable address shown next to the map (falls back to the query).
+export const MAPS_ADDRESS =
+  process.env.NEXT_PUBLIC_MAPS_ADDRESS || MAPS_QUERY;
+
+// Prefer an explicit embed URL (Google Maps → Share → Embed a map) when set:
+// it pins the exact business/place. Otherwise fall back to a keyless query embed
+// derived from MAPS_QUERY.
+export const MAPS_EMBED_URL =
+  process.env.NEXT_PUBLIC_MAPS_EMBED_URL ||
+  `https://www.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&output=embed`;
+
+// "Open in Google Maps" target. Overridable so the button lands on the same
+// place as the embed; defaults to a search on MAPS_QUERY.
+export const MAPS_LINK_URL =
+  process.env.NEXT_PUBLIC_MAPS_LINK_URL ||
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    MAPS_QUERY,
+  )}`;
+
 export const FEATURED_CARS_LIMIT = 3;
 
 export const MS_PER_DAY = 1000 * 60 * 60 * 24;

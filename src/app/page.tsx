@@ -1,10 +1,13 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import LocationSection from "@/components/LocationSection";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import Link from "next/link";
 import Image from "next/image";
 import { getCars } from "@/lib/cars";
 import type { Metadata } from "next";
+import { getServerI18n } from "@/i18n/server";
+import { interpolate } from "@/i18n/format";
 import {
   SITE_URL,
   BRAND_NAME,
@@ -21,66 +24,6 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = "force-dynamic";
-
-const steps = [
-  {
-    num: "01",
-    title: "Choisissez votre véhicule",
-    desc: "Parcourez la flotte et trouvez le modèle adapté à votre trajet.",
-  },
-  {
-    num: "02",
-    title: "Sélectionnez vos dates",
-    desc: "Disponibilités vérifiées en temps réel, sans mauvaise surprise.",
-  },
-  {
-    num: "03",
-    title: "Confirmez la réservation",
-    desc: "Quelques clics suffisent — confirmation envoyée immédiatement.",
-  },
-  {
-    num: "04",
-    title: "Prenez la route",
-    desc: "Récupérez le véhicule et partez l'esprit tranquille.",
-  },
-];
-
-const features = [
-  {
-    title: "Flotte récente",
-    desc: "Véhicules renouvelés et entretenus selon des standards exigeants.",
-  },
-  {
-    title: "Réservation instantanée",
-    desc: "Confirmez en quelques secondes, disponibilité en temps réel.",
-  },
-  {
-    title: "Assistance 24/7",
-    desc: "Une équipe joignable à toute heure pendant votre location.",
-  },
-  {
-    title: "Prix transparents",
-    desc: "Le prix affiché est le prix final. Aucun frais caché.",
-  },
-];
-
-const engagements = [
-  {
-    k: "Réponse",
-    v: "< 30 min",
-    d: "Toute demande traitée en moins de trente minutes.",
-  },
-  {
-    k: "Service",
-    v: "24 / 7",
-    d: "Assistance disponible jour et nuit, partout en Tunisie.",
-  },
-  {
-    k: "Tarifs",
-    v: "Sans frais cachés",
-    d: "Le devis est ferme. Pas de supplément de dernière minute.",
-  },
-];
 
 function CarSilhouette({ className }: { className?: string }) {
   return (
@@ -99,6 +42,7 @@ function Arrow({ className }: { className?: string }) {
 }
 
 export default async function Home() {
+  const { t } = await getServerI18n();
   const cars = await getCars().catch(() => []);
   const availableCars = cars.filter((car) => car.is_available);
   const featuredCars = availableCars.filter((car) => car.is_featured);
@@ -143,23 +87,23 @@ export default async function Home() {
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <span className="eyebrow">Sélection du moment</span>
+            <span className="eyebrow">{t.fleet.eyebrow}</span>
             <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
-              Flotte à la une
+              {t.fleet.title}
             </h2>
           </div>
           <Link
             href="/voitures"
             className="group inline-flex w-fit items-center gap-2 border-b border-ink pb-1 text-sm font-medium text-ink"
           >
-            Toute la flotte
-            <Arrow className="transition-transform duration-200 group-hover:translate-x-1" />
+            {t.fleet.allFleet}
+            <Arrow className="transition-transform duration-200 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180" />
           </Link>
         </div>
 
         {fleet.length === 0 ? (
           <div className="mt-12 border border-mist bg-cloud p-12 text-center text-stone">
-            Aucun véhicule disponible pour le moment.
+            {t.fleet.empty}
           </div>
         ) : (
           <div className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-3">
@@ -178,7 +122,7 @@ export default async function Home() {
                   <span className="h-px flex-1 bg-mist transition-colors duration-300 group-hover:bg-ink" />
                   {car.is_featured && (
                     <span className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-accent">
-                      Vedette
+                      {t.fleet.featured}
                     </span>
                   )}
                 </div>
@@ -198,8 +142,8 @@ export default async function Home() {
                       <CarSilhouette className="h-16 w-16 text-ash" />
                     </div>
                   )}
-                  <span className="absolute right-3 top-3 rounded-full border border-ink/10 bg-paper/80 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.1em] text-stone backdrop-blur-sm">
-                    {car.category}
+                  <span className="absolute end-3 top-3 rounded-full border border-ink/10 bg-paper/80 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.1em] text-stone backdrop-blur-sm">
+                    {t.enums.category[car.category] ?? car.category}
                   </span>
                 </div>
 
@@ -212,17 +156,21 @@ export default async function Home() {
                     {car.name}
                   </h3>
                   <p className="mt-2 text-xs text-ash">
-                    {car.transmission} · {car.fuel_type} · {car.seats} places
+                    {t.enums.transmission[car.transmission] ?? car.transmission} ·{" "}
+                    {t.enums.fuel[car.fuel_type] ?? car.fuel_type} · {car.seats}{" "}
+                    {t.common.seats}
                   </p>
 
                   <div className="mt-5 flex items-end justify-between border-t border-mist pt-4">
                     <p className="font-display text-2xl text-ink">
                       {car.price_per_day}
-                      <span className="ml-1 text-sm text-ash">DT/jour</span>
+                      <span className="ms-1 text-sm text-ash">
+                        {t.fleet.perDay}
+                      </span>
                     </p>
                     <span className="inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors duration-200 group-hover:text-accent">
-                      Réserver
-                      <Arrow className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                      {t.fleet.book}
+                      <Arrow className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
                     </span>
                   </div>
                 </div>
@@ -236,21 +184,21 @@ export default async function Home() {
       <section id="how" className="scroll-mt-24 bg-cloud">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <div className="max-w-2xl">
-            <span className="eyebrow">Simple et rapide</span>
+            <span className="eyebrow">{t.how.eyebrow}</span>
             <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
-              Comment ça marche
+              {t.how.title}
             </h2>
           </div>
 
           <div className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, idx) => (
+            {t.how.steps.map((step, idx) => (
               <div
-                key={step.num}
+                key={idx}
                 data-reveal
                 className={`reveal-d${idx + 1} border-t border-line pt-6`}
               >
                 <span className="font-display text-4xl font-medium text-ink/15">
-                  {step.num}
+                  {String(idx + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-4 font-display text-lg font-medium text-ink">
                   {step.title}
@@ -266,17 +214,19 @@ export default async function Home() {
       <section id="about" className="scroll-mt-24">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <div className="max-w-2xl">
-            <span className="eyebrow">Pourquoi {BRAND_SHORT}</span>
+            <span className="eyebrow">
+              {interpolate(t.features.eyebrow, { brand: BRAND_SHORT })}
+            </span>
             <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
-              Une location pensée
-              <br className="hidden sm:block" /> pour la tranquillité d&apos;esprit.
+              {t.features.titleA}
+              <br className="hidden sm:block" /> {t.features.titleB}
             </h2>
           </div>
 
           <div className="mt-16 grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-mist sm:grid-cols-2">
-            {features.map((f, idx) => (
+            {t.features.items.map((f, idx) => (
               <div
-                key={f.title}
+                key={idx}
                 data-reveal
                 className={`reveal-d${(idx % 2) + 1} bg-paper p-8 lg:p-10`}
               >
@@ -302,8 +252,8 @@ export default async function Home() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           {/* Engagements — honest commitments, no fake testimonials */}
           <div className="grid gap-px border-b border-white/10 py-16 sm:grid-cols-3 lg:py-20">
-            {engagements.map((e) => (
-              <div key={e.k} className="sm:px-8 sm:first:pl-0">
+            {t.engagements.map((e, idx) => (
+              <div key={idx} className="sm:px-8 sm:first:ps-0">
                 <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/40">
                   {e.k}
                 </p>
@@ -321,34 +271,33 @@ export default async function Home() {
           <div className="flex flex-col items-start justify-between gap-10 py-16 lg:flex-row lg:items-end lg:py-24">
             <div className="max-w-2xl">
               <span className="eyebrow text-white/55 before:bg-white/40">
-                Départ dès aujourd&apos;hui
+                {t.cta.eyebrow}
               </span>
               <h2 className="mt-6 font-display text-[clamp(2.4rem,5vw,4rem)] font-medium leading-[1.02] tracking-[-0.02em] text-white">
-                Prêt pour votre
+                {t.cta.titleA}
                 <br />
-                prochaine <span className="italic text-white/50">aventure</span> ?
+                {t.cta.titleB}{" "}
+                <span className="italic text-white/50">{t.cta.titleAccent}</span> ?
               </h2>
             </div>
 
             <div className="flex w-full flex-col gap-4 lg:w-auto lg:items-end">
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link href="/voitures" className="btn-accent px-8 py-4">
-                  Réservez maintenant
-                  <Arrow />
+                  {t.cta.bookNow}
+                  <Arrow className="rtl:rotate-180" />
                 </Link>
                 <a href={`tel:+${WHATSAPP_NUMBER}`} className="btn-ghost-dark px-8 py-4">
-                  Appeler le {PHONE_DISPLAY}
+                  {interpolate(t.cta.call, { phone: PHONE_DISPLAY })}
                 </a>
               </div>
               <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/50">
-                {["Disponible 24/7", "Confirmation rapide", "Aucun frais caché"].map(
-                  (b) => (
-                    <span key={b} className="inline-flex items-center gap-2">
-                      <span className="h-1 w-1 rounded-full bg-accent" />
-                      {b}
-                    </span>
-                  ),
-                )}
+                {t.cta.badges.map((b) => (
+                  <span key={b} className="inline-flex items-center gap-2">
+                    <span className="h-1 w-1 rounded-full bg-accent" />
+                    {b}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -360,27 +309,30 @@ export default async function Home() {
         <div className="mx-auto grid max-w-7xl gap-px overflow-hidden border-y border-mist bg-mist lg:grid-cols-2">
           {/* Contact */}
           <div className="bg-paper p-8 sm:p-12 lg:p-16">
-            <span className="eyebrow">Contact</span>
+            <span className="eyebrow">{t.contact.eyebrow}</span>
             <h3 className="mt-5 font-display text-2xl font-medium text-ink sm:text-3xl">
-              Parlons de votre prochaine location
+              {t.contact.title}
             </h3>
             <p className="mt-4 max-w-md text-sm leading-7 text-stone">
-              Notre équipe répond rapidement pour les réservations, les tarifs
-              longue durée et l&apos;assistance avant départ.
+              {t.contact.desc}
             </p>
 
             <dl className="mt-10 space-y-6">
               <div className="flex items-baseline gap-6 border-t border-mist pt-5">
                 <dt className="w-24 shrink-0 text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-ash">
-                  Téléphone
+                  {t.contact.phone}
                 </dt>
-                <dd className="font-display text-lg text-ink">{PHONE_DISPLAY}</dd>
+                <dd className="font-display text-lg text-ink" dir="ltr">
+                  {PHONE_DISPLAY}
+                </dd>
               </div>
               <div className="flex items-baseline gap-6 border-t border-mist pt-5">
                 <dt className="w-24 shrink-0 text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-ash">
-                  Adresse
+                  {t.contact.address}
                 </dt>
-                <dd className="font-display text-lg text-ink">Tunis, Tunisie</dd>
+                <dd className="font-display text-lg text-ink">
+                  {t.contact.addressValue}
+                </dd>
               </div>
             </dl>
 
@@ -391,23 +343,18 @@ export default async function Home() {
               className="mt-10 inline-flex items-center gap-2.5 rounded-[var(--radius)] border border-ink px-6 py-3.5 text-sm font-medium text-ink transition-colors duration-200 hover:bg-[#25D366] hover:border-[#25D366] hover:text-white active:scale-[0.98]"
             >
               <WhatsAppIcon size={17} />
-              Contacter via WhatsApp
+              {t.contact.whatsapp}
             </a>
           </div>
 
           {/* Privacy */}
           <div id="privacy" className="scroll-mt-24 bg-paper p-8 sm:p-12 lg:p-16">
-            <span className="eyebrow">Confidentialité</span>
+            <span className="eyebrow">{t.privacy.eyebrow}</span>
             <h3 className="mt-5 font-display text-2xl font-medium text-ink sm:text-3xl">
-              Vos données restent protégées
+              {t.privacy.title}
             </h3>
             <ul className="mt-8 space-y-5">
-              {[
-                "Données utilisées uniquement pour gérer vos réservations.",
-                "Aucune information vendue ou partagée avec des tiers.",
-                "Modification ou suppression possible à tout moment.",
-                "Connexion sécurisée (HTTPS) sur toutes les pages.",
-              ].map((point) => (
+              {t.privacy.points.map((point) => (
                 <li
                   key={point}
                   className="flex items-start gap-4 border-t border-mist pt-5"
@@ -422,6 +369,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* ─────────────────────  LOCATION / MAP  ───────────────────── */}
+      <LocationSection />
     </main>
   );
 }

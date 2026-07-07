@@ -7,6 +7,7 @@
  */
 import { useEffect } from "react";
 import Link from "next/link";
+import { useI18n } from "@/i18n/client";
 
 export default function Error({
   error,
@@ -15,6 +16,8 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const { t } = useI18n();
+
   useEffect(() => {
     // Log for diagnostics (server/observability picks this up); never shown to
     // the user.
@@ -23,20 +26,19 @@ export default function Error({
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-paper px-6 py-20 text-center">
-      <span className="eyebrow">Une erreur est survenue</span>
+      <span className="eyebrow">{t.states.errorEyebrow}</span>
       <h1 className="mt-5 font-display text-[clamp(2rem,5vw,3.25rem)] font-medium leading-[1.05] tracking-tight text-ink">
-        Quelque chose s&apos;est mal passé
+        {t.states.errorTitle}
       </h1>
       <p className="mt-4 max-w-md text-sm leading-7 text-stone">
-        Nous n&apos;avons pas pu afficher cette page pour le moment. Vous pouvez
-        réessayer — si le problème persiste, revenez dans quelques instants.
+        {t.states.errorDesc}
       </p>
       <div className="mt-9 flex flex-col gap-3 sm:flex-row">
         <button onClick={reset} className="btn-primary px-7 py-3">
-          Réessayer
+          {t.common.retry}
         </button>
         <Link href="/" className="btn-outline px-7 py-3">
-          Retour à l&apos;accueil
+          {t.states.backHome}
         </Link>
       </div>
     </main>

@@ -20,6 +20,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useI18n } from "@/i18n/client";
 
 type ToastVariant = "success" | "error" | "info";
 
@@ -91,6 +92,7 @@ export default function FeedbackProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const { t: msg } = useI18n();
   const [toasts, setToasts] = useState<ToastItem[]>([]);
   const [confirmState, setConfirmState] = useState<ConfirmState | null>(null);
   const idRef = useRef(0);
@@ -158,8 +160,8 @@ export default function FeedbackProvider({
             </span>
             <button
               onClick={() => dismiss(t.id)}
-              className="-mr-1 -mt-0.5 shrink-0 rounded p-0.5 text-white/45 transition-colors hover:text-white"
-              aria-label="Fermer la notification"
+              className="-me-1 -mt-0.5 shrink-0 rounded p-0.5 text-white/45 transition-colors hover:text-white"
+              aria-label={msg.feedback.closeNotification}
             >
               <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path d="M18 6L6 18M6 6l12 12" />
@@ -200,13 +202,13 @@ export default function FeedbackProvider({
                     : "bg-ink text-paper hover:bg-graphite"
                 }`}
               >
-                {confirmState.confirmLabel ?? "Confirmer"}
+                {confirmState.confirmLabel ?? msg.feedback.confirm}
               </button>
               <button
                 onClick={() => settleConfirm(false)}
                 className="flex-1 rounded-[var(--radius)] border border-line px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink active:scale-[0.98]"
               >
-                {confirmState.cancelLabel ?? "Annuler"}
+                {confirmState.cancelLabel ?? msg.feedback.cancel}
               </button>
             </div>
           </div>

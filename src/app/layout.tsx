@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Inter, Cairo } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import ConditionalFooter from "@/components/ConditionalFooter";
 import MotionProvider from "@/components/MotionProvider";
 import FeedbackProvider from "@/components/Feedback";
+import { I18nProvider } from "@/i18n/client";
+import { getServerLocale } from "@/i18n/server";
+import { getDir } from "@/i18n/config";
 import { SITE_URL, BRAND_NAME } from "@/lib/constants";
 
 const OG_IMAGE_PATH = "/Untitled design.png";
@@ -23,6 +26,14 @@ const fraunces = Fraunces({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
+  display: "swap",
+});
+
+// Arabic — applied via CSS when <html lang="ar">. Covers both body and display
+// so RTL pages read naturally instead of falling back to a Latin serif.
+const cairo = Cairo({
+  subsets: ["arabic"],
+  variable: "--font-arabic",
   display: "swap",
 });
 
@@ -90,21 +101,26 @@ export const metadata: Metadata = {
   category: "travel",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getServerLocale();
+  const dir = getDir(locale);
+
   return (
-    <html lang="fr">
+    <html lang={locale} dir={dir}>
       <body
-        className={`${fraunces.variable} ${inter.variable} bg-paper text-ink antialiased overflow-x-hidden`}
+        className={`${fraunces.variable} ${inter.variable} ${cairo.variable} bg-paper text-ink antialiased overflow-x-hidden`}
       >
-        <MotionProvider />
-        <FeedbackProvider>
-          <div className="min-h-screen page-enter">{children}</div>
-          <ConditionalFooter />
-        </FeedbackProvider>
+        <I18nProvider initialLocale={locale}>
+          <MotionProvider />
+          <FeedbackProvider>
+            <div className="min-h-screen page-enter">{children}</div>
+            <ConditionalFooter />
+          </FeedbackProvider>
+        </I18nProvider>
         <Analytics />
       </body>
     </html>

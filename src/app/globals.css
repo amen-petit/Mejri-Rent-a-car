@@ -408,6 +408,45 @@
   }
 }
 
+/* =========================================================================
+   ARABIC / RTL — applied when <html lang="ar" dir="rtl">.
+   The layout is largely gap- and flexbox-based, so inline direction (text
+   alignment, flex start/end, list order) mirrors automatically from `dir`.
+   These rules cover what physical properties and Latin type tricks don't.
+   ========================================================================= */
+html[lang="ar"] body,
+html[lang="ar"] .font-body,
+html[lang="ar"] .input-premium,
+html[lang="ar"] input,
+html[lang="ar"] textarea,
+html[lang="ar"] button {
+  font-family: var(--font-arabic), var(--font-body), ui-sans-serif, system-ui,
+    sans-serif;
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] h5,
+html[lang="ar"] h6,
+html[lang="ar"] .font-display {
+  font-family: var(--font-arabic), var(--font-display), Georgia, serif;
+  letter-spacing: 0;
+}
+
+/* Arabic script has no case and reads poorly with wide tracking; the design
+   uses uppercase + letter-spacing on eyebrows/labels for Latin only. Neutralize
+   it globally for Arabic so labels stay legible. */
+html[lang="ar"] * {
+  letter-spacing: normal !important;
+}
+
+/* Keep the WebkitTextStroke hero line readable in Arabic (thinner outline). */
+html[lang="ar"] .hero-stroke {
+  -webkit-text-stroke-width: 1px;
+}
+
 /* Toast entrance — gentle rise + fade. Reduced-motion users get a plain fade. */
 @keyframes toast-in {
   from {

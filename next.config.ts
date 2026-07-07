@@ -44,6 +44,8 @@ const csp = [
   `img-src 'self' data: blob: ${supabaseOrigin}`,
   "font-src 'self' data:",
   `connect-src 'self' ${supabaseOrigin}`,
+  // Google Maps embed (keyless output=embed) is served from these origins.
+  "frame-src 'self' https://www.google.com https://maps.google.com",
   "upgrade-insecure-requests",
 ].join("; ");
 
@@ -69,6 +71,10 @@ const nextConfig: NextConfig = {
   // build to anyone fingerprinting the deployment.
   poweredByHeader: false,
   images: {
+    // Supabase image URLs can resolve through NAT64/translated addresses in
+    // this environment, which Next.js treats as private IPs unless explicitly
+    // allowed. The storage bucket is public, so we permit those fetches here.
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         protocol: "https",
