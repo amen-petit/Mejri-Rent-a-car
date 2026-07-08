@@ -263,7 +263,9 @@ function CarsPageContent() {
       (s, c) => s + Math.max(0, (c.quantity ?? 1) - (rentedToday[c.id] ?? 0)),
       0,
     );
-  const minPrice = cars.length ? Math.min(...cars.map((c) => c.price_per_day)) : 0;
+  const minPrice = cars.length
+    ? Math.min(...cars.map((c) => c.price_per_day))
+    : 0;
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-paper">
@@ -286,37 +288,39 @@ function CarsPageContent() {
             {/* Live availability — hidden in search mode, where window-specific
                 results replace today's fleet snapshot. */}
             {!bookingSearch && (
-            <div className="flex items-stretch gap-8 border-t border-mist pt-6 lg:border-t-0 lg:pt-0">
-              <div className="flex flex-col justify-end">
-                <span className="inline-flex items-center gap-2 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-stone">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  {t.cars.live}
-                </span>
-              </div>
-              {loading ? (
-                <div className="space-y-2 self-center">
-                  <div className="h-3 w-32 animate-pulse rounded bg-mist" />
-                  <div className="h-3 w-24 animate-pulse rounded bg-mist" />
+              <div className="flex items-stretch gap-8 border-t border-mist pt-6 lg:border-t-0 lg:pt-0">
+                <div className="flex flex-col justify-end">
+                  <span className="inline-flex items-center gap-2 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-stone">
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                    {t.cars.live}
+                  </span>
                 </div>
-              ) : (
-                <>
-                  <div className="border-s border-mist ps-8">
-                    <p className="font-display text-2xl text-ink">{availableUnits}</p>
-                    <p className="mt-1 text-[0.62rem] uppercase tracking-[0.16em] text-stone">
-                      {interpolate(t.cars.availableOf, { total: totalUnits })}
-                    </p>
+                {loading ? (
+                  <div className="space-y-2 self-center">
+                    <div className="h-3 w-32 animate-pulse rounded bg-mist" />
+                    <div className="h-3 w-24 animate-pulse rounded bg-mist" />
                   </div>
-                  <div className="border-s border-mist ps-8">
-                    <p className="font-display text-2xl text-ink">
-                      {minPrice} {t.common.currency}
-                    </p>
-                    <p className="mt-1 text-[0.62rem] uppercase tracking-[0.16em] text-stone">
-                      {t.cars.fromPerDay}
-                    </p>
-                  </div>
-                </>
-              )}
-            </div>
+                ) : (
+                  <>
+                    <div className="border-s border-mist ps-8">
+                      <p className="font-display text-2xl text-ink">
+                        {availableUnits}
+                      </p>
+                      <p className="mt-1 text-[0.62rem] uppercase tracking-[0.16em] text-stone">
+                        {interpolate(t.cars.availableOf, { total: totalUnits })}
+                      </p>
+                    </div>
+                    <div className="border-s border-mist ps-8">
+                      <p className="font-display text-2xl text-ink">
+                        {minPrice} {t.common.currency}
+                      </p>
+                      <p className="mt-1 text-[0.62rem] uppercase tracking-[0.16em] text-stone">
+                        {t.cars.fromPerDay}
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
             )}
           </div>
         </div>
@@ -343,7 +347,15 @@ function CarsPageContent() {
               className="mb-4 flex w-full items-center justify-between rounded-[var(--radius)] border border-line px-4 py-3.5 text-sm transition-colors hover:border-ink"
             >
               <span className="flex items-center gap-2 font-medium text-ink">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                >
                   <line x1="4" y1="6" x2="20" y2="6" />
                   <line x1="8" y1="12" x2="20" y2="12" />
                   <line x1="12" y1="18" x2="20" y2="18" />
@@ -383,7 +395,9 @@ function CarsPageContent() {
                 <h2 className="font-display text-2xl font-medium text-ink">
                   {t.cars.loadFailedTitle}
                 </h2>
-                <p className="mt-2 text-sm text-stone">{t.cars.loadFailedDesc}</p>
+                <p className="mt-2 text-sm text-stone">
+                  {t.cars.loadFailedDesc}
+                </p>
                 <button
                   onClick={() => {
                     setLoading(true);
@@ -401,7 +415,9 @@ function CarsPageContent() {
                   <h2 className="font-display text-2xl font-medium text-ink">
                     {t.booking.emptyTitle}
                   </h2>
-                  <p className="mt-2 text-sm text-stone">{t.booking.emptyDesc}</p>
+                  <p className="mt-2 text-sm text-stone">
+                    {t.booking.emptyDesc}
+                  </p>
                   <Link href="/voitures" className="btn-primary mt-7">
                     {t.booking.seeAllFleet}
                   </Link>
@@ -412,7 +428,9 @@ function CarsPageContent() {
                   <h2 className="font-display text-2xl font-medium text-ink">
                     {t.cars.noResultsTitle}
                   </h2>
-                  <p className="mt-2 text-sm text-stone">{t.cars.noResultsDesc}</p>
+                  <p className="mt-2 text-sm text-stone">
+                    {t.cars.noResultsDesc}
+                  </p>
                   <button onClick={resetFilters} className="btn-primary mt-7">
                     {t.cars.resetFilters}
                   </button>
@@ -508,7 +526,10 @@ function CarsPageFallback() {
         <div className="h-8 w-56 animate-pulse rounded bg-mist" />
         <div className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
           {[...Array(6)].map((_, idx) => (
-            <div key={idx} className="aspect-[4/3] animate-pulse rounded-[var(--radius-lg)] bg-mist" />
+            <div
+              key={idx}
+              className="aspect-[4/3] animate-pulse rounded-[var(--radius-lg)] bg-mist"
+            />
           ))}
         </div>
       </div>

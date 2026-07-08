@@ -54,7 +54,7 @@ export const MAPS_LINK_URL =
 // "Voir tous les avis" target — the reviews tab of the Google listing.
 export const REVIEWS_URL =
   process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL ||
-  "https://www.google.com/maps/place/FMEJRI+RENT+CAR/@36.8344329,10.2423043,169m/data=!3m1!1e3!4m8!3m7!1s0x12fd4b02202143af:0xe9e69add9960ce7a!8m2!3d36.8342291!4d10.2425589!9m1!1b1";
+  "https://maps.app.goo.gl/d6hKdW44pPWXxiUj8";
 
 export const FEATURED_CARS_LIMIT = 3;
 
