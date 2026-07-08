@@ -116,6 +116,7 @@ export default function Hero({ car }: { car?: Car }) {
                       alt={`${car.brand} ${car.name}`}
                       fill
                       priority
+                      unoptimized
                       sizes="(max-width: 1024px) 100vw, 46vw"
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     />
