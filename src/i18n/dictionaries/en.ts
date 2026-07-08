@@ -55,6 +55,8 @@ export const en: Messages = {
     available: "Available",
     from: "From",
     perDayShort: "DT/d",
+    prev: "Previous vehicle",
+    next: "Next vehicle",
     spine: "Premium Rental — Tunisia — Est. 2019",
     scroll: "Scroll",
     stats: {

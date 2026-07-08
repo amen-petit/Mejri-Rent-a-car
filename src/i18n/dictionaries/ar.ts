@@ -55,6 +55,8 @@ export const ar: Messages = {
     available: "متاحة",
     from: "ابتداءً من",
     perDayShort: "د.ت/ي",
+    prev: "المركبة السابقة",
+    next: "المركبة التالية",
     spine: "تأجير مميز — تونس — تأسّس 2019",
     scroll: "مرّر للأسفل",
     stats: {

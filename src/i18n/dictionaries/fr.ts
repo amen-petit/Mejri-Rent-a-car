@@ -59,6 +59,8 @@ export const fr = {
     available: "Disponible",
     from: "Dès",
     perDayShort: "DT/j",
+    prev: "Véhicule précédent",
+    next: "Véhicule suivant",
     spine: "Location Premium — Tunisie — Est. 2019",
     scroll: "Défiler",
     stats: {

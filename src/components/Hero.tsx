@@ -20,7 +20,7 @@ import BookingSearchCard from "@/components/BookingSearchCard";
 import { useI18n } from "@/i18n/client";
 import { interpolate } from "@/i18n/format";
 
-const ROTATE_MS = 5000;
+const ROTATE_MS = 2500;
 
 export default function Hero({ cars }: { cars: Car[] }) {
   const { t } = useI18n();
@@ -37,16 +37,18 @@ export default function Hero({ cars }: { cars: Car[] }) {
     return () => cancelAnimationFrame(id);
   }, []);
 
-  // Rotate the vedette cars on a fixed cadence; hold while the visitor hovers
-  // or focuses within the showcase, or when there's only one car to show.
+  // Advance the vedette rotation on a fixed cadence. The timeout is keyed to the
+  // current index, so any manual jump (arrows or dots) resets the countdown and
+  // the picked car gets a full beat before the next auto-advance. Held while the
+  // visitor hovers or focuses the showcase, or when there's only one car.
   useEffect(() => {
     if (cars.length <= 1 || paused) return;
-    const id = window.setInterval(
+    const id = window.setTimeout(
       () => setIndex((i) => (i + 1) % cars.length),
       ROTATE_MS,
     );
-    return () => window.clearInterval(id);
-  }, [cars.length, paused]);
+    return () => window.clearTimeout(id);
+  }, [cars.length, paused, index]);
 
   const reveal = (delay: number): React.CSSProperties =>
     reduce
@@ -60,6 +62,8 @@ export default function Hero({ cars }: { cars: Car[] }) {
         };
 
   const car = cars[index];
+  const go = (dir: number) =>
+    setIndex((i) => (i + dir + cars.length) % cars.length);
 
   return (
     <section className="relative isolate overflow-hidden bg-ink text-paper">
@@ -190,10 +194,16 @@ export default function Hero({ cars }: { cars: Car[] }) {
                       <div
                         key={c.id}
                         aria-hidden={i !== index}
-                        className="absolute inset-0 translate-y-[16%] transition-opacity ease-out"
+                        className="absolute inset-0 translate-y-[16%] will-change-[opacity,transform]"
                         style={{
                           opacity: i === index ? 1 : 0,
-                          transitionDuration: reduce ? "0ms" : "900ms",
+                          transform:
+                            i === index
+                              ? "translateY(0) scale(1)"
+                              : "translateY(12px) scale(0.965)",
+                          transition: reduce
+                            ? "none"
+                            : "opacity 620ms var(--ease-out), transform 620ms var(--ease-out)",
                         }}
                       >
                         {c.images?.[0] ? (
@@ -262,25 +272,71 @@ export default function Hero({ cars }: { cars: Car[] }) {
                 </Link>
 
                 {cars.length > 1 && (
-                  <div className="mt-5 flex items-center justify-center gap-1">
-                    {cars.map((c, i) => (
-                      <button
-                        key={c.id}
-                        type="button"
-                        aria-label={c.name}
-                        aria-current={i === index}
-                        onClick={() => setIndex(i)}
-                        className="group/dot flex h-8 items-center px-1.5"
+                  <div className="mt-5 flex items-center justify-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => go(-1)}
+                      aria-label={t.hero.prev}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/55 transition-colors duration-200 hover:border-white/40 hover:bg-white/[0.06] hover:text-white"
+                    >
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="rtl:rotate-180"
+                        aria-hidden="true"
                       >
-                        <span
-                          className={`block h-1.5 rounded-full transition-all duration-300 ease-out ${
-                            i === index
-                              ? "w-6 bg-accent"
-                              : "w-1.5 bg-white/25 group-hover/dot:bg-white/55"
-                          }`}
-                        />
-                      </button>
-                    ))}
+                        <path d="M15 18l-6-6 6-6" />
+                      </svg>
+                    </button>
+
+                    <div className="flex items-center gap-1">
+                      {cars.map((c, i) => (
+                        <button
+                          key={c.id}
+                          type="button"
+                          aria-label={c.name}
+                          aria-current={i === index}
+                          onClick={() => setIndex(i)}
+                          className="group/dot flex h-8 items-center px-1.5"
+                        >
+                          <span
+                            className={`block h-1.5 rounded-full transition-all duration-300 ease-out ${
+                              i === index
+                                ? "w-6 bg-accent"
+                                : "w-1.5 bg-white/25 group-hover/dot:bg-white/55"
+                            }`}
+                          />
+                        </button>
+                      ))}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => go(1)}
+                      aria-label={t.hero.next}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/55 transition-colors duration-200 hover:border-white/40 hover:bg-white/[0.06] hover:text-white"
+                    >
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="rtl:rotate-180"
+                        aria-hidden="true"
+                      >
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </button>
                   </div>
                 )}
               </>
