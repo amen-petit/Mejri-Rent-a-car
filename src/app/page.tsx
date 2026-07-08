@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import LocationSection from "@/components/LocationSection";
-import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
+import ReviewsShowcase from "@/components/ReviewsShowcase";
 import Link from "next/link";
 import Image from "next/image";
 import { getCars } from "@/lib/cars";
@@ -247,25 +247,11 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ────────────────  ENGAGEMENTS + CTA  (ink band)  ──────────────── */}
+      {/* ────────────────  REVIEWS + CTA  (ink band)  ──────────────── */}
       <section className="bg-ink text-paper">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          {/* Engagements — honest commitments, no fake testimonials */}
-          <div className="grid gap-px border-b border-white/10 py-16 sm:grid-cols-3 lg:py-20">
-            {t.engagements.map((e, idx) => (
-              <div key={idx} className="sm:px-8 sm:first:ps-0">
-                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/40">
-                  {e.k}
-                </p>
-                <p className="mt-3 font-display text-3xl font-medium text-white">
-                  {e.v}
-                </p>
-                <p className="mt-3 max-w-xs text-sm leading-7 text-white/55">
-                  {e.d}
-                </p>
-              </div>
-            ))}
-          </div>
+          {/* Real Google reviews, curated */}
+          <ReviewsShowcase t={t} />
 
           {/* CTA */}
           <div className="flex flex-col items-start justify-between gap-10 py-16 lg:flex-row lg:items-end lg:py-24">
@@ -300,72 +286,6 @@ export default async function Home() {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────  CONTACT & PRIVACY  ───────────────────── */}
-      <section id="contact" className="scroll-mt-24 bg-cloud">
-        <div className="mx-auto grid max-w-7xl gap-px overflow-hidden border-y border-mist bg-mist lg:grid-cols-2">
-          {/* Contact */}
-          <div className="bg-paper p-8 sm:p-12 lg:p-16">
-            <span className="eyebrow">{t.contact.eyebrow}</span>
-            <h3 className="mt-5 font-display text-2xl font-medium text-ink sm:text-3xl">
-              {t.contact.title}
-            </h3>
-            <p className="mt-4 max-w-md text-sm leading-7 text-stone">
-              {t.contact.desc}
-            </p>
-
-            <dl className="mt-10 space-y-6">
-              <div className="flex items-baseline gap-6 border-t border-mist pt-5">
-                <dt className="w-24 shrink-0 text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-ash">
-                  {t.contact.phone}
-                </dt>
-                <dd className="font-display text-lg text-ink" dir="ltr">
-                  {PHONE_DISPLAY}
-                </dd>
-              </div>
-              <div className="flex items-baseline gap-6 border-t border-mist pt-5">
-                <dt className="w-24 shrink-0 text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-ash">
-                  {t.contact.address}
-                </dt>
-                <dd className="font-display text-lg text-ink">
-                  {t.contact.addressValue}
-                </dd>
-              </div>
-            </dl>
-
-            <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-10 inline-flex items-center gap-2.5 rounded-[var(--radius)] border border-ink px-6 py-3.5 text-sm font-medium text-ink transition-colors duration-200 hover:bg-[#25D366] hover:border-[#25D366] hover:text-white active:scale-[0.98]"
-            >
-              <WhatsAppIcon size={17} />
-              {t.contact.whatsapp}
-            </a>
-          </div>
-
-          {/* Privacy */}
-          <div id="privacy" className="scroll-mt-24 bg-paper p-8 sm:p-12 lg:p-16">
-            <span className="eyebrow">{t.privacy.eyebrow}</span>
-            <h3 className="mt-5 font-display text-2xl font-medium text-ink sm:text-3xl">
-              {t.privacy.title}
-            </h3>
-            <ul className="mt-8 space-y-5">
-              {t.privacy.points.map((point) => (
-                <li
-                  key={point}
-                  className="flex items-start gap-4 border-t border-mist pt-5"
-                >
-                  <svg className="mt-0.5 h-4 w-4 shrink-0 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                  <p className="text-sm leading-7 text-stone">{point}</p>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>

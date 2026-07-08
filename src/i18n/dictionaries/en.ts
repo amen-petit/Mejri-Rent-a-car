@@ -137,6 +137,13 @@ export const en: Messages = {
       d: "The quote is firm. No last-minute surcharge.",
     },
   ],
+  reviews: {
+    eyebrow: "Google reviews",
+    title: "What our clients say",
+    viewAll: "See all reviews",
+    googleTag: "Google review",
+    ratingLabel: "{rating} out of 5",
+  },
   cta: {
     eyebrow: "Leave today",
     titleA: "Ready for your",

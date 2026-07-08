@@ -63,7 +63,10 @@ export default function DateField({
   const [viewMonth, setViewMonth] = useState(initial.getMonth());
 
   // Position the portalled popover under (or above) the trigger, clamped to the
-  // viewport, and keep it attached while open.
+  // viewport, and keep it attached while open. Measures the popover's REAL
+  // height (it's rendered hidden until positioned) so a flipped-up calendar sits
+  // flush above the field instead of floating with a gap. Re-runs when the month
+  // changes, since a 5-row vs 6-row month is a different height.
   useEffect(() => {
     if (!open) {
       setCoords(null);
@@ -74,18 +77,19 @@ export default function DateField({
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const gap = 6;
-      const width = Math.min(POPOVER_WIDTH, window.innerWidth - 16);
-      let left = Math.min(rect.left, window.innerWidth - width - 8);
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const height = popoverRef.current?.offsetHeight || POPOVER_EST_HEIGHT;
+      const width = Math.min(POPOVER_WIDTH, vw - 16);
+      let left = Math.min(rect.left, vw - width - 8);
       left = Math.max(8, left);
+      // Prefer opening below; flip above (bottom flush to the field) when there
+      // isn't room, using the measured height so there's no dangling gap.
       let top = rect.bottom + gap;
-      // Flip above the field if there isn't room below but there is above.
-      if (
-        top + POPOVER_EST_HEIGHT > window.innerHeight &&
-        rect.top - gap - POPOVER_EST_HEIGHT > 0
-      ) {
-        top = rect.top - gap - POPOVER_EST_HEIGHT;
+      if (top + height > vh - 8) {
+        top = rect.top - gap - height;
       }
-      top = Math.max(8, top);
+      top = Math.max(8, Math.min(top, vh - height - 8));
       setCoords({ top, left });
     };
     update();
@@ -95,7 +99,7 @@ export default function DateField({
       window.removeEventListener("scroll", update, true);
       window.removeEventListener("resize", update);
     };
-  }, [open]);
+  }, [open, viewYear, viewMonth]);
 
   // Close on outside click (accounting for the portalled popover) / Escape.
   useEffect(() => {
@@ -161,18 +165,20 @@ export default function DateField({
     ? formatDate(selected, locale)
     : (placeholder ?? t.booking.datePlaceholder);
 
-  const popover =
-    open && coords
-      ? createPortal(
+  const popover = open
+    ? createPortal(
           <div
             ref={popoverRef}
             role="dialog"
             aria-label={ariaLabel}
             style={{
               position: "fixed",
-              top: coords.top,
-              left: coords.left,
+              top: coords?.top ?? 0,
+              left: coords?.left ?? 0,
               width: POPOVER_WIDTH,
+              // Rendered but invisible until measured + positioned (no flash,
+              // and offsetHeight is readable for accurate flip-up placement).
+              visibility: coords ? "visible" : "hidden",
             }}
             className="z-[60] max-w-[calc(100vw-1rem)] rounded-[var(--radius)] border border-mist bg-paper p-3 shadow-md"
           >

@@ -12,7 +12,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import DateField from "@/components/ui/DateField";
-import SegmentedControl from "@/components/ui/SegmentedControl";
+import Select from "@/components/ui/Select";
 import { useI18n } from "@/i18n/client";
 import { nowInTimezone } from "@/lib/time";
 import {
@@ -98,9 +98,11 @@ export default function BookingSearchCard({
     router.push(`/voitures?${buildBookingSearchParams(search)}`);
   }
 
+  // Solid surfaces, no glass. The hero variant carries a deep, brand-tinted
+  // shadow so it reads as a floating command bar on the dark stage.
   const shell =
     variant === "hero"
-      ? "border border-white/12 bg-paper/95 text-ink shadow-[0_30px_80px_-30px_rgba(0,0,0,0.75)] backdrop-blur-xl"
+      ? "border border-mist bg-paper text-ink shadow-[0_36px_90px_-42px_rgba(0,0,0,0.62)]"
       : "border border-mist bg-paper text-ink shadow-sm";
 
   return (
@@ -110,14 +112,14 @@ export default function BookingSearchCard({
       aria-label={t.booking.cardTitle}
       className={`rounded-[var(--radius-lg)] p-5 sm:p-6 ${shell} ${className}`}
     >
-      <div className="mb-5 flex items-center gap-2.5">
+      <div className="mb-5 flex items-center gap-2.5 border-b border-mist pb-4">
         <span className="h-1.5 w-1.5 rounded-full bg-accent" />
         <span className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-stone">
           {t.booking.cardTitle}
         </span>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[1fr_1fr_1.2fr_auto] lg:items-end">
+      <div className="grid gap-4 lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-end">
         <div>
           <FieldLabel>{t.booking.pickupDate}</FieldLabel>
           <DateField
@@ -143,12 +145,12 @@ export default function BookingSearchCard({
 
         <div>
           <FieldLabel>{t.booking.pickupLocation}</FieldLabel>
-          <SegmentedControl
+          <Select
             options={locationOptions}
             value={pickup}
             onChange={(value) => {
-              setPickup(value);
-              if (!differentReturn) setReturnLocation(value);
+              setPickup(value as RentalLocation);
+              if (!differentReturn) setReturnLocation(value as RentalLocation);
             }}
             ariaLabel={t.booking.pickupLocation}
           />
@@ -182,12 +184,12 @@ export default function BookingSearchCard({
       </div>
 
       {differentReturn && (
-        <div className="mt-4 max-w-md">
+        <div className="mt-4 max-w-xs">
           <FieldLabel>{t.booking.returnLocation}</FieldLabel>
-          <SegmentedControl
+          <Select
             options={locationOptions}
             value={returnLocation}
-            onChange={setReturnLocation}
+            onChange={(value) => setReturnLocation(value as RentalLocation)}
             ariaLabel={t.booking.returnLocation}
           />
         </div>

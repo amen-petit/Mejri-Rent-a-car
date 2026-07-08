@@ -137,6 +137,13 @@ export const ar: Messages = {
       d: "عرض السعر ثابت. لا زيادة في اللحظة الأخيرة.",
     },
   ],
+  reviews: {
+    eyebrow: "تقييمات جوجل",
+    title: "ماذا يقول عملاؤنا",
+    viewAll: "عرض كل التقييمات",
+    googleTag: "تقييم على جوجل",
+    ratingLabel: "{rating} من 5",
+  },
   cta: {
     eyebrow: "انطلق منذ اليوم",
     titleA: "جاهز",

@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { key: "home", href: "/" },
   { key: "vehicles", href: "/voitures" },
   { key: "about", href: "/#about" },
-  { key: "contact", href: "/#contact" },
+  { key: "contact", href: "/#location" },
 ] as const;
 
 function Wordmark() {

@@ -39,20 +39,14 @@ export default function Footer() {
     { label: t.nav.home, href: "/" },
     { label: t.nav.vehicles, href: "/voitures" },
     { label: t.nav.about, href: "/#about" },
-    { label: t.nav.contact, href: "/#contact" },
-  ];
-
-  const legalItems = [
-    { label: t.footer.privacy, href: "/#privacy" },
-    { label: t.footer.terms, href: "/#terms" },
-    { label: t.footer.contactUs, href: "/#contact" },
+    { label: t.nav.contact, href: "/#location" },
   ];
 
   return (
     <footer className="bg-ink text-white">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         {/* Top — oversized wordmark + columns */}
-        <div className="grid gap-12 border-b border-white/10 py-16 lg:grid-cols-[1.6fr_1fr_1fr] lg:py-20">
+        <div className="grid gap-12 border-b border-white/10 py-16 lg:grid-cols-[1.8fr_1fr] lg:py-20">
           <div className="max-w-sm">
             <div className="flex items-baseline gap-2.5">
               <span className="font-display text-3xl font-medium tracking-tight">
@@ -93,7 +87,6 @@ export default function Footer() {
           </div>
 
           <FooterColumn title={t.footer.navigation} items={navItems} />
-          <FooterColumn title={t.footer.legal} items={legalItems} />
         </div>
 
         {/* Bottom bar */}

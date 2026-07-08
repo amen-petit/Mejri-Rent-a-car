@@ -141,6 +141,13 @@ export const fr = {
       d: "Le devis est ferme. Pas de supplément de dernière minute.",
     },
   ],
+  reviews: {
+    eyebrow: "Avis Google",
+    title: "Ce que disent nos clients",
+    viewAll: "Voir tous les avis",
+    googleTag: "Avis Google",
+    ratingLabel: "{rating} sur 5",
+  },
   cta: {
     eyebrow: "Départ dès aujourd'hui",
     titleA: "Prêt pour votre",
