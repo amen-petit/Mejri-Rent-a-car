@@ -128,7 +128,7 @@ export default async function Home() {
         </div>
 
         {fleet.length === 0 ? (
-          <div className="mt-12 border border-mist bg-cloud p-12 text-center text-stone">
+          <div className="mt-14 border border-mist bg-cloud p-12 text-center text-stone">
             {t.fleet.empty}
           </div>
         ) : (
@@ -225,7 +225,7 @@ export default async function Home() {
                 data-reveal
                 className={`reveal-d${idx + 1} border-t-2 border-mist pt-6 transition-colors duration-300 hover:border-accent`}
               >
-                <span className="font-display text-5xl font-medium text-accent">
+                <span className="font-display text-4xl font-medium text-accent">
                   {String(idx + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-4 font-display text-lg font-medium text-ink">
@@ -253,7 +253,7 @@ export default async function Home() {
             </h2>
           </div>
 
-          <div className="mt-16 grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-mist sm:grid-cols-2">
+          <div className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-mist sm:grid-cols-2">
             {t.features.items.map((f, idx) => (
               <div
                 key={idx}
@@ -292,10 +292,10 @@ export default async function Home() {
           <ReviewsShowcase t={t} />
 
           {/* CTA */}
-          <div className="flex flex-col items-start justify-between gap-10 py-16 lg:flex-row lg:items-end lg:py-24">
+          <div className="flex flex-col items-start justify-between gap-10 pt-16 pb-20 lg:flex-row lg:items-end lg:pt-20 lg:pb-28">
             <div data-reveal="left" className="max-w-2xl">
               <span className="eyebrow text-white/60">{t.cta.eyebrow}</span>
-              <h2 className="mt-6 font-display text-[clamp(2.4rem,5vw,4rem)] font-medium leading-[1.02] tracking-[-0.02em] text-white">
+              <h2 className="mt-5 font-display text-[clamp(2.4rem,5vw,4rem)] font-medium leading-[1.02] tracking-[-0.02em] text-white">
                 {t.cta.titleA}
                 <br />
                 {t.cta.titleB}{" "}

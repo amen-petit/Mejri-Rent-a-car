@@ -58,11 +58,11 @@ export default function ReviewsShowcase({ t }: { t: Messages }) {
     interpolate(t.reviews.ratingLabel, { rating });
 
   return (
-    <div className="border-b border-white/10 py-16 lg:py-24">
+    <div className="border-b border-white/10 pt-20 pb-16 lg:pt-28 lg:pb-20">
       {/* Header */}
       <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <span className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-white/40">
+          <span className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-white/40">
             {t.reviews.eyebrow}
           </span>
           <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-white">

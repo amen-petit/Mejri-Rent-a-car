@@ -524,6 +524,57 @@ html[lang="ar"] .hero-stroke {
   }
 }
 
+/* =========================================================================
+   HERO CAR — the cutout object levitates over a soft, breathing floor light.
+   The two loops share one duration + easing so the car and its light move as
+   one; both animate transform/opacity only and freeze under reduced motion.
+   ========================================================================= */
+.hero-car-levitate {
+  animation: hero-car-rise 6.5s var(--ease-in-out) infinite alternate;
+  will-change: transform;
+}
+
+@keyframes hero-car-rise {
+  from {
+    transform: translateY(5px);
+  }
+  to {
+    transform: translateY(-12px);
+  }
+}
+
+.hero-car-pool {
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    rgba(214, 224, 255, 0.17),
+    rgba(214, 224, 255, 0.05) 55%,
+    transparent 78%
+  );
+  filter: blur(20px);
+  animation: hero-car-pool 6.5s var(--ease-in-out) infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes hero-car-pool {
+  from {
+    transform: translateX(-50%) scale(1.06);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateX(-50%) scale(0.82);
+    opacity: 0.42;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-car-levitate,
+  .hero-car-pool {
+    animation: none !important;
+  }
+}
+
 /* Toast entrance — gentle rise + fade. Reduced-motion users get a plain fade. */
 @keyframes toast-in {
   from {

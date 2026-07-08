@@ -148,60 +148,83 @@ export default function Hero({ car }: { car?: Car }) {
             )}
           </div>
 
-          {/* The car -one clean object: image plate + solid info bar, one border. */}
+          {/* The car — floated free: a cutout object levitating over a soft floor
+              light, its facts on a separate dark bar. No plate, no box; the car
+              is the hero object. (Expects transparent-background car images.) */}
           <div className="lg:col-span-6" style={reveal(300)}>
             {car ? (
               <Link
                 href={`/voitures/${car.id}`}
                 aria-label={interpolate(t.hero.discover, { name: car.name })}
-                className="group block overflow-hidden rounded-[var(--radius-lg)] border border-white/10"
+                className="group block"
               >
-                <div className="relative aspect-[16/11] bg-cloud">
+                {/* Stage — the object hovers over a breathing floor light. */}
+                <div className="relative aspect-[16/10]">
+                  <div
+                    aria-hidden
+                    className="hero-car-pool absolute bottom-[7%] left-1/2 h-[13%] w-[70%]"
+                  />
                   {car.images?.[0] ? (
-                    <Image
-                      src={car.images[0]}
-                      alt={`${car.brand} ${car.name}`}
-                      fill
-                      priority
-                      unoptimized
-                      sizes="(max-width: 1024px) 100vw, 46vw"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                    />
+                    <div className="hero-car-levitate absolute inset-0">
+                      <Image
+                        src={car.images[0]}
+                        alt={`${car.brand} ${car.name}`}
+                        fill
+                        priority
+                        unoptimized
+                        sizes="(max-width: 1024px) 100vw, 46vw"
+                        className="object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      />
+                    </div>
                   ) : (
                     <div className="flex h-full items-center justify-center">
                       <CarSilhouette className="h-24 w-24 text-ash" />
                     </div>
                   )}
-                  <span className="absolute end-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/85 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-white">
+                  <span className="absolute end-2 top-2 z-10 inline-flex items-center gap-1.5 rounded-full bg-ink/85 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-white">
                     <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                     {t.hero.available}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between gap-4 border-t border-white/10 bg-graphite px-5 py-4">
-                  <div className="min-w-0">
+                {/* Facts — a floating dark bar: brand·name / specs / price. */}
+                <div className="mt-6 flex items-center gap-5 rounded-2xl border border-white/10 bg-graphite px-6 py-4 shadow-[0_24px_50px_-28px_rgba(0,0,0,0.9)] transition-colors duration-300 group-hover:border-white/20">
+                  <div className="me-auto min-w-0">
                     <p className="text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/40">
                       {car.brand}
                     </p>
-                    <p className="mt-0.5 truncate font-display text-base font-medium text-white">
+                    <p className="mt-1 truncate font-display text-2xl font-medium leading-none text-white">
                       {car.name}
                     </p>
                   </div>
-                  <p className="shrink-0 whitespace-nowrap text-end">
-                    <span className="text-[0.55rem] uppercase tracking-[0.16em] text-white/40">
-                      {t.hero.from}{" "}
-                    </span>
-                    <span className="font-display text-xl text-white">
-                      {car.price_per_day}
+
+                  <div className="hidden shrink-0 sm:block">
+                    <p className="text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/40">
+                      {t.enums.transmission[car.transmission] ?? car.transmission}
+                    </p>
+                    <p className="mt-1 whitespace-nowrap text-sm text-white/65">
+                      {t.enums.fuel[car.fuel_type] ?? car.fuel_type} · {car.seats}{" "}
+                      {t.common.seats}
+                    </p>
+                  </div>
+
+                  <div className="shrink-0 border-s border-white/10 ps-5">
+                    <p className="text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/40">
+                      {t.hero.from}
+                    </p>
+                    <p className="mt-1 whitespace-nowrap font-display leading-none text-white">
+                      <span className="text-2xl font-medium">
+                        {car.price_per_day}
+                      </span>
                       <span className="ms-1 text-xs text-white/45">
                         {t.hero.perDayShort}
                       </span>
-                    </span>
-                  </p>
+                    </p>
+                  </div>
                 </div>
               </Link>
             ) : (
-              <div className="aspect-[16/11] rounded-[var(--radius-lg)] border border-white/10 bg-graphite" />
+              <div className="aspect-[16/10] rounded-2xl border border-white/10 bg-graphite/40" />
             )}
           </div>
         </div>
