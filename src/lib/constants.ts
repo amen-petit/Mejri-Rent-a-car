@@ -148,6 +148,21 @@ export type RentalLocation = (typeof RENTAL_LOCATIONS)[number];
 
 export const DEFAULT_RENTAL_LOCATION: RentalLocation = "agency";
 
+/**
+ * Return the other configured rental location.
+ *
+ * With the current two-location setup (agency/airport), this guarantees an
+ * opposite pickup/return pair when "different return" is enabled.
+ */
+export function getAlternateRentalLocation(
+  location: RentalLocation,
+): RentalLocation {
+  return (
+    RENTAL_LOCATIONS.find((candidate) => candidate !== location) ??
+    DEFAULT_RENTAL_LOCATION
+  );
+}
+
 export function isRentalLocation(value: unknown): value is RentalLocation {
   return (
     typeof value === "string" &&

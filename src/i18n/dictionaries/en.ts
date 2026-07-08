@@ -187,6 +187,7 @@ export const en: Messages = {
     pickupLocation: "Pickup location",
     returnLocation: "Return location",
     differentReturn: "Return to a different location",
+    differentReturnTo: "Return to {location}",
     search: "Find available cars",
     searching: "Searching…",
     datePlaceholder: "dd/mm/yyyy",

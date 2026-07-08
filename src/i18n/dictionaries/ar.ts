@@ -187,6 +187,7 @@ export const ar: Messages = {
     pickupLocation: "مكان الاستلام",
     returnLocation: "مكان الإرجاع",
     differentReturn: "الإرجاع في مكان مختلف",
+    differentReturnTo: "الإرجاع إلى {location}",
     search: "اعرض السيارات المتاحة",
     searching: "جارٍ البحث…",
     datePlaceholder: "يوم/شهر/سنة",

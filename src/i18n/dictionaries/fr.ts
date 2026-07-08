@@ -191,6 +191,7 @@ export const fr = {
     pickupLocation: "Lieu de prise en charge",
     returnLocation: "Lieu de retour",
     differentReturn: "Retour à un endroit différent",
+    differentReturnTo: "Retour à {location}",
     search: "Voir les véhicules disponibles",
     searching: "Recherche…",
     datePlaceholder: "jj/mm/aaaa",

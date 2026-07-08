@@ -18,6 +18,7 @@ import {
   PICKUP_LEAD_MINUTES,
   RENTAL_LOCATIONS,
   DEFAULT_RENTAL_LOCATION,
+  getAlternateRentalLocation,
   type RentalLocation,
 } from "@/lib/constants";
 import { computeQuote, normalizePricingTiers } from "@/lib/pricing";
@@ -106,9 +107,6 @@ function CarDetailPageContent() {
   // Pickup / return locations (prefilled from the search, editable here).
   const [pickupLocation, setPickupLocation] = useState<RentalLocation>(
     presetSearch?.pickup ?? DEFAULT_RENTAL_LOCATION,
-  );
-  const [returnLocation, setReturnLocation] = useState<RentalLocation>(
-    presetSearch?.return ?? presetSearch?.pickup ?? DEFAULT_RENTAL_LOCATION,
   );
   const [differentReturn, setDifferentReturn] = useState(
     !!presetSearch && presetSearch.return !== presetSearch.pickup,
@@ -354,7 +352,9 @@ function CarDetailPageContent() {
           pickup_time: pickupTime,
           return_time: returnTime,
           pickup_location: pickupLocation,
-          return_location: differentReturn ? returnLocation : pickupLocation,
+          return_location: differentReturn
+            ? getAlternateRentalLocation(pickupLocation)
+            : pickupLocation,
           notes: form.notes.trim() || null,
         }),
       });
@@ -442,8 +442,13 @@ function CarDetailPageContent() {
     value,
     label: t.booking.locations[value] ?? value,
   }));
+  const alternateReturnLocation = getAlternateRentalLocation(pickupLocation);
+  const differentReturnLabel = interpolate(t.booking.differentReturnTo, {
+    location:
+      t.booking.locations[alternateReturnLocation] ?? alternateReturnLocation,
+  });
   const effectiveReturnLocation = differentReturn
-    ? returnLocation
+    ? alternateReturnLocation
     : pickupLocation;
 
   return (
@@ -775,7 +780,6 @@ function CarDetailPageContent() {
                       value={pickupLocation}
                       onChange={(value) => {
                         setPickupLocation(value);
-                        if (!differentReturn) setReturnLocation(value);
                       }}
                       ariaLabel={t.booking.pickupLocation}
                     />
@@ -788,26 +792,11 @@ function CarDetailPageContent() {
                       onChange={(e) => {
                         const on = e.target.checked;
                         setDifferentReturn(on);
-                        if (!on) setReturnLocation(pickupLocation);
                       }}
                       className="h-4 w-4 accent-[var(--color-ink)]"
                     />
-                    {t.booking.differentReturn}
+                    {differentReturnLabel}
                   </label>
-
-                  {differentReturn && (
-                    <div>
-                      <label className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-stone">
-                        {t.booking.returnLocation}
-                      </label>
-                      <SegmentedControl
-                        options={locationOptions}
-                        value={returnLocation}
-                        onChange={setReturnLocation}
-                        ariaLabel={t.booking.returnLocation}
-                      />
-                    </div>
-                  )}
                 </div>
               </div>
 
@@ -841,7 +830,7 @@ function CarDetailPageContent() {
                     <span className="text-end text-sm font-medium text-white">
                       {t.booking.locations[pickupLocation] ?? pickupLocation}
                       {effectiveReturnLocation !== pickupLocation
-                        ? ` → ${t.booking.locations[returnLocation] ?? returnLocation}`
+                        ? ` → ${t.booking.locations[effectiveReturnLocation] ?? effectiveReturnLocation}`
                         : ""}
                     </span>
                   </div>

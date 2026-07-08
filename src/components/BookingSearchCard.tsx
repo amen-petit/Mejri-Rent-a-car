@@ -14,10 +14,12 @@ import { useRouter } from "next/navigation";
 import DateField from "@/components/ui/DateField";
 import Select from "@/components/ui/Select";
 import { useI18n } from "@/i18n/client";
+import { interpolate } from "@/i18n/format";
 import { nowInTimezone } from "@/lib/time";
 import {
   RENTAL_LOCATIONS,
   DEFAULT_RENTAL_LOCATION,
+  getAlternateRentalLocation,
   type RentalLocation,
 } from "@/lib/constants";
 import {
@@ -59,15 +61,17 @@ export default function BookingSearchCard({
   const [differentReturn, setDifferentReturn] = useState(
     !!initial?.return && initial.return !== (initial.pickup ?? DEFAULT_RENTAL_LOCATION),
   );
-  const [returnLocation, setReturnLocation] = useState<RentalLocation>(
-    initial?.return ?? initial?.pickup ?? DEFAULT_RENTAL_LOCATION,
-  );
   const [error, setError] = useState<BookingSearchError | null>(null);
 
   const locationOptions = RENTAL_LOCATIONS.map((value) => ({
     value,
     label: t.booking.locations[value] ?? value,
   }));
+  const alternateReturnLocation = getAlternateRentalLocation(pickup);
+  const differentReturnLabel = interpolate(t.booking.differentReturnTo, {
+    location:
+      t.booking.locations[alternateReturnLocation] ?? alternateReturnLocation,
+  });
 
   function handlePickupDate(value: string) {
     setStart(value);
@@ -93,7 +97,7 @@ export default function BookingSearchCard({
       start,
       end,
       pickup,
-      return: differentReturn ? returnLocation : pickup,
+      return: differentReturn ? alternateReturnLocation : pickup,
     };
     router.push(`/voitures?${buildBookingSearchParams(search)}`);
   }
@@ -149,8 +153,8 @@ export default function BookingSearchCard({
             options={locationOptions}
             value={pickup}
             onChange={(value) => {
-              setPickup(value as RentalLocation);
-              if (!differentReturn) setReturnLocation(value as RentalLocation);
+              const nextPickup = value as RentalLocation;
+              setPickup(nextPickup);
             }}
             ariaLabel={t.booking.pickupLocation}
           />
@@ -175,25 +179,12 @@ export default function BookingSearchCard({
             onChange={(e) => {
               const on = e.target.checked;
               setDifferentReturn(on);
-              if (!on) setReturnLocation(pickup);
             }}
             className="h-4 w-4 accent-[var(--color-ink)]"
           />
-          {t.booking.differentReturn}
+          {differentReturnLabel}
         </label>
       </div>
-
-      {differentReturn && (
-        <div className="mt-4 max-w-xs">
-          <FieldLabel>{t.booking.returnLocation}</FieldLabel>
-          <Select
-            options={locationOptions}
-            value={returnLocation}
-            onChange={(value) => setReturnLocation(value as RentalLocation)}
-            ariaLabel={t.booking.returnLocation}
-          />
-        </div>
-      )}
 
       {error && (
         <p
