@@ -20,9 +20,13 @@
   --color-mist: #e6e2d9; /* hairline border on paper */
   --color-line: #d8d3c9; /* slightly stronger hairline */
 
-  /* ── Single accent ── */
-  --color-accent: #1f3de6; /* cobalt */
+  /* ── Accents ── */
+  --color-accent: #1f3de6; /* cobalt — primary, interactive, brand */
   --color-accent-strong: #1731c2; /* pressed / hover-dark */
+  /* Warm secondary (amber-gold) — energy + warmth. Ratings, featured tags.
+     Used sparingly as a deliberate complement to the cobalt, never scattered. */
+  --color-warm: oklch(0.79 0.125 74);
+  --color-warm-strong: oklch(0.72 0.13 64);
 
   /* ── Legacy aliases ─────────────────────────────────────────────────
      Un-migrated pages (listing, detail, admin) still reference these
@@ -149,9 +153,9 @@
   .eyebrow::before {
     content: "";
     width: 1.75rem;
-    height: 1px;
-    background: var(--color-ink);
-    opacity: 0.45;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: 2px;
   }
 
   /* ── Buttons ─────────────────────────────────────────────────────────
@@ -363,19 +367,22 @@
 @media (prefers-reduced-motion: no-preference) {
   [data-reveal] {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(28px);
     transition:
-      opacity 0.5s var(--ease-out),
-      transform 0.5s var(--ease-out);
+      opacity 0.72s var(--ease-out),
+      transform 0.72s var(--ease-out);
     transition-delay: var(--reveal-delay, 0ms);
     will-change: opacity, transform;
   }
 
   [data-reveal="left"] {
-    transform: translateX(-18px);
+    transform: translateX(-26px);
   }
   [data-reveal="right"] {
-    transform: translateX(18px);
+    transform: translateX(26px);
+  }
+  [data-reveal="scale"] {
+    transform: translateY(28px) scale(0.97);
   }
 
   [data-reveal][data-reveal-visible="true"],

@@ -85,7 +85,7 @@ export default async function Home() {
 
       {/* ─────────────────────  FEATURED FLEET  ───────────────────── */}
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div data-reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <span className="eyebrow">{t.fleet.eyebrow}</span>
             <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
@@ -121,14 +121,15 @@ export default async function Home() {
                   </span>
                   <span className="h-px flex-1 bg-mist transition-colors duration-300 group-hover:bg-ink" />
                   {car.is_featured && (
-                    <span className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-accent">
+                    <span className="inline-flex items-center gap-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-warm">
+                      <span className="h-1 w-1 rounded-full bg-warm" />
                       {t.fleet.featured}
                     </span>
                   )}
                 </div>
 
                 {/* Image plate */}
-                <div className="relative mt-5 aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud">
+                <div className="relative mt-5 aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud transition-[border-color,box-shadow] duration-300 group-hover:border-ink group-hover:shadow-[var(--shadow-md)]">
                   {car.images?.[0] ? (
                     <Image
                       src={car.images[0]}
@@ -142,7 +143,7 @@ export default async function Home() {
                       <CarSilhouette className="h-16 w-16 text-ash" />
                     </div>
                   )}
-                  <span className="absolute end-3 top-3 rounded-full border border-ink/10 bg-paper/80 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.1em] text-stone backdrop-blur-sm">
+                  <span className="absolute end-3 top-3 rounded-full border border-mist bg-paper px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.1em] text-stone">
                     {t.enums.category[car.category] ?? car.category}
                   </span>
                 </div>
@@ -183,7 +184,7 @@ export default async function Home() {
       {/* ─────────────────────  HOW IT WORKS  ───────────────────── */}
       <section id="how" className="scroll-mt-24 bg-cloud">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-          <div className="max-w-2xl">
+          <div data-reveal className="max-w-2xl">
             <span className="eyebrow">{t.how.eyebrow}</span>
             <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
               {t.how.title}
@@ -195,9 +196,9 @@ export default async function Home() {
               <div
                 key={idx}
                 data-reveal
-                className={`reveal-d${idx + 1} border-t border-line pt-6`}
+                className={`reveal-d${idx + 1} border-t-2 border-mist pt-6 transition-colors duration-300 hover:border-accent`}
               >
-                <span className="font-display text-4xl font-medium text-ink/15">
+                <span className="font-display text-5xl font-medium text-accent">
                   {String(idx + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-4 font-display text-lg font-medium text-ink">
@@ -213,7 +214,7 @@ export default async function Home() {
       {/* ─────────────────────  WHY / FEATURES  ───────────────────── */}
       <section id="about" className="scroll-mt-24">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-          <div className="max-w-2xl">
+          <div data-reveal className="max-w-2xl">
             <span className="eyebrow">
               {interpolate(t.features.eyebrow, { brand: BRAND_SHORT })}
             </span>
@@ -228,10 +229,10 @@ export default async function Home() {
               <div
                 key={idx}
                 data-reveal
-                className={`reveal-d${(idx % 2) + 1} bg-paper p-8 lg:p-10`}
+                className={`reveal-d${(idx % 2) + 1} group bg-paper p-8 transition-colors duration-300 hover:bg-cloud lg:p-10`}
               >
                 <div className="flex items-baseline gap-4">
-                  <span className="font-display text-2xl text-ash">
+                  <span className="font-display text-2xl text-ash transition-colors duration-300 group-hover:text-accent">
                     {String(idx + 1).padStart(2, "0")}
                   </span>
                   <h3 className="font-display text-xl font-medium text-ink">
@@ -248,15 +249,23 @@ export default async function Home() {
       </section>
 
       {/* ────────────────  REVIEWS + CTA  (ink band)  ──────────────── */}
-      <section className="bg-ink text-paper">
+      <section className="relative isolate overflow-hidden bg-ink text-paper">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(70% 55% at 88% 2%, color-mix(in srgb, var(--color-accent) 13%, transparent), transparent 62%)",
+          }}
+        />
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           {/* Real Google reviews, curated */}
           <ReviewsShowcase t={t} />
 
           {/* CTA */}
           <div className="flex flex-col items-start justify-between gap-10 py-16 lg:flex-row lg:items-end lg:py-24">
-            <div className="max-w-2xl">
-              <span className="eyebrow text-white/55 before:bg-white/40">
+            <div data-reveal="left" className="max-w-2xl">
+              <span className="eyebrow text-white/60">
                 {t.cta.eyebrow}
               </span>
               <h2 className="mt-6 font-display text-[clamp(2.4rem,5vw,4rem)] font-medium leading-[1.02] tracking-[-0.02em] text-white">
@@ -267,7 +276,7 @@ export default async function Home() {
               </h2>
             </div>
 
-            <div className="flex w-full flex-col gap-4 lg:w-auto lg:items-end">
+            <div data-reveal="right" className="reveal-d2 flex w-full flex-col gap-4 lg:w-auto lg:items-end">
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link href="/voitures" className="btn-accent px-8 py-4">
                   {t.cta.bookNow}

@@ -64,7 +64,7 @@ export default function LocationSection() {
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-16">
           {/* Info */}
-          <div>
+          <div data-reveal>
             <span className="eyebrow">{t.location.eyebrow}</span>
             <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
               {t.location.title}
@@ -129,7 +129,10 @@ export default function LocationSection() {
           </div>
 
           {/* Map */}
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-paper shadow-sm sm:aspect-[16/10]">
+          <div
+            data-reveal="right"
+            className="reveal-d2 relative aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-paper shadow-sm sm:aspect-[16/10]"
+          >
             <iframe
               src={MAPS_EMBED_URL}
               title={t.location.mapTitle}

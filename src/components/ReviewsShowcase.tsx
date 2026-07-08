@@ -15,7 +15,7 @@ function Stars({ rating, label }: { rating: number; label: string }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
-          className={i < rating ? "h-3.5 w-3.5 text-accent" : "h-3.5 w-3.5 text-white/20"}
+          className={i < rating ? "h-4 w-4 text-warm" : "h-4 w-4 text-white/15"}
           viewBox="0 0 24 24"
           fill="currentColor"
           aria-hidden="true"
