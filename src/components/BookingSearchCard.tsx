@@ -59,7 +59,8 @@ export default function BookingSearchCard({
     initial?.pickup ?? DEFAULT_RENTAL_LOCATION,
   );
   const [differentReturn, setDifferentReturn] = useState(
-    !!initial?.return && initial.return !== (initial.pickup ?? DEFAULT_RENTAL_LOCATION),
+    !!initial?.return &&
+      initial.return !== (initial.pickup ?? DEFAULT_RENTAL_LOCATION),
   );
   const [error, setError] = useState<BookingSearchError | null>(null);
 
@@ -165,7 +166,18 @@ export default function BookingSearchCard({
           className="btn-accent h-[2.75rem] w-full whitespace-nowrap px-6 lg:w-auto"
         >
           {t.booking.search}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rtl:rotate-180" aria-hidden="true">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="rtl:rotate-180"
+            aria-hidden="true"
+          >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </button>

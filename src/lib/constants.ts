@@ -5,8 +5,7 @@ export const BRAND_NAME =
   process.env.NEXT_PUBLIC_BRAND_NAME || "Fekra rent a car";
 
 // Short brand mark used in headings and the decorative background watermark.
-export const BRAND_SHORT =
-  process.env.NEXT_PUBLIC_BRAND_SHORT || "Fekra";
+export const BRAND_SHORT = process.env.NEXT_PUBLIC_BRAND_SHORT || "Fekra";
 
 export const PHONE_DISPLAY =
   process.env.NEXT_PUBLIC_PHONE_DISPLAY || "28 538 910";
@@ -35,8 +34,7 @@ export const MAPS_QUERY =
   process.env.NEXT_PUBLIC_MAPS_QUERY || `${BRAND_NAME}, Tunisie`;
 
 // Human-readable address shown next to the map (falls back to the query).
-export const MAPS_ADDRESS =
-  process.env.NEXT_PUBLIC_MAPS_ADDRESS || MAPS_QUERY;
+export const MAPS_ADDRESS = process.env.NEXT_PUBLIC_MAPS_ADDRESS || MAPS_QUERY;
 
 // Prefer an explicit embed URL (Google Maps → Share → Embed a map) when set:
 // it pins the exact business/place. Otherwise fall back to a keyless query embed

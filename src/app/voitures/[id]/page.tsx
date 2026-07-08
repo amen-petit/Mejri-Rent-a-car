@@ -1,6 +1,13 @@
 "use client";
 import Image from "next/image";
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import TimeSlotPicker from "@/components/TimeSlotPicker";
 import Navbar from "@/components/Navbar";
@@ -136,7 +143,8 @@ function CarDetailPageContent() {
       fetch(`/api/cars/${id}/availability`)
         .then((r) => r.json())
         .then(
-          (d) => (d.unavailable ?? []) as { start_date: string; end_date: string }[],
+          (d) =>
+            (d.unavailable ?? []) as { start_date: string; end_date: string }[],
         )
         .catch(() => [] as { start_date: string; end_date: string }[]),
     ])
@@ -229,10 +237,8 @@ function CarDetailPageContent() {
     if (isStart || isEnd)
       return "bg-ink text-paper rounded-[var(--radius-sm)] font-medium";
     if (isInRange) return "bg-ink/[0.07] text-ink";
-    if (isPast)
-      return "text-ash cursor-not-allowed line-through";
-    if (isUnavail)
-      return "text-ash cursor-not-allowed line-through";
+    if (isPast) return "text-ash cursor-not-allowed line-through";
+    if (isUnavail) return "text-ash cursor-not-allowed line-through";
     return "hover:bg-ink/[0.05] cursor-pointer text-ink";
   }
 
@@ -433,7 +439,10 @@ function CarDetailPageContent() {
     );
 
   const specStrip: [string, string][] = [
-    [t.carDetail.transmission, t.enums.transmission[car.transmission] ?? car.transmission],
+    [
+      t.carDetail.transmission,
+      t.enums.transmission[car.transmission] ?? car.transmission,
+    ],
     [t.carDetail.fuel, t.enums.fuel[car.fuel_type] ?? car.fuel_type],
     [t.carDetail.seats, `${car.seats}`],
   ];
@@ -460,7 +469,16 @@ function CarDetailPageContent() {
           onClick={() => router.back()}
           className="mb-10 flex items-center gap-1.5 text-sm font-medium text-stone transition-colors hover:text-ink"
         >
-          <svg className="h-4 w-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg
+            className="h-4 w-4 rtl:rotate-180"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
           {t.carDetail.back}
@@ -616,7 +634,9 @@ function CarDetailPageContent() {
             <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.5rem)] font-medium tracking-tight text-ink">
               {t.carDetail.chooseDates}
             </h2>
-            <p className="mt-3 text-sm text-stone">{t.carDetail.greyedBooked}</p>
+            <p className="mt-3 text-sm text-stone">
+              {t.carDetail.greyedBooked}
+            </p>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-[1.45fr_0.95fr] lg:items-start">
@@ -633,7 +653,16 @@ function CarDetailPageContent() {
                   aria-label={t.carDetail.prevMonth}
                   className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
                 >
-                  <svg className="h-4 w-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <svg
+                    className="h-4 w-4 rtl:rotate-180"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
                     <path d="M15 18l-6-6 6-6" />
                   </svg>
                 </button>
@@ -650,7 +679,16 @@ function CarDetailPageContent() {
                   aria-label={t.carDetail.nextMonth}
                   className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
                 >
-                  <svg className="h-4 w-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <svg
+                    className="h-4 w-4 rtl:rotate-180"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
                     <path d="M9 18l6-6-6-6" />
                   </svg>
                 </button>
@@ -842,7 +880,9 @@ function CarDetailPageContent() {
                       {t.carDetail.totalEstimate}
                     </p>
                     <p className="mt-1 font-display text-3xl text-white">
-                      {totalDays > 0 ? `${totalPrice} ${t.common.currency}` : "—"}
+                      {totalDays > 0
+                        ? `${totalPrice} ${t.common.currency}`
+                        : "—"}
                     </p>
                     {totalDays > 0 && (
                       <p className="mt-1 text-[0.7rem] text-white/50">
@@ -938,7 +978,9 @@ function CarDetailPageContent() {
                   type="text"
                   placeholder={t.carDetail.yourName}
                   value={form.name}
-                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, name: e.target.value }))
+                  }
                   className="input-premium"
                   autoComplete="name"
                   required
@@ -957,16 +999,23 @@ function CarDetailPageContent() {
                   type="tel"
                   placeholder={t.carDetail.phonePlaceholder}
                   value={form.phone}
-                  onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, phone: e.target.value }))
+                  }
                   className="input-premium"
                   autoComplete="tel"
                   dir="ltr"
                   aria-invalid={phoneInvalid}
-                  aria-describedby={phoneInvalid ? "booking-phone-error" : undefined}
+                  aria-describedby={
+                    phoneInvalid ? "booking-phone-error" : undefined
+                  }
                   required
                 />
                 {phoneInvalid && (
-                  <p id="booking-phone-error" className="mt-1.5 text-xs font-medium text-red-600">
+                  <p
+                    id="booking-phone-error"
+                    className="mt-1.5 text-xs font-medium text-red-600"
+                  >
                     {t.carDetail.phoneInvalid}
                   </p>
                 )}
@@ -984,15 +1033,22 @@ function CarDetailPageContent() {
                   type="email"
                   placeholder={t.carDetail.emailPlaceholder}
                   value={form.email}
-                  onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, email: e.target.value }))
+                  }
                   className="input-premium"
                   autoComplete="email"
                   dir="ltr"
                   aria-invalid={emailInvalid}
-                  aria-describedby={emailInvalid ? "booking-email-error" : undefined}
+                  aria-describedby={
+                    emailInvalid ? "booking-email-error" : undefined
+                  }
                 />
                 {emailInvalid && (
-                  <p id="booking-email-error" className="mt-1.5 text-xs font-medium text-red-600">
+                  <p
+                    id="booking-email-error"
+                    className="mt-1.5 text-xs font-medium text-red-600"
+                  >
                     {t.carDetail.emailInvalid}
                   </p>
                 )}
@@ -1057,7 +1113,16 @@ function CarDetailPageContent() {
         >
           <div className="w-full max-w-[calc(100vw-1rem)] rounded-[var(--radius-lg)] border border-mist bg-paper p-8 text-center shadow-md sm:max-w-sm sm:p-10">
             <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-ink">
-              <svg className="h-6 w-6 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                className="h-6 w-6 text-ink"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <path d="M5 13l4 4L19 7" />
               </svg>
             </div>

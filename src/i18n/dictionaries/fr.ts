@@ -284,7 +284,8 @@ export const fr = {
     totalEstimate: "Total estimé",
     perDayRate: "{rate} DT / jour",
     confirmDays: "Confirmer — {days} {unit}",
-    chooseEndToActivate: "Choisissez une date de fin pour activer la confirmation.",
+    chooseEndToActivate:
+      "Choisissez une date de fin pour activer la confirmation.",
     chooseEnd: "Choisissez une fin",
     confirm: "Confirmer",
     yourInfo: "Vos informations",

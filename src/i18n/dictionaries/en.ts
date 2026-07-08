@@ -297,14 +297,13 @@ export const en: Messages = {
     requestSentDesc:
       "We'll contact you as soon as possible to confirm your booking.",
     backToVehicle: "Back to vehicle",
-    toastReturnAfterPickup:
-      "The return time must be after the pickup time.",
+    toastReturnAfterPickup: "The return time must be after the pickup time.",
     toastSlotPassed:
       "This pickup slot has already passed. Choose a later time.",
     toastRequestSent: "Your booking request has been sent.",
-    toastRateLimited: "You're going a little too fast. Wait a moment and try again.",
-    toastSaveFailed:
-      "We couldn't save your booking. Please try again.",
+    toastRateLimited:
+      "You're going a little too fast. Wait a moment and try again.",
+    toastSaveFailed: "We couldn't save your booking. Please try again.",
     toastConnection:
       "Connection problem. Check your internet connection and try again.",
   },

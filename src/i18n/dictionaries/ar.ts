@@ -229,7 +229,8 @@ export const ar: Messages = {
     showFilters: "إظهار",
     hideFilters: "إخفاء",
     loadFailedTitle: "تعذّر تحميل السيارات",
-    loadFailedDesc: "حدث خطأ في الاتصال. تحقق من اتصالك بالإنترنت وأعد المحاولة.",
+    loadFailedDesc:
+      "حدث خطأ في الاتصال. تحقق من اتصالك بالإنترنت وأعد المحاولة.",
     noResultsTitle: "لم يُعثر على أي سيارة",
     noResultsDesc: "حاول تعديل عوامل التصفية.",
     resetFilters: "إعادة تعيين عوامل التصفية",
@@ -300,7 +301,8 @@ export const ar: Messages = {
     toastRequestSent: "تم إرسال طلب حجزك بنجاح.",
     toastRateLimited: "أنت تتقدّم بسرعة كبيرة. انتظر لحظة ثم أعد المحاولة.",
     toastSaveFailed: "لم نتمكن من حفظ حجزك. يرجى إعادة المحاولة.",
-    toastConnection: "مشكلة في الاتصال. تحقق من اتصالك بالإنترنت وأعد المحاولة.",
+    toastConnection:
+      "مشكلة في الاتصال. تحقق من اتصالك بالإنترنت وأعد المحاولة.",
   },
   states: {
     errorEyebrow: "حدث خطأ",
