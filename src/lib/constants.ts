@@ -58,6 +58,11 @@ export const REVIEWS_URL =
 
 export const FEATURED_CARS_LIMIT = 3;
 
+// How many vedette (featured) cars the hero rotates through, one every few
+// seconds. Caps the rotation so the fleet below always keeps some cars of its
+// own; falls back to a single car when nothing is featured yet.
+export const HERO_ROTATION_LIMIT = 5;
+
 export const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 // Minimum lead time (minutes) required for a same-day pickup. Shared by the

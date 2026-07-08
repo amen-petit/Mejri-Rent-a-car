@@ -1,16 +1,14 @@
 "use client";
 
 /**
- * Hero -distilled dark stage. One confident idea: a clean spotlit car, a bold
- * Fraunces headline with a single cobalt mark, and the booking bar as the sole
- * primary action.
+ * Hero — distilled dark stage. The vedette (featured) cars rotate through one
+ * spotlit cutout, one every few seconds, grounded by a soft cast shadow so the
+ * car sits on the page rather than floating over it. A bold Fraunces headline
+ * carries the message; the booking bar is the sole primary action.
  *
- * Deliberately stripped of the old chrome (film grain, cursor spotlight,
- * parallax, tech grid, mix-blend, outline type, gradient sweeps, price count-up,
- * stats HUD, bounce scroll cue, the em-dash "spine"). Surfaces are solid with
- * hairline borders (no glass); depth is one restrained wash, not a stack. Motion
- * is a quiet staggered reveal on the site's exponential ease-out, static under
- * prefers-reduced-motion.
+ * Motion: a quiet staggered reveal on load, a gentle crossfade between cars, and
+ * a fade-up on the swapping facts. Rotation pauses on hover/focus and can be
+ * jogged by the dots. Everything is static under prefers-reduced-motion.
  */
 import Image from "next/image";
 import Link from "next/link";
@@ -22,10 +20,14 @@ import BookingSearchCard from "@/components/BookingSearchCard";
 import { useI18n } from "@/i18n/client";
 import { interpolate } from "@/i18n/format";
 
-export default function Hero({ car }: { car?: Car }) {
+const ROTATE_MS = 5000;
+
+export default function Hero({ cars }: { cars: Car[] }) {
   const { t } = useI18n();
   const [ready, setReady] = useState(false);
   const [reduce, setReduce] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {
@@ -34,6 +36,17 @@ export default function Hero({ car }: { car?: Car }) {
     });
     return () => cancelAnimationFrame(id);
   }, []);
+
+  // Rotate the vedette cars on a fixed cadence; hold while the visitor hovers
+  // or focuses within the showcase, or when there's only one car to show.
+  useEffect(() => {
+    if (cars.length <= 1 || paused) return;
+    const id = window.setInterval(
+      () => setIndex((i) => (i + 1) % cars.length),
+      ROTATE_MS,
+    );
+    return () => window.clearInterval(id);
+  }, [cars.length, paused]);
 
   const reveal = (delay: number): React.CSSProperties =>
     reduce
@@ -45,6 +58,8 @@ export default function Hero({ car }: { car?: Car }) {
           opacity: ready ? 1 : 0,
           transform: ready ? "none" : "translateY(0.6rem)",
         };
+
+  const car = cars[index];
 
   return (
     <section className="relative isolate overflow-hidden bg-ink text-paper">
@@ -139,7 +154,10 @@ export default function Hero({ car }: { car?: Car }) {
                   href={`/voitures/${car.id}`}
                   className="group inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
                 >
-                  <span className="border-b border-white/25 pb-0.5 transition-colors group-hover:border-white">
+                  <span
+                    key={car.id}
+                    className="hero-swap border-b border-white/25 pb-0.5 transition-colors group-hover:border-white"
+                  >
                     {interpolate(t.hero.discover, { name: car.name })}
                   </span>
                   <Arrow className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
@@ -148,88 +166,131 @@ export default function Hero({ car }: { car?: Car }) {
             )}
           </div>
 
-          {/* The car — floated free: a cutout object levitating over a soft floor
-              light, its facts on a separate dark bar. No plate, no box; the car
-              is the hero object. (Expects transparent-background car images.) */}
-          <div className="lg:col-span-6" style={reveal(300)}>
+          {/* The vedette — a grounded cutout that crossfades between the featured
+              cars, its facts on a separate dark bar, dots to jog the set. */}
+          <div
+            className="lg:col-span-6"
+            style={reveal(300)}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onFocusCapture={() => setPaused(true)}
+            onBlurCapture={() => setPaused(false)}
+          >
             {car ? (
-              <Link
-                href={`/voitures/${car.id}`}
-                aria-label={interpolate(t.hero.discover, { name: car.name })}
-                className="group block"
-              >
-                {/* Stage — the object hovers over a breathing floor light. */}
-                <div className="relative aspect-[16/10]">
-                  <div
-                    aria-hidden
-                    className="hero-car-pool absolute bottom-[7%] left-1/2 h-[13%] w-[70%]"
-                  />
-                  {car.images?.[0] ? (
-                    <div className="hero-car-levitate absolute inset-0">
-                      <Image
-                        src={car.images[0]}
-                        alt={`${car.brand} ${car.name}`}
-                        fill
-                        priority
-                        unoptimized
-                        sizes="(max-width: 1024px) 100vw, 46vw"
-                        className="object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                      />
+              <>
+                <Link
+                  href={`/voitures/${car.id}`}
+                  aria-label={interpolate(t.hero.discover, { name: car.name })}
+                  className="group block"
+                >
+                  {/* Stage — cars stacked and crossfading; a soft cast shadow
+                      under each grounds it against the dark. */}
+                  <div className="relative aspect-[16/10]">
+                    {cars.map((c, i) => (
+                      <div
+                        key={c.id}
+                        aria-hidden={i !== index}
+                        className="absolute inset-0 translate-y-[16%] transition-opacity ease-out"
+                        style={{
+                          opacity: i === index ? 1 : 0,
+                          transitionDuration: reduce ? "0ms" : "900ms",
+                        }}
+                      >
+                        {c.images?.[0] ? (
+                          <Image
+                            src={c.images[0]}
+                            alt={`${c.brand} ${c.name}`}
+                            fill
+                            priority={i === 0}
+                            unoptimized
+                            sizes="(max-width: 1024px) 100vw, 46vw"
+                            className="object-contain object-center drop-shadow-[0_20px_22px_rgba(0,0,0,0.5)] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                          />
+                        ) : (
+                          <div className="flex h-full items-center justify-center">
+                            <CarSilhouette className="h-24 w-24 text-ash" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+
+                    <span className="absolute end-2 top-2 z-10 inline-flex items-center gap-1.5 rounded-full bg-ink/85 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-white">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      {t.hero.available}
+                    </span>
+                  </div>
+
+                  {/* Facts — floating dark bar: brand·name / specs / price.
+                      The bar holds; only its contents fade on each swap. */}
+                  <div className="mt-3 rounded-2xl border border-white/10 bg-graphite px-6 py-4 shadow-[0_24px_50px_-28px_rgba(0,0,0,0.9)] transition-colors duration-300 group-hover:border-white/20">
+                    <div key={car.id} className="hero-swap flex items-center gap-5">
+                      <div className="me-auto min-w-0">
+                        <p className="text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/40">
+                          {car.brand}
+                        </p>
+                        <p className="mt-1 truncate font-display text-2xl font-medium leading-none text-white">
+                          {car.name}
+                        </p>
+                      </div>
+
+                      <div className="hidden shrink-0 sm:block">
+                        <p className="text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/40">
+                          {t.enums.transmission[car.transmission] ??
+                            car.transmission}
+                        </p>
+                        <p className="mt-1 whitespace-nowrap text-sm text-white/65">
+                          {t.enums.fuel[car.fuel_type] ?? car.fuel_type} ·{" "}
+                          {car.seats} {t.common.seats}
+                        </p>
+                      </div>
+
+                      <div className="shrink-0 border-s border-white/10 ps-5">
+                        <p className="text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/40">
+                          {t.hero.from}
+                        </p>
+                        <p className="mt-1 whitespace-nowrap font-display leading-none text-white">
+                          <span className="text-2xl font-medium">
+                            {car.price_per_day}
+                          </span>
+                          <span className="ms-1 text-xs text-white/45">
+                            {t.hero.perDayShort}
+                          </span>
+                        </p>
+                      </div>
                     </div>
-                  ) : (
-                    <div className="flex h-full items-center justify-center">
-                      <CarSilhouette className="h-24 w-24 text-ash" />
-                    </div>
-                  )}
-                  <span className="absolute end-2 top-2 z-10 inline-flex items-center gap-1.5 rounded-full bg-ink/85 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-white">
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                    {t.hero.available}
-                  </span>
-                </div>
-
-                {/* Facts — a floating dark bar: brand·name / specs / price. */}
-                <div className="mt-6 flex items-center gap-5 rounded-2xl border border-white/10 bg-graphite px-6 py-4 shadow-[0_24px_50px_-28px_rgba(0,0,0,0.9)] transition-colors duration-300 group-hover:border-white/20">
-                  <div className="me-auto min-w-0">
-                    <p className="text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/40">
-                      {car.brand}
-                    </p>
-                    <p className="mt-1 truncate font-display text-2xl font-medium leading-none text-white">
-                      {car.name}
-                    </p>
                   </div>
+                </Link>
 
-                  <div className="hidden shrink-0 sm:block">
-                    <p className="text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/40">
-                      {t.enums.transmission[car.transmission] ?? car.transmission}
-                    </p>
-                    <p className="mt-1 whitespace-nowrap text-sm text-white/65">
-                      {t.enums.fuel[car.fuel_type] ?? car.fuel_type} · {car.seats}{" "}
-                      {t.common.seats}
-                    </p>
+                {cars.length > 1 && (
+                  <div className="mt-5 flex items-center justify-center gap-1">
+                    {cars.map((c, i) => (
+                      <button
+                        key={c.id}
+                        type="button"
+                        aria-label={c.name}
+                        aria-current={i === index}
+                        onClick={() => setIndex(i)}
+                        className="group/dot flex h-8 items-center px-1.5"
+                      >
+                        <span
+                          className={`block h-1.5 rounded-full transition-all duration-300 ease-out ${
+                            i === index
+                              ? "w-6 bg-accent"
+                              : "w-1.5 bg-white/25 group-hover/dot:bg-white/55"
+                          }`}
+                        />
+                      </button>
+                    ))}
                   </div>
-
-                  <div className="shrink-0 border-s border-white/10 ps-5">
-                    <p className="text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/40">
-                      {t.hero.from}
-                    </p>
-                    <p className="mt-1 whitespace-nowrap font-display leading-none text-white">
-                      <span className="text-2xl font-medium">
-                        {car.price_per_day}
-                      </span>
-                      <span className="ms-1 text-xs text-white/45">
-                        {t.hero.perDayShort}
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              </Link>
+                )}
+              </>
             ) : (
               <div className="aspect-[16/10] rounded-2xl border border-white/10 bg-graphite/40" />
             )}
           </div>
         </div>
 
-        {/* Booking command bar -the single primary action. */}
+        {/* Booking command bar — the single primary action. */}
         <div style={reveal(520)}>
           <BookingSearchCard variant="hero" />
         </div>

@@ -15,6 +15,7 @@ import {
   PHONE_DISPLAY,
   WHATSAPP_NUMBER,
   FEATURED_CARS_LIMIT,
+  HERO_ROTATION_LIMIT,
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -69,12 +70,16 @@ export default async function Home() {
   const featuredCars = availableCars.filter((car) => car.is_featured);
   const otherAvailableCars = availableCars.filter((car) => !car.is_featured);
   const ordered = [...featuredCars, ...otherAvailableCars];
-  const hero = ordered[0];
-  // Fleet excludes the hero vehicle: never repeat the showcased car, and
-  // never request the same remote image twice on one page (which races the
-  // image optimizer and can blank one copy).
+  // The hero rotates the vedette (featured) cars; when none are featured yet it
+  // simply shows the newest available car (no rotation).
+  const heroCars =
+    featuredCars.length > 0
+      ? featuredCars.slice(0, HERO_ROTATION_LIMIT)
+      : ordered.slice(0, 1);
+  // Fleet never repeats a car already in the hero rotation.
+  const heroIds = new Set(heroCars.map((car) => car.id));
   const fleet = ordered
-    .filter((car) => car.id !== hero?.id)
+    .filter((car) => !heroIds.has(car.id))
     .slice(0, FEATURED_CARS_LIMIT);
 
   const localBusinessSchema = {
@@ -104,7 +109,7 @@ export default async function Home() {
       <Navbar />
 
       {/* ─────────────────────────  HERO  ───────────────────────── */}
-      <Hero car={hero} />
+      <Hero cars={heroCars} />
 
       {/* ─────────────────────  FEATURED FLEET  ───────────────────── */}
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">

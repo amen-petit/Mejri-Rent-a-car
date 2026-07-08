@@ -525,53 +525,28 @@ html[lang="ar"] .hero-stroke {
 }
 
 /* =========================================================================
-   HERO CAR — the cutout object levitates over a soft, breathing floor light.
-   The two loops share one duration + easing so the car and its light move as
-   one; both animate transform/opacity only and freeze under reduced motion.
+   HERO CAR SWAP — when the vedette rotation advances, the incoming car's facts
+   fade up in place (the image itself crossfades via opacity). Transform +
+   opacity only; under reduced motion the swap is instant, no fade.
    ========================================================================= */
-.hero-car-levitate {
-  animation: hero-car-rise 6.5s var(--ease-in-out) infinite alternate;
-  will-change: transform;
+.hero-swap {
+  animation: hero-swap 0.55s var(--ease-out) both;
 }
 
-@keyframes hero-car-rise {
+@keyframes hero-swap {
   from {
+    opacity: 0;
     transform: translateY(5px);
   }
   to {
-    transform: translateY(-12px);
-  }
-}
-
-.hero-car-pool {
-  transform: translateX(-50%);
-  border-radius: 9999px;
-  background: radial-gradient(
-    closest-side,
-    rgba(214, 224, 255, 0.17),
-    rgba(214, 224, 255, 0.05) 55%,
-    transparent 78%
-  );
-  filter: blur(20px);
-  animation: hero-car-pool 6.5s var(--ease-in-out) infinite alternate;
-  will-change: transform, opacity;
-}
-
-@keyframes hero-car-pool {
-  from {
-    transform: translateX(-50%) scale(1.06);
-    opacity: 0.8;
-  }
-  to {
-    transform: translateX(-50%) scale(0.82);
-    opacity: 0.42;
+    opacity: 1;
+    transform: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-car-levitate,
-  .hero-car-pool {
-    animation: none !important;
+  .hero-swap {
+    animation: none;
   }
 }
 
