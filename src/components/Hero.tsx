@@ -47,16 +47,63 @@ export default function Hero({ car }: { car?: Car }) {
         };
 
   return (
-    <section className="relative isolate bg-ink text-paper">
-      {/* One restrained depth wash (contained to the section, no gradient stack). */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(115% 90% at 82% 0%, #17171b 0%, #0b0b0c 56%, #090909 100%)",
-        }}
-      />
+    <section className="relative isolate overflow-hidden bg-ink text-paper">
+      {/* Living dark stage: an enriched cobalt-warmed base, two slow auroras, a
+          faint dot lattice for texture, and grain to kill banding. All contained
+          to the section; motion freezes under prefers-reduced-motion. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        {/* Base wash — warm-neutral falloff with a cobalt breath from the top. */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(120% 100% at 78% -10%, #1b1c24 0%, #101015 46%, #09090b 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(90% 70% at 84% 4%, color-mix(in srgb, var(--color-accent) 22%, transparent) 0%, transparent 60%)",
+          }}
+        />
+
+        {/* Drifting auroras — the scene breathes. */}
+        <span className="hero-aurora hero-aurora--one" />
+        <span className="hero-aurora hero-aurora--two" />
+
+        {/* Faint dot lattice, faded toward the edges so it never reads as a grid. */}
+        <div
+          className="absolute inset-0 opacity-[0.14]"
+          style={{
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,0.35) 1px, transparent 1px)",
+            backgroundSize: "26px 26px",
+            maskImage:
+              "radial-gradient(120% 90% at 50% 20%, #000 0%, transparent 72%)",
+            WebkitMaskImage:
+              "radial-gradient(120% 90% at 50% 20%, #000 0%, transparent 72%)",
+          }}
+        />
+
+        {/* Grain — removes gradient banding on dark surfaces. */}
+        <div
+          className="absolute inset-0 opacity-[0.05] mix-blend-soft-light"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          }}
+        />
+
+        {/* Soft floor vignette to seat the content and blend into the next section. */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-40"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-ink) 80%, transparent))",
+          }}
+        />
+      </div>
 
       <div className="mx-auto flex min-h-[calc(100svh-4.25rem)] max-w-7xl flex-col justify-center gap-y-12 px-5 py-12 sm:px-8 lg:gap-y-16 lg:py-16">
         <div className="grid items-center gap-x-12 gap-y-12 lg:grid-cols-12">
