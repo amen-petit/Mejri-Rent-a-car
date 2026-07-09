@@ -1,20 +1,20 @@
 "use client";
 
 /**
- * Hero — distilled dark stage. The vedette (featured) cars rotate through one
- * spotlit cutout, one every few seconds, grounded by a soft cast shadow so the
- * car sits on the page rather than floating over it. A bold Fraunces headline
- * carries the message; the booking bar is the sole primary action.
+ * Hero — distilled dark stage. A single dominant Fraunces headline crowns the
+ * section, then the booking card (the primary action) sits to the left of the
+ * spotlit car showcase, so a visitor can read the promise, see a featured car,
+ * and start a reservation without scrolling.
  *
- * Motion: a quiet staggered reveal on load, a gentle crossfade between cars, and
- * a fade-up on the swapping facts. Rotation pauses on hover/focus and can be
- * jogged by the dots. Everything is static under prefers-reduced-motion.
+ * The vedette (featured) cars rotate through one grounded cutout. Motion is a
+ * quiet staggered reveal on load, a gentle crossfade between cars, and a fade-up
+ * on the swapping facts. Rotation pauses on hover/focus and can be jogged by the
+ * dots. Everything is static under prefers-reduced-motion.
  */
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Car } from "@/lib/types";
-import Arrow from "@/components/icons/Arrow";
 import CarSilhouette from "@/components/icons/CarSilhouette";
 import BookingSearchCard from "@/components/BookingSearchCard";
 import { useI18n } from "@/i18n/client";
@@ -124,57 +124,45 @@ export default function Hero({ cars }: { cars: Car[] }) {
         />
       </div>
 
-      <div className="mx-auto flex min-h-[calc(100svh-4.25rem)] max-w-7xl flex-col justify-center gap-y-12 px-5 py-12 sm:px-8 lg:gap-y-16 lg:py-16">
-        <div className="grid items-center gap-x-12 gap-y-12 lg:grid-cols-12">
-          {/* Type */}
-          <div className="lg:col-span-6">
-            <div className="inline-flex items-center gap-3" style={reveal(60)}>
-              <span className="h-px w-10 bg-accent" />
-              <span className="text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-white/55">
-                {t.hero.kicker}
-              </span>
-            </div>
+      <div className="mx-auto flex min-h-[calc(100svh-4.25rem)] max-w-7xl flex-col justify-center gap-y-10 px-5 py-10 sm:px-8 lg:gap-y-14 lg:py-14">
+        {/* Headline — crowns the hero, centred, spanning its width. */}
+        <div className="text-center">
+          <div
+            className="inline-flex items-center gap-3"
+            style={reveal(60)}
+          >
+            <span className="h-px w-8 bg-accent" />
+            <span className="text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-white/55">
+              {t.hero.kicker}
+            </span>
+            <span className="h-px w-8 bg-accent" />
+          </div>
 
-            <h1 className="mt-7 font-display font-medium leading-[0.95] tracking-[-0.03em] text-[clamp(2.9rem,6.4vw,5.5rem)]">
-              <span className="block" style={reveal(150)}>
-                {t.hero.title1} {t.hero.title2}
-              </span>
-              <span className="block" style={reveal(240)}>
-                {t.hero.title3}
-                <span className="text-accent">.</span>
-              </span>
-            </h1>
+          <h1
+            className="mt-6 text-balance font-display font-medium leading-[1.05] tracking-[-0.03em] text-[clamp(2.4rem,5vw,4rem)]"
+            style={reveal(150)}
+          >
+            {t.hero.title1} {t.hero.title2} {t.hero.title3}
+            <span className="text-accent">.</span>
+          </h1>
+        </div>
 
-            <p
-              className="mt-7 max-w-md text-base leading-relaxed text-white/60"
-              style={reveal(360)}
-            >
-              {t.hero.subtitle}
-            </p>
-
-            {car && (
-              <div className="mt-8" style={reveal(440)}>
-                <Link
-                  href={`/voitures/${car.id}`}
-                  className="group inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
-                >
-                  <span
-                    key={car.id}
-                    className="hero-swap border-b border-white/25 pb-0.5 transition-colors group-hover:border-white"
-                  >
-                    {interpolate(t.hero.discover, { name: car.name })}
-                  </span>
-                  <Arrow className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
-                </Link>
-              </div>
-            )}
+        {/* Booking (left) + car showcase (right). On tablet/mobile the car comes
+            first and the booking card follows, both top-aligned on one baseline. */}
+        <div className="grid items-start gap-x-10 gap-y-10 lg:grid-cols-12">
+          {/* Booking — the primary action, immediately available. */}
+          <div
+            className="order-2 lg:order-1 lg:col-span-5"
+            style={reveal(340)}
+          >
+            <BookingSearchCard variant="hero" layout="stacked" />
           </div>
 
           {/* The vedette — a grounded cutout that crossfades between the featured
               cars, its facts on a separate dark bar, dots to jog the set. */}
           <div
-            className="lg:col-span-6"
-            style={reveal(300)}
+            className="order-1 lg:order-2 lg:col-span-7"
+            style={reveal(260)}
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
             onFocusCapture={() => setPaused(true)}
@@ -344,11 +332,6 @@ export default function Hero({ cars }: { cars: Car[] }) {
               <div className="aspect-[16/10] rounded-2xl border border-white/10 bg-graphite/40" />
             )}
           </div>
-        </div>
-
-        {/* Booking command bar — the single primary action. */}
-        <div style={reveal(520)}>
-          <BookingSearchCard variant="hero" />
         </div>
       </div>
     </section>

@@ -245,43 +245,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ─────────────────────  WHY / FEATURES  ───────────────────── */}
-      <section id="about" className="scroll-mt-24">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-          <div data-reveal className="max-w-2xl">
-            <span className="eyebrow">
-              {interpolate(t.features.eyebrow, { brand: BRAND_SHORT })}
-            </span>
-            <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
-              {t.features.titleA}
-              <br className="hidden sm:block" /> {t.features.titleB}
-            </h2>
-          </div>
-
-          <div className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-mist sm:grid-cols-2">
-            {t.features.items.map((f, idx) => (
-              <div
-                key={idx}
-                data-reveal
-                className={`reveal-d${(idx % 2) + 1} group bg-paper p-8 transition-colors duration-300 hover:bg-cloud lg:p-10`}
-              >
-                <div className="flex items-baseline gap-4">
-                  <span className="font-display text-2xl text-ash transition-colors duration-300 group-hover:text-accent">
-                    {String(idx + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-display text-xl font-medium text-ink">
-                    {f.title}
-                  </h3>
-                </div>
-                <p className="mt-4 max-w-sm text-sm leading-7 text-stone">
-                  {f.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ────────────────  REVIEWS + CTA  (ink band)  ──────────────── */}
       <section className="relative isolate overflow-hidden bg-ink text-paper">
         <div

@@ -186,6 +186,8 @@ export const ar: Messages = {
     cardTitle: "احجز سيارتك",
     pickupDate: "الاستلام",
     returnDate: "الإرجاع",
+    pickupTime: "وقت الاستلام",
+    returnTime: "وقت الإرجاع",
     pickupLocation: "مكان الاستلام",
     returnLocation: "مكان الإرجاع",
     differentReturn: "الإرجاع في مكان مختلف",
@@ -204,6 +206,9 @@ export const ar: Messages = {
     errReturnBeforePickup:
       "يجب أن يكون تاريخ الإرجاع مساويًا لتاريخ الاستلام أو بعده.",
     errPastDate: "لا يمكن أن يكون تاريخ الاستلام في الماضي.",
+    errTimeOrder:
+      "للإيجار في نفس اليوم، يجب أن يكون وقت الإرجاع بعد وقت الاستلام.",
+    errPastTime: "لقد فات وقت الاستلام هذا. اختر وقتًا لاحقًا.",
     resultsEyebrow: "نتائج البحث",
     period: "الفترة",
     modifySearch: "تعديل",

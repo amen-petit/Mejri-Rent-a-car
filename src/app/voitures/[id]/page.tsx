@@ -108,8 +108,12 @@ function CarDetailPageContent() {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [hoverDate, setHoverDate] = useState<Date | null>(null);
-  const [pickupTime, setPickupTime] = useState<string>(DEFAULT_PICKUP_TIME);
-  const [returnTime, setReturnTime] = useState<string>(DEFAULT_RETURN_TIME);
+  const [pickupTime, setPickupTime] = useState<string>(
+    presetSearch?.startTime ?? DEFAULT_PICKUP_TIME,
+  );
+  const [returnTime, setReturnTime] = useState<string>(
+    presetSearch?.endTime ?? DEFAULT_RETURN_TIME,
+  );
 
   // Pickup / return locations (prefilled from the search, editable here).
   const [pickupLocation, setPickupLocation] = useState<RentalLocation>(

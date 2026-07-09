@@ -186,6 +186,8 @@ export const en: Messages = {
     cardTitle: "Book your vehicle",
     pickupDate: "Pickup",
     returnDate: "Return",
+    pickupTime: "Pickup time",
+    returnTime: "Return time",
     pickupLocation: "Pickup location",
     returnLocation: "Return location",
     differentReturn: "Return to a different location",
@@ -204,6 +206,9 @@ export const en: Messages = {
     errReturnBeforePickup:
       "The return date must be the same as or after the pickup date.",
     errPastDate: "The pickup date can't be in the past.",
+    errTimeOrder:
+      "For a same-day rental, the return time must be after the pickup time.",
+    errPastTime: "That pickup time has already passed. Choose a later slot.",
     resultsEyebrow: "Search results",
     period: "Period",
     modifySearch: "Modify",

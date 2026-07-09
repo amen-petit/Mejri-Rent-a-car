@@ -190,6 +190,8 @@ export const fr = {
     cardTitle: "Réservez votre véhicule",
     pickupDate: "Prise en charge",
     returnDate: "Retour",
+    pickupTime: "Heure de prise en charge",
+    returnTime: "Heure de retour",
     pickupLocation: "Lieu de prise en charge",
     returnLocation: "Lieu de retour",
     differentReturn: "Retour à un endroit différent",
@@ -208,6 +210,10 @@ export const fr = {
     errReturnBeforePickup:
       "La date de retour doit être identique ou postérieure à la prise en charge.",
     errPastDate: "La date de prise en charge ne peut pas être dans le passé.",
+    errTimeOrder:
+      "Pour une location le même jour, l'heure de retour doit être postérieure à l'heure de prise en charge.",
+    errPastTime:
+      "Cette heure de prise en charge est déjà passée. Choisissez un créneau plus tard.",
     resultsEyebrow: "Résultats de recherche",
     period: "Période",
     modifySearch: "Modifier",
