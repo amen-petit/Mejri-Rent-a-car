@@ -420,77 +420,94 @@ function CarDetailPageContent() {
           {t.carDetail.back}
         </button>
 
+        {/* Title — category and name: the page's main heading, centred above
+            the two-column layout for a stronger hierarchy. */}
+        <div data-reveal className="mb-10 text-center sm:mb-12">
+          <span className="eyebrow">
+            {t.enums.category[car.category] ?? car.category}
+          </span>
+          <h1 className="mt-4 text-balance font-display text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.05] tracking-tight text-ink">
+            {car.brand} {car.name}
+          </h1>
+        </div>
+
         <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr] lg:items-start lg:gap-14">
           {/* ── LEFT: vehicle information ── */}
           <div data-reveal="left" className="reveal-d1">
-            {/* Gallery */}
-            <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud">
-              {car.images?.[activeImage] ? (
-                <Image
-                  src={car.images[activeImage]}
-                  alt={car.name}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 62vw"
-                  className="object-cover"
-                />
-              ) : (
-                <CarGlyph className="h-28 w-28 text-ash" />
-              )}
-            </div>
-            {car.images?.length > 1 && (
-              <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
-                {car.images.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveImage(i)}
-                    aria-label={`${car.name} ${i + 1}`}
-                    className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border transition-colors duration-200 ${activeImage === i ? "border-ink" : "border-mist hover:border-line"}`}
-                  >
+            {/* Gallery + specifications — side by side, the spec card stretches
+                to match the gallery's height (image + thumbnails) so neither
+                column feels short or leaves dead space. */}
+            <div className="grid gap-6 sm:grid-cols-[1.15fr_0.85fr] sm:items-stretch">
+              {/* Gallery — resized: it now shares the row with the specs
+                  instead of spanning the full column width. */}
+              <div>
+                <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud">
+                  {car.images?.[activeImage] ? (
                     <Image
-                      src={img}
-                      alt={`${car.name} ${i + 1}`}
+                      src={car.images[activeImage]}
+                      alt={car.name}
                       fill
-                      sizes="64px"
+                      priority
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 58vw, 36vw"
                       className="object-cover"
                     />
-                  </button>
+                  ) : (
+                    <CarGlyph className="h-28 w-28 text-ash" />
+                  )}
+                </div>
+                {car.images?.length > 1 && (
+                  <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
+                    {car.images.map((img, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setActiveImage(i)}
+                        aria-label={`${car.name} ${i + 1}`}
+                        className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border transition-colors duration-200 ${activeImage === i ? "border-ink" : "border-mist hover:border-line"}`}
+                      >
+                        <Image
+                          src={img}
+                          alt={`${car.name} ${i + 1}`}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Starting price — back under the gallery. */}
+                <div className="mt-4 font-display text-3xl text-ink">
+                  {car.price_per_day}
+                  <span className="ms-1.5 text-base font-normal text-stone">
+                    {t.common.perDayFull}
+                  </span>
+                </div>
+              </div>
+
+              {/* Specifications — a vertical list beside the image. Rows are
+                  flex-1 so they distribute evenly across whatever height the
+                  gallery ends up being, matching it exactly with no manual
+                  height math. */}
+              <div className="flex h-full flex-col divide-y divide-mist rounded-[var(--radius-lg)] border border-mist bg-cloud px-5">
+                {specs.map(([label, value]) => (
+                  <div
+                    key={label}
+                    className="flex flex-1 items-center justify-between gap-4 py-4"
+                  >
+                    <span className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-ash">
+                      {label}
+                    </span>
+                    <span className="font-display text-lg text-ink">
+                      {value}
+                    </span>
+                  </div>
                 ))}
               </div>
-            )}
-
-            {/* Header — category, name, starting price */}
-            <div className="mt-8">
-              <span className="eyebrow">
-                {t.enums.category[car.category] ?? car.category}
-              </span>
-              <h1 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.05] tracking-tight text-ink">
-                {car.brand} {car.name}
-              </h1>
-              <div className="mt-3 font-display text-3xl text-ink">
-                {car.price_per_day}
-                <span className="ms-1.5 text-base font-normal text-stone">
-                  {t.common.perDayFull}
-                </span>
-              </div>
-            </div>
-
-            {/* Specification grid */}
-            <div className="mt-8 grid grid-cols-3 gap-px overflow-hidden rounded-[var(--radius)] border border-mist bg-mist">
-              {specs.map(([label, value]) => (
-                <div key={label} className="bg-paper px-4 py-4">
-                  <div className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-ash">
-                    {label}
-                  </div>
-                  <div className="mt-1.5 font-display text-base text-ink">
-                    {value}
-                  </div>
-                </div>
-              ))}
             </div>
 
             {car.features?.length > 0 && (
-              <div className="mt-5 flex flex-wrap gap-2">
+              <div className="mt-6 flex flex-wrap gap-2">
                 {car.features.map((f) => (
                   <span key={f} className="chip">
                     {f}
@@ -505,6 +522,32 @@ function CarDetailPageContent() {
                 {car.description}
               </p>
             )}
+
+            {/* Flexible pricing — reassurance, not a warning */}
+            <div className="mt-6 max-w-prose rounded-[var(--radius-lg)] border border-mist bg-cloud p-5">
+              <div className="flex items-center gap-2.5">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/10 text-accent">
+                  <svg
+                    className="h-3.5 w-3.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
+                  </svg>
+                </span>
+                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
+                  {t.carDetail.flexiblePricingTitle}
+                </p>
+              </div>
+              <p className="mt-3 text-xs leading-6 text-stone">
+                {t.carDetail.flexiblePricingDesc}
+              </p>
+            </div>
 
             {/* Secondary contact */}
             <a
@@ -682,32 +725,6 @@ function CarDetailPageContent() {
                   {validationMessage}
                 </p>
               )}
-            </div>
-
-            {/* Flexible pricing — reassurance, not a warning */}
-            <div className="rounded-[var(--radius-lg)] border border-mist bg-cloud p-5">
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/10 text-accent">
-                  <svg
-                    className="h-3.5 w-3.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
-                  </svg>
-                </span>
-                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-                  {t.carDetail.flexiblePricingTitle}
-                </p>
-              </div>
-              <p className="mt-3 text-xs leading-6 text-stone">
-                {t.carDetail.flexiblePricingDesc}
-              </p>
             </div>
           </aside>
         </div>
