@@ -2,14 +2,18 @@
 
 /**
  * The booking/search card that turns the hero into the entry point of the
- * reservation flow. Collects pickup/return date + time and locations, validates
- * client-side, then routes to /voitures with the search encoded in the URL so
- * results are shareable and the back button behaves.
+ * reservation flow. Collects pickup/return date + time and pickup/return
+ * locations, validates client-side, then routes to /voitures with the search
+ * encoded in the URL so results are shareable and the back button behaves.
  *
  * One component, two arrangements: `layout="stacked"` is the tall vertical card
  * used in the hero; `layout="bar"` is the horizontal command bar used on the
  * results page. Both share identical state, validation and submit logic — only
  * the field arrangement differs.
+ *
+ * The `variant="hero"` card is themed dark (`tone="dark"` fields) so it reads as
+ * a premium command panel on the dark stage; `variant="plain"` stays light for
+ * the results page.
  *
  * Availability isn't computed here — the results page asks the server (which is
  * authoritative). This component only gathers and validates intent.
@@ -19,12 +23,10 @@ import { useRouter } from "next/navigation";
 import DateField from "@/components/ui/DateField";
 import Select from "@/components/ui/Select";
 import { useI18n } from "@/i18n/client";
-import { interpolate } from "@/i18n/format";
 import { nowInTimezone } from "@/lib/time";
 import {
   RENTAL_LOCATIONS,
   DEFAULT_RENTAL_LOCATION,
-  getAlternateRentalLocation,
   BOOKING_TIME_SLOTS,
   DEFAULT_PICKUP_TIME,
   DEFAULT_RETURN_TIME,
@@ -37,9 +39,19 @@ import {
   type BookingSearchError,
 } from "@/lib/booking-search";
 
-function FieldLabel({ children }: { children: React.ReactNode }) {
+function FieldLabel({
+  children,
+  dark,
+}: {
+  children: React.ReactNode;
+  dark?: boolean;
+}) {
   return (
-    <span className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
+    <span
+      className={`mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] ${
+        dark ? "text-white/45" : "text-stone"
+      }`}
+    >
       {children}
     </span>
   );
@@ -54,13 +66,16 @@ export default function BookingSearchCard({
   /** Pre-fill (used when editing an existing search). */
   initial?: Partial<BookingSearch>;
   className?: string;
-  /** "hero" floats on the dark hero; "plain" is a bordered card for light bg. */
+  /** "hero" is the dark card on the hero; "plain" is a light card for light bg. */
   variant?: "hero" | "plain";
   /** "stacked" is the vertical hero card; "bar" is the horizontal results bar. */
   layout?: "stacked" | "bar";
 }) {
   const { t, locale } = useI18n();
   const router = useRouter();
+
+  const dark = variant === "hero";
+  const fieldTone = dark ? "dark" : "light";
 
   const today = useMemo(() => nowInTimezone().dateStr, []);
 
@@ -73,9 +88,8 @@ export default function BookingSearchCard({
   const [pickup, setPickup] = useState<RentalLocation>(
     initial?.pickup ?? DEFAULT_RENTAL_LOCATION,
   );
-  const [differentReturn, setDifferentReturn] = useState(
-    !!initial?.return &&
-      initial.return !== (initial.pickup ?? DEFAULT_RENTAL_LOCATION),
+  const [returnLocation, setReturnLocation] = useState<RentalLocation>(
+    initial?.return ?? initial?.pickup ?? DEFAULT_RENTAL_LOCATION,
   );
   const [error, setError] = useState<BookingSearchError | null>(null);
 
@@ -87,11 +101,6 @@ export default function BookingSearchCard({
     () => BOOKING_TIME_SLOTS.map((slot) => ({ value: slot, label: slot })),
     [],
   );
-  const alternateReturnLocation = getAlternateRentalLocation(pickup);
-  const differentReturnLabel = interpolate(t.booking.differentReturnTo, {
-    location:
-      t.booking.locations[alternateReturnLocation] ?? alternateReturnLocation,
-  });
 
   function handlePickupDate(value: string) {
     setStart(value);
@@ -121,7 +130,7 @@ export default function BookingSearchCard({
       startTime,
       endTime,
       pickup,
-      return: differentReturn ? alternateReturnLocation : pickup,
+      return: returnLocation,
     };
     router.push(`/voitures?${buildBookingSearchParams(search)}`);
   }
@@ -134,11 +143,28 @@ export default function BookingSearchCard({
     time: React.ReactNode,
   ) => (
     <div>
-      <FieldLabel>{label}</FieldLabel>
+      <FieldLabel dark={dark}>{label}</FieldLabel>
       <div className="flex gap-2">
         <div className="min-w-0 flex-1">{date}</div>
         <div className="w-[5.5rem] shrink-0">{time}</div>
       </div>
+    </div>
+  );
+
+  const locationGroup = (
+    label: string,
+    value: RentalLocation,
+    onChange: (value: RentalLocation) => void,
+  ) => (
+    <div>
+      <FieldLabel dark={dark}>{label}</FieldLabel>
+      <Select
+        options={locationOptions}
+        value={value}
+        onChange={(v) => onChange(v as RentalLocation)}
+        ariaLabel={label}
+        tone={fieldTone}
+      />
     </div>
   );
 
@@ -149,6 +175,7 @@ export default function BookingSearchCard({
       onChange={handlePickupDate}
       min={today}
       ariaLabel={t.booking.pickupDate}
+      tone={fieldTone}
     />,
     <Select
       options={timeOptions}
@@ -159,6 +186,7 @@ export default function BookingSearchCard({
       }}
       ariaLabel={t.booking.pickupTime}
       align="right"
+      tone={fieldTone}
     />,
   );
 
@@ -172,6 +200,7 @@ export default function BookingSearchCard({
       }}
       min={start || today}
       ariaLabel={t.booking.returnDate}
+      tone={fieldTone}
     />,
     <Select
       options={timeOptions}
@@ -182,26 +211,26 @@ export default function BookingSearchCard({
       }}
       ariaLabel={t.booking.returnTime}
       align="right"
+      tone={fieldTone}
     />,
   );
 
-  const locationGroup = (
-    <div>
-      <FieldLabel>{t.booking.pickupLocation}</FieldLabel>
-      <Select
-        options={locationOptions}
-        value={pickup}
-        onChange={(value) => setPickup(value as RentalLocation)}
-        ariaLabel={t.booking.pickupLocation}
-      />
-    </div>
+  const pickupLocationGroup = locationGroup(
+    t.booking.pickupLocation,
+    pickup,
+    setPickup,
+  );
+  const returnLocationGroup = locationGroup(
+    t.booking.returnLocation,
+    returnLocation,
+    setReturnLocation,
   );
 
   const submitButton = (
     <button
       type="submit"
       className={`btn-accent h-11 w-full whitespace-nowrap px-6 ${
-        layout === "bar" ? "lg:w-auto" : ""
+        layout === "bar" ? "xl:w-auto" : ""
       }`}
     >
       {t.booking.search}
@@ -222,24 +251,9 @@ export default function BookingSearchCard({
     </button>
   );
 
-  const differentReturnToggle = (
-    <label className="inline-flex cursor-pointer items-center gap-2.5 text-sm text-stone">
-      <input
-        type="checkbox"
-        checked={differentReturn}
-        onChange={(e) => setDifferentReturn(e.target.checked)}
-        className="h-4 w-4 accent-[var(--color-ink)]"
-      />
-      {differentReturnLabel}
-    </label>
-  );
-
-  // Solid surfaces, no glass. The hero variant carries a deep, brand-tinted
-  // shadow so it reads as a floating command card on the dark stage.
-  const shell =
-    variant === "hero"
-      ? "border border-mist bg-paper text-ink shadow-[0_36px_90px_-42px_rgba(0,0,0,0.62)]"
-      : "border border-mist bg-paper text-ink shadow-sm";
+  const shell = dark
+    ? "border border-white/10 bg-graphite text-white shadow-[0_36px_90px_-42px_rgba(0,0,0,0.85)]"
+    : "border border-mist bg-paper text-ink shadow-sm";
 
   return (
     <form
@@ -250,44 +264,50 @@ export default function BookingSearchCard({
         layout === "stacked" ? "sm:p-7" : "sm:p-6"
       } ${shell} ${layout === "stacked" ? "flex h-full flex-col" : ""} ${className}`}
     >
-      <div className="mb-5 flex items-center gap-2.5 border-b border-mist pb-4">
+      <div
+        className={`mb-5 flex items-center gap-2.5 border-b pb-4 ${
+          dark ? "border-white/10" : "border-mist"
+        }`}
+      >
         <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-        <span className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-stone">
+        <span
+          className={`text-[0.62rem] font-semibold uppercase tracking-[0.24em] ${
+            dark ? "text-white/50" : "text-stone"
+          }`}
+        >
           {t.booking.cardTitle}
         </span>
       </div>
 
       {layout === "stacked" ? (
-        // Fields at top, CTA anchored to the bottom via mt-auto: this stretches
-        // to fill whatever height the grid row ends up being (set by the car
-        // showcase next to it) instead of leaving dead space under the button.
+        // Fields grouped by intent (dates → locations), the CTA anchored to the
+        // bottom via mt-auto so the card fills whatever height the grid row ends
+        // up being (set by the car showcase beside it) with no dead space.
         <div className="flex flex-1 flex-col">
           <div className="flex flex-col gap-5">
             {pickupGroup}
             {returnGroup}
-            {locationGroup}
+            {pickupLocationGroup}
+            {returnLocationGroup}
           </div>
-          <div className="mt-auto flex flex-col gap-4 pt-8">
-            {differentReturnToggle}
-            {submitButton}
-          </div>
+          <div className="mt-auto pt-7">{submitButton}</div>
         </div>
       ) : (
-        <>
-          <div className="grid gap-4 lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-end">
-            {pickupGroup}
-            {returnGroup}
-            {locationGroup}
-            {submitButton}
-          </div>
-          <div className="mt-4">{differentReturnToggle}</div>
-        </>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1.25fr_1.25fr_1fr_1fr_auto] xl:items-end">
+          {pickupGroup}
+          {returnGroup}
+          {pickupLocationGroup}
+          {returnLocationGroup}
+          {submitButton}
+        </div>
       )}
 
       {error && (
         <p
           role="alert"
-          className="mt-4 text-xs font-medium text-red-600"
+          className={`mt-4 text-xs font-medium ${
+            dark ? "text-red-400" : "text-red-600"
+          }`}
           lang={locale}
         >
           {errorMessage[error]}

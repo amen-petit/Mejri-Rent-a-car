@@ -37,6 +37,7 @@ export default function DateField({
   ariaLabel,
   placeholder,
   className = "",
+  tone = "light",
 }: {
   value: string;
   onChange: (value: string) => void;
@@ -45,8 +46,11 @@ export default function DateField({
   ariaLabel?: string;
   placeholder?: string;
   className?: string;
+  /** "dark" restyles the field + calendar popover for dark surfaces. */
+  tone?: "light" | "dark";
 }) {
   const { t, locale } = useI18n();
+  const dark = tone === "dark";
   const [open, setOpen] = useState(false);
   const [coords, setCoords] = useState<{ top: number; left: number } | null>(
     null,
@@ -180,7 +184,11 @@ export default function DateField({
               // and offsetHeight is readable for accurate flip-up placement).
               visibility: coords ? "visible" : "hidden",
             }}
-            className="z-[60] max-w-[calc(100vw-1rem)] rounded-[var(--radius)] border border-mist bg-paper p-3 shadow-md"
+            className={`z-[60] max-w-[calc(100vw-1rem)] rounded-[var(--radius)] border p-3 ${
+              dark
+                ? "border-white/10 bg-[#1c1d24] shadow-[0_24px_60px_-16px_rgba(0,0,0,0.9)]"
+                : "border-mist bg-paper shadow-md"
+            }`}
           >
             {/* Month nav */}
             <div className="mb-2 flex items-center justify-between">
@@ -188,18 +196,30 @@ export default function DateField({
                 type="button"
                 onClick={prevMonth}
                 aria-label={t.carDetail.prevMonth}
-                className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
+                className={`flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] border transition-colors ${
+                  dark
+                    ? "border-white/12 text-white hover:border-white/30"
+                    : "border-mist text-ink hover:border-ink"
+                }`}
               >
                 <svg className="h-4 w-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
               </button>
-              <span className="font-display text-sm font-medium capitalize text-ink">
+              <span
+                className={`font-display text-sm font-medium capitalize ${
+                  dark ? "text-white" : "text-ink"
+                }`}
+              >
                 {monthName(viewYear, viewMonth, locale)} {viewYear}
               </span>
               <button
                 type="button"
                 onClick={nextMonth}
                 aria-label={t.carDetail.nextMonth}
-                className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] border border-mist text-ink transition-colors hover:border-ink"
+                className={`flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] border transition-colors ${
+                  dark
+                    ? "border-white/12 text-white hover:border-white/30"
+                    : "border-mist text-ink hover:border-ink"
+                }`}
               >
                 <svg className="h-4 w-4 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
               </button>
@@ -208,7 +228,12 @@ export default function DateField({
             {/* Weekday header */}
             <div className="mb-1 grid grid-cols-7">
               {weekdayLabels(locale).map((d, i) => (
-                <div key={i} className="py-1 text-center text-[0.55rem] font-semibold uppercase tracking-[0.08em] text-ash">
+                <div
+                  key={i}
+                  className={`py-1 text-center text-[0.55rem] font-semibold uppercase tracking-[0.08em] ${
+                    dark ? "text-white/40" : "text-ash"
+                  }`}
+                >
                   {d}
                 </div>
               ))}
@@ -232,10 +257,16 @@ export default function DateField({
                     }}
                     className={`flex aspect-square items-center justify-center rounded-[var(--radius-sm)] text-sm transition-colors ${
                       isSelected
-                        ? "bg-ink font-medium text-paper"
+                        ? dark
+                          ? "bg-accent font-medium text-white"
+                          : "bg-ink font-medium text-paper"
                         : disabled
-                          ? "cursor-not-allowed text-ash/50"
-                          : "text-ink hover:bg-ink/[0.06]"
+                          ? dark
+                            ? "cursor-not-allowed text-white/25"
+                            : "cursor-not-allowed text-ash/50"
+                          : dark
+                            ? "text-white/85 hover:bg-white/[0.08]"
+                            : "text-ink hover:bg-ink/[0.06]"
                     }`}
                   >
                     {date.getDate()}
@@ -245,21 +276,33 @@ export default function DateField({
             </div>
 
             {/* Footer */}
-            <div className="mt-2 flex items-center justify-between border-t border-mist pt-2">
+            <div
+              className={`mt-2 flex items-center justify-between border-t pt-2 ${
+                dark ? "border-white/10" : "border-mist"
+              }`}
+            >
               <button
                 type="button"
                 onClick={() => {
                   onChange("");
                   setOpen(false);
                 }}
-                className="text-xs font-medium text-stone transition-colors hover:text-ink"
+                className={`text-xs font-medium transition-colors ${
+                  dark
+                    ? "text-white/50 hover:text-white"
+                    : "text-stone transition-colors hover:text-ink"
+                }`}
               >
                 {t.booking.clear}
               </button>
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="text-xs font-medium text-stone transition-colors hover:text-ink"
+                className={`text-xs font-medium transition-colors ${
+                  dark
+                    ? "text-white/50 hover:text-white"
+                    : "text-stone transition-colors hover:text-ink"
+                }`}
               >
                 {t.booking.close}
               </button>
@@ -278,10 +321,26 @@ export default function DateField({
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-label={ariaLabel}
-        className="flex h-10 w-full items-center justify-between gap-2 rounded-[var(--radius-sm)] border border-line bg-paper px-3 text-sm transition-colors hover:border-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10"
+        className={`flex h-10 w-full items-center justify-between gap-2 rounded-[var(--radius-sm)] border px-3 text-sm transition-colors focus:outline-none focus:ring-2 ${
+          dark
+            ? "border-white/12 bg-white/[0.04] hover:border-white/25 focus:border-accent focus:ring-accent/30"
+            : "border-line bg-paper hover:border-ink focus:border-ink focus:ring-ink/10"
+        }`}
       >
-        <span className={selected ? "text-ink" : "text-ash"}>{label}</span>
-        <svg className="h-4 w-4 shrink-0 text-ash" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
+        <span
+          className={
+            selected
+              ? dark
+                ? "text-white"
+                : "text-ink"
+              : dark
+                ? "text-white/40"
+                : "text-ash"
+          }
+        >
+          {label}
+        </span>
+        <svg className={`h-4 w-4 shrink-0 ${dark ? "text-white/45" : "text-ash"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
           <rect x="3" y="4.5" width="18" height="16" rx="2" />
           <path d="M3 9h18M8 2.5v4M16 2.5v4" />
         </svg>

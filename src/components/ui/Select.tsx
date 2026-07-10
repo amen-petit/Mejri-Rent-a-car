@@ -17,6 +17,7 @@ export default function Select({
   ariaLabel,
   className = "",
   align = "left",
+  tone = "light",
 }: {
   value: string;
   onChange: (value: string) => void;
@@ -24,7 +25,10 @@ export default function Select({
   ariaLabel?: string;
   className?: string;
   align?: "left" | "right";
+  /** "dark" restyles the control + popover for dark surfaces (e.g. the hero). */
+  tone?: "light" | "dark";
 }) {
+  const dark = tone === "dark";
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -119,11 +123,17 @@ export default function Select({
         aria-activedescendant={
           open && activeIndex >= 0 ? `${baseId}-opt-${activeIndex}` : undefined
         }
-        className="flex h-10 w-full items-center justify-between gap-2 rounded-[var(--radius-sm)] border border-line bg-paper px-3 text-sm text-ink transition-colors hover:border-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10"
+        className={`flex h-10 w-full items-center justify-between gap-2 rounded-[var(--radius-sm)] border px-3 text-sm transition-colors focus:outline-none focus:ring-2 ${
+          dark
+            ? "border-white/12 bg-white/[0.04] text-white hover:border-white/25 focus:border-accent focus:ring-accent/30"
+            : "border-line bg-paper text-ink hover:border-ink focus:border-ink focus:ring-ink/10"
+        }`}
       >
         <span className="truncate">{selected?.label ?? ""}</span>
         <svg
-          className={`h-3.5 w-3.5 shrink-0 text-ash transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${
+            dark ? "text-white/45" : "text-ash"
+          } ${open ? "rotate-180" : ""}`}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -138,9 +148,11 @@ export default function Select({
         <ul
           role="listbox"
           aria-label={ariaLabel}
-          className={`absolute z-30 mt-1.5 max-h-64 w-full overflow-auto rounded-[var(--radius)] border border-mist bg-paper p-1 shadow-md ${
-            align === "right" ? "right-0" : "left-0"
-          }`}
+          className={`absolute z-30 mt-1.5 max-h-64 w-full overflow-auto rounded-[var(--radius)] border p-1 ${
+            dark
+              ? "border-white/10 bg-[#1c1d24] shadow-[0_24px_60px_-16px_rgba(0,0,0,0.9)]"
+              : "border-mist bg-paper shadow-md"
+          } ${align === "right" ? "right-0" : "left-0"}`}
         >
           {options.map((o, i) => {
             const isSelected = o.value === value;
@@ -154,13 +166,21 @@ export default function Select({
                 onMouseEnter={() => setActiveIndex(i)}
                 onClick={() => commit(i)}
                 className={`flex cursor-pointer items-center justify-between gap-2 rounded-[var(--radius-sm)] px-2.5 py-2 text-sm transition-colors ${
-                  isActive ? "bg-ink text-paper" : "text-ink hover:bg-ink/[0.04]"
+                  dark
+                    ? isActive
+                      ? "bg-accent text-white"
+                      : "text-white/80 hover:bg-white/[0.06]"
+                    : isActive
+                      ? "bg-ink text-paper"
+                      : "text-ink hover:bg-ink/[0.04]"
                 }`}
               >
                 <span className="truncate">{o.label}</span>
                 {isSelected && (
                   <svg
-                    className={`h-3.5 w-3.5 shrink-0 ${isActive ? "text-paper" : "text-ink"}`}
+                    className={`h-3.5 w-3.5 shrink-0 ${
+                      dark ? "text-white" : isActive ? "text-paper" : "text-ink"
+                    }`}
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
