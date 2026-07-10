@@ -124,7 +124,7 @@ export default function Hero({ cars }: { cars: Car[] }) {
         />
       </div>
 
-      <div className="mx-auto flex min-h-[calc(100svh-4.25rem)] max-w-7xl flex-col justify-center gap-y-10 px-5 py-10 sm:px-8 lg:gap-y-14 lg:py-14">
+      <div className="mx-auto flex min-h-[calc(100svh-4.25rem)] max-w-7xl flex-col justify-center gap-y-12 px-5 py-10 sm:px-8 lg:gap-y-16 lg:py-14">
         {/* Headline — crowns the hero, centred, spanning its width. */}
         <div className="text-center">
           <div
@@ -139,7 +139,7 @@ export default function Hero({ cars }: { cars: Car[] }) {
           </div>
 
           <h1
-            className="mt-6 text-balance font-display font-medium leading-[1.05] tracking-[-0.03em] text-[clamp(2.4rem,5vw,4rem)]"
+            className="mt-7 text-balance font-display font-medium leading-[1.05] tracking-[-0.03em] text-[clamp(2.4rem,5vw,4rem)]"
             style={reveal(150)}
           >
             {t.hero.title1} {t.hero.title2} {t.hero.title3}
@@ -147,12 +147,14 @@ export default function Hero({ cars }: { cars: Car[] }) {
           </h1>
         </div>
 
-        {/* Booking (left) + car showcase (right). On tablet/mobile the car comes
-            first and the booking card follows, both top-aligned on one baseline. */}
-        <div className="grid items-start gap-x-10 gap-y-10 lg:grid-cols-12">
+        {/* Booking (left) + car showcase (right). Columns stretch to match the
+            row's height (car sets it), so the booking card's own content fills
+            the space rather than leaving a gap below it. On tablet/mobile the
+            car comes first and the booking card follows, single column. */}
+        <div className="grid gap-x-14 gap-y-12 lg:grid-cols-[0.95fr_1.05fr]">
           {/* Booking — the primary action, immediately available. */}
           <div
-            className="order-2 lg:order-1 lg:col-span-5"
+            className="order-2 lg:order-1"
             style={reveal(340)}
           >
             <BookingSearchCard variant="hero" layout="stacked" />
@@ -161,7 +163,7 @@ export default function Hero({ cars }: { cars: Car[] }) {
           {/* The vedette — a grounded cutout that crossfades between the featured
               cars, its facts on a separate dark bar, dots to jog the set. */}
           <div
-            className="order-1 lg:order-2 lg:col-span-7"
+            className="order-1 lg:order-2"
             style={reveal(260)}
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}

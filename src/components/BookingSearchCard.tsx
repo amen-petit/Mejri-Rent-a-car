@@ -246,7 +246,9 @@ export default function BookingSearchCard({
       onSubmit={handleSubmit}
       noValidate
       aria-label={t.booking.cardTitle}
-      className={`rounded-[var(--radius-lg)] p-5 sm:p-6 ${shell} ${className}`}
+      className={`rounded-[var(--radius-lg)] p-5 ${
+        layout === "stacked" ? "sm:p-7" : "sm:p-6"
+      } ${shell} ${layout === "stacked" ? "flex h-full flex-col" : ""} ${className}`}
     >
       <div className="mb-5 flex items-center gap-2.5 border-b border-mist pb-4">
         <span className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -256,12 +258,19 @@ export default function BookingSearchCard({
       </div>
 
       {layout === "stacked" ? (
-        <div className="flex flex-col gap-4">
-          {pickupGroup}
-          {returnGroup}
-          {locationGroup}
-          {differentReturnToggle}
-          {submitButton}
+        // Fields at top, CTA anchored to the bottom via mt-auto: this stretches
+        // to fill whatever height the grid row ends up being (set by the car
+        // showcase next to it) instead of leaving dead space under the button.
+        <div className="flex flex-1 flex-col">
+          <div className="flex flex-col gap-5">
+            {pickupGroup}
+            {returnGroup}
+            {locationGroup}
+          </div>
+          <div className="mt-auto flex flex-col gap-4 pt-8">
+            {differentReturnToggle}
+            {submitButton}
+          </div>
         </div>
       ) : (
         <>
