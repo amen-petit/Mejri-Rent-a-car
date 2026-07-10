@@ -279,6 +279,12 @@ export const ar: Messages = {
     noSlotsToday: "لا توجد مواعيد متاحة اليوم. اختر تاريخًا آخر.",
     start: "البداية",
     end: "النهاية",
+    duration: "المدة",
+    unavailableRange:
+      "هذه السيارة غير متاحة للتواريخ المحددة. الرجاء اختيار فترة أخرى.",
+    flexiblePricingTitle: "تسعير مرن",
+    flexiblePricingDesc:
+      "يُحتسب سعر الإيجار تلقائيًا حسب المدة والموسم والتواريخ المختارة. ويُعرض المبلغ النهائي دائمًا قبل تأكيد حجزك.",
     totalEstimate: "الإجمالي التقديري",
     perDayRate: "{rate} د.ت / يوم",
     confirmDays: "أكّد — {days} {unit}",

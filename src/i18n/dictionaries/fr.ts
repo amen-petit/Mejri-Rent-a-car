@@ -289,6 +289,12 @@ export const fr = {
       "Plus de créneau disponible aujourd'hui. Choisissez une autre date.",
     start: "Début",
     end: "Fin",
+    duration: "Durée",
+    unavailableRange:
+      "Ce véhicule n'est pas disponible pour les dates sélectionnées. Choisissez une autre période.",
+    flexiblePricingTitle: "Tarification flexible",
+    flexiblePricingDesc:
+      "Le prix de location est calculé automatiquement selon la durée, la saison et les dates choisies. Le montant final est toujours affiché avant la confirmation de votre réservation.",
     totalEstimate: "Total estimé",
     perDayRate: "{rate} DT / jour",
     confirmDays: "Confirmer — {days} {unit}",

@@ -279,6 +279,12 @@ export const en: Messages = {
     noSlotsToday: "No slots left today. Choose another date.",
     start: "Start",
     end: "End",
+    duration: "Duration",
+    unavailableRange:
+      "This vehicle isn't available for the selected dates. Please choose another period.",
+    flexiblePricingTitle: "Flexible pricing",
+    flexiblePricingDesc:
+      "Rental prices are automatically calculated based on the selected duration, season, and booking dates. The final amount is always shown before you confirm your reservation.",
     totalEstimate: "Estimated total",
     perDayRate: "{rate} DT / day",
     confirmDays: "Confirm — {days} {unit}",
