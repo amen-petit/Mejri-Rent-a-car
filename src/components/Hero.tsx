@@ -202,7 +202,6 @@ export default function Hero({ cars }: { cars: Car[] }) {
                             alt={`${c.brand} ${c.name}`}
                             fill
                             priority={i === 0}
-                            unoptimized
                             sizes="(max-width: 1024px) 100vw, 46vw"
                             className="object-contain object-center drop-shadow-[0_20px_22px_rgba(0,0,0,0.5)] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                           />

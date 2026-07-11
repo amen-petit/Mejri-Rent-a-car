@@ -167,7 +167,6 @@ export default async function Home() {
                       src={car.images[0]}
                       alt={`${car.brand} ${car.name}`}
                       fill
-                      unoptimized
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-contain p-5 transition-transform duration-500 ease-out group-hover:scale-[1.05]"
                     />
