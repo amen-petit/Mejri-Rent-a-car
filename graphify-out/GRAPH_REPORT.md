@@ -1,16 +1,16 @@
 # Graph Report - Mejri-Rent-a-car  (2026-07-11)
 
 ## Corpus Check
-- 240 files · ~1,040,181 words
+- 240 files · ~1,040,176 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4775 nodes · 7435 edges · 337 communities (311 shown, 26 thin omitted)
+- 4775 nodes · 7435 edges · 338 communities (312 shown, 26 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 155 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `afe82f0f`
+- Built from commit: `483789e6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -281,6 +281,7 @@
 - [[_COMMUNITY_Community 265|Community 265]]
 - [[_COMMUNITY_Community 266|Community 266]]
 - [[_COMMUNITY_Community 267|Community 267]]
+- [[_COMMUNITY_Community 268|Community 268]]
 - [[_COMMUNITY_Community 270|Community 270]]
 - [[_COMMUNITY_Community 271|Community 271]]
 - [[_COMMUNITY_Community 273|Community 273]]
@@ -386,11 +387,11 @@
 - **Design System Documentation Pipeline** — teach_product_md, document_design_md_format, extract_design_tokens, polish_design_system_discovery [INFERRED 0.85]
 - **Visual Hierarchy Through Space & Scale** — spatial_squint_test, layout_visual_hierarchy, typeset_type_scale, distill_visual_simplification [INFERRED 0.75]
 
-## Communities (337 total, 26 thin omitted)
+## Communities (338 total, 26 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.04
-Nodes (66): acknowledgePendingEvent(), annotRoot, args, CONTEXT_DIR, { detectScript, sessionPath, livePath }, __dirname, enqueueEvent(), existingRecord (+58 more)
+Nodes (70): acknowledgePendingEvent(), annotRoot, args, CONTEXT_DIR, { detectScript, sessionPath, livePath }, __dirname, enqueueEvent(), existingRecord (+62 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.12
@@ -989,8 +990,8 @@ Cohesion: 0.10
 Nodes (27): bool, DesignSystemGenerator, _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system() (+19 more)
 
 ### Community 174 - "Community 174"
-Cohesion: 0.07
-Nodes (54): firstExisting(), getCritiqueDir(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath(), getLiveAnnotationsDir() (+46 more)
+Cohesion: 0.13
+Nodes (26): firstExisting(), getCritiqueDir(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath(), getLiveAnnotationsDir() (+18 more)
 
 ### Community 175 - "Community 175"
 Cohesion: 0.08
@@ -1006,11 +1007,11 @@ Nodes (10): buildAdminHtml(), buildCustomerHtml(), buildEmailCopy(), createTrans
 
 ### Community 178 - "Community 178"
 Cohesion: 0.12
-Nodes (24): appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH, __dirname, findCspMetaTags(), getAttr() (+16 more)
+Nodes (23): appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH, __dirname, findCspMetaTags(), getAttr() (+15 more)
 
 ### Community 179 - "Community 179"
 Cohesion: 0.12
-Nodes (22): appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH, __dirname, findCspMetaTags(), getAttr() (+14 more)
+Nodes (23): appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH, __dirname, findCspMetaTags(), getAttr() (+15 more)
 
 ### Community 180 - "Community 180"
 Cohesion: 0.08
@@ -1356,6 +1357,10 @@ Nodes (8): Animate enter states with @starting-style, Buttons must feel responsi
 Cohesion: 0.25
 Nodes (7): Extract Flow, Step 1: Discover the Design System, Step 2: Identify Patterns, Step 3: Plan Extraction, Step 4: Extract & Enrich, Step 5: Migrate, Step 6: Document
 
+### Community 268 - "Community 268"
+Cohesion: 0.14
+Nodes (24): createRequestHandler(), firstExisting(), getCritiqueDir(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath() (+16 more)
+
 ### Community 270 - "Community 270"
 Cohesion: 0.29
 Nodes (6): Core Rule, Impeccable Asset Producer, Input Contract, Output Contract, Prompt Pattern, Workflow
@@ -1425,7 +1430,7 @@ Cohesion: 0.40
 Nodes (5): Ie(), Lt(), Ot(), Re(), z()
 
 ### Community 288 - "Community 288"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): adapt, argumentHint, description
 
 ### Community 289 - "Community 289"
@@ -1521,7 +1526,7 @@ Cohesion: 0.67
 Nodes (3): polish, argumentHint, description
 
 ### Community 313 - "Community 313"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): quieter, argumentHint, description
 
 ### Community 314 - "Community 314"
@@ -1561,7 +1566,7 @@ Cohesion: 0.67
 Nodes (3): craft, argumentHint, description
 
 ### Community 325 - "Community 325"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): critique, argumentHint, description
 
 ### Community 326 - "Community 326"
@@ -1609,7 +1614,7 @@ Cohesion: 0.67
 Nodes (3): polish, argumentHint, description
 
 ### Community 337 - "Community 337"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): quieter, argumentHint, description
 
 ### Community 338 - "Community 338"

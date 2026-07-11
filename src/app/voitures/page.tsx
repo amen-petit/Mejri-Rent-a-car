@@ -459,7 +459,6 @@ function CarsPageContent() {
                             src={car.images[0]}
                             alt={`${car.brand} ${car.name}`}
                             fill
-                            unoptimized
                             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                             className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                           />

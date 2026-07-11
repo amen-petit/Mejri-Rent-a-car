@@ -505,7 +505,7 @@ export default function AdminReservations() {
                     <div className="flex items-start gap-4 sm:items-center">
                       <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border border-mist bg-paper">
                         {car?.images?.[0] ? (
-                          <Image src={car.images[0]} alt={car.name} fill unoptimized className="object-cover" />
+                          <Image src={car.images[0]} alt={car.name} fill sizes="56px" className="object-cover" />
                         ) : (
                           <CarGlyph className="h-7 w-7 text-ash" />
                         )}
@@ -597,7 +597,7 @@ export default function AdminReservations() {
                   <div className="mb-6 flex items-center gap-3 rounded-[var(--radius)] border border-mist bg-paper p-4">
                     <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border border-mist bg-cloud">
                       {selected.car?.images?.[0] ? (
-                        <Image src={selected.car.images[0]} alt={selected.car.name || "Voiture"} fill unoptimized className="object-cover" />
+                        <Image src={selected.car.images[0]} alt={selected.car.name || "Voiture"} fill sizes="56px" className="object-cover" />
                       ) : (
                         <CarGlyph className="h-7 w-7 text-ash" />
                       )}

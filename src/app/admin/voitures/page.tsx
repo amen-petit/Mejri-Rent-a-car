@@ -407,7 +407,6 @@ export default function AdminVoitures() {
                     src={car.images[0]}
                     alt={car.name}
                     fill
-                    unoptimized
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                   />
@@ -614,7 +613,6 @@ export default function AdminVoitures() {
                           alt={`Photo ${i + 1} de ${editing.brand} ${editing.name}`}
                           width={64}
                           height={64}
-                          unoptimized
                           className="h-16 w-16 rounded-[var(--radius-sm)] border border-mist object-cover"
                         />
                         <button

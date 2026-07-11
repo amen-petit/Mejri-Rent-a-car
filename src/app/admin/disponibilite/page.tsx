@@ -68,7 +68,7 @@ function CarRow({ entry, isRange }: { entry: CarAvailability; isRange: boolean }
           <div className="flex min-w-0 items-center gap-4">
             <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border border-mist bg-paper">
               {car.images?.[0] ? (
-                <Image src={car.images[0]} alt={car.name} fill unoptimized className="object-cover" />
+                <Image src={car.images[0]} alt={car.name} fill sizes="56px" className="object-cover" />
               ) : (
                 <CarGlyph className="h-7 w-7 text-ash" />
               )}
