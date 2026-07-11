@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import LocationSection from "@/components/LocationSection";
 import ReviewsShowcase from "@/components/ReviewsShowcase";
+import WhatsAppFab from "@/components/WhatsAppFab";
 import Link from "next/link";
 import Image from "next/image";
 import { getCars } from "@/lib/cars";
@@ -305,6 +306,9 @@ export default async function Home() {
 
       {/* ─────────────────────  LOCATION / MAP  ───────────────────── */}
       <LocationSection />
+
+      {/* Floating WhatsApp contact CTA — fixed to the viewport, above content. */}
+      <WhatsAppFab />
     </main>
   );
 }

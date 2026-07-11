@@ -163,6 +163,8 @@ export const en: Messages = {
     address: "Address",
     addressValue: "Tunis, Tunisia",
     whatsapp: "Contact via WhatsApp",
+    whatsappCtaMessage:
+      "Hi! I'd like more information about renting a car.",
   },
   privacy: {
     eyebrow: "Privacy",

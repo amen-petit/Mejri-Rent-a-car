@@ -167,6 +167,8 @@ export const fr = {
     address: "Adresse",
     addressValue: "Tunis, Tunisie",
     whatsapp: "Contacter via WhatsApp",
+    whatsappCtaMessage:
+      "Bonjour ! J'aimerais avoir plus d'informations sur la location de voitures.",
   },
   privacy: {
     eyebrow: "Confidentialité",

@@ -550,6 +550,137 @@ html[lang="ar"] .hero-stroke {
   }
 }
 
+/* =========================================================================
+   WHATSAPP FAB — a floating contact CTA that reads as a native brand element
+   (ink surface, WhatsApp green used only as the icon accent) rather than a
+   generic green widget. It's a 56px circle that expands to a pill on hover /
+   keyboard focus, revealing the label by animating max-width (not a hard width
+   reflow). It fades + slides in on load and gives a rare, subtle green pulse to
+   draw the eye. Every bit of motion is dropped under prefers-reduced-motion.
+   Positioning, colour and radius all come from the design tokens.
+   ========================================================================= */
+.wa-fab-fixed {
+  position: fixed;
+  inset-block-end: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  inset-inline-end: calc(1.5rem + env(safe-area-inset-right, 0px));
+  z-index: 40;
+  animation: wa-fab-in 0.55s var(--ease-out) both;
+  animation-delay: 0.35s;
+}
+
+.wa-fab {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  box-shadow:
+    0 12px 32px -10px rgba(11, 11, 12, 0.55),
+    0 3px 10px -3px rgba(11, 11, 12, 0.35);
+  transition:
+    transform 0.26s var(--ease-out),
+    box-shadow 0.26s var(--ease-out);
+  will-change: transform;
+}
+.wa-fab:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 20px 46px -12px rgba(11, 11, 12, 0.6),
+    0 4px 12px -3px rgba(11, 11, 12, 0.4);
+}
+.wa-fab:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.wa-fab__icon {
+  position: relative;
+  display: inline-flex;
+  height: 3.5rem;
+  width: 3.5rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  color: #25d366; /* WhatsApp green — the single accent */
+}
+/* Rare attention pulse — a green ring that expands and fades ~once every 22s. */
+.wa-fab__icon::after {
+  content: "";
+  position: absolute;
+  inset: 0.35rem;
+  border-radius: var(--radius-pill);
+  border: 2px solid #25d366;
+  opacity: 0;
+  animation: wa-fab-pulse 22s var(--ease-out) infinite;
+}
+.wa-fab:hover .wa-fab__icon::after {
+  animation: none;
+}
+
+.wa-fab__label {
+  display: inline-block;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 560;
+  letter-spacing: 0.005em;
+  transition:
+    max-width 0.36s var(--ease-out),
+    opacity 0.24s var(--ease-out),
+    padding 0.36s var(--ease-out);
+}
+.wa-fab:hover .wa-fab__label,
+.wa-fab:focus-visible .wa-fab__label {
+  max-width: 16rem;
+  opacity: 1;
+  padding-inline-start: 1.25rem;
+}
+
+@keyframes wa-fab-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes wa-fab-pulse {
+  0%,
+  90%,
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  93% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  99% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-fab-fixed {
+    animation: none;
+  }
+  .wa-fab,
+  .wa-fab__label {
+    transition: none;
+  }
+  .wa-fab:hover {
+    transform: none;
+  }
+  .wa-fab__icon::after {
+    animation: none;
+  }
+}
+
 /* Toast entrance — gentle rise + fade. Reduced-motion users get a plain fade. */
 @keyframes toast-in {
   from {

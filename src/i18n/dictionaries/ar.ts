@@ -163,6 +163,7 @@ export const ar: Messages = {
     address: "العنوان",
     addressValue: "تونس، تونس",
     whatsapp: "تواصل عبر واتساب",
+    whatsappCtaMessage: "مرحبًا! أودّ الحصول على مزيد من المعلومات حول تأجير السيارات.",
   },
   privacy: {
     eyebrow: "الخصوصية",
