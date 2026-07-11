@@ -9,8 +9,12 @@ import Navbar from "@/components/Navbar";
 import Arrow from "@/components/icons/Arrow";
 import CarSilhouette from "@/components/icons/CarSilhouette";
 import BookingSearchCard from "@/components/BookingSearchCard";
+import PromoBadge from "@/components/PromoBadge";
+import PromoPrice from "@/components/PromoPrice";
 import { getCars } from "@/lib/cars";
-import { Car } from "@/lib/types";
+import { getActivePromotions } from "@/lib/promotions-data";
+import { getActivePromotion, computePromotionSavings } from "@/lib/promotions";
+import { Car, Promotion } from "@/lib/types";
 import { useI18n } from "@/i18n/client";
 import { interpolate, plural, pluralSuffix } from "@/i18n/format";
 import {
@@ -39,6 +43,7 @@ function CarsPageContent() {
     : "";
 
   const [cars, setCars] = useState<Car[]>([]);
+  const [promotions, setPromotions] = useState<Promotion[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadFailed, setLoadFailed] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -71,6 +76,23 @@ function CarsPageContent() {
     () => [ALL, ...new Set(cars.map((car) => car.fuel_type).filter(Boolean))],
     [cars],
   );
+
+  // Active promotions are fetched once (RLS returns only currently-active rows)
+  // and attached by car, so both normal and search results show them uniformly.
+  useEffect(() => {
+    getActivePromotions()
+      .then(setPromotions)
+      .catch(() => setPromotions([]));
+  }, []);
+
+  const promoByCar = useMemo(() => {
+    const map = new Map<string, Promotion>();
+    for (const car of cars) {
+      const promo = getActivePromotion(promotions, car.id);
+      if (promo) map.set(car.id, promo);
+    }
+    return map;
+  }, [cars, promotions]);
 
   const loadCars = useCallback(async () => {
     setLoadFailed(false);
@@ -447,7 +469,12 @@ function CarsPageContent() {
                 </p>
 
                 <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
-                  {filteredCars.map((car) => (
+                  {filteredCars.map((car) => {
+                    const promo = promoByCar.get(car.id) ?? null;
+                    const savings = promo
+                      ? computePromotionSavings(car.price_per_day, promo)
+                      : null;
+                    return (
                     <Link
                       href={`/voitures/${car.id}${linkSuffix}`}
                       key={car.id}
@@ -470,8 +497,16 @@ function CarsPageContent() {
                         <span className="absolute end-3 top-3 rounded-full border border-ink/10 bg-paper/85 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.1em] text-stone backdrop-blur-sm">
                           {t.enums.category[car.category] ?? car.category}
                         </span>
+                        {promo && (
+                          <PromoBadge
+                            promotion={promo}
+                            className="absolute start-3 top-3 shadow-sm"
+                          />
+                        )}
                         {car.is_featured && (
-                          <span className="absolute start-3 top-3 rounded-full bg-ink px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-paper">
+                          <span
+                            className={`absolute start-3 ${promo ? "top-11" : "top-3"} rounded-full bg-ink px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-paper`}
+                          >
                             {t.fleet.featured}
                           </span>
                         )}
@@ -492,12 +527,21 @@ function CarsPageContent() {
                         </p>
 
                         <div className="mt-5 flex items-end justify-between border-t border-mist pt-4">
-                          <p className="font-display text-2xl text-ink">
-                            {car.price_per_day}
-                            <span className="ms-1 text-sm text-ash">
-                              {t.common.perDay}
-                            </span>
-                          </p>
+                          {savings ? (
+                            <PromoPrice
+                              original={savings.original}
+                              discounted={savings.discounted}
+                              unit={t.common.perDay}
+                              savingsPct={savings.savingsPct}
+                            />
+                          ) : (
+                            <p className="font-display text-2xl text-ink">
+                              {car.price_per_day}
+                              <span className="ms-1 text-sm text-ash">
+                                {t.common.perDay}
+                              </span>
+                            </p>
+                          )}
                           <span className="inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors duration-200 group-hover:text-accent">
                             {t.cars.book}
                             <Arrow className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
@@ -505,7 +549,8 @@ function CarsPageContent() {
                         </div>
                       </div>
                     </Link>
-                  ))}
+                    );
+                  })}
                 </div>
               </>
             )}

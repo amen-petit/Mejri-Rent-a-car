@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { isAdminRequest } from "@/lib/admin-guard";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { carInputSchema } from "@/lib/validation";
+import { CARS_CACHE_TAG } from "@/lib/constants";
 
 export const runtime = "nodejs";
 
@@ -34,6 +36,9 @@ export async function PATCH(req: Request, { params }: Params) {
     return NextResponse.json({ error: "Failed to update car." }, { status: 500 });
   }
 
+  // Edits/toggles (availability, featured, price…) affect the public fleet.
+  revalidateTag(CARS_CACHE_TAG, { expire: 0 });
+
   return NextResponse.json({ ok: true });
 }
 
@@ -50,6 +55,9 @@ export async function DELETE(_req: Request, { params }: Params) {
     console.error("Car delete failed:", error.message);
     return NextResponse.json({ error: "Failed to delete car." }, { status: 500 });
   }
+
+  // Removed car must disappear from the public fleet.
+  revalidateTag(CARS_CACHE_TAG, { expire: 0 });
 
   return NextResponse.json({ ok: true });
 }

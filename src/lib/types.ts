@@ -24,6 +24,31 @@ export type Car = {
   created_at: string;
 };
 
+export type PromotionType = "percentage" | "fixed";
+export type PromotionBadgeStyle = "warm" | "accent" | "ink";
+
+/**
+ * A marketing campaign attached to one car. `discount_type` decides how
+ * `discount_value` is read: a percent off (`percentage`) or a flat amount off
+ * per day (`fixed`). The effective price is always derived from the car's
+ * current price — nothing here stores a frozen promotional price.
+ */
+export type Promotion = {
+  id: string;
+  car_id: string;
+  discount_type: PromotionType;
+  discount_value: number;
+  label: string | null;
+  badge_style: PromotionBadgeStyle;
+  start_date: string; // YYYY-MM-DD
+  end_date: string; // YYYY-MM-DD
+  is_active: boolean;
+  created_at: string;
+};
+
+/** A car with its currently-active promotion attached (null when none). */
+export type CarWithPromotion = Car & { promotion?: Promotion | null };
+
 import type { RentalLocation } from "./constants";
 
 export type Reservation = {
@@ -39,6 +64,12 @@ export type Reservation = {
   pickup_location: RentalLocation;
   return_location: RentalLocation;
   total_price: number;
+  // Price snapshot at booking time. Null on reservations made before promotions
+  // existed; otherwise both are set (equal when no promo applied) so historical
+  // records never shift if a car's price or a promotion changes later.
+  original_price_per_day: number | null;
+  discounted_price_per_day: number | null;
+  promotion_label: string | null;
   status: "pending" | "confirmed" | "cancelled";
   notes: string | null;
   created_at: string;

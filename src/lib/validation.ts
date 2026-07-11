@@ -9,6 +9,9 @@ import {
   FUEL_TYPES,
   BOOKING_TIME_SLOTS,
   RENTAL_LOCATIONS,
+  PROMOTION_TYPES,
+  PROMO_BADGE_STYLES,
+  DEFAULT_PROMO_BADGE_STYLE,
 } from "./constants";
 
 export const pricingTierSchema = z
@@ -102,3 +105,36 @@ export const availabilitySearchSchema = z
   });
 
 export type AvailabilitySearch = z.infer<typeof availabilitySearchSchema>;
+
+// ── Promotions ───────────────────────────────────────────────────────────────
+// Raw shape (no cross-field refinements) so the PATCH schema can `.partial()` it.
+const promotionObject = z.object({
+  car_id: z.string().uuid(),
+  discount_type: z.enum(PROMOTION_TYPES),
+  discount_value: z.number().positive().max(1_000_000),
+  label: z.string().trim().max(80).nullable().optional(),
+  badge_style: z.enum(PROMO_BADGE_STYLES).default(DEFAULT_PROMO_BADGE_STYLE),
+  start_date: dateOnly,
+  end_date: dateOnly,
+  is_active: z.boolean(),
+});
+
+// Full create payload. The `fixed`-value-below-car-price rule needs the car row,
+// so it is enforced in the API (where the join is available), not here.
+export const promotionInputSchema = promotionObject
+  .refine((p) => p.end_date >= p.start_date, {
+    message: "end_date must be on or after start_date",
+    path: ["end_date"],
+  })
+  .refine((p) => p.discount_type !== "percentage" || p.discount_value <= 100, {
+    message: "A percentage discount cannot exceed 100.",
+    path: ["discount_value"],
+  });
+
+export type PromotionInput = z.infer<typeof promotionInputSchema>;
+
+// Partial payload for edits / toggles; the API re-checks cross-field rules
+// against the merged (existing + patch) record.
+export const promotionUpdateSchema = promotionObject.partial();
+
+export type PromotionUpdate = z.infer<typeof promotionUpdateSchema>;

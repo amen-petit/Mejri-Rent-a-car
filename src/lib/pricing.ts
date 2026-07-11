@@ -6,8 +6,9 @@
  * Dates are handled as calendar dates (YYYY-MM-DD) in UTC to avoid timezone
  * drift between the browser and the server.
  */
-import type { Car, PricingTier } from "./types";
+import type { Car, PricingTier, Promotion } from "./types";
 import { getDaysBetween, parseDateOnly } from "./dates";
+import { applyPromotionToRate } from "./promotions";
 
 export function normalizePricingTiers(
   tiers?: PricingTier[] | null,
@@ -62,32 +63,71 @@ export function getDailyRateForDuration(
 
 export type Quote = {
   totalDays: number;
+  /** Effective daily rate charged — the discounted rate when a promo applies. */
   dailyRate: number;
+  /** Effective total — days × effective daily rate. */
   totalPrice: number;
   tier: PricingTier | null;
+  /** Daily rate before any promotion (the tier/base rate). */
+  originalDailyRate: number;
+  /** Total before any promotion, for strikethrough display. */
+  originalTotal: number;
+  /** The promotion applied, if any. */
+  promotion: Promotion | null;
 };
 
 /**
  * Authoritative quote for a car over a date range. The server uses this to set
  * total_price; the client uses it for display. Returns a zero-day quote for
  * invalid/empty ranges.
+ *
+ * When an active `promotion` is passed, the discount is applied to the effective
+ * (tier-selected) daily rate, and `dailyRate`/`totalPrice` become the DISCOUNTED
+ * values — so every existing caller (booking persist, detail estimate, summary)
+ * automatically charges the promotional price. `originalDailyRate`/`originalTotal`
+ * expose the pre-discount figures for strikethrough display. With no promotion,
+ * original === effective (fully backward compatible).
  */
 export function computeQuote(
   car: Pick<Car, "price_per_day" | "pricing_tiers">,
   startDate: string,
   endDate: string,
+  promotion?: Promotion | null,
 ): Quote {
   const start = parseDateOnly(startDate);
   const end = parseDateOnly(endDate);
 
   if (!start || !end || end < start) {
-    return { totalDays: 0, dailyRate: car.price_per_day, totalPrice: 0, tier: null };
+    const base = car.price_per_day;
+    const discounted = applyPromotionToRate(base, promotion);
+    return {
+      totalDays: 0,
+      dailyRate: discounted,
+      totalPrice: 0,
+      tier: null,
+      originalDailyRate: base,
+      originalTotal: 0,
+      promotion: promotion ?? null,
+    };
   }
 
   const totalDays = getDaysBetween(start, end);
   const tiers = normalizePricingTiers(car.pricing_tiers);
-  const dailyRate = getDailyRateForDuration(totalDays, car.price_per_day, tiers);
+  const originalDailyRate = getDailyRateForDuration(
+    totalDays,
+    car.price_per_day,
+    tiers,
+  );
   const tier = getMatchingTierForDuration(totalDays, tiers);
+  const dailyRate = applyPromotionToRate(originalDailyRate, promotion);
 
-  return { totalDays, dailyRate, totalPrice: totalDays * dailyRate, tier };
+  return {
+    totalDays,
+    dailyRate,
+    totalPrice: totalDays * dailyRate,
+    tier,
+    originalDailyRate,
+    originalTotal: totalDays * originalDailyRate,
+    promotion: promotion ?? null,
+  };
 }

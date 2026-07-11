@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { reservationInputSchema } from "@/lib/validation";
 import { computeQuote } from "@/lib/pricing";
+import { getActivePromotion } from "@/lib/promotions";
 import { sendReservationEmails } from "@/lib/email";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
 import { isPickupInPast } from "@/lib/time";
@@ -59,8 +60,21 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Véhicule indisponible." }, { status: 409 });
   }
 
+  // Resolve the car's active promotion authoritatively on the server (a
+  // client-sent discount is never trusted). Service role bypasses RLS, so filter
+  // to the active window here.
+  const today = new Date().toISOString().slice(0, 10);
+  const { data: promoRows } = await supabase
+    .from("promotions")
+    .select("*")
+    .eq("car_id", car.id)
+    .eq("is_active", true)
+    .lte("start_date", today)
+    .gte("end_date", today);
+  const promotion = getActivePromotion(promoRows ?? [], car.id, today);
+
   // Authoritative price computed on the server; any client-sent price is ignored.
-  const quote = computeQuote(car, input.start_date, input.end_date);
+  const quote = computeQuote(car, input.start_date, input.end_date, promotion);
   if (quote.totalDays <= 0 || quote.totalPrice <= 0) {
     return NextResponse.json({ error: "Période invalide." }, { status: 400 });
   }
@@ -77,6 +91,9 @@ export async function POST(req: Request) {
       p_pickup_location: input.pickup_location,
       p_return_location: input.return_location,
       p_total: quote.totalPrice,
+      p_original_daily: quote.originalDailyRate,
+      p_discounted_daily: quote.dailyRate,
+      p_promo_label: promotion?.label ?? null,
       p_name: input.client_name,
       p_phone: input.client_phone,
       p_email: input.client_email ?? null,
@@ -105,6 +122,8 @@ export async function POST(req: Request) {
     pickupLocation: input.pickup_location,
     returnLocation: input.return_location,
     totalPrice: quote.totalPrice,
+    originalTotal: promotion ? quote.originalTotal : null,
+    promotionLabel: promotion?.label ?? null,
     notes: input.notes ?? null,
   }).catch((error) =>
     console.error(

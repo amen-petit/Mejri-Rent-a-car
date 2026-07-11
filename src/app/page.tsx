@@ -3,9 +3,12 @@ import Hero from "@/components/Hero";
 import LocationSection from "@/components/LocationSection";
 import ReviewsShowcase from "@/components/ReviewsShowcase";
 import WhatsAppFab from "@/components/WhatsAppFab";
+import PromoBadge from "@/components/PromoBadge";
+import PromoPrice from "@/components/PromoPrice";
 import Link from "next/link";
 import Image from "next/image";
-import { getCars } from "@/lib/cars";
+import { getCachedCars, getCachedActivePromotions } from "@/lib/cars";
+import { attachPromotions, computePromotionSavings } from "@/lib/promotions";
 import type { Metadata } from "next";
 import { getServerI18n } from "@/i18n/server";
 import { interpolate } from "@/i18n/format";
@@ -24,8 +27,6 @@ export const metadata: Metadata = {
   description: `${BRAND_NAME}: location de voitures en Tunisie avec réservation en ligne simple, flotte moderne et assistance 24/7.`,
   alternates: { canonical: "/" },
 };
-
-export const dynamic = "force-dynamic";
 
 function CarSilhouette({ className }: { className?: string }) {
   return (
@@ -66,17 +67,36 @@ function Arrow({ className }: { className?: string }) {
 
 export default async function Home() {
   const { t } = await getServerI18n();
-  const cars = await getCars().catch(() => []);
-  const availableCars = cars.filter((car) => car.is_available);
+  const [cars, promotions] = await Promise.all([
+    getCachedCars().catch(() => []),
+    getCachedActivePromotions().catch(() => []),
+  ]);
+  // Attach each car's currently-active promotion (resolved in one place).
+  const withPromo = attachPromotions(cars, promotions);
+  const availableCars = withPromo.filter((car) => car.is_available);
   const featuredCars = availableCars.filter((car) => car.is_featured);
   const otherAvailableCars = availableCars.filter((car) => !car.is_featured);
   const ordered = [...featuredCars, ...otherAvailableCars];
-  // The hero rotates the vedette (featured) cars; when none are featured yet it
-  // simply shows the newest available car (no rotation).
+
+  // Hero-selection strategy: PREFER cars with an active promotion so campaigns
+  // headline the hero automatically. Among promoted cars, order by featured
+  // first, then the biggest saving, then newest. When nothing is promoted, fall
+  // back to the previous behaviour (featured, else the newest available car).
+  const promoCars = [...availableCars]
+    .filter((car) => car.promotion)
+    .sort((a, b) => {
+      if (a.is_featured !== b.is_featured) return a.is_featured ? -1 : 1;
+      const sa = computePromotionSavings(a.price_per_day, a.promotion).savingsPct;
+      const sb = computePromotionSavings(b.price_per_day, b.promotion).savingsPct;
+      if (sa !== sb) return sb - sa;
+      return b.created_at.localeCompare(a.created_at);
+    });
   const heroCars =
-    featuredCars.length > 0
-      ? featuredCars.slice(0, HERO_ROTATION_LIMIT)
-      : ordered.slice(0, 1);
+    promoCars.length > 0
+      ? promoCars.slice(0, HERO_ROTATION_LIMIT)
+      : featuredCars.length > 0
+        ? featuredCars.slice(0, HERO_ROTATION_LIMIT)
+        : ordered.slice(0, 1);
   // Fleet never repeats a car already in the hero rotation.
   const heroIds = new Set(heroCars.map((car) => car.id));
   const fleet = ordered
@@ -178,6 +198,12 @@ export default async function Home() {
                   <span className="absolute end-3 top-3 rounded-full border border-mist bg-paper px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.1em] text-stone">
                     {t.enums.category[car.category] ?? car.category}
                   </span>
+                  {car.promotion && (
+                    <PromoBadge
+                      promotion={car.promotion}
+                      className="absolute start-3 top-3 shadow-sm"
+                    />
+                  )}
                 </div>
 
                 {/* Caption */}
@@ -195,12 +221,29 @@ export default async function Home() {
                   </p>
 
                   <div className="mt-5 flex items-end justify-between border-t border-mist pt-4">
-                    <p className="font-display text-2xl text-ink">
-                      {car.price_per_day}
-                      <span className="ms-1 text-sm text-ash">
-                        {t.fleet.perDay}
-                      </span>
-                    </p>
+                    {car.promotion ? (
+                      (() => {
+                        const s = computePromotionSavings(
+                          car.price_per_day,
+                          car.promotion,
+                        );
+                        return (
+                          <PromoPrice
+                            original={s.original}
+                            discounted={s.discounted}
+                            unit={t.fleet.perDay}
+                            savingsPct={s.savingsPct}
+                          />
+                        );
+                      })()
+                    ) : (
+                      <p className="font-display text-2xl text-ink">
+                        {car.price_per_day}
+                        <span className="ms-1 text-sm text-ash">
+                          {t.fleet.perDay}
+                        </span>
+                      </p>
+                    )}
                     <span className="inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors duration-200 group-hover:text-accent">
                       {t.fleet.book}
                       <Arrow className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />

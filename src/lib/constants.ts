@@ -63,6 +63,21 @@ export const FEATURED_CARS_LIMIT = 3;
 // own; falls back to a single car when nothing is featured yet.
 export const HERO_ROTATION_LIMIT = 5;
 
+// ── Fleet data cache ─────────────────────────────────────────────────────────
+// The public fleet (home page) is read through Next's data cache instead of
+// hitting Supabase on every request. The list only changes when an admin
+// mutates a car, so every admin car write busts CARS_CACHE_TAG for a near-
+// instant update; the time window below is a bounded-staleness safety net in
+// case a bust is ever missed. Shared here so the reader (lib/cars) and the
+// admin route handlers can never drift on the tag name.
+export const CARS_CACHE_TAG = "cars";
+export const CARS_CACHE_REVALIDATE_SECONDS = 300;
+
+// Active promotions are cached alongside the fleet and busted whenever an admin
+// creates/edits/deletes a promotion. Date-based expiry is bounded by the same
+// revalidate window as the fleet.
+export const PROMOS_CACHE_TAG = "promotions";
+
 export const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 // Minimum lead time (minutes) required for a same-day pickup. Shared by the
@@ -182,6 +197,13 @@ export const CAR_CATEGORIES = [
 ] as const;
 
 export const TRANSMISSION_OPTIONS = ["Manuelle", "Automatique"] as const;
+
+// ── Promotions ───────────────────────────────────────────────────────────────
+// Canonical stored values, mirrored by the DB CHECK constraints in
+// supabase/add-promotions.sql. Keep this list and the migration in sync.
+export const PROMOTION_TYPES = ["percentage", "fixed"] as const;
+export const PROMO_BADGE_STYLES = ["warm", "accent", "ink"] as const;
+export const DEFAULT_PROMO_BADGE_STYLE = "warm" as const;
 
 export const FUEL_TYPES = [
   "Essence",

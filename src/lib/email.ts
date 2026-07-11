@@ -30,6 +30,9 @@ export type ReservationEmailPayload = {
   pickupLocation?: string | null;
   returnLocation?: string | null;
   totalPrice: number;
+  /** Pre-discount total, set only when a promotion was applied. */
+  originalTotal?: number | null;
+  promotionLabel?: string | null;
   notes?: string | null;
 };
 
@@ -123,6 +126,14 @@ function buildAdminHtml(copy: EmailCopy, p: ReservationEmailPayload): string {
         ${row("Lieu de départ", locationLabel(p.pickupLocation))}
         ${row("Lieu de retour", locationLabel(p.returnLocation))}
         ${row("Prix total", `${p.totalPrice} DT`)}
+        ${
+          p.originalTotal != null && p.originalTotal > p.totalPrice
+            ? row(
+                "Promotion",
+                `${p.promotionLabel ? `${p.promotionLabel} — ` : ""}−${p.originalTotal - p.totalPrice} DT (au lieu de ${p.originalTotal} DT)`,
+              )
+            : ""
+        }
         ${row("Notes", p.notes || "—")}
       </table>
     </div>`;
@@ -136,6 +147,11 @@ function buildCustomerHtml(copy: EmailCopy, p: ReservationEmailPayload): string 
       <p style="margin:0 0 12px;">Période: ${escapeHtml(p.startDate)}${p.pickupTime ? ` à ${escapeHtml(p.pickupTime)}` : ""} au ${escapeHtml(p.endDate)}${p.returnTime ? ` à ${escapeHtml(p.returnTime)}` : ""}</p>
       <p style="margin:0 0 12px;">Lieu: ${escapeHtml(locationLabel(p.pickupLocation))}${p.returnLocation && p.returnLocation !== p.pickupLocation ? ` → ${escapeHtml(locationLabel(p.returnLocation))}` : ""}</p>
       <p style="margin:0 0 12px;">Prix estimé: ${p.totalPrice} DT</p>
+      ${
+        p.originalTotal != null && p.originalTotal > p.totalPrice
+          ? `<p style="margin:0 0 12px;color:#0a7a3f;">Promotion appliquée${p.promotionLabel ? ` (${escapeHtml(p.promotionLabel)})` : ""} : vous économisez ${p.originalTotal - p.totalPrice} DT.</p>`
+          : ""
+      }
       <p style="margin:0;">${copy.customerCta}</p>
     </div>`;
 }

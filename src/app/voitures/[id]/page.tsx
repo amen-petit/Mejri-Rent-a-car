@@ -9,7 +9,10 @@ import { useToast } from "@/components/Feedback";
 import CarGlyph from "@/components/icons/CarGlyph";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { getCarById } from "@/lib/cars";
-import { Car } from "@/lib/types";
+import { getActivePromotionForCar } from "@/lib/promotions-data";
+import { computePromotionSavings, applyPromotionToRate } from "@/lib/promotions";
+import PromoBadge from "@/components/PromoBadge";
+import { Car, Promotion } from "@/lib/types";
 import {
   WHATSAPP_NUMBER,
   BOOKING_TIME_SLOTS,
@@ -98,6 +101,7 @@ function CarDetailPageContent() {
   );
 
   const [car, setCar] = useState<Car | null>(null);
+  const [promotion, setPromotion] = useState<Promotion | null>(null);
   const [loading, setLoading] = useState(true);
   const [unavailable, setUnavailable] = useState<
     { start_date: string; end_date: string }[]
@@ -142,10 +146,12 @@ function CarDetailPageContent() {
             (d.unavailable ?? []) as { start_date: string; end_date: string }[],
         )
         .catch(() => [] as { start_date: string; end_date: string }[]),
+      getActivePromotionForCar(id).catch(() => null),
     ])
-      .then(([carData, unavailData]) => {
+      .then(([carData, unavailData, promoData]) => {
         setCar(carData);
         setUnavailable(unavailData);
+        setPromotion(promoData);
       })
       .catch(() => setCar(null))
       .finally(() => setLoading(false));
@@ -158,10 +164,14 @@ function CarDetailPageContent() {
   // ── Pricing — authoritative quote, recomputed from the selected range. Cheap
   // and pure; the server recomputes and validates it on submit (single source
   // of truth for the amount). The user only ever sees the final total. ──
-  const quote = car && start && end ? computeQuote(car, start, end) : null;
+  const quote =
+    car && start && end ? computeQuote(car, start, end, promotion) : null;
   const totalDays = quote?.totalDays ?? 0;
   const totalPrice = quote?.totalPrice ?? 0;
-  const appliedDailyRate = quote?.dailyRate ?? car?.price_per_day ?? 0;
+  // Effective (promo-adjusted) daily rate — falls back to the discounted base
+  // price when no dates are picked yet.
+  const appliedDailyRate =
+    quote?.dailyRate ?? applyPromotionToRate(car?.price_per_day ?? 0, promotion);
 
   // ── Time / availability validation (mirrors the server so the customer can't
   // pick something that will be rejected on submit). ──
@@ -476,13 +486,41 @@ function CarDetailPageContent() {
                   </div>
                 )}
 
-                {/* Starting price — back under the gallery. */}
-                <div className="mt-4 font-display text-3xl text-ink">
-                  {car.price_per_day}
-                  <span className="ms-1.5 text-base font-normal text-stone">
-                    {t.common.perDayFull}
-                  </span>
-                </div>
+                {/* Starting price — promo-aware. */}
+                {promotion ? (
+                  (() => {
+                    const s = computePromotionSavings(
+                      car.price_per_day,
+                      promotion,
+                    );
+                    return (
+                      <div className="mt-4">
+                        <PromoBadge promotion={promotion} className="mb-2" />
+                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                          <span className="font-display text-xl text-ash line-through">
+                            {s.original}
+                          </span>
+                          <span className="font-display text-3xl text-ink">
+                            {s.discounted}
+                            <span className="ms-1.5 text-base font-normal text-stone">
+                              {t.common.perDayFull}
+                            </span>
+                          </span>
+                          <span className="rounded-full bg-[var(--color-warm)] px-2 py-0.5 text-xs font-semibold text-ink">
+                            −{s.savingsAmount} DT ({s.savingsPct}%)
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })()
+                ) : (
+                  <div className="mt-4 font-display text-3xl text-ink">
+                    {car.price_per_day}
+                    <span className="ms-1.5 text-base font-normal text-stone">
+                      {t.common.perDayFull}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Specifications — a vertical list beside the image. Rows are
@@ -698,6 +736,14 @@ function CarDetailPageContent() {
                 <p className="mt-1 font-display text-3xl text-white">
                   {totalDays > 0 ? `${totalPrice} ${t.common.currency}` : "—"}
                 </p>
+                {promotion &&
+                  totalDays > 0 &&
+                  quote &&
+                  quote.originalTotal > totalPrice && (
+                    <p className="mt-0.5 text-sm text-white/40 line-through">
+                      {quote.originalTotal} {t.common.currency}
+                    </p>
+                  )}
                 {totalDays > 0 && (
                   <p className="mt-1 text-[0.7rem] text-white/50">
                     {interpolate(t.carDetail.perDayRate, {

@@ -6,7 +6,23 @@ import {
   getDailyRateForDuration,
   computeQuote,
 } from "./pricing";
-import type { PricingTier } from "./types";
+import type { PricingTier, Promotion } from "./types";
+
+function mkPromo(over: Partial<Promotion> = {}): Promotion {
+  return {
+    id: "p1",
+    car_id: "c1",
+    discount_type: "percentage",
+    discount_value: 20,
+    label: "Test",
+    badge_style: "warm",
+    start_date: "2025-01-01",
+    end_date: "2025-12-31",
+    is_active: true,
+    created_at: "2025-01-01T00:00:00Z",
+    ...over,
+  };
+}
 
 const tiers: PricingTier[] = [
   { min_days: 1, max_days: 3, price_per_day: 100 },
@@ -150,7 +166,15 @@ describe("computeQuote", () => {
       "2025-01-01",
       "2025-01-03",
     );
-    expect(q).toEqual({ totalDays: 3, dailyRate: 120, totalPrice: 360, tier: null });
+    expect(q).toEqual({
+      totalDays: 3,
+      dailyRate: 120,
+      totalPrice: 360,
+      tier: null,
+      originalDailyRate: 120,
+      originalTotal: 360,
+      promotion: null,
+    });
   });
 
   it("applies the matching tier rate", () => {
@@ -210,5 +234,42 @@ describe("computeQuote", () => {
     );
     expect(q.totalDays).toBe(0);
     expect(q.totalPrice).toBe(0);
+  });
+
+  it("applies a percentage promotion to the effective daily rate", () => {
+    const q = computeQuote(
+      { price_per_day: 100, pricing_tiers: null },
+      "2025-01-01",
+      "2025-01-03", // 3 days
+      mkPromo({ discount_type: "percentage", discount_value: 20 }),
+    );
+    expect(q.originalDailyRate).toBe(100);
+    expect(q.dailyRate).toBe(80);
+    expect(q.originalTotal).toBe(300);
+    expect(q.totalPrice).toBe(240);
+    expect(q.promotion?.id).toBe("p1");
+  });
+
+  it("applies a fixed promotion on top of the tier rate", () => {
+    const q = computeQuote(
+      { price_per_day: 120, pricing_tiers: tiers },
+      "2025-01-01",
+      "2025-01-05", // 5 days -> tier rate 80
+      mkPromo({ discount_type: "fixed", discount_value: 15 }),
+    );
+    expect(q.originalDailyRate).toBe(80);
+    expect(q.dailyRate).toBe(65);
+    expect(q.totalPrice).toBe(325);
+  });
+
+  it("leaves pricing unchanged when no promotion is passed", () => {
+    const q = computeQuote(
+      { price_per_day: 100, pricing_tiers: null },
+      "2025-01-01",
+      "2025-01-02",
+    );
+    expect(q.dailyRate).toBe(q.originalDailyRate);
+    expect(q.totalPrice).toBe(q.originalTotal);
+    expect(q.promotion).toBeNull();
   });
 });

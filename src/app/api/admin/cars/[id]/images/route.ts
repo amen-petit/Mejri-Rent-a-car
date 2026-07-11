@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { randomUUID } from "node:crypto";
 import { isAdminRequest } from "@/lib/admin-guard";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { CARS_CACHE_TAG } from "@/lib/constants";
 
 export const runtime = "nodejs";
 
@@ -109,6 +111,9 @@ export async function POST(req: Request, { params }: Params) {
     return NextResponse.json({ error: "Failed to save images." }, { status: 500 });
   }
 
+  // New photos change how the car renders on the public fleet.
+  revalidateTag(CARS_CACHE_TAG, { expire: 0 });
+
   return NextResponse.json({ images: urls });
 }
 
@@ -157,6 +162,9 @@ export async function DELETE(req: Request, { params }: Params) {
   if (updateError) {
     return NextResponse.json({ error: "Failed to update images." }, { status: 500 });
   }
+
+  // Removed photo changes how the car renders on the public fleet.
+  revalidateTag(CARS_CACHE_TAG, { expire: 0 });
 
   return NextResponse.json({ images: updated });
 }

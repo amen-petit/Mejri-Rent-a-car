@@ -14,15 +14,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import type { Car } from "@/lib/types";
+import type { CarWithPromotion } from "@/lib/types";
 import CarSilhouette from "@/components/icons/CarSilhouette";
 import BookingSearchCard from "@/components/BookingSearchCard";
+import PromoBadge from "@/components/PromoBadge";
+import PromoPrice from "@/components/PromoPrice";
+import { computePromotionSavings } from "@/lib/promotions";
 import { useI18n } from "@/i18n/client";
 import { interpolate } from "@/i18n/format";
 
 const ROTATE_MS = 2500;
 
-export default function Hero({ cars }: { cars: Car[] }) {
+export default function Hero({ cars }: { cars: CarWithPromotion[] }) {
   const { t } = useI18n();
   const [ready, setReady] = useState(false);
   const [reduce, setReduce] = useState(false);
@@ -217,6 +220,12 @@ export default function Hero({ cars }: { cars: Car[] }) {
                       <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                       {t.hero.available}
                     </span>
+                    {car.promotion && (
+                      <PromoBadge
+                        promotion={car.promotion}
+                        className="absolute start-2 top-2 z-10 shadow-sm"
+                      />
+                    )}
                   </div>
 
                   {/* Facts — floating dark bar: brand·name / specs / price.
@@ -247,14 +256,35 @@ export default function Hero({ cars }: { cars: Car[] }) {
                         <p className="text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/40">
                           {t.hero.from}
                         </p>
-                        <p className="mt-1 whitespace-nowrap font-display leading-none text-white">
-                          <span className="text-2xl font-medium">
-                            {car.price_per_day}
-                          </span>
-                          <span className="ms-1 text-xs text-white/45">
-                            {t.hero.perDayShort}
-                          </span>
-                        </p>
+                        {car.promotion ? (
+                          (() => {
+                            const s = computePromotionSavings(
+                              car.price_per_day,
+                              car.promotion,
+                            );
+                            return (
+                              <div className="mt-1">
+                                <PromoPrice
+                                  original={s.original}
+                                  discounted={s.discounted}
+                                  unit={t.hero.perDayShort}
+                                  savingsPct={s.savingsPct}
+                                  size="lg"
+                                  tone="dark"
+                                />
+                              </div>
+                            );
+                          })()
+                        ) : (
+                          <p className="mt-1 whitespace-nowrap font-display leading-none text-white">
+                            <span className="text-2xl font-medium">
+                              {car.price_per_day}
+                            </span>
+                            <span className="ms-1 text-xs text-white/45">
+                              {t.hero.perDayShort}
+                            </span>
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>

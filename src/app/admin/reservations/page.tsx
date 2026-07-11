@@ -611,6 +611,23 @@ export default function AdminReservations() {
                       <div className="mt-0.5 font-display text-base text-ink">
                         {selected.total_price} DT
                       </div>
+                      {(selected.promotion_label ||
+                        (selected.original_price_per_day != null &&
+                          selected.discounted_price_per_day != null &&
+                          selected.discounted_price_per_day <
+                            selected.original_price_per_day)) && (
+                        <div className="mt-1 text-xs text-emerald-600">
+                          {selected.promotion_label
+                            ? `${selected.promotion_label} · `
+                            : "Promotion · "}
+                          {selected.discounted_price_per_day} DT/j
+                          {selected.original_price_per_day != null && (
+                            <span className="ms-1 text-ash line-through">
+                              {selected.original_price_per_day} DT/j
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
 

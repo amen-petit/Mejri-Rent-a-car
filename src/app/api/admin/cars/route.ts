@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { isAdminRequest } from "@/lib/admin-guard";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { carInputSchema } from "@/lib/validation";
+import { CARS_CACHE_TAG } from "@/lib/constants";
 
 export const runtime = "nodejs";
 
@@ -55,6 +57,9 @@ export async function POST(req: Request) {
     console.error("Car insert failed:", error.message);
     return NextResponse.json({ error: "Failed to create car." }, { status: 500 });
   }
+
+  // Public fleet changed — drop the cached list so the new car shows immediately.
+  revalidateTag(CARS_CACHE_TAG, { expire: 0 });
 
   return NextResponse.json({ id: data.id });
 }
