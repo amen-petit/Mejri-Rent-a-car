@@ -15,7 +15,6 @@ import { interpolate } from "@/i18n/format";
 import {
   SITE_URL,
   BRAND_NAME,
-  BRAND_SHORT,
   PHONE_DISPLAY,
   WHATSAPP_NUMBER,
   FEATURED_CARS_LIMIT,

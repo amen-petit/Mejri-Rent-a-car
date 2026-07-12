@@ -5,8 +5,15 @@
  * styled, so we render our own listbox popover that matches the editorial
  * system. Supports keyboard navigation (↑/↓/Home/End/Enter/Esc), click-outside
  * close, and aria-activedescendant for screen readers.
+ *
+ * The listbox is rendered in a PORTAL with fixed positioning (like DateField) so
+ * it can never be clipped by an ancestor's `overflow-hidden` (e.g. the hero
+ * section) or trapped behind a sibling's stacking context. It matches the
+ * trigger's width, flips above when there isn't room below, and follows the
+ * trigger on scroll/resize.
  */
 import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 export type SelectOption = { value: string; label: string };
 
@@ -31,20 +38,64 @@ export default function Select({
   const dark = tone === "dark";
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
-  const rootRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState<{
+    top: number;
+    left: number;
+    width: number;
+  } | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const baseId = useId();
 
   const selected = options.find((o) => o.value === value);
   const selectedIndex = options.findIndex((o) => o.value === value);
 
-  // Close on outside click.
+  // Position the portalled listbox under (or above) the trigger, matched to its
+  // width and clamped to the viewport, and keep it attached while open. Measures
+  // the list's real height (rendered hidden until positioned) so a flipped-up
+  // list sits flush above the field instead of floating with a gap.
+  useEffect(() => {
+    if (!open) {
+      // Clear so a reopen re-measures before showing (no flash). Same pattern as
+      // DateField; the lint heuristic misfires on this early-return reset.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCoords(null);
+      return;
+    }
+    const update = () => {
+      const el = triggerRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const gap = 6;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const width = Math.min(rect.width, vw - 16);
+      const height = listRef.current?.offsetHeight ?? 256;
+      let left = align === "right" ? rect.right - width : rect.left;
+      left = Math.max(8, Math.min(left, vw - width - 8));
+      // Prefer opening below; flip above when there isn't room in the viewport.
+      let top = rect.bottom + gap;
+      if (top + height > vh - 8) top = rect.top - gap - height;
+      top = Math.max(8, Math.min(top, vh - height - 8));
+      setCoords({ top, left, width });
+    };
+    update();
+    window.addEventListener("scroll", update, true);
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update, true);
+      window.removeEventListener("resize", update);
+    };
+  }, [open, align]);
+
+  // Close on outside click (accounting for the portalled listbox).
   useEffect(() => {
     if (!open) return;
     const onDoc = (e: MouseEvent) => {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
+      const target = e.target as Node;
+      if (triggerRef.current?.contains(target)) return;
+      if (listRef.current?.contains(target)) return;
+      setOpen(false);
     };
     document.addEventListener("mousedown", onDoc);
     return () => document.removeEventListener("mousedown", onDoc);
@@ -110,49 +161,26 @@ export default function Select({
     }
   }
 
-  return (
-    <div ref={rootRef} className={`relative ${className}`}>
-      <button
-        ref={triggerRef}
-        type="button"
-        onClick={() => (open ? setOpen(false) : openMenu())}
-        onKeyDown={onKeyDown}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-label={ariaLabel}
-        aria-activedescendant={
-          open && activeIndex >= 0 ? `${baseId}-opt-${activeIndex}` : undefined
-        }
-        className={`flex h-10 w-full items-center justify-between gap-2 rounded-[var(--radius-sm)] border px-3 text-sm transition-colors focus:outline-none focus:ring-2 ${
-          dark
-            ? "border-white/12 bg-white/[0.04] text-white hover:border-white/25 focus:border-accent focus:ring-accent/30"
-            : "border-line bg-paper text-ink hover:border-ink focus:border-ink focus:ring-ink/10"
-        }`}
-      >
-        <span className="truncate">{selected?.label ?? ""}</span>
-        <svg
-          className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${
-            dark ? "text-white/45" : "text-ash"
-          } ${open ? "rotate-180" : ""}`}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          aria-hidden="true"
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      </button>
-
-      {open && (
+  const listbox = open
+    ? createPortal(
         <ul
+          ref={listRef}
           role="listbox"
           aria-label={ariaLabel}
-          className={`absolute z-30 mt-1.5 max-h-64 w-full overflow-auto rounded-[var(--radius)] border p-1 ${
+          style={{
+            position: "fixed",
+            top: coords?.top ?? 0,
+            left: coords?.left ?? 0,
+            width: coords?.width,
+            // Rendered but invisible until measured + positioned (no flash, and
+            // offsetHeight is readable for accurate flip-up placement).
+            visibility: coords ? "visible" : "hidden",
+          }}
+          className={`z-[60] max-h-64 overflow-auto rounded-[var(--radius)] border p-1 ${
             dark
               ? "border-white/10 bg-[#1c1d24] shadow-[0_24px_60px_-16px_rgba(0,0,0,0.9)]"
               : "border-mist bg-paper shadow-md"
-          } ${align === "right" ? "right-0" : "left-0"}`}
+          }`}
         >
           {options.map((o, i) => {
             const isSelected = o.value === value;
@@ -195,8 +223,46 @@ export default function Select({
               </li>
             );
           })}
-        </ul>
-      )}
+        </ul>,
+        document.body,
+      )
+    : null;
+
+  return (
+    <div className={className}>
+      <button
+        ref={triggerRef}
+        type="button"
+        onClick={() => (open ? setOpen(false) : openMenu())}
+        onKeyDown={onKeyDown}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={ariaLabel}
+        aria-activedescendant={
+          open && activeIndex >= 0 ? `${baseId}-opt-${activeIndex}` : undefined
+        }
+        className={`flex h-10 w-full items-center justify-between gap-2 rounded-[var(--radius-sm)] border px-3 text-sm transition-colors focus:outline-none focus:ring-2 ${
+          dark
+            ? "border-white/12 bg-white/[0.04] text-white hover:border-white/25 focus:border-accent focus:ring-accent/30"
+            : "border-line bg-paper text-ink hover:border-ink focus:border-ink focus:ring-ink/10"
+        }`}
+      >
+        <span className="truncate">{selected?.label ?? ""}</span>
+        <svg
+          className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${
+            dark ? "text-white/45" : "text-ash"
+          } ${open ? "rotate-180" : ""}`}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+
+      {listbox}
     </div>
   );
 }

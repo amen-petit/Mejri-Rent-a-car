@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# graphify — local AST cache + machine markers are generated and should never be
+# tracked (the human/AI-readable graph outputs under graphify-out/ can stay).
+# Already-tracked cache files still need one-time: git rm -r --cached graphify-out/cache
+graphify-out/cache/
+graphify-out/.graphify_*
