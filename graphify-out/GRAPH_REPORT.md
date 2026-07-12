@@ -1,16 +1,16 @@
 # Graph Report - Mejri-Rent-a-car  (2026-07-11)
 
 ## Corpus Check
-- 250 files · ~1,046,702 words
+- 251 files · ~1,046,961 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4828 nodes · 7593 edges · 337 communities (312 shown, 25 thin omitted)
+- 4828 nodes · 7593 edges · 334 communities (309 shown, 25 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 155 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `31d1b341`
+- Built from commit: `0986e35a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -196,7 +196,6 @@
 - [[_COMMUNITY_Community 180|Community 180]]
 - [[_COMMUNITY_Community 181|Community 181]]
 - [[_COMMUNITY_Community 182|Community 182]]
-- [[_COMMUNITY_Community 183|Community 183]]
 - [[_COMMUNITY_Community 184|Community 184]]
 - [[_COMMUNITY_Community 185|Community 185]]
 - [[_COMMUNITY_Community 186|Community 186]]
@@ -220,7 +219,6 @@
 - [[_COMMUNITY_Community 204|Community 204]]
 - [[_COMMUNITY_Community 205|Community 205]]
 - [[_COMMUNITY_Community 206|Community 206]]
-- [[_COMMUNITY_Community 207|Community 207]]
 - [[_COMMUNITY_Community 208|Community 208]]
 - [[_COMMUNITY_Community 209|Community 209]]
 - [[_COMMUNITY_Community 210|Community 210]]
@@ -268,7 +266,6 @@
 - [[_COMMUNITY_Community 252|Community 252]]
 - [[_COMMUNITY_Community 253|Community 253]]
 - [[_COMMUNITY_Community 254|Community 254]]
-- [[_COMMUNITY_Community 255|Community 255]]
 - [[_COMMUNITY_Community 257|Community 257]]
 - [[_COMMUNITY_Community 258|Community 258]]
 - [[_COMMUNITY_Community 259|Community 259]]
@@ -386,7 +383,7 @@
 - **Design System Documentation Pipeline** — teach_product_md, document_design_md_format, extract_design_tokens, polish_design_system_discovery [INFERRED 0.85]
 - **Visual Hierarchy Through Space & Scale** — spatial_squint_test, layout_visual_hierarchy, typeset_type_scale, distill_visual_simplification [INFERRED 0.75]
 
-## Communities (337 total, 25 thin omitted)
+## Communities (334 total, 25 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.04
@@ -397,8 +394,8 @@ Cohesion: 0.09
 Nodes (39): Params, GET(), POST(), bustPromoCaches(), DELETE(), EXT_BY_MIME, Params, POST() (+31 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.15
-Nodes (22): ae(), bt(), de(), dt(), _e(), er(), fe(), ft() (+14 more)
+Cohesion: 0.11
+Nodes (27): _(), be(), bt(), Ct(), _e(), er(), fe(), Gt() (+19 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.07
@@ -454,11 +451,11 @@ Nodes (29): Accessibility, Available Domains, Available Stacks, Common Rules for
 
 ### Community 16 - "Community 16"
 Cohesion: 0.03
-Nodes (133): beginEditPin(), buildAnnotationsForCapture(), buildCollapsible(), buildColorModels(), buildDesignHeader(), buildPinElement(), buildRadiiModels(), buildTypographyModels() (+125 more)
+Nodes (157): actionLabel(), applyParamDefaults(), applyParamValue(), barPaletteForTheme(), beginEditPin(), buildAnnotationsForCapture(), buildCollapsible(), buildColorModels() (+149 more)
 
 ### Community 17 - "Community 17"
-Cohesion: 0.04
-Nodes (135): actionLabel(), applyParamDefaults(), applyParamValue(), barPaletteForTheme(), beginEditPin(), buildAnnotationsForCapture(), buildConfigureRow(), buildConfirmedRow() (+127 more)
+Cohesion: 0.03
+Nodes (158): actionLabel(), applyParamDefaults(), applyParamValue(), barPaletteForTheme(), beginEditPin(), buildAnnotationsForCapture(), buildCollapsible(), buildColorModels() (+150 more)
 
 ### Community 18 - "Community 18"
 Cohesion: 0.08
@@ -469,8 +466,8 @@ Cohesion: 0.10
 Nodes (41): actionLabel(), applyParamDefaults(), applyParamValue(), barPaletteForTheme(), buildConfigureRow(), buildConfirmedRow(), buildCyclingRow(), buildDots() (+33 more)
 
 ### Community 20 - "Community 20"
-Cohesion: 0.08
-Nodes (44): cleanup(), clearHandled(), clearScrollY(), clearSession(), closeTunePopover(), copyToClipboard(), cycleVariant(), desc() (+36 more)
+Cohesion: 0.07
+Nodes (51): checkpointPayload(), cleanup(), clearHandled(), clearScrollY(), clearSession(), closeTunePopover(), copyToClipboard(), cycleVariant() (+43 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.09
@@ -525,8 +522,8 @@ Cohesion: 0.11
 Nodes (17): Accent Color Application, Accessibility, Assess Color Opportunity, Background & Surfaces, Balance & Refinement, Borders & Accents, Cohesion, Data Visualization (+9 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.09
-Nodes (52): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+44 more)
+Cohesion: 0.08
+Nodes (54): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+46 more)
 
 ### Community 35 - "Community 35"
 Cohesion: 0.09
@@ -609,8 +606,8 @@ Cohesion: 0.14
 Nodes (13): Accessibility & Inclusion, Brand & Personality, Interview mode, not confirmation mode, Minimum viable interview, Register (ask first; it shapes everything below), Step 1: Load current state, Step 2: Explore the codebase, Step 3: Ask strategic questions (for PRODUCT.md) (+5 more)
 
 ### Community 55 - "Community 55"
-Cohesion: 0.08
-Nodes (54): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+46 more)
+Cohesion: 0.09
+Nodes (52): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+44 more)
 
 ### Community 56 - "Community 56"
 Cohesion: 0.17
@@ -797,7 +794,7 @@ Cohesion: 0.60
 Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
 ### Community 103 - "Community 103"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): adapt, argumentHint, description
 
 ### Community 104 - "Community 104"
@@ -865,7 +862,7 @@ Cohesion: 0.67
 Nodes (3): live, argumentHint, description
 
 ### Community 122 - "Community 122"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): onboard, argumentHint, description
 
 ### Community 123 - "Community 123"
@@ -949,8 +946,8 @@ Cohesion: 0.40
 Nodes (5): Interruptibility advantage, Spring Animations, Spring-based mouse interactions, Spring configuration, When to use springs
 
 ### Community 164 - "Community 164"
-Cohesion: 0.09
-Nodes (43): actionLabel(), applyParamDefaults(), applyParamValue(), barPaletteForTheme(), buildConfigureRow(), buildConfirmedRow(), buildCyclingRow(), buildDots() (+35 more)
+Cohesion: 0.17
+Nodes (12): buildAnnotationsForCapture(), buildPinElement(), captureAndEmit(), captureElementToBlob(), collectFontCssText(), compileShader(), hideShaderOverlay(), inlineFontUrls() (+4 more)
 
 ### Community 165 - "Community 165"
 Cohesion: 0.50
@@ -1019,10 +1016,6 @@ Nodes (24): Component translation rules, Narrative mapping, Pitfalls, Scan mode 
 ### Community 182 - "Community 182"
 Cohesion: 0.18
 Nodes (20): __dirname, ensureServerRunning(), liveCli(), runScript(), safeParse(), scanForDrift(), __dirname, ensureServerRunning() (+12 more)
-
-### Community 183 - "Community 183"
-Cohesion: 0.13
-Nodes (23): buildCollapsible(), buildColorModels(), buildRadiiModels(), buildTypographyModels(), escapeHtml(), fontStack(), groupByKind(), highlightBold() (+15 more)
 
 ### Community 184 - "Community 184"
 Cohesion: 0.09
@@ -1115,10 +1108,6 @@ Nodes (16): 1. The Wall of Options, 2. The Memory Bridge, 3. The Hidden Navigati
 ### Community 206 - "Community 206"
 Cohesion: 0.12
 Nodes (16): Avoid Redundant Copy, Confirmation Dialogs: Use Sparingly, Consistency: The Terminology Problem, Don't Blame the User, Empty States Are Opportunities, Error Message Templates, Error Messages: The Formula, Form Instructions (+8 more)
-
-### Community 207 - "Community 207"
-Cohesion: 0.25
-Nodes (8): be(), ht(), L(), me(), pt(), ut(), wt(), ye()
 
 ### Community 208 - "Community 208"
 Cohesion: 0.08
@@ -1229,8 +1218,8 @@ Cohesion: 0.14
 Nodes (13): Accessibility & Inclusion, Brand & Personality, Interview mode, not confirmation mode, Minimum viable interview, Register (ask first; it shapes everything below), Step 1: Load current state, Step 2: Explore the codebase, Step 3: Ask strategic questions (for PRODUCT.md) (+5 more)
 
 ### Community 235 - "Community 235"
-Cohesion: 0.19
-Nodes (13): _(), Ct(), Et(), It(), J(), ne(), Se(), St() (+5 more)
+Cohesion: 0.20
+Nodes (11): Ce(), Ee(), Et(), It(), ne(), Rt(), St(), _t() (+3 more)
 
 ### Community 236 - "Community 236"
 Cohesion: 0.17
@@ -1307,10 +1296,6 @@ Nodes (9): After This File, Codex: Visual Direction & Asset Production, Four sto
 ### Community 254 - "Community 254"
 Cohesion: 0.20
 Nodes (9): Color, Components, Layout, Motion, Product bans (on top of the shared absolute bans), Product permissions, Product register, The product slop test (+1 more)
-
-### Community 255 - "Community 255"
-Cohesion: 0.50
-Nodes (4): Ce(), Ee(), Rt(), vt()
 
 ### Community 257 - "Community 257"
 Cohesion: 0.22
@@ -1425,8 +1410,8 @@ Cohesion: 0.40
 Nodes (5): Interruptibility advantage, Spring Animations, Spring-based mouse interactions, Spring configuration, When to use springs
 
 ### Community 287 - "Community 287"
-Cohesion: 0.40
-Nodes (5): Ie(), Lt(), Ot(), Re(), z()
+Cohesion: 0.15
+Nodes (14): ae(), de(), dt(), ft(), Ie(), jt(), Lt(), Mt() (+6 more)
 
 ### Community 288 - "Community 288"
 Cohesion: 0.67
@@ -1656,7 +1641,7 @@ _Questions this graph is uniquely positioned to answer:_
   _Edge tagged AMBIGUOUS (relation: references) - confidence is low._
 - **Why does `readLiveServerInfo()` connect `Community 176` to `Community 0`, `Community 268`, `Community 174`, `Community 182`, `Community 186`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `Design Engineering` connect `Community 259` to `Community 289`, `Community 290`, `Community 265`, `Community 273`, `Community 274`, `Community 275`, `Community 276`, `Community 281`, `Community 282`, `Community 283`?**
+- **Why does `rateLimit()` connect `Community 208` to `Community 43`?**
   _High betweenness centrality (0.000) - this node is a cross-community bridge._
-- **Why does `getSupabaseAdmin()` connect `Community 1` to `Community 208`, `Community 43`?**
+- **Why does `Design Engineering` connect `Community 259` to `Community 289`, `Community 290`, `Community 265`, `Community 273`, `Community 274`, `Community 275`, `Community 276`, `Community 281`, `Community 282`, `Community 283`?**
   _High betweenness centrality (0.000) - this node is a cross-community bridge._

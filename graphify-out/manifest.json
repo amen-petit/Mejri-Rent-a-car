@@ -1755,18 +1755,18 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\i18n\\dictionaries\\ar.ts": {
-    "mtime": 1783684016.6855867,
-    "ast_hash": "da29acb36ac81c8b7b671c1e07e69288",
+    "mtime": 1783797670.0750985,
+    "ast_hash": "7d5d7d3e3cd8d9c8a14e26360fb03f4b",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\i18n\\dictionaries\\en.ts": {
-    "mtime": 1783684014.5582888,
-    "ast_hash": "6866cbaba3740dc1e6983dfa93e04249",
+    "mtime": 1783797637.8161178,
+    "ast_hash": "d2a1d77f314c9f62c9189abb7f7e5576",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\i18n\\dictionaries\\fr.ts": {
-    "mtime": 1783683983.977307,
-    "ast_hash": "32a2fe48b7153fe799ca561327409e9a",
+    "mtime": 1783797587.6272204,
+    "ast_hash": "6f7fe8b077a64cf2c58b7efd299c2dee",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\i18n\\dictionaries\\index.ts": {
@@ -1805,8 +1805,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\constants.ts": {
-    "mtime": 1783737530.8451443,
-    "ast_hash": "b406562e5ae7b3494bb112a445148fa1",
+    "mtime": 1783797556.8458385,
+    "ast_hash": "3eb20d5ced36e8fa373c2e7d461bf346",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\dates.ts": {
@@ -2517,6 +2517,11 @@
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\supabase\\add-promotions.sql": {
     "mtime": 1783737254.9304585,
     "ast_hash": "823633c29fb15520db28d9013cdf1f09",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\supabase\\expand-locations.sql": {
+    "mtime": 1783797536.36266,
+    "ast_hash": "e4a2cebb1ed7349175b327663f280987",
     "semantic_hash": ""
   }
 }

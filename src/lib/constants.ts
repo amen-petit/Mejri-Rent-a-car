@@ -156,30 +156,29 @@ export const RESERVATION_STATUS_COLOR: Record<string, string> = {
 };
 
 // ── Rental pickup / return locations ─────────────────────────────────────────
-// Only two fixed points exist for this agency. Modeled as a config enum (with a
-// matching DB CHECK constraint) rather than a table — simple now, and extended
-// by adding a value here + the migration. Labels are localized in the i18n
-// dictionaries (booking.locations); these are the canonical stored values.
-export const RENTAL_LOCATIONS = ["agency", "airport"] as const;
+// The agency plus every major Tunisian airport. Modeled as a config enum (with a
+// matching DB CHECK constraint) rather than a table — a near-static national list
+// where compile-time type safety is worth more than runtime editability. Adding a
+// location later = one value here + its labels in the i18n dictionaries
+// (booking.locations) + widening the CHECK (supabase/expand-locations.sql).
+// `airport` is the legacy code for Tunis-Carthage, kept so existing reservations
+// need no backfill; the rest use descriptive codes. Order = display order.
+// These are the canonical stored values.
+export const RENTAL_LOCATIONS = [
+  "agency",
+  "airport", // Aéroport Tunis-Carthage (legacy code — kept to avoid a backfill)
+  "enfidha_hammamet",
+  "monastir",
+  "djerba_zarzis",
+  "sfax_thyna",
+  "tozeur_nefta",
+  "tabarka_ain_draham",
+  "gafsa_ksar",
+] as const;
 
 export type RentalLocation = (typeof RENTAL_LOCATIONS)[number];
 
 export const DEFAULT_RENTAL_LOCATION: RentalLocation = "agency";
-
-/**
- * Return the other configured rental location.
- *
- * With the current two-location setup (agency/airport), this guarantees an
- * opposite pickup/return pair when "different return" is enabled.
- */
-export function getAlternateRentalLocation(
-  location: RentalLocation,
-): RentalLocation {
-  return (
-    RENTAL_LOCATIONS.find((candidate) => candidate !== location) ??
-    DEFAULT_RENTAL_LOCATION
-  );
-}
 
 export function isRentalLocation(value: unknown): value is RentalLocation {
   return (
