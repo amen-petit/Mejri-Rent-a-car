@@ -11,6 +11,7 @@ import CarSilhouette from "@/components/icons/CarSilhouette";
 import BookingSearchCard from "@/components/BookingSearchCard";
 import PromoBadge from "@/components/PromoBadge";
 import PromoPrice from "@/components/PromoPrice";
+import WhatsAppFab from "@/components/WhatsAppFab";
 import { getCars } from "@/lib/cars";
 import { getActivePromotions } from "@/lib/promotions-data";
 import { getActivePromotion, computePromotionSavings } from "@/lib/promotions";
@@ -584,8 +585,12 @@ function CarsPageFallback() {
 
 export default function CarsPage() {
   return (
-    <Suspense fallback={<CarsPageFallback />}>
-      <CarsPageContent />
-    </Suspense>
+    <>
+      <Suspense fallback={<CarsPageFallback />}>
+        <CarsPageContent />
+      </Suspense>
+      {/* Floating WhatsApp CTA — same as the home page, always visible here too. */}
+      <WhatsAppFab />
+    </>
   );
 }
