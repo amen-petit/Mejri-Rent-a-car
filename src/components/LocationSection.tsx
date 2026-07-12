@@ -100,7 +100,8 @@ export default function LocationSection() {
                     {t.location.addressLabel}
                   </p>
                   <p className="mt-1 font-display text-lg text-ink">
-                    {MAPS_ADDRESS}
+                    Rue Windemere Immeuble Malika Lac 1 <br />
+                    16 Avenue De CarthageAin Zaghouan Tunis
                   </p>
                 </div>
               </div>

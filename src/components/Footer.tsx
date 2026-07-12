@@ -53,7 +53,7 @@ export default function Footer() {
                 {BRAND_SHORT}
               </span>
               <span className="text-[0.62rem] font-semibold uppercase tracking-[0.32em] text-white/40">
-                Rent a Car
+                Rent Car
               </span>
             </div>
             <p className="mt-5 text-sm leading-7 text-white/55">

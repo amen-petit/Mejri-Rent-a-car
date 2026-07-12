@@ -20,7 +20,7 @@ function Wordmark() {
         {BRAND_SHORT}
       </span>
       <span className="hidden text-[0.62rem] font-semibold uppercase tracking-[0.32em] text-stone sm:inline">
-        Rent a Car
+        Rent Car
       </span>
     </Link>
   );
@@ -87,7 +87,16 @@ export default function Navbar() {
           <LanguageSwitcher />
           <Link href="/voitures" className="btn-primary">
             {t.nav.book}
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </Link>
@@ -102,8 +111,20 @@ export default function Navbar() {
             aria-label={t.nav.openMenu}
             aria-expanded={menuOpen}
           >
-            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-              {menuOpen ? <path d="M18 6L6 18M6 6l12 12" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            <svg
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {menuOpen ? (
+                <path d="M18 6L6 18M6 6l12 12" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
             </svg>
           </button>
         </div>
@@ -134,10 +155,17 @@ export default function Navbar() {
             </div>
 
             <div className="pt-1">
-              <LanguageSwitcher variant="inline" onSelect={() => setMenuOpen(false)} />
+              <LanguageSwitcher
+                variant="inline"
+                onSelect={() => setMenuOpen(false)}
+              />
             </div>
 
-            <Link href="/voitures" className="btn-primary mt-5 w-full" onClick={() => setMenuOpen(false)}>
+            <Link
+              href="/voitures"
+              className="btn-primary mt-5 w-full"
+              onClick={() => setMenuOpen(false)}
+            >
               {t.nav.bookNow}
             </Link>
           </div>
