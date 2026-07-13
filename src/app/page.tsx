@@ -85,8 +85,14 @@ export default async function Home() {
     .filter((car) => car.promotion)
     .sort((a, b) => {
       if (a.is_featured !== b.is_featured) return a.is_featured ? -1 : 1;
-      const sa = computePromotionSavings(a.price_per_day, a.promotion).savingsPct;
-      const sb = computePromotionSavings(b.price_per_day, b.promotion).savingsPct;
+      const sa = computePromotionSavings(
+        a.price_per_day,
+        a.promotion,
+      ).savingsPct;
+      const sb = computePromotionSavings(
+        b.price_per_day,
+        b.promotion,
+      ).savingsPct;
       if (sa !== sb) return sb - sa;
       return b.created_at.localeCompare(a.created_at);
     });
@@ -258,7 +264,7 @@ export default async function Home() {
       {/* ─────────────────────  HOW IT WORKS  ───────────────────── */}
       <section id="how" className="scroll-mt-24 bg-cloud">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-          <div data-reveal className="max-w-2xl">
+          <div data-reveal className="mx-auto max-w-2xl text-center">
             <span className="eyebrow">{t.how.eyebrow}</span>
             <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
               {t.how.title}
