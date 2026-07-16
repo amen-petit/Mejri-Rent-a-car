@@ -95,7 +95,7 @@ export default function LocationSection() {
                     <a
                       href={`tel:${PHONE2_TEL}`}
                       aria-label={`${t.nav.call} ${PHONE2_DISPLAY}`}
-                      className="inline-block font-display text-lg text-ink/70 underline-offset-4 hover:underline"
+                      className="inline-block font-display text-lg text-ink underline-offset-4 hover:underline"
                       dir="ltr"
                     >
                       +216 {PHONE2_DISPLAY}

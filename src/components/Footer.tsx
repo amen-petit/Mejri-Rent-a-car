@@ -75,7 +75,7 @@ export default function Footer() {
                 <a
                   href={`tel:${PHONE2_TEL}`}
                   aria-label={`${t.nav.call} ${PHONE2_DISPLAY}`}
-                  className="inline-block font-display text-xl text-white/70 transition-colors duration-200 hover:text-white/90"
+                  className="inline-block font-display text-xl transition-colors duration-200 hover:text-white/80"
                   dir="ltr"
                 >
                   +216 {PHONE2_DISPLAY}

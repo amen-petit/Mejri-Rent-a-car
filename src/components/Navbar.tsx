@@ -53,7 +53,7 @@ function PhoneLink({ className = "" }: { className?: string }) {
         <a
           href={`tel:${PHONE2_TEL}`}
           aria-label={`${t.nav.call} ${PHONE2_DISPLAY}`}
-          className="text-stone/80 hover:text-ink transition-colors"
+          className="hover:text-ink transition-colors"
         >
           +216 {PHONE2_DISPLAY}
         </a>
