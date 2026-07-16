@@ -22,7 +22,10 @@ import {
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Accueil",
+  // Absolute: bypasses the layout's "%s | Brand" template so the homepage's
+  // <title> reads as a full, keyword-led sentence in search results rather than
+  // "Accueil | ...".
+  title: { absolute: `${BRAND_NAME} - Location de voitures en Tunisie` },
   description: `${BRAND_NAME}: location de voitures en Tunisie avec réservation en ligne simple, flotte moderne et assistance 24/7.`,
   alternates: { canonical: "/" },
 };
@@ -113,7 +116,7 @@ export default async function Home() {
     "@type": "CarRental",
     name: BRAND_NAME,
     url: SITE_URL,
-    image: `${SITE_URL}/Untitled%20design.png`,
+    image: `${SITE_URL}/logo.jpg`,
     telephone: PHONE_DISPLAY,
     address: {
       "@type": "PostalAddress",

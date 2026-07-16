@@ -8,10 +8,26 @@ import FeedbackProvider from "@/components/Feedback";
 import { I18nProvider } from "@/i18n/client";
 import { getServerLocale } from "@/i18n/server";
 import { getDir } from "@/i18n/config";
-import { SITE_URL, BRAND_NAME } from "@/lib/constants";
+import { SITE_URL, BRAND_NAME, BRAND_SHORT } from "@/lib/constants";
 
-const OG_IMAGE_PATH = "/Untitled design.png";
-const BRAND_ICON_PATH = "/icons/car.svg";
+// Brand logo — used for the favicon/apple-touch-icon and the social share image.
+// Not a tight square crop, so at very small favicon sizes (16x16 tab icon) the
+// browser center-crops the full mark; a dedicated square icon crop would sharpen
+// that further but isn't required for this to work correctly.
+const OG_IMAGE_PATH = "/logo.jpg";
+const BRAND_ICON_PATH = "/logo.jpg";
+
+// Sitewide WebSite structured data — a signal (not a guarantee; Google has final
+// say) that helps it associate the brand name with this domain instead of
+// falling back to the raw URL in search results.
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: BRAND_NAME,
+  alternateName: [BRAND_SHORT],
+  url: SITE_URL,
+  inLanguage: ["fr", "en", "ar"],
+};
 
 // Display — optical serif for editorial headlines. Variable font, so no
 // `weight`; we opt into the optical-size axis for refined large type.
@@ -78,8 +94,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: OG_IMAGE_PATH,
-        width: 1200,
-        height: 630,
+        width: 1176,
+        height: 896,
+        type: "image/jpeg",
         alt: BRAND_NAME,
       },
     ],
@@ -93,10 +110,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: BRAND_ICON_PATH, type: "image/png" },
-      { url: BRAND_ICON_PATH, rel: "shortcut icon", type: "image/png" },
+      { url: BRAND_ICON_PATH, type: "image/jpeg" },
+      { url: BRAND_ICON_PATH, rel: "shortcut icon", type: "image/jpeg" },
     ],
-    apple: [{ url: BRAND_ICON_PATH, type: "image/png" }],
+    apple: [{ url: BRAND_ICON_PATH, type: "image/jpeg" }],
   },
   category: "travel",
 };
@@ -114,6 +131,10 @@ export default async function RootLayout({
       <body
         className={`${fraunces.variable} ${inter.variable} ${cairo.variable} bg-paper text-ink antialiased overflow-x-hidden`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <I18nProvider initialLocale={locale}>
           <MotionProvider />
           <FeedbackProvider>
