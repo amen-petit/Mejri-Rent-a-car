@@ -12,6 +12,8 @@ import {
   MAPS_LINK_URL,
   PHONE_TEL,
   PHONE_DISPLAY,
+  PHONE2_TEL,
+  PHONE2_DISPLAY,
   WHATSAPP_NUMBER,
 } from "@/lib/constants";
 import { useI18n } from "@/i18n/client";
@@ -81,14 +83,24 @@ export default function LocationSection() {
                   <p className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-ash">
                     {t.contact.phone}
                   </p>
-                  <a
-                    href={`tel:${PHONE_TEL}`}
-                    aria-label={`${t.nav.call} ${PHONE_DISPLAY}`}
-                    className="mt-1 inline-block font-display text-lg text-ink underline-offset-4 hover:underline"
-                    dir="ltr"
-                  >
-                    {PHONE_DISPLAY}
-                  </a>
+                  <div className="mt-1 flex flex-col items-start gap-0.5">
+                    <a
+                      href={`tel:${PHONE_TEL}`}
+                      aria-label={`${t.nav.call} ${PHONE_DISPLAY}`}
+                      className="inline-block font-display text-lg text-ink underline-offset-4 hover:underline"
+                      dir="ltr"
+                    >
+                      {PHONE_DISPLAY}
+                    </a>
+                    <a
+                      href={`tel:${PHONE2_TEL}`}
+                      aria-label={`${t.nav.call} ${PHONE2_DISPLAY}`}
+                      className="inline-block font-display text-lg text-ink/70 underline-offset-4 hover:underline"
+                      dir="ltr"
+                    >
+                      +216 {PHONE2_DISPLAY}
+                    </a>
+                  </div>
                 </div>
               </div>
 

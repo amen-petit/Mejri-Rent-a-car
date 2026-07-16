@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BRAND_SHORT, PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
+import { BRAND_SHORT, PHONE_DISPLAY, PHONE_TEL, PHONE2_DISPLAY, PHONE2_TEL } from "@/lib/constants";
 import { useI18n } from "@/i18n/client";
 import SocialLinks from "@/components/SocialLinks";
 
@@ -59,18 +59,29 @@ export default function Footer() {
             <p className="mt-5 text-sm leading-7 text-white/55">
               {t.footer.tagline}
             </p>
-            <a
-              href={`tel:${PHONE_TEL}`}
-              aria-label={`${t.nav.call} ${PHONE_DISPLAY}`}
-              className="mt-7 inline-flex items-baseline gap-3 border-b border-white/20 pb-1 transition-colors duration-200 hover:border-white"
-            >
+            <div className="mt-7 flex flex-col items-start gap-1">
               <span className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/40">
                 {t.footer.phoneLabel}
               </span>
-              <span className="font-display text-xl" dir="ltr">
-                {PHONE_DISPLAY}
-              </span>
-            </a>
+              <div className="mt-1 flex flex-col gap-0.5">
+                <a
+                  href={`tel:${PHONE_TEL}`}
+                  aria-label={`${t.nav.call} ${PHONE_DISPLAY}`}
+                  className="inline-block font-display text-xl transition-colors duration-200 hover:text-white/80"
+                  dir="ltr"
+                >
+                  {PHONE_DISPLAY}
+                </a>
+                <a
+                  href={`tel:${PHONE2_TEL}`}
+                  aria-label={`${t.nav.call} ${PHONE2_DISPLAY}`}
+                  className="inline-block font-display text-xl text-white/70 transition-colors duration-200 hover:text-white/90"
+                  dir="ltr"
+                >
+                  +216 {PHONE2_DISPLAY}
+                </a>
+              </div>
+            </div>
 
             {/* Social */}
             <div className="mt-7">

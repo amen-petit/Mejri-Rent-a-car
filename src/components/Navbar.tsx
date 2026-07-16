@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { BRAND_SHORT, PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
+import { BRAND_SHORT, PHONE_DISPLAY, PHONE_TEL, PHONE2_DISPLAY, PHONE2_TEL } from "@/lib/constants";
 import { useI18n } from "@/i18n/client";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import SocialLinks from "@/components/SocialLinks";
@@ -29,11 +29,7 @@ function Wordmark() {
 function PhoneLink({ className = "" }: { className?: string }) {
   const { t } = useI18n();
   return (
-    <a
-      href={`tel:${PHONE_TEL}`}
-      aria-label={`${t.nav.call} ${PHONE_DISPLAY}`}
-      className={className}
-    >
+    <div className={className}>
       <svg
         className="h-4 w-4 shrink-0"
         viewBox="0 0 24 24"
@@ -46,10 +42,23 @@ function PhoneLink({ className = "" }: { className?: string }) {
       >
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
       </svg>
-      <span className="font-medium" dir="ltr">
-        +216 27 60 50 60
-      </span>
-    </a>
+      <div className="flex flex-col gap-0.5 text-xs font-medium leading-none" dir="ltr">
+        <a
+          href={`tel:${PHONE_TEL}`}
+          aria-label={`${t.nav.call} ${PHONE_DISPLAY}`}
+          className="hover:text-ink transition-colors"
+        >
+          {PHONE_DISPLAY}
+        </a>
+        <a
+          href={`tel:${PHONE2_TEL}`}
+          aria-label={`${t.nav.call} ${PHONE2_DISPLAY}`}
+          className="text-stone/80 hover:text-ink transition-colors"
+        >
+          +216 {PHONE2_DISPLAY}
+        </a>
+      </div>
+    </div>
   );
 }
 
