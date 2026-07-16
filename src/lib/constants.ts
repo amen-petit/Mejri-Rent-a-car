@@ -16,10 +16,11 @@ export const WHATSAPP_NUMBER =
 export const PHONE2_DISPLAY =
   process.env.NEXT_PUBLIC_PHONE2_DISPLAY || "27 06 03 08";
 
-// E.164 tel: target. The WhatsApp number already carries the country code, so we
-// derive the dialable number from it and prefix "+". Keep a single source so the
-// navbar, footer and CTA can never drift from the displayed number.
-export const PHONE_TEL = `+${WHATSAPP_NUMBER.replace(/\D/g, "")}`;
+// E.164 tel: targets, derived from the DISPLAYED numbers (not WHATSAPP_NUMBER,
+// which is a separate line reserved for wa.me links). Keeping each tel: target
+// derived from its own displayed string means the navbar, footer and CTA can
+// never dial a different number than the one shown.
+export const PHONE_TEL = `+${PHONE_DISPLAY.replace(/\D/g, "")}`;
 export const PHONE2_TEL = `+216${PHONE2_DISPLAY.replace(/\D/g, "")}`;
 
 // ── Social media ────────────────────────────────────────────────────────────

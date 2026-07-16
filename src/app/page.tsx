@@ -16,7 +16,7 @@ import {
   SITE_URL,
   BRAND_NAME,
   PHONE_DISPLAY,
-  WHATSAPP_NUMBER,
+  PHONE_TEL,
   FEATURED_CARS_LIMIT,
   HERO_ROTATION_LIMIT,
 } from "@/lib/constants";
@@ -335,7 +335,7 @@ export default async function Home() {
                   <Arrow className="rtl:rotate-180" />
                 </Link>
                 <a
-                  href={`tel:+${WHATSAPP_NUMBER}`}
+                  href={`tel:${PHONE_TEL}`}
                   className="btn-ghost-dark px-8 py-4"
                 >
                   {interpolate(t.cta.call, { phone: PHONE_DISPLAY })}
