@@ -61,7 +61,7 @@ export default function LocationSection() {
 
   return (
     <section id="location" className="scroll-mt-24 bg-cloud">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:py-16">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-16">
           {/* Info */}
           <div data-reveal>

@@ -58,7 +58,7 @@ export default function ReviewsShowcase({ t }: { t: Messages }) {
     interpolate(t.reviews.ratingLabel, { rating });
 
   return (
-    <div className="border-b border-white/10 pt-20 pb-16 lg:pt-28 lg:pb-20">
+    <div className="border-b border-white/10 pt-12 pb-10 lg:pt-16 lg:pb-12">
       {/* Header */}
       <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
@@ -94,7 +94,7 @@ export default function ReviewsShowcase({ t }: { t: Messages }) {
       </div>
 
       {/* Featured + supporting */}
-      <div className="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-2">
+      <div className="mt-10 grid gap-x-16 gap-y-12 lg:grid-cols-2">
         {featured && (
           <figure data-reveal className="reveal-d1">
             <Stars rating={featured.rating} label={starLabel(featured.rating)} />

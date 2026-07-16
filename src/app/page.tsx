@@ -138,7 +138,7 @@ export default async function Home() {
       <Hero cars={heroCars} />
 
       {/* ─────────────────────  FEATURED FLEET  ───────────────────── */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:py-16">
         <div
           data-reveal
           className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"
@@ -159,11 +159,11 @@ export default async function Home() {
         </div>
 
         {fleet.length === 0 ? (
-          <div className="mt-14 border border-mist bg-cloud p-12 text-center text-stone">
+          <div className="mt-10 border border-mist bg-cloud p-12 text-center text-stone">
             {t.fleet.empty}
           </div>
         ) : (
-          <div className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-3">
+          <div className="mt-10 grid gap-x-8 gap-y-12 md:grid-cols-3">
             {fleet.map((car, idx) => (
               <Link
                 href={`/voitures/${car.id}`}
@@ -263,7 +263,7 @@ export default async function Home() {
 
       {/* ─────────────────────  HOW IT WORKS  ───────────────────── */}
       <section id="how" className="scroll-mt-24 bg-cloud">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:py-16">
           <div data-reveal className="mx-auto max-w-2xl text-center">
             <span className="eyebrow">{t.how.eyebrow}</span>
             <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium tracking-tight text-ink">
@@ -271,7 +271,7 @@ export default async function Home() {
             </h2>
           </div>
 
-          <div className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {t.how.steps.map((step, idx) => (
               <div
                 key={idx}
@@ -308,7 +308,7 @@ export default async function Home() {
           <ReviewsShowcase t={t} />
 
           {/* CTA */}
-          <div className="flex flex-col items-start justify-between gap-10 pt-16 pb-20 lg:flex-row lg:items-end lg:pt-20 lg:pb-28">
+          <div className="flex flex-col items-start justify-between gap-8 pt-10 pb-12 lg:flex-row lg:items-end lg:pt-14 lg:pb-16">
             <div data-reveal="left" className="max-w-2xl">
               <span className="eyebrow text-white/60">{t.cta.eyebrow}</span>
               <h2 className="mt-5 font-display text-[clamp(2.4rem,5vw,4rem)] font-medium leading-[1.02] tracking-[-0.02em] text-white">
