@@ -1,17 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import type { MouseEvent } from "react";
 import { BRAND_SHORT, PHONE_DISPLAY, PHONE_TEL, PHONE2_DISPLAY, PHONE2_TEL } from "@/lib/constants";
 import { useI18n } from "@/i18n/client";
 import SocialLinks from "@/components/SocialLinks";
+import { scrollToHashOnSamePage } from "@/components/hash-scroll";
 
-function FooterColumn({
-  title,
-  items,
-}: {
-  title: string;
-  items: { label: string; href: string }[];
-}) {
+type FooterNavItem = {
+  label: string;
+  href: string;
+  onClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
+};
+
+function FooterColumn({ title, items }: { title: string; items: FooterNavItem[] }) {
   return (
     <div>
       <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-white/40">
@@ -22,6 +25,7 @@ function FooterColumn({
           <Link
             key={item.label}
             href={item.href}
+            onClick={item.onClick}
             className="w-fit text-sm text-white/70 transition-colors duration-200 hover:text-white"
           >
             {item.label}
@@ -34,12 +38,23 @@ function FooterColumn({
 
 export default function Footer() {
   const { t } = useI18n();
+  const pathname = usePathname();
 
-  const navItems = [
+  // "how" / "location" scroll manually when already on the home page — see
+  // hash-scroll.ts for why Next's <Link> can't be trusted on a repeat click.
+  const navItems: FooterNavItem[] = [
     { label: t.nav.home, href: "/" },
     { label: t.nav.vehicles, href: "/voitures" },
-    { label: t.how.title, href: "/#how" },
-    { label: t.nav.contact, href: "/#location" },
+    {
+      label: t.how.title,
+      href: "/#how",
+      onClick: (e) => scrollToHashOnSamePage(e, pathname, "how"),
+    },
+    {
+      label: t.nav.contact,
+      href: "/#location",
+      onClick: (e) => scrollToHashOnSamePage(e, pathname, "location"),
+    },
   ];
 
   return (

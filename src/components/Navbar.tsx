@@ -1,10 +1,16 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { BRAND_SHORT, PHONE_DISPLAY, PHONE_TEL, PHONE2_DISPLAY, PHONE2_TEL } from "@/lib/constants";
 import { useI18n } from "@/i18n/client";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import SocialLinks from "@/components/SocialLinks";
+import {
+  scrollToHashOnSamePage,
+  isSamePageHashClick,
+  performHashScroll,
+} from "@/components/hash-scroll";
 
 function Wordmark() {
   return (
@@ -57,15 +63,19 @@ function PhoneLink({ className = "" }: { className?: string }) {
 
 export default function Navbar() {
   const { t } = useI18n();
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
   // "How it works" reuses that section's own heading as its nav label, so the
-  // link text and the section you land on always say the same thing.
+  // link text and the section you land on always say the same thing. "how" and
+  // "location" carry the target element id: clicking them while already on the
+  // home page scrolls there directly instead of relying on Next's <Link>, which
+  // no-ops on a repeat click to a hash already in the URL (see hash-scroll.ts).
   const navLinks = [
-    { key: "home", href: "/", label: t.nav.home },
-    { key: "vehicles", href: "/voitures", label: t.nav.vehicles },
-    { key: "how", href: "/#how", label: t.how.title },
-    { key: "contact", href: "/#location", label: t.nav.contact },
+    { key: "home", href: "/", label: t.nav.home, hash: null },
+    { key: "vehicles", href: "/voitures", label: t.nav.vehicles, hash: null },
+    { key: "how", href: "/#how", label: t.how.title, hash: "how" },
+    { key: "contact", href: "/#location", label: t.nav.contact, hash: "location" },
   ];
 
   return (
@@ -79,6 +89,11 @@ export default function Navbar() {
             <Link
               key={link.key}
               href={link.href}
+              onClick={
+                link.hash
+                  ? (e) => scrollToHashOnSamePage(e, pathname, link.hash!)
+                  : undefined
+              }
               className="relative text-sm text-stone transition-colors duration-200 hover:text-ink after:absolute after:-bottom-1.5 after:start-0 after:h-px after:w-0 after:bg-ink after:transition-[width] after:duration-200 after:ease-out hover:after:w-full"
             >
               {link.label}
@@ -150,7 +165,23 @@ export default function Navbar() {
                 key={link.key}
                 href={link.href}
                 className="border-b border-mist py-3.5 text-sm text-stone transition-colors duration-150 hover:text-ink"
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => {
+                  const sameHashPage =
+                    link.hash && isSamePageHashClick(pathname);
+                  if (sameHashPage) e.preventDefault();
+                  setMenuOpen(false);
+                  if (sameHashPage) {
+                    // This panel is in-flow (not an overlay), so closing it
+                    // shifts the whole page up. Wait for that reflow to
+                    // settle before measuring the scroll target, otherwise
+                    // scrollIntoView aims at the pre-collapse position.
+                    requestAnimationFrame(() =>
+                      requestAnimationFrame(() =>
+                        performHashScroll(link.hash!),
+                      ),
+                    );
+                  }
+                }}
               >
                 {link.label}
               </Link>
