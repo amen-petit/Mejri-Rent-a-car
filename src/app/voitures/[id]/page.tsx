@@ -441,175 +441,115 @@ function CarDetailPageContent() {
           </h1>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr] lg:items-start lg:gap-14">
-          {/* ── LEFT: vehicle information ── */}
-          <div data-reveal="left" className="reveal-d1">
-            {/* Gallery + specifications — side by side, the spec card stretches
-                to match the gallery's height (image + thumbnails) so neither
-                column feels short or leaves dead space. */}
-            <div className="grid gap-6 sm:grid-cols-[1.15fr_0.85fr] sm:items-stretch">
-              {/* Gallery — resized: it now shares the row with the specs
-                  instead of spanning the full column width. */}
-              <div>
-                <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud">
-                  {car.images?.[activeImage] ? (
+        {/* ═══════════════════════════════════════════════════════════
+            3-COLUMN LAYOUT
+            xl  → 3 columns (image+price+specs | form | summary)
+            lg  → 2 columns (image+details | form+summary stacked)
+            <lg → single column, booking form surfaced early
+            Mobile order: image→price→specs → form → summary → whatsapp → features→desc→tarif
+            ════════════════════════════════════════════════════════════ */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8 xl:grid-cols-[1.4fr_0.9fr_0.9fr] xl:items-start xl:gap-7">
+
+          {/* ── SECTION A: Image, Price, Specs row (Col 1 top) ── */}
+          <div
+            data-reveal="left"
+            className="reveal-d1 order-1 lg:col-start-1 lg:row-start-1 xl:col-start-1 xl:row-start-1"
+          >
+            {/* Gallery */}
+            <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud">
+              {car.images?.[activeImage] ? (
+                <Image
+                  src={car.images[activeImage]}
+                  alt={car.name}
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 44vw"
+                  className="object-cover"
+                />
+              ) : (
+                <CarGlyph className="h-28 w-28 text-ash" />
+              )}
+            </div>
+            {car.images?.length > 1 && (
+              <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
+                {car.images.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImage(i)}
+                    aria-label={`${car.name} ${i + 1}`}
+                    className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border transition-colors duration-200 ${activeImage === i ? "border-ink" : "border-mist hover:border-line"}`}
+                  >
                     <Image
-                      src={car.images[activeImage]}
-                      alt={car.name}
+                      src={img}
+                      alt={`${car.name} ${i + 1}`}
                       fill
-                      priority
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 58vw, 36vw"
+                      sizes="64px"
                       className="object-cover"
                     />
-                  ) : (
-                    <CarGlyph className="h-28 w-28 text-ash" />
-                  )}
-                </div>
-                {car.images?.length > 1 && (
-                  <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
-                    {car.images.map((img, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setActiveImage(i)}
-                        aria-label={`${car.name} ${i + 1}`}
-                        className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border transition-colors duration-200 ${activeImage === i ? "border-ink" : "border-mist hover:border-line"}`}
-                      >
-                        <Image
-                          src={img}
-                          alt={`${car.name} ${i + 1}`}
-                          fill
-                          sizes="64px"
-                          className="object-cover"
-                        />
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                {/* Starting price — promo-aware. */}
-                {promotion ? (
-                  (() => {
-                    const s = computePromotionSavings(
-                      car.price_per_day,
-                      promotion,
-                    );
-                    return (
-                      <div className="mt-4">
-                        <PromoBadge promotion={promotion} className="mb-2" />
-                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                          <span className="font-display text-xl text-ash line-through">
-                            {s.original}
-                          </span>
-                          <span className="font-display text-3xl text-ink">
-                            {s.discounted}
-                            <span className="ms-1.5 text-base font-normal text-stone">
-                              {t.common.perDayFull}
-                            </span>
-                          </span>
-                          <span className="rounded-full bg-[var(--color-warm)] px-2 py-0.5 text-xs font-semibold text-ink">
-                            −{s.savingsAmount} DT ({s.savingsPct}%)
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })()
-                ) : (
-                  <div className="mt-4 font-display text-3xl text-ink">
-                    {car.price_per_day}
-                    <span className="ms-1.5 text-base font-normal text-stone">
-                      {t.common.perDayFull}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* Specifications — a vertical list beside the image. Rows are
-                  flex-1 so they distribute evenly across whatever height the
-                  gallery ends up being, matching it exactly with no manual
-                  height math. */}
-              <div className="flex h-full flex-col divide-y divide-mist rounded-[var(--radius-lg)] border border-mist bg-cloud px-5">
-                {specs.map(([label, value]) => (
-                  <div
-                    key={label}
-                    className="flex flex-1 items-center justify-between gap-4 py-4"
-                  >
-                    <span className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-ash">
-                      {label}
-                    </span>
-                    <span className="font-display text-lg text-ink">
-                      {value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {car.features?.length > 0 && (
-              <div className="mt-6 flex flex-wrap gap-2">
-                {car.features.map((f) => (
-                  <span key={f} className="chip">
-                    {f}
-                  </span>
+                  </button>
                 ))}
               </div>
             )}
 
-            {/* Description */}
-            {car.description && (
-              <p className="mt-8 max-w-prose text-sm leading-7 text-stone">
-                {car.description}
-              </p>
-            )}
-
-            {/* Flexible pricing — reassurance, not a warning */}
-            <div className="mt-6 max-w-prose rounded-[var(--radius-lg)] border border-mist bg-cloud p-5">
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/10 text-accent">
-                  <svg
-                    className="h-3.5 w-3.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
-                  </svg>
+            {/* Starting price — promo-aware */}
+            {promotion ? (
+              (() => {
+                const s = computePromotionSavings(
+                  car.price_per_day,
+                  promotion,
+                );
+                return (
+                  <div className="mt-4">
+                    <PromoBadge promotion={promotion} className="mb-2" />
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span className="font-display text-xl text-ash line-through">
+                        {s.original}
+                      </span>
+                      <span className="font-display text-3xl text-ink">
+                        {s.discounted}
+                        <span className="ms-1.5 text-base font-normal text-stone">
+                          {t.common.perDayFull}
+                        </span>
+                      </span>
+                      <span className="rounded-full bg-[var(--color-warm)] px-2 py-0.5 text-xs font-semibold text-ink">
+                        −{s.savingsAmount} DT ({s.savingsPct}%)
+                      </span>
+                    </div>
+                  </div>
+                );
+              })()
+            ) : (
+              <div className="mt-4 font-display text-3xl text-ink">
+                {car.price_per_day}
+                <span className="ms-1.5 text-base font-normal text-stone">
+                  {t.common.perDayFull}
                 </span>
-                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-                  {t.carDetail.flexiblePricingTitle}
-                </p>
               </div>
-              <p className="mt-3 text-xs leading-6 text-stone">
-                {t.carDetail.flexiblePricingDesc}
-              </p>
-            </div>
+            )}
 
-            {/* Secondary contact */}
-            <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                interpolate(t.carDetail.whatsappInterest, {
-                  brand: car.brand,
-                  name: car.name,
-                }),
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex w-full items-center justify-center gap-2.5 rounded-[var(--radius)] border border-ink py-3.5 text-sm font-medium text-ink transition-colors duration-200 hover:border-[#25D366] hover:bg-[#25D366] hover:text-white active:scale-[0.98] sm:w-auto sm:px-7"
-            >
-              <WhatsAppIcon size={16} />
-              {t.carDetail.contactWhatsapp}
-            </a>
+            {/* Specs — horizontal inline row */}
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+              {specs.map(([label, value], i) => (
+                <div
+                  key={label}
+                  className={`flex items-baseline gap-2${i > 0 ? " border-l border-mist pl-5" : ""}`}
+                >
+                  <span className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-ash">
+                    {label}
+                  </span>
+                  <span className="font-display text-base text-ink">
+                    {value}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* ── RIGHT: sticky booking ── */}
-          <aside
+          {/* ── SECTION B: Booking form (Col 2) ── */}
+          <div
             data-reveal="right"
-            className="reveal-d2 space-y-4 lg:sticky lg:top-24"
+            className="reveal-d2 order-2 lg:col-start-2 lg:row-start-1 xl:col-start-2 xl:row-start-1"
           >
-            {/* Booking fields */}
             <div className="rounded-[var(--radius-lg)] border border-mist bg-cloud p-5 sm:p-6">
               <div className="mb-5 flex items-center gap-2.5 border-b border-mist pb-4">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -701,8 +641,13 @@ function CarDetailPageContent() {
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Summary — ink band */}
+          {/* ── SECTION C: Summary card + confirm (Col 3) ── */}
+          <div
+            data-reveal="right"
+            className="reveal-d3 order-3 lg:col-start-2 lg:row-start-2 xl:col-start-3 xl:row-start-1 xl:sticky xl:top-24"
+          >
             <div className="rounded-[var(--radius-lg)] bg-ink p-6 text-paper">
               <div className="space-y-4 border-b border-white/10 pb-5">
                 {summaryLine(
@@ -772,7 +717,75 @@ function CarDetailPageContent() {
                 </p>
               )}
             </div>
-          </aside>
+          </div>
+
+          {/* ── SECTION D: WhatsApp CTA (spans below Cols 2+3) ── */}
+          <div className="order-4 lg:col-start-2 lg:row-start-3 xl:col-start-2 xl:col-span-2 xl:row-start-2">
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                interpolate(t.carDetail.whatsappInterest, {
+                  brand: car.brand,
+                  name: car.name,
+                }),
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2.5 rounded-[var(--radius)] border border-ink py-3.5 text-sm font-medium text-ink transition-colors duration-200 hover:border-[#25D366] hover:bg-[#25D366] hover:text-white active:scale-[0.98]"
+            >
+              <WhatsAppIcon size={16} />
+              {t.carDetail.contactWhatsapp}
+            </a>
+          </div>
+
+          {/* ── SECTION E: Features, Description, Tarification (Col 1 bottom) ── */}
+          <div
+            data-reveal="left"
+            className="reveal-d1 order-5 lg:col-start-1 lg:row-start-2 xl:col-start-1 xl:row-start-2"
+          >
+            {car.features?.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {car.features.map((f) => (
+                  <span key={f} className="chip">
+                    {f}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Description */}
+            {car.description && (
+              <p className="mt-6 text-sm leading-7 text-stone">
+                {car.description}
+              </p>
+            )}
+
+            {/* Flexible pricing — reassurance, not a warning */}
+            <div className="mt-5 rounded-[var(--radius-lg)] border border-mist bg-cloud p-5">
+              <div className="flex items-center gap-2.5">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/10 text-accent">
+                  <svg
+                    className="h-3.5 w-3.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
+                  </svg>
+                </span>
+                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
+                  {t.carDetail.flexiblePricingTitle}
+                </p>
+              </div>
+              <p className="mt-3 text-xs leading-6 text-stone">
+                {t.carDetail.flexiblePricingDesc}
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -996,9 +1009,10 @@ function CarDetailFallback() {
     <main className="min-h-screen bg-paper">
       <Navbar />
       <div className="mx-auto max-w-7xl animate-pulse px-5 pt-16 sm:px-8 sm:pt-20">
-        <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8 xl:grid-cols-[1.4fr_0.9fr_0.9fr] xl:gap-7">
           <div className="aspect-[4/3] rounded-[var(--radius-lg)] bg-mist" />
-          <div className="h-96 rounded-[var(--radius-lg)] bg-mist" />
+          <div className="h-80 rounded-[var(--radius-lg)] bg-mist" />
+          <div className="h-80 rounded-[var(--radius-lg)] bg-mist" />
         </div>
       </div>
     </main>
