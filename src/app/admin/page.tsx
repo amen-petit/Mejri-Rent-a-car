@@ -64,7 +64,14 @@ export default function AdminDashboard() {
     (r) => r.start_date <= todayStr && r.end_date >= todayStr,
   );
   const revenue = confirmed.reduce((sum, r) => sum + Number(r.total_price), 0);
-  const available = cars.filter((c) => c.is_available).length;
+  // Fleet size in physical, rentable UNITS (a car's `quantity`), not model rows —
+  // a model with quantity 4 is 4 bookable vehicles, matching how the rest of the
+  // app (lib/availability.ts) counts the fleet.
+  const totalUnits = cars.reduce((sum, c) => sum + (c.quantity || 0), 0);
+  const availableUnits = cars.reduce(
+    (sum, c) => sum + (c.is_available ? c.quantity || 0 : 0),
+    0,
+  );
 
   // Calendar — current month
   const [calMonth, setCalMonth] = useState(today.getMonth());
@@ -116,7 +123,7 @@ export default function AdminDashboard() {
       <div className="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
         <StatCard label="Locations actives" value={activeNow.length} sub="aujourd'hui" />
         <StatCard label="En attente" value={pending.length} sub="à confirmer" />
-        <StatCard label="Véhicules dispo" value={`${available}/${cars.length}`} sub="disponibles" />
+        <StatCard label="Véhicules dispo" value={`${availableUnits}/${totalUnits}`} sub="disponibles" />
         <StatCard label="Revenus confirmés" value={`${revenue.toLocaleString()} DT`} sub="total" />
       </div>
 
