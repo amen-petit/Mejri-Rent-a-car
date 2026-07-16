@@ -21,7 +21,6 @@ export const ar: Messages = {
   nav: {
     home: "الرئيسية",
     vehicles: "سياراتنا",
-    about: "من نحن",
     contact: "اتصل بنا",
     book: "احجز",
     bookNow: "احجز الآن",

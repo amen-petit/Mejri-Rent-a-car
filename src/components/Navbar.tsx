@@ -6,13 +6,6 @@ import { useI18n } from "@/i18n/client";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import SocialLinks from "@/components/SocialLinks";
 
-const NAV_LINKS = [
-  { key: "home", href: "/" },
-  { key: "vehicles", href: "/voitures" },
-  { key: "about", href: "/#about" },
-  { key: "contact", href: "/#location" },
-] as const;
-
 function Wordmark() {
   return (
     <Link href="/" className="group flex items-baseline gap-2.5">
@@ -66,6 +59,15 @@ export default function Navbar() {
   const { t } = useI18n();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // "How it works" reuses that section's own heading as its nav label, so the
+  // link text and the section you land on always say the same thing.
+  const navLinks = [
+    { key: "home", href: "/", label: t.nav.home },
+    { key: "vehicles", href: "/voitures", label: t.nav.vehicles },
+    { key: "how", href: "/#how", label: t.how.title },
+    { key: "contact", href: "/#location", label: t.nav.contact },
+  ];
+
   return (
     <nav className="sticky top-0 z-50 border-b border-mist bg-paper/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
@@ -73,13 +75,13 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-9 md:flex">
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={link.key}
               href={link.href}
               className="relative text-sm text-stone transition-colors duration-200 hover:text-ink after:absolute after:-bottom-1.5 after:start-0 after:h-px after:w-0 after:bg-ink after:transition-[width] after:duration-200 after:ease-out hover:after:w-full"
             >
-              {t.nav[link.key]}
+              {link.label}
             </Link>
           ))}
         </div>
@@ -143,14 +145,14 @@ export default function Navbar() {
       {menuOpen && (
         <div className="border-t border-mist bg-paper px-5 pb-6 pt-2 md:hidden">
           <div className="flex flex-col">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.key}
                 href={link.href}
                 className="border-b border-mist py-3.5 text-sm text-stone transition-colors duration-150 hover:text-ink"
                 onClick={() => setMenuOpen(false)}
               >
-                {t.nav[link.key]}
+                {link.label}
               </Link>
             ))}
 

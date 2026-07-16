@@ -21,7 +21,6 @@ export const en: Messages = {
   nav: {
     home: "Home",
     vehicles: "Our Vehicles",
-    about: "About",
     contact: "Contact",
     book: "Book",
     bookNow: "Book now",

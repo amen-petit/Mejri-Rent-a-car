@@ -38,7 +38,7 @@ export default function Footer() {
   const navItems = [
     { label: t.nav.home, href: "/" },
     { label: t.nav.vehicles, href: "/voitures" },
-    { label: t.nav.about, href: "/#about" },
+    { label: t.how.title, href: "/#how" },
     { label: t.nav.contact, href: "/#location" },
   ];
 

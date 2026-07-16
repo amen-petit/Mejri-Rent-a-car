@@ -25,7 +25,6 @@ export const fr = {
   nav: {
     home: "Accueil",
     vehicles: "Nos Véhicules",
-    about: "À Propos",
     contact: "Contact",
     book: "Réserver",
     bookNow: "Réserver maintenant",
