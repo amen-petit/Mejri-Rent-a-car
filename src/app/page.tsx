@@ -116,7 +116,7 @@ export default async function Home() {
     "@type": "CarRental",
     name: BRAND_NAME,
     url: SITE_URL,
-    image: `${SITE_URL}/logo.jpg`,
+    image: `${SITE_URL}/logo.png`,
     telephone: PHONE_DISPLAY,
     address: {
       "@type": "PostalAddress",

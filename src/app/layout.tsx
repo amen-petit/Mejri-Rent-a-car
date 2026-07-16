@@ -10,12 +10,15 @@ import { getServerLocale } from "@/i18n/server";
 import { getDir } from "@/i18n/config";
 import { SITE_URL, BRAND_NAME, BRAND_SHORT } from "@/lib/constants";
 
-// Brand logo — used for the favicon/apple-touch-icon and the social share image.
-// Not a tight square crop, so at very small favicon sizes (16x16 tab icon) the
-// browser center-crops the full mark; a dedicated square icon crop would sharpen
-// that further but isn't required for this to work correctly.
-const OG_IMAGE_PATH = "/logo.jpg";
-const BRAND_ICON_PATH = "/logo.jpg";
+// Brand logo (transparent PNG) — used for the favicon/apple-touch-icon and the
+// social share image. Not a tight square crop, so at very small favicon sizes
+// (16x16 tab icon) the browser center-crops the full mark; a dedicated square
+// icon crop would sharpen that further but isn't required for this to work
+// correctly. Transparency means favicons blend into the browser tab instead of
+// showing a background box, and OG/Twitter previews render it on the
+// platform's own background (typically white) rather than a filled card.
+const OG_IMAGE_PATH = "/logo.png";
+const BRAND_ICON_PATH = "/logo.png";
 
 // Sitewide WebSite structured data — a signal (not a guarantee; Google has final
 // say) that helps it associate the brand name with this domain instead of
@@ -94,9 +97,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: OG_IMAGE_PATH,
-        width: 1176,
-        height: 896,
-        type: "image/jpeg",
+        width: 2352,
+        height: 1792,
+        type: "image/png",
         alt: BRAND_NAME,
       },
     ],
@@ -110,10 +113,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: BRAND_ICON_PATH, type: "image/jpeg" },
-      { url: BRAND_ICON_PATH, rel: "shortcut icon", type: "image/jpeg" },
+      { url: BRAND_ICON_PATH, type: "image/png" },
+      { url: BRAND_ICON_PATH, rel: "shortcut icon", type: "image/png" },
     ],
-    apple: [{ url: BRAND_ICON_PATH, type: "image/jpeg" }],
+    apple: [{ url: BRAND_ICON_PATH, type: "image/png" }],
   },
   category: "travel",
 };
