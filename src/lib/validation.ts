@@ -47,7 +47,7 @@ const dateOnly = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/, "Expected YYYY-MM-DD");
 
-// HH:MM that must be one of the offered booking slots (08:00–20:00, 30-min).
+// HH:MM that must be one of the offered booking slots (00:00–23:30, 30-min).
 // Validating against the shared slot list keeps the server authoritative: a
 // crafted request can't smuggle an out-of-hours time past the UI.
 const bookingTime = z

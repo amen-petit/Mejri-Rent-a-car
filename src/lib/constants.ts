@@ -119,11 +119,11 @@ export const MONTHS_FR_SHORT = [
 
 export const DAYS_FR = ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"];
 
-// Pickup / return time slots offered to the client: 08:00–20:00 in 30-min steps.
+// Pickup / return time slots offered to the client: 00:00–23:30 in 30-min steps.
 // Single source of truth shared by the booking UI and the server validation, so
 // the dropdown and the accepted values can never drift apart.
-export const BOOKING_TIME_START_MIN = 8 * 60; // 08:00
-export const BOOKING_TIME_END_MIN = 20 * 60; // 20:00
+export const BOOKING_TIME_START_MIN = 0; // 00:00
+export const BOOKING_TIME_END_MIN = 23 * 60 + 30; // 23:30
 export const BOOKING_TIME_STEP_MIN = 30;
 
 export const BOOKING_TIME_SLOTS: string[] = (() => {
