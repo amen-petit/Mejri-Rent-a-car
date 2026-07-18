@@ -833,7 +833,7 @@ function CarDetailPageContent() {
               data-reveal="right"
               className="reveal-d3 mt-8 lg:mt-auto lg:pt-8"
             >
-              <div className="flex items-start gap-4 rounded-[var(--radius-lg)] border border-mist bg-cloud p-6">
+              <div className="flex items-start gap-4 rounded-[var(--radius-lg)] border border-mist bg-cloud p-5">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
                   <svg
                     className="h-4 w-4"
@@ -848,7 +848,7 @@ function CarDetailPageContent() {
                     <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
                   </svg>
                 </span>
-                <div className="max-w-md">
+                <div className="max-w-xl">
                   <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
                     {t.carDetail.flexiblePricingTitle}
                   </p>
