@@ -1,6 +1,13 @@
 "use client";
 import Image from "next/image";
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import DateField from "@/components/ui/DateField";
@@ -137,7 +144,12 @@ function CarDetailPageContent() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", notes: "" });
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    notes: "",
+  });
 
   const firstFieldRef = useRef<HTMLInputElement>(null);
   const lastFocusedRef = useRef<HTMLElement | null>(null);
@@ -451,331 +463,380 @@ function CarDetailPageContent() {
         </div>
 
         {/* ═══════════════════════════════════════════════════════════
-            3-COLUMN LAYOUT
-            xl  → 3 columns (image+price+specs | form | summary)
-            lg  → 2 columns (image+details | form+summary stacked)
-            <lg → single column, booking form surfaced early
-            Mobile order: image→price→specs → form → summary → whatsapp → features→desc→tarif
+            TWO INDEPENDENT COLUMNS
+            Left: vehicle showcase (gallery → price/specs → features/desc).
+            Right: the booking experience (form+summary → note → WhatsApp).
+            Each column stacks to its OWN content height — no shared grid
+            rows forcing a shorter card to stretch and leave dead space.
+            Scan order (all breakpoints): vehicle info → booking → confirm.
             ════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8 xl:grid-cols-[1.4fr_0.9fr_0.9fr] xl:gap-7">
-
-          {/* ── COL 1, ROW 1: Gallery ── */}
-          <div
-            data-reveal="left"
-            className="reveal-d1 order-1 lg:col-start-1 lg:row-start-1 xl:col-start-1 xl:row-start-1"
-          >
-            <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud">
-              {car.images?.[activeImage] ? (
-                <Image
-                  src={car.images[activeImage]}
-                  alt={car.name}
-                  fill
-                  priority
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 44vw"
-                  className="object-cover"
-                />
-              ) : (
-                <CarGlyph className="h-28 w-28 text-ash" />
-              )}
-            </div>
-            {car.images?.length > 1 && (
-              <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
-                {car.images.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveImage(i)}
-                    aria-label={`${car.name} ${i + 1}`}
-                    className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border transition-colors duration-200 ${activeImage === i ? "border-ink" : "border-mist hover:border-line"}`}
-                  >
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 xl:grid-cols-[1.4fr_1.8fr] xl:gap-12">
+          {/* ── LEFT: vehicle showcase ── */}
+          <div className="flex flex-col lg:h-full">
+            <div className="flex flex-col gap-8">
+              {/* Gallery */}
+              <div data-reveal="left" className="reveal-d1">
+                <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border border-mist bg-cloud">
+                  {car.images?.[activeImage] ? (
                     <Image
-                      src={img}
-                      alt={`${car.name} ${i + 1}`}
+                      src={car.images[activeImage]}
+                      alt={car.name}
                       fill
-                      sizes="64px"
+                      priority
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 44vw"
                       className="object-cover"
                     />
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* ── COL 2, ROW 1: Booking Form ── */}
-          <div
-            data-reveal="right"
-            className="reveal-d2 order-3 lg:col-start-2 lg:row-start-1 xl:col-start-2 xl:row-start-1"
-          >
-            <div className="flex h-full flex-col rounded-[var(--radius-lg)] border border-mist bg-cloud p-5 sm:p-6 lg:p-7">
-              <div className="mb-5 flex items-center gap-2.5 border-b border-mist pb-4">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                <span className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-stone">
-                  {t.booking.cardTitle}
-                </span>
-              </div>
-
-              <div className="flex flex-1 flex-col justify-between gap-4">
-                {/* Pickup date + time */}
-                <div>
-                  <span className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-                    {t.booking.pickupDate}
-                  </span>
-                  <div className="flex gap-2">
-                    <div className="min-w-0 flex-1">
-                      <DateField
-                        value={start}
-                        onChange={handlePickupDate}
-                        min={agencyNow.dateStr}
-                        ariaLabel={t.booking.pickupDate}
-                      />
-                    </div>
-                    <div className="w-[5.5rem] shrink-0">
-                      <Select
-                        options={timeOption(pickupSlots)}
-                        value={pickupTime}
-                        onChange={setPickupTime}
-                        ariaLabel={t.booking.pickupTime}
-                        align="right"
-                      />
-                    </div>
-                  </div>
+                  ) : (
+                    <CarGlyph className="h-28 w-28 text-ash" />
+                  )}
                 </div>
-
-                {/* Return date + time */}
-                <div>
-                  <span className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-                    {t.booking.returnDate}
-                  </span>
-                  <div className="flex gap-2">
-                    <div className="min-w-0 flex-1">
-                      <DateField
-                        value={end}
-                        onChange={(value) => {
-                          setEnd(value);
-                          setSubmitError(null);
-                        }}
-                        min={start || agencyNow.dateStr}
-                        ariaLabel={t.booking.returnDate}
-                      />
-                    </div>
-                    <div className="w-[5.5rem] shrink-0">
-                      <Select
-                        options={timeOption(BOOKING_TIME_SLOTS)}
-                        value={returnTime}
-                        onChange={setReturnTime}
-                        ariaLabel={t.booking.returnTime}
-                        align="right"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Pickup location */}
-                <div>
-                  <span className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-                    {t.booking.pickupLocation}
-                  </span>
-                  <Select
-                    options={locationOptions}
-                    value={pickupLocation}
-                    onChange={(v) => setPickupLocation(v as RentalLocation)}
-                    ariaLabel={t.booking.pickupLocation}
-                  />
-                </div>
-
-                {/* Return location */}
-                <div>
-                  <span className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-                    {t.booking.returnLocation}
-                  </span>
-                  <Select
-                    options={locationOptions}
-                    value={returnLocation}
-                    onChange={(v) => setReturnLocation(v as RentalLocation)}
-                    ariaLabel={t.booking.returnLocation}
-                  />
-                </div>
-
-                {/* Optional services */}
-                <AddonServices
-                  value={addonKeys}
-                  onChange={setAddonKeys}
-                  tone="light"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* ── COL 3, ROW 1: Summary Card ── */}
-          <div
-            data-reveal="right"
-            className="reveal-d3 order-4 lg:col-start-2 lg:row-start-2 xl:col-start-3 xl:row-start-1"
-          >
-            <div className="flex flex-col rounded-[var(--radius-lg)] bg-ink p-6 text-paper lg:p-7">
-              <div className="space-y-4 border-b border-white/10 pb-5">
-                {summaryLine(
-                  t.carDetail.pickup,
-                  startDate,
-                  pickupTime,
-                  pickupLocation,
-                )}
-                {summaryLine(
-                  t.carDetail.return,
-                  endDate,
-                  returnTime,
-                  returnLocation,
-                )}
-                <div className="flex items-baseline justify-between gap-4">
-                  <span className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
-                    {t.carDetail.duration}
-                  </span>
-                  <span className="text-sm font-medium text-white">
-                    {totalDays > 0
-                      ? `${totalDays} ${plural(totalDays, t.units.day, locale)}`
-                      : "—"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Pricing → total → CTA: one continuous block, spaced by its own
-                  content rather than stretched to match the neighbouring columns. */}
-              <div className="pt-5">
-                {totalDays > 0 && (
-                  <div className="mb-4 space-y-2 border-b border-white/10 pb-4">
-                    {/* Vehicle line (with promo strikethrough) */}
-                    <div className="flex items-baseline justify-between gap-4">
-                      <span className="text-xs text-white/55">
-                        {t.carDetail.vehicleRental}
-                      </span>
-                      <span className="text-sm text-white">
-                        {promotion &&
-                          quote &&
-                          quote.originalTotal > vehicleTotal && (
-                            <span className="me-2 text-white/40 line-through">
-                              {quote.originalTotal}
-                            </span>
-                          )}
-                        {vehicleTotal} {t.common.currency}
-                      </span>
-                    </div>
-                    {/* Add-on lines */}
-                    {addonLines.map((line) => (
-                      <div
-                        key={line.key}
-                        className="flex items-baseline justify-between gap-4"
+                {car.images?.length > 1 && (
+                  <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
+                    {car.images.map((img, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setActiveImage(i)}
+                        aria-label={`${car.name} ${i + 1}`}
+                        className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border transition-colors duration-200 ${activeImage === i ? "border-ink" : "border-mist hover:border-line"}`}
                       >
-                        <span className="text-xs text-white/55">
-                          {t.addons[line.key].label}
-                          <span className="ms-1.5 text-white/35">
-                            {line.days} × {line.daily_rate} {t.common.currency}
-                          </span>
-                        </span>
-                        <span className="whitespace-nowrap text-sm text-white">
-                          {line.total} {t.common.currency}
-                        </span>
-                      </div>
+                        <Image
+                          src={img}
+                          alt={`${car.name} ${i + 1}`}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
+                        />
+                      </button>
                     ))}
                   </div>
                 )}
-                <p className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
-                  {t.carDetail.totalEstimate}
-                </p>
-                <p className="mt-1 font-display text-3xl text-white">
-                  {totalDays > 0 ? `${totalPrice} ${t.common.currency}` : "—"}
-                </p>
+              </div>
 
-                <div className="mt-5">
-                  <button
-                    onClick={() => setShowForm(true)}
-                    disabled={!bookingReady}
-                    className="btn-accent w-full py-3 disabled:cursor-not-allowed disabled:opacity-40"
-                  >
-                    {totalDays > 0
-                      ? interpolate(t.carDetail.confirmDays, {
-                          days: totalDays,
-                          unit: plural(totalDays, t.units.day, locale),
-                        })
-                      : t.carDetail.confirm}
-                  </button>
+              {/* Price & specs */}
+              <div data-reveal="left" className="reveal-d2">
+                {promotion ? (
+                  (() => {
+                    const s = computePromotionSavings(
+                      car.price_per_day,
+                      promotion,
+                    );
+                    return (
+                      <div>
+                        <PromoBadge promotion={promotion} className="mb-2" />
+                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                          <span className="font-display text-2xl text-ash line-through">
+                            {s.original}
+                          </span>
+                          <span className="font-display text-5xl text-ink tracking-tight">
+                            {s.discounted}
+                            <span className="ms-2 text-lg font-normal tracking-normal text-stone">
+                              {t.common.perDayFull}
+                            </span>
+                          </span>
+                          <span className="rounded-full bg-[var(--color-warm)] px-2.5 py-1 text-xs font-semibold text-ink">
+                            −{s.savingsAmount} DT ({s.savingsPct}%)
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })()
+                ) : (
+                  <div className="font-display text-5xl text-ink tracking-tight">
+                    {car.price_per_day}
+                    <span className="ms-2 text-lg font-normal tracking-normal text-stone">
+                      {t.common.perDayFull}
+                    </span>
+                  </div>
+                )}
 
-                  {validationMessage && (
-                    <p className="mt-3 text-center text-xs text-white/55">
-                      {validationMessage}
+                <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2">
+                  {specs.map(([label, value], i) => (
+                    <div
+                      key={label}
+                      className={`flex items-baseline gap-2.5${i > 0 ? " border-l border-mist pl-6" : ""}`}
+                    >
+                      <span className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-ash">
+                        {label}
+                      </span>
+                      <span className="font-display text-base text-ink">
+                        {value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Features & description */}
+              {(car.features?.length > 0 || car.description) && (
+                <div data-reveal="left" className="reveal-d3">
+                  {car.features?.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {car.features.map((f) => (
+                        <span key={f} className="chip">
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {car.description && (
+                    <p className="mt-6 text-sm leading-7 text-stone">
+                      {car.description}
                     </p>
                   )}
                 </div>
-              </div>
+              )}
+            </div>
+
+            {/* WhatsApp CTA — follows the vehicle info it refers to. Pinned to
+                the bottom so it lines up with the note opposite it, once both
+                columns are stretched to the same row height. */}
+            <div
+              data-reveal="left"
+              className="reveal-d4 mt-8 lg:mt-auto lg:pt-8"
+            >
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                  interpolate(t.carDetail.whatsappInterest, {
+                    brand: car.brand,
+                    name: car.name,
+                  }),
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-[var(--radius)] border border-ink py-3.5 text-sm font-medium text-ink transition-colors duration-200 hover:border-[#25D366] hover:bg-[#25D366] hover:text-white active:scale-[0.98]"
+              >
+                <WhatsAppIcon size={16} />
+                {t.carDetail.contactWhatsapp}
+              </a>
             </div>
           </div>
 
-          {/* ── COL 1, ROW 2: Price & Specs ── */}
-          <div
-            data-reveal="left"
-            className="reveal-d1 order-2 flex h-full flex-col lg:-mt-2 xl:-mt-3 lg:col-start-1 lg:row-start-2 xl:col-start-1 xl:row-start-2"
-          >
-            {/* Starting price */}
-            {promotion ? (
-              (() => {
-                const s = computePromotionSavings(
-                  car.price_per_day,
-                  promotion,
-                );
-                return (
-                  <div>
-                    <PromoBadge promotion={promotion} className="mb-2" />
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <span className="font-display text-2xl text-ash line-through">
-                        {s.original}
-                      </span>
-                      <span className="font-display text-5xl text-ink tracking-tight">
-                        {s.discounted}
-                        <span className="ms-2 text-lg font-normal tracking-normal text-stone">
-                          {t.common.perDayFull}
-                        </span>
-                      </span>
-                      <span className="rounded-full bg-[var(--color-warm)] px-2.5 py-1 text-xs font-semibold text-ink">
-                        −{s.savingsAmount} DT ({s.savingsPct}%)
+          {/* ── RIGHT: booking experience ── */}
+          <div className="flex flex-col lg:h-full">
+            <div className="flex flex-col gap-6">
+              {/* Form + summary: paired side by side from xl, one connected step */}
+              <div className="grid gap-6 xl:grid-cols-2 xl:items-start">
+                <div data-reveal="right" className="reveal-d1">
+                  <div className="flex flex-col rounded-[var(--radius-lg)] border border-mist bg-cloud p-5 sm:p-6 lg:p-7">
+                    <div className="mb-5 flex items-center gap-2.5 border-b border-mist pb-4">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-stone">
+                        {t.booking.cardTitle}
                       </span>
                     </div>
+
+                    <div className="flex flex-col gap-4">
+                      {/* Pickup date + time */}
+                      <div>
+                        <span className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
+                          {t.booking.pickupDate}
+                        </span>
+                        <div className="flex gap-2">
+                          <div className="min-w-0 flex-1">
+                            <DateField
+                              value={start}
+                              onChange={handlePickupDate}
+                              min={agencyNow.dateStr}
+                              ariaLabel={t.booking.pickupDate}
+                            />
+                          </div>
+                          <div className="w-[5.5rem] shrink-0">
+                            <Select
+                              options={timeOption(pickupSlots)}
+                              value={pickupTime}
+                              onChange={setPickupTime}
+                              ariaLabel={t.booking.pickupTime}
+                              align="right"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Return date + time */}
+                      <div>
+                        <span className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
+                          {t.booking.returnDate}
+                        </span>
+                        <div className="flex gap-2">
+                          <div className="min-w-0 flex-1">
+                            <DateField
+                              value={end}
+                              onChange={(value) => {
+                                setEnd(value);
+                                setSubmitError(null);
+                              }}
+                              min={start || agencyNow.dateStr}
+                              ariaLabel={t.booking.returnDate}
+                            />
+                          </div>
+                          <div className="w-[5.5rem] shrink-0">
+                            <Select
+                              options={timeOption(BOOKING_TIME_SLOTS)}
+                              value={returnTime}
+                              onChange={setReturnTime}
+                              ariaLabel={t.booking.returnTime}
+                              align="right"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Pickup location */}
+                      <div>
+                        <span className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
+                          {t.booking.pickupLocation}
+                        </span>
+                        <Select
+                          options={locationOptions}
+                          value={pickupLocation}
+                          onChange={(v) =>
+                            setPickupLocation(v as RentalLocation)
+                          }
+                          ariaLabel={t.booking.pickupLocation}
+                        />
+                      </div>
+
+                      {/* Return location */}
+                      <div>
+                        <span className="mb-2 block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
+                          {t.booking.returnLocation}
+                        </span>
+                        <Select
+                          options={locationOptions}
+                          value={returnLocation}
+                          onChange={(v) =>
+                            setReturnLocation(v as RentalLocation)
+                          }
+                          ariaLabel={t.booking.returnLocation}
+                        />
+                      </div>
+
+                      {/* Optional services */}
+                      <AddonServices
+                        value={addonKeys}
+                        onChange={setAddonKeys}
+                        tone="light"
+                      />
+                    </div>
                   </div>
-                );
-              })()
-            ) : (
-              <div className="font-display text-5xl text-ink tracking-tight">
-                {car.price_per_day}
-                <span className="ms-2 text-lg font-normal tracking-normal text-stone">
-                  {t.common.perDayFull}
-                </span>
-              </div>
-            )}
-
-            {/* Specs */}
-            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2">
-              {specs.map(([label, value], i) => (
-                <div
-                  key={label}
-                  className={`flex items-baseline gap-2.5${i > 0 ? " border-l border-mist pl-6" : ""}`}
-                >
-                  <span className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-ash">
-                    {label}
-                  </span>
-                  <span className="font-display text-base text-ink">
-                    {value}
-                  </span>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* ── COLS 2+3, ROW 2: Tarification Flexible ── */}
-          <div
-            data-reveal="right"
-            className="reveal-d2 order-7 lg:col-start-2 lg:row-start-3 xl:col-start-2 xl:col-span-2 xl:row-start-2"
-          >
-            <div className="rounded-[var(--radius-lg)] border border-mist bg-cloud p-5">
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/10 text-accent">
+                <div data-reveal="right" className="reveal-d2">
+                  <div className="flex flex-col rounded-[var(--radius-lg)] bg-ink p-5 text-paper sm:p-6 lg:p-7">
+                    <div className="space-y-5 border-b border-white/10 pb-6">
+                      {summaryLine(
+                        t.carDetail.pickup,
+                        startDate,
+                        pickupTime,
+                        pickupLocation,
+                      )}
+                      {summaryLine(
+                        t.carDetail.return,
+                        endDate,
+                        returnTime,
+                        returnLocation,
+                      )}
+                      <div className="flex items-baseline justify-between gap-4">
+                        <span className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
+                          {t.carDetail.duration}
+                        </span>
+                        <span className="text-base font-medium text-white">
+                          {totalDays > 0
+                            ? `${totalDays} ${plural(totalDays, t.units.day, locale)}`
+                            : "—"}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Pricing → total → CTA: one continuous block, spaced by its own
+                        content rather than stretched to match the neighbouring columns. */}
+                    <div className="pt-7">
+                      {totalDays > 0 && (
+                        <div className="mb-6 space-y-3.5 border-b border-white/10 pb-5">
+                          {/* Vehicle line (with promo strikethrough) */}
+                          <div className="flex items-baseline justify-between gap-4">
+                            <span className="text-sm text-white/55">
+                              {t.carDetail.vehicleRental}
+                            </span>
+                            <span className="text-base text-white">
+                              {promotion &&
+                                quote &&
+                                quote.originalTotal > vehicleTotal && (
+                                  <span className="me-2 text-white/40 line-through">
+                                    {quote.originalTotal}
+                                  </span>
+                                )}
+                              {vehicleTotal} {t.common.currency}
+                            </span>
+                          </div>
+                          {/* Add-on lines */}
+                          {addonLines.map((line) => (
+                            <div
+                              key={line.key}
+                              className="flex items-baseline justify-between gap-4"
+                            >
+                              <span className="text-sm text-white/55">
+                                {t.addons[line.key].label}
+                                <span className="ms-1.5 text-white/35">
+                                  {line.days} × {line.daily_rate}{" "}
+                                  {t.common.currency}
+                                </span>
+                              </span>
+                              <span className="whitespace-nowrap text-base text-white">
+                                {line.total} {t.common.currency}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      <p className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
+                        {t.carDetail.totalEstimate}
+                      </p>
+                      <p className="mt-2 font-display text-4xl text-white">
+                        {totalDays > 0
+                          ? `${totalPrice} ${t.common.currency}`
+                          : "—"}
+                      </p>
+
+                      <div className="mt-8">
+                        <button
+                          onClick={() => setShowForm(true)}
+                          disabled={!bookingReady}
+                          className="btn-accent w-full py-4 disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          {totalDays > 0
+                            ? interpolate(t.carDetail.confirmDays, {
+                                days: totalDays,
+                                unit: plural(totalDays, t.units.day, locale),
+                              })
+                            : t.carDetail.confirm}
+                        </button>
+
+                        {validationMessage && (
+                          <p className="mt-3 text-center text-xs text-white/55">
+                            {validationMessage}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Flexible pricing note — pinned to the bottom so it lines up
+                with the WhatsApp CTA opposite it, once both columns are
+                stretched to the same row height. Same trailing gap (pt-8) as
+                the left column, so the vertical rhythm matches on both sides. */}
+            <div
+              data-reveal="right"
+              className="reveal-d3 mt-8 lg:mt-auto lg:pt-8"
+            >
+              <div className="flex items-start gap-4 rounded-[var(--radius-lg)] border border-mist bg-cloud p-6">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
                   <svg
-                    className="h-3.5 w-3.5"
+                    className="h-4 w-4"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -787,56 +848,17 @@ function CarDetailPageContent() {
                     <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
                   </svg>
                 </span>
-                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
-                  {t.carDetail.flexiblePricingTitle}
-                </p>
+                <div className="max-w-md">
+                  <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-stone">
+                    {t.carDetail.flexiblePricingTitle}
+                  </p>
+                  <p className="mt-1.5 text-xs leading-6 text-stone">
+                    {t.carDetail.flexiblePricingDesc}
+                  </p>
+                </div>
               </div>
-              <p className="mt-3 text-xs leading-6 text-stone">
-                {t.carDetail.flexiblePricingDesc}
-              </p>
             </div>
           </div>
-
-          {/* ── COL 1, ROW 3: Tags & Description ── */}
-          <div
-            data-reveal="left"
-            className="reveal-d1 order-6 lg:col-start-1 lg:row-start-3 xl:col-start-1 xl:row-start-3"
-          >
-            {car.features?.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {car.features.map((f) => (
-                  <span key={f} className="chip">
-                    {f}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            {car.description && (
-              <p className="mt-6 text-sm leading-7 text-stone">
-                {car.description}
-              </p>
-            )}
-          </div>
-
-          {/* ── COLS 2+3, ROW 3: WhatsApp CTA ── */}
-          <div className="order-5 lg:col-start-1 lg:col-span-2 lg:row-start-4 xl:col-start-2 xl:col-span-2 xl:row-start-3 xl:self-start">
-            <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                interpolate(t.carDetail.whatsappInterest, {
-                  brand: car.brand,
-                  name: car.name,
-                }),
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2.5 rounded-[var(--radius)] border border-ink py-3.5 text-sm font-medium text-ink transition-colors duration-200 hover:border-[#25D366] hover:bg-[#25D366] hover:text-white active:scale-[0.98]"
-            >
-              <WhatsAppIcon size={16} />
-              {t.carDetail.contactWhatsapp}
-            </a>
-          </div>
-
         </div>
       </div>
 

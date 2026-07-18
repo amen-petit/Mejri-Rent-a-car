@@ -72,7 +72,7 @@ export default function AddonServices({
               role="checkbox"
               aria-checked={selected}
               onClick={() => toggle(svc.key)}
-              className={`group flex w-full items-start gap-3 rounded-[var(--radius)] border p-3.5 text-start transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
+              className={`group flex w-full items-center gap-3 rounded-[var(--radius)] border p-3 text-start transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
                 selected
                   ? dark
                     ? "border-accent bg-accent/15"
@@ -83,7 +83,7 @@ export default function AddonServices({
               }`}
             >
               <span
-                className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-[var(--radius-xs)] border-2 transition-colors duration-200 ${
+                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-[var(--radius-xs)] border-2 transition-colors duration-200 ${
                   selected
                     ? "border-accent bg-accent text-white"
                     : dark
@@ -98,29 +98,20 @@ export default function AddonServices({
                 />
               </span>
 
-              <span className="min-w-0 flex-1">
-                <span className="flex items-baseline justify-between gap-2">
-                  <span
-                    className={`text-sm font-medium ${dark ? "text-white" : "text-ink"}`}
-                  >
-                    {t.addons[svc.key].label}
-                  </span>
-                  <span
-                    className={`whitespace-nowrap text-xs font-semibold ${
-                      dark ? "text-white/70" : "text-accent"
-                    }`}
-                  >
-                    {interpolate(t.carDetail.addonPerDay, {
-                      price: svc.pricePerDay,
-                    })}
-                  </span>
+              <span className="flex min-w-0 flex-1 items-baseline justify-between gap-2">
+                <span
+                  className={`text-sm font-medium ${dark ? "text-white" : "text-ink"}`}
+                >
+                  {t.addons[svc.key].label}
                 </span>
                 <span
-                  className={`mt-0.5 block text-[0.7rem] leading-snug ${
-                    dark ? "text-white/45" : "text-stone"
+                  className={`whitespace-nowrap text-xs font-semibold ${
+                    dark ? "text-white/70" : "text-accent"
                   }`}
                 >
-                  {t.addons[svc.key].hint}
+                  {interpolate(t.carDetail.addonPerDay, {
+                    price: svc.pricePerDay,
+                  })}
                 </span>
               </span>
             </button>
