@@ -628,6 +628,16 @@ export default function AdminReservations() {
                           )}
                         </div>
                       )}
+                      {selected.addons?.length > 0 && (
+                        <div className="mt-1 space-y-0.5">
+                          {selected.addons.map((a) => (
+                            <div key={a.key} className="text-xs text-accent">
+                              {fr.addons[a.key]?.label ?? a.key} · {a.daily_rate}{" "}
+                              DT/j · {a.total} DT
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
 

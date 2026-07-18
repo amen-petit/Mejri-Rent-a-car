@@ -13,6 +13,7 @@ import {
   PROMO_BADGE_STYLES,
   DEFAULT_PROMO_BADGE_STYLE,
 } from "./constants";
+import { ADDON_KEYS } from "./addons";
 
 export const pricingTierSchema = z
   .object({
@@ -70,6 +71,8 @@ export const reservationInputSchema = z
     return_time: bookingTime,
     pickup_location: rentalLocation,
     return_location: rentalLocation,
+    // Selected optional add-on service keys; priced authoritatively server-side.
+    addons: z.array(z.enum(ADDON_KEYS)).max(10).optional().default([]),
     notes: z.string().trim().max(2000).nullable().optional(),
   })
   .refine((r) => r.end_date >= r.start_date, {

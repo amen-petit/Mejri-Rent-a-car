@@ -5,6 +5,7 @@ import {
   getMatchingTierForDuration,
   getDailyRateForDuration,
   computeQuote,
+  computeBookingQuote,
 } from "./pricing";
 import type { PricingTier, Promotion } from "./types";
 
@@ -271,5 +272,52 @@ describe("computeQuote", () => {
     expect(q.dailyRate).toBe(q.originalDailyRate);
     expect(q.totalPrice).toBe(q.originalTotal);
     expect(q.promotion).toBeNull();
+  });
+});
+
+describe("computeBookingQuote", () => {
+  const car = { price_per_day: 60, pricing_tiers: null };
+
+  it("adds chauffeur (days × 30) on top of the vehicle total", () => {
+    // 3 days: vehicle 3×60=180, chauffeur 3×30=90, grand 270
+    const b = computeBookingQuote(car, "2025-01-01", "2025-01-03", null, [
+      "chauffeur",
+    ]);
+    expect(b.vehicleTotal).toBe(180);
+    expect(b.addons).toEqual([
+      { key: "chauffeur", daily_rate: 30, days: 3, total: 90 },
+    ]);
+    expect(b.addonsTotal).toBe(90);
+    expect(b.grandTotal).toBe(270);
+  });
+
+  it("prices a 1-day chauffeur booking at +30", () => {
+    const b = computeBookingQuote(car, "2025-01-01", "2025-01-01", null, [
+      "chauffeur",
+    ]);
+    expect(b.addonsTotal).toBe(30);
+    expect(b.grandTotal).toBe(b.vehicleTotal + 30);
+  });
+
+  it("grand total equals vehicle total when no add-ons are selected", () => {
+    const b = computeBookingQuote(car, "2025-01-01", "2025-01-05", null, []);
+    expect(b.addons).toEqual([]);
+    expect(b.addonsTotal).toBe(0);
+    expect(b.grandTotal).toBe(b.vehicleTotal);
+  });
+
+  it("applies add-ons on top of the DISCOUNTED vehicle total under a promo", () => {
+    // 5 days @ 60, -20% -> vehicle 48×5=240; chauffeur 5×30=150; grand 390
+    const b = computeBookingQuote(
+      car,
+      "2025-01-01",
+      "2025-01-05",
+      mkPromo({ discount_type: "percentage", discount_value: 20 }),
+      ["chauffeur"],
+    );
+    expect(b.vehicleTotal).toBe(240);
+    expect(b.addonsTotal).toBe(150);
+    expect(b.grandTotal).toBe(390);
+    expect(b.originalTotal).toBe(300); // vehicle-only, pre-discount
   });
 });

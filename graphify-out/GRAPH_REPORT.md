@@ -1,16 +1,16 @@
-# Graph Report - Mejri-Rent-a-car  (2026-07-11)
+# Graph Report - Mejri-Rent-a-car  (2026-07-18)
 
 ## Corpus Check
-- 251 files · ~1,046,961 words
+- 255 files · ~353,596 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4828 nodes · 7593 edges · 334 communities (309 shown, 25 thin omitted)
+- 4860 nodes · 7661 edges · 333 communities (308 shown, 25 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 155 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0986e35a`
+- Built from commit: `97d6a7d6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -277,7 +277,6 @@
 - [[_COMMUNITY_Community 265|Community 265]]
 - [[_COMMUNITY_Community 266|Community 266]]
 - [[_COMMUNITY_Community 267|Community 267]]
-- [[_COMMUNITY_Community 268|Community 268]]
 - [[_COMMUNITY_Community 270|Community 270]]
 - [[_COMMUNITY_Community 271|Community 271]]
 - [[_COMMUNITY_Community 273|Community 273]]
@@ -356,9 +355,9 @@
 5. `Impeccable Skill (SKILL.md)` - 20 edges
 6. `CarDetailPage()` - 19 edges
 7. `compilerOptions` - 17 edges
-8. `Royal Car - App Documentation` - 17 edges
-9. `handleClick()` - 17 edges
-10. `handleKeyDown()` - 17 edges
+8. `CarDetailPageContent()` - 17 edges
+9. `Royal Car - App Documentation` - 17 edges
+10. `handleClick()` - 17 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `RootLayout Component` --implements--> `@theme Design Tokens`  [AMBIGUOUS]
@@ -383,19 +382,19 @@
 - **Design System Documentation Pipeline** — teach_product_md, document_design_md_format, extract_design_tokens, polish_design_system_discovery [INFERRED 0.85]
 - **Visual Hierarchy Through Space & Scale** — spatial_squint_test, layout_visual_hierarchy, typeset_type_scale, distill_visual_simplification [INFERRED 0.75]
 
-## Communities (334 total, 25 thin omitted)
+## Communities (333 total, 25 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.04
-Nodes (70): acknowledgePendingEvent(), annotRoot, args, CONTEXT_DIR, { detectScript, sessionPath, livePath }, __dirname, enqueueEvent(), existingRecord (+62 more)
+Nodes (66): acknowledgePendingEvent(), annotRoot, args, CONTEXT_DIR, { detectScript, sessionPath, livePath }, __dirname, enqueueEvent(), existingRecord (+58 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.09
-Nodes (39): Params, GET(), POST(), bustPromoCaches(), DELETE(), EXT_BY_MIME, Params, POST() (+31 more)
+Cohesion: 0.10
+Nodes (37): Params, GET(), POST(), bustPromoCaches(), DELETE(), EXT_BY_MIME, Params, POST() (+29 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.11
-Nodes (27): _(), be(), bt(), Ct(), _e(), er(), fe(), Gt() (+19 more)
+Cohesion: 0.12
+Nodes (25): ae(), be(), bt(), de(), dt(), _e(), er(), fe() (+17 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.07
@@ -478,8 +477,8 @@ Cohesion: 0.13
 Nodes (22): Admin Authentication, Atomic Booking Transaction, Availability Counting, Reservation / Booking Flow, App Documentation Overview, Pricing Tiers, Row-Level Security (RLS), Service-Role Key Access (+14 more)
 
 ### Community 23 - "Community 23"
-Cohesion: 0.05
-Nodes (37): engagements, features, Home(), metadata, steps, testimonials, sitemap(), useConfirm() (+29 more)
+Cohesion: 0.04
+Nodes (41): engagements, features, Home(), metadata, steps, testimonials, sitemap(), LocationSection() (+33 more)
 
 ### Community 24 - "Community 24"
 Cohesion: 0.10
@@ -522,12 +521,12 @@ Cohesion: 0.11
 Nodes (17): Accent Color Application, Accessibility, Assess Color Opportunity, Background & Surfaces, Balance & Refinement, Borders & Accents, Cohesion, Data Visualization (+9 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.08
-Nodes (54): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+46 more)
+Cohesion: 0.09
+Nodes (52): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+44 more)
 
 ### Community 35 - "Community 35"
-Cohesion: 0.09
-Nodes (44): BookingSearchCard(), useToast(), Props, formatDate(), interpolate(), monthName(), plural(), pluralSuffix() (+36 more)
+Cohesion: 0.08
+Nodes (45): Error(), BookingSearchCard(), Hero(), Props, useI18n(), formatDate(), interpolate(), monthName() (+37 more)
 
 ### Community 36 - "Community 36"
 Cohesion: 0.15
@@ -559,7 +558,7 @@ Nodes (15): Accessibility Considerations, Anti-reflexes worth defending against,
 
 ### Community 43 - "Community 43"
 Cohesion: 0.11
-Nodes (26): GET(), AvailabilityCar, BOOKING_BLOCKING_STATUSES, computeCarWindowAvailability(), computeFleetAvailability(), peakConcurrentReservations(), reservationCoversDay(), reservationOverlapsWindow() (+18 more)
+Nodes (33): GET(), ADDON_KEYS, ADDON_SERVICES, AddonKey, AddonLine, AddonService, computeAddonLines(), getAddonService() (+25 more)
 
 ### Community 44 - "Community 44"
 Cohesion: 0.13
@@ -606,8 +605,8 @@ Cohesion: 0.14
 Nodes (13): Accessibility & Inclusion, Brand & Personality, Interview mode, not confirmation mode, Minimum viable interview, Register (ask first; it shapes everything below), Step 1: Load current state, Step 2: Explore the codebase, Step 3: Ask strategic questions (for PRODUCT.md) (+5 more)
 
 ### Community 55 - "Community 55"
-Cohesion: 0.09
-Nodes (52): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+44 more)
+Cohesion: 0.08
+Nodes (54): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+46 more)
 
 ### Community 56 - "Community 56"
 Cohesion: 0.17
@@ -627,7 +626,7 @@ Nodes (33): buildTargetNames(), cleanSkillsLock(), cleanup(), DEPRECATED_NAMES, 
 
 ### Community 60 - "Community 60"
 Cohesion: 0.08
-Nodes (29): cairo, dmSans, fraunces, inter, metadata, RootLayout(), spaceGrotesk, Loading() (+21 more)
+Nodes (30): cairo, dmSans, fraunces, inter, metadata, RootLayout(), spaceGrotesk, websiteSchema (+22 more)
 
 ### Community 61 - "Community 61"
 Cohesion: 0.17
@@ -790,11 +789,11 @@ Cohesion: 0.50
 Nodes (4): Variant Scaffold Pattern (live iteration), Style Mode Detection (scoped vs astro-global-prefixed), Variant Scaffold (impeccable-variants wrapper), wrapCli (Element Wrapper CLI)
 
 ### Community 102 - "Community 102"
-Cohesion: 0.60
-Nodes (3): Deploy on Vercel, Getting Started, Learn More
+Cohesion: 0.14
+Nodes (14): Admin, Database setup (Supabase), Deployment (Vercel), Environment variables, Features, Getting started, Mejri Rent a Car, Prerequisites (+6 more)
 
 ### Community 103 - "Community 103"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): adapt, argumentHint, description
 
 ### Community 104 - "Community 104"
@@ -838,7 +837,7 @@ Cohesion: 0.67
 Nodes (3): delight, argumentHint, description
 
 ### Community 116 - "Community 116"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): distill, argumentHint, description
 
 ### Community 117 - "Community 117"
@@ -902,8 +901,8 @@ Cohesion: 0.06
 Nodes (32): Accessibility, Animation Standards Reference, Asymmetric timing, Cohesion, Debugging (recommend in reviews when feel is uncertain), Duration, Easing, Gestures & drag (+24 more)
 
 ### Community 153 - "Community 153"
-Cohesion: 0.08
-Nodes (19): AdminAvailability(), formatFr(), getDays(), Mode, Props, CarAvailability, FleetAvailabilitySummary, RESERVATION_STATUS_COLOR (+11 more)
+Cohesion: 0.07
+Nodes (30): ConfirmOptions, ConfirmState, FeedbackContext, FeedbackContextValue, FeedbackProvider(), ToastItem, ToastVariant, useConfirm() (+22 more)
 
 ### Community 154 - "Community 154"
 Cohesion: 0.10
@@ -966,8 +965,8 @@ Cohesion: 0.05
 Nodes (37): 1. Read the screenshot (if present), 2. Wrap the element, 3. Load the action's reference, 4. Plan three variants: identity first, then mode, then axes, 5. Apply the freeform prompt (if present), 6. Write all variants in a single edit, 7. Parameters (composition-sized, 0–4 per variant), 8. Signal done (+29 more)
 
 ### Community 169 - "Community 169"
-Cohesion: 0.06
-Nodes (27): Error(), ConfirmOptions, ConfirmState, FeedbackContext, FeedbackContextValue, FeedbackProvider(), ToastItem, ToastVariant (+19 more)
+Cohesion: 0.10
+Nodes (17): Footer(), FooterNavItem, legalItems, navItems, isSamePageHashClick(), performHashScroll(), scrollToHashOnSamePage(), NAV_LINKS (+9 more)
 
 ### Community 171 - "Community 171"
 Cohesion: 0.05
@@ -982,28 +981,28 @@ Cohesion: 0.10
 Nodes (27): bool, DesignSystemGenerator, _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system() (+19 more)
 
 ### Community 174 - "Community 174"
-Cohesion: 0.13
-Nodes (26): firstExisting(), getCritiqueDir(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath(), getLiveAnnotationsDir() (+18 more)
+Cohesion: 0.07
+Nodes (54): firstExisting(), getCritiqueDir(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath(), getLiveAnnotationsDir() (+46 more)
 
 ### Community 175 - "Community 175"
 Cohesion: 0.08
-Nodes (23): navItems, CAR_CATEGORIES, DEFAULT_PROMO_BADGE_STYLE, FUEL_TYPES, MONTHS_FR_SHORT, PROMO_BADGE_STYLES, PROMOTION_TYPES, RENTAL_LOCATIONS (+15 more)
+Nodes (24): navItems, CAR_CATEGORIES, DAYS_FR, DEFAULT_PROMO_BADGE_STYLE, FUEL_TYPES, MONTHS_FR_SHORT, PROMO_BADGE_STYLES, PROMOTION_TYPES (+16 more)
 
 ### Community 176 - "Community 176"
-Cohesion: 0.16
-Nodes (23): completeCli(), completeThroughServer(), parseArgs(), readServerInfo(), fetchServerStatus(), readServerInfo(), statusCli(), completeCli() (+15 more)
+Cohesion: 0.27
+Nodes (12): completeCli(), completeThroughServer(), parseArgs(), readServerInfo(), completeCli(), completeThroughServer(), parseArgs(), readServerInfo() (+4 more)
 
 ### Community 177 - "Community 177"
 Cohesion: 0.25
 Nodes (8): scripts, build, dev, lint, start, test, test:watch, typecheck
 
 ### Community 178 - "Community 178"
-Cohesion: 0.12
-Nodes (24): appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH, __dirname, findCspMetaTags(), getAttr() (+16 more)
+Cohesion: 0.07
+Nodes (46): appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH, __dirname, findCspMetaTags(), getAttr() (+38 more)
 
 ### Community 179 - "Community 179"
-Cohesion: 0.12
-Nodes (22): appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH, __dirname, findCspMetaTags(), getAttr() (+14 more)
+Cohesion: 0.29
+Nodes (7): ht(), L(), me(), pt(), ut(), wt(), ye()
 
 ### Community 180 - "Community 180"
 Cohesion: 0.08
@@ -1027,7 +1026,7 @@ Nodes (22): Assess Onboarding Needs, Context Over Ceremony, Contextual Help, Des
 
 ### Community 186 - "Community 186"
 Cohesion: 0.17
-Nodes (14): buildPollReplyPayload(), pollCli(), postReply(), readServerInfo(), buildPollReplyPayload(), pollCli(), postReply(), readServerInfo() (+6 more)
+Nodes (15): buildPollReplyPayload(), pollCli(), postReply(), readServerInfo(), buildPollReplyPayload(), pollCli(), postReply(), readServerInfo() (+7 more)
 
 ### Community 187 - "Community 187"
 Cohesion: 0.10
@@ -1110,8 +1109,8 @@ Cohesion: 0.12
 Nodes (16): Avoid Redundant Copy, Confirmation Dialogs: Use Sparingly, Consistency: The Terminology Problem, Don't Blame the User, Empty States Are Opportunities, Error Message Templates, Error Messages: The Formula, Form Instructions (+8 more)
 
 ### Community 208 - "Community 208"
-Cohesion: 0.08
-Nodes (36): AdminSessionPayload, constantTimeEqual(), createAdminSessionToken(), fromBase64Url(), importSecretKey(), signValue(), toBase64Url(), verifyAdminSessionToken() (+28 more)
+Cohesion: 0.07
+Nodes (41): AdminSessionPayload, constantTimeEqual(), createAdminSessionToken(), fromBase64Url(), importSecretKey(), signValue(), toBase64Url(), verifyAdminSessionToken() (+33 more)
 
 ### Community 209 - "Community 209"
 Cohesion: 0.12
@@ -1218,8 +1217,8 @@ Cohesion: 0.14
 Nodes (13): Accessibility & Inclusion, Brand & Personality, Interview mode, not confirmation mode, Minimum viable interview, Register (ask first; it shapes everything below), Step 1: Load current state, Step 2: Explore the codebase, Step 3: Ask strategic questions (for PRODUCT.md) (+5 more)
 
 ### Community 235 - "Community 235"
-Cohesion: 0.20
-Nodes (11): Ce(), Ee(), Et(), It(), ne(), Rt(), St(), _t() (+3 more)
+Cohesion: 0.16
+Nodes (15): _(), Ce(), Ct(), Ee(), Et(), It(), Kt(), ne() (+7 more)
 
 ### Community 236 - "Community 236"
 Cohesion: 0.17
@@ -1322,8 +1321,8 @@ Cohesion: 0.22
 Nodes (8): 1. Impatient Power User: "Alex", 2. Confused First-Timer: "Jordan", 3. Accessibility-Dependent User: "Sam", 4. Deliberate Stress Tester: "Riley", 5. Distracted Mobile User: "Casey", Persona-Based Design Testing, Project-Specific Personas, Selecting Personas
 
 ### Community 263 - "Community 263"
-Cohesion: 0.39
-Nodes (6): parseArgs(), resumeCli(), parseArgs(), resumeCli(), parseArgs(), resumeCli()
+Cohesion: 0.17
+Nodes (16): parseArgs(), resumeCli(), fetchServerStatus(), readServerInfo(), statusCli(), parseArgs(), resumeCli(), fetchServerStatus() (+8 more)
 
 ### Community 264 - "Community 264"
 Cohesion: 0.25
@@ -1340,10 +1339,6 @@ Nodes (8): Animate enter states with @starting-style, Buttons must feel responsi
 ### Community 267 - "Community 267"
 Cohesion: 0.25
 Nodes (7): Extract Flow, Step 1: Discover the Design System, Step 2: Identify Patterns, Step 3: Plan Extraction, Step 4: Extract & Enrich, Step 5: Migrate, Step 6: Document
-
-### Community 268 - "Community 268"
-Cohesion: 0.14
-Nodes (24): createRequestHandler(), firstExisting(), getCritiqueDir(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath() (+16 more)
 
 ### Community 270 - "Community 270"
 Cohesion: 0.29
@@ -1410,8 +1405,8 @@ Cohesion: 0.40
 Nodes (5): Interruptibility advantage, Spring Animations, Spring-based mouse interactions, Spring configuration, When to use springs
 
 ### Community 287 - "Community 287"
-Cohesion: 0.15
-Nodes (14): ae(), de(), dt(), ft(), Ie(), jt(), Lt(), Mt() (+6 more)
+Cohesion: 0.40
+Nodes (5): Ie(), Lt(), Ot(), Re(), z()
 
 ### Community 288 - "Community 288"
 Cohesion: 0.67
@@ -1450,7 +1445,7 @@ Cohesion: 0.67
 Nodes (3): bolder, argumentHint, description
 
 ### Community 298 - "Community 298"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): clarify, argumentHint, description
 
 ### Community 299 - "Community 299"
@@ -1510,7 +1505,7 @@ Cohesion: 0.67
 Nodes (3): polish, argumentHint, description
 
 ### Community 313 - "Community 313"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): quieter, argumentHint, description
 
 ### Community 314 - "Community 314"
@@ -1624,7 +1619,7 @@ Nodes (3): typeset, argumentHint, description
   src/app/sitemap.ts · relation: references
 
 ## Knowledge Gaps
-- **2203 isolated node(s):** `eslintConfig`, `config`, `supabaseHostname`, `csp`, `securityHeaders` (+2198 more)
+- **2217 isolated node(s):** `eslintConfig`, `config`, `supabaseHostname`, `csp`, `securityHeaders` (+2212 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **25 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -1639,9 +1634,9 @@ _Questions this graph is uniquely positioned to answer:_
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
 - **What is the exact relationship between `Sitemap Generator` and `Environment-Variable Configuration`?**
   _Edge tagged AMBIGUOUS (relation: references) - confidence is low._
-- **Why does `readLiveServerInfo()` connect `Community 176` to `Community 0`, `Community 268`, `Community 174`, `Community 182`, `Community 186`?**
+- **Why does `readLiveServerInfo()` connect `Community 186` to `Community 0`, `Community 263`, `Community 174`, `Community 176`, `Community 182`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `rateLimit()` connect `Community 208` to `Community 43`?**
-  _High betweenness centrality (0.000) - this node is a cross-community bridge._
 - **Why does `Design Engineering` connect `Community 259` to `Community 289`, `Community 290`, `Community 265`, `Community 273`, `Community 274`, `Community 275`, `Community 276`, `Community 281`, `Community 282`, `Community 283`?**
+  _High betweenness centrality (0.000) - this node is a cross-community bridge._
+- **Why does `Design Brief Output` connect `Community 47` to `Community 57`, `Community 58`, `Community 36`?**
   _High betweenness centrality (0.000) - this node is a cross-community bridge._

@@ -1510,8 +1510,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\layout.tsx": {
-    "mtime": 1783400908.2694874,
-    "ast_hash": "3052dc7132788bfff4a8fe4e308103b0",
+    "mtime": 1784221736.890896,
+    "ast_hash": "c64aea8f009e0d53f58ce992fc4e64ce",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\loading.tsx": {
@@ -1525,8 +1525,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\page.tsx": {
-    "mtime": 1783738208.0624218,
-    "ast_hash": "72f94b3e09f03a47cfeee61ad2431f25",
+    "mtime": 1784226607.618984,
+    "ast_hash": "2783a737c88aa5eaac93b9c7a6573651",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\robots.ts": {
@@ -1545,8 +1545,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\admin\\page.tsx": {
-    "mtime": 1783398380.8570912,
-    "ast_hash": "303ff9cfc3e0fa9defd03c5441506012",
+    "mtime": 1784226148.3991716,
+    "ast_hash": "92a97bc1086c6b707b7a02c6a4a697a6",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\admin\\disponibilite\\page.tsx": {
@@ -1560,8 +1560,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\admin\\reservations\\page.tsx": {
-    "mtime": 1783762336.9846635,
-    "ast_hash": "fc16625718ac44bf31ada269d7aed802",
+    "mtime": 1784373382.8388202,
+    "ast_hash": "104047a6de0c722c5c205463e3b49a32",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\admin\\voitures\\page.tsx": {
@@ -1605,8 +1605,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\api\\admin\\reservations\\[id]\\route.ts": {
-    "mtime": 1783424658.4774354,
-    "ast_hash": "a4bed031fe155baa24cf5f6b0542f502",
+    "mtime": 1784373338.7106078,
+    "ast_hash": "6ef8c4ac85049db39c20eb12348a8efb",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\api\\admin\\session\\route.ts": {
@@ -1625,8 +1625,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\api\\reservations\\route.ts": {
-    "mtime": 1783762301.9846134,
-    "ast_hash": "e2f5624cdeb338579ea17a7a696d79e9",
+    "mtime": 1784372985.011336,
+    "ast_hash": "c89fc3b8b725b8345c13438a5ae3bb82",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\voitures\\layout.tsx": {
@@ -1635,8 +1635,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\voitures\\page.tsx": {
-    "mtime": 1783738389.2149398,
-    "ast_hash": "3af7963f246cd2a0c9f97ec502836962",
+    "mtime": 1783854403.5979471,
+    "ast_hash": "792f2e065b28553498aad08c5b38178e",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\voitures\\[id]\\layout.tsx": {
@@ -1645,8 +1645,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\voitures\\[id]\\page.tsx": {
-    "mtime": 1783762416.786056,
-    "ast_hash": "979c154bb653e968b52c4501af124fda",
+    "mtime": 1784373209.1516263,
+    "ast_hash": "1757019fcfd2d44dffd764918dc560d7",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\ConditionalFooter.tsx": {
@@ -1660,8 +1660,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\Footer.tsx": {
-    "mtime": 1783478849.384022,
-    "ast_hash": "637c3418abf086be97b0724eaec3bedd",
+    "mtime": 1784227569.9895525,
+    "ast_hash": "4e4b264e5f6b523807aba640b3b2260a",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\Hero.tsx": {
@@ -1675,8 +1675,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\LocationSection.tsx": {
-    "mtime": 1783592231.1355865,
-    "ast_hash": "fff8bb4346190dda4c265736d5360b2a",
+    "mtime": 1784224134.9208856,
+    "ast_hash": "de720c90c2eb09a215c866e6a78a7851",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\MotionProvider.tsx": {
@@ -1685,8 +1685,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\Navbar.tsx": {
-    "mtime": 1783478792.888586,
-    "ast_hash": "d8fd74499be708f7ff86edab2e4aa0a4",
+    "mtime": 1784227545.7582107,
+    "ast_hash": "d12061fb5c1e4680a693975b01fc2986",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\SocialLinks.tsx": {
@@ -1730,8 +1730,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\ui\\Select.tsx": {
-    "mtime": 1783647754.5405602,
-    "ast_hash": "00a51f76e73fd03dbc144a3532f2c667",
+    "mtime": 1783853458.4676528,
+    "ast_hash": "99b0906ba409d25fe5aaac6eab4a6d15",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\i18n\\client.tsx": {
@@ -1755,18 +1755,18 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\i18n\\dictionaries\\ar.ts": {
-    "mtime": 1783797670.0750985,
-    "ast_hash": "7d5d7d3e3cd8d9c8a14e26360fb03f4b",
+    "mtime": 1784373546.322348,
+    "ast_hash": "81265a7d9c2b9a203aaf84efec56534e",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\i18n\\dictionaries\\en.ts": {
-    "mtime": 1783797637.8161178,
-    "ast_hash": "d2a1d77f314c9f62c9189abb7f7e5576",
+    "mtime": 1784373499.602221,
+    "ast_hash": "cef3dda20a9e7c5d4cfaf45aaac95fc9",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\i18n\\dictionaries\\fr.ts": {
-    "mtime": 1783797587.6272204,
-    "ast_hash": "6f7fe8b077a64cf2c58b7efd299c2dee",
+    "mtime": 1784373440.1143205,
+    "ast_hash": "804770e35076df228df28514baed8cce",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\i18n\\dictionaries\\index.ts": {
@@ -1790,8 +1790,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\availability.test.ts": {
-    "mtime": 1783737662.7005644,
-    "ast_hash": "27b659f93db0bd28f183db3315e076cd",
+    "mtime": 1784372840.0746908,
+    "ast_hash": "c71a681794d356e152c09f9c4456dcde",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\availability.ts": {
@@ -1805,8 +1805,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\constants.ts": {
-    "mtime": 1783797556.8458385,
-    "ast_hash": "3eb20d5ced36e8fa373c2e7d461bf346",
+    "mtime": 1784226579.7193248,
+    "ast_hash": "e819b1ab5f9168ee1a53ad7a9db3bd86",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\dates.ts": {
@@ -1815,18 +1815,18 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\email.ts": {
-    "mtime": 1783762293.7089195,
-    "ast_hash": "596871007f5a5ede7f864abff1e3f2b0",
+    "mtime": 1784373329.0183215,
+    "ast_hash": "4ef59abf0c96de7dc914c78e67a4ea28",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\pricing.test.ts": {
-    "mtime": 1783737491.6384676,
-    "ast_hash": "90a927de726c3620772c3690e66e5f8c",
+    "mtime": 1784372827.059876,
+    "ast_hash": "a2e970264757b47aee716b5db6c59f67",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\pricing.ts": {
-    "mtime": 1783737435.1530278,
-    "ast_hash": "d73dfe7f2c8733b20b89deeec1d4acf8",
+    "mtime": 1784372673.9239206,
+    "ast_hash": "d79ba5f940ee78f9c847d1c94a24c259",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\rate-limit.ts": {
@@ -1850,8 +1850,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\types.ts": {
-    "mtime": 1783737294.6676552,
-    "ast_hash": "1474c3b931e9ebebec67656ad7224d66",
+    "mtime": 1784372696.9421158,
+    "ast_hash": "e641ec329f3c2a7d9c341a5a441b6951",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\validation.test.ts": {
@@ -1860,8 +1860,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\validation.ts": {
-    "mtime": 1783737575.194899,
-    "ast_hash": "b40718dd5721cde1ff9fd9c7e205c77e",
+    "mtime": 1784372722.0240018,
+    "ast_hash": "a99febc7e323f7270da7d0403d4e1f3f",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\supabase\\add-pickup-return-time.sql": {
@@ -1910,8 +1910,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\README.md": {
-    "mtime": 1783398380.651089,
-    "ast_hash": "9162add00befbcdb432430f405c4ad8d",
+    "mtime": 1783852698.4287753,
+    "ast_hash": "868b628f6fd6187408609603d73b9e30",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\TEMPLATE.md": {
@@ -2344,11 +2344,6 @@
     "ast_hash": "ef38e1689fcc315232d9294dd2f17354",
     "semantic_hash": ""
   },
-  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\public\\brand-logo.png": {
-    "mtime": 1783398380.8471808,
-    "ast_hash": "e10d3d20b98e756a3a54a682443387ff",
-    "semantic_hash": ""
-  },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\public\\file.svg": {
     "mtime": 1783398380.8480904,
     "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
@@ -2362,16 +2357,6 @@
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\public\\next.svg": {
     "mtime": 1783398380.8530917,
     "ast_hash": "8e061864f388b47f33a1c3780831193e",
-    "semantic_hash": ""
-  },
-  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\public\\Untitled design (4).png": {
-    "mtime": 1783398380.775107,
-    "ast_hash": "e10d3d20b98e756a3a54a682443387ff",
-    "semantic_hash": ""
-  },
-  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\public\\Untitled design.png": {
-    "mtime": 1783398380.815186,
-    "ast_hash": "c39e217bcd5c75f52dd692f04efb84b8",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\public\\vercel.svg": {
@@ -2419,11 +2404,6 @@
     "ast_hash": "af0f44e1d25bf82be35132f3630cff73",
     "semantic_hash": ""
   },
-  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\icon.png": {
-    "mtime": 1783398380.9000907,
-    "ast_hash": "e10d3d20b98e756a3a54a682443387ff",
-    "semantic_hash": ""
-  },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\app\\api\\cars\\search\\route.ts": {
     "mtime": 1783404158.7860348,
     "ast_hash": "9882a0b00a84cd666cb838df981474db",
@@ -2435,8 +2415,8 @@
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\ReviewsShowcase.tsx": {
-    "mtime": 1783524689.5351424,
-    "ast_hash": "a28edcb3a5f0190c2a8af8b9a57e6419",
+    "mtime": 1784207101.2278278,
+    "ast_hash": "6b47b58712a53969020dc91a3cee108d",
     "semantic_hash": ""
   },
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\ui\\SegmentedControl.tsx": {
@@ -2522,6 +2502,36 @@
   "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\supabase\\expand-locations.sql": {
     "mtime": 1783797536.36266,
     "ast_hash": "e4a2cebb1ed7349175b327663f280987",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\components\\hash-scroll.ts": {
+    "mtime": 1784227523.7991989,
+    "ast_hash": "689bb322715e2b54c8a406b3b3249eea",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\addons.test.ts": {
+    "mtime": 1784372759.4830778,
+    "ast_hash": "8331187229993357f55e05014a0ff671",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\src\\lib\\addons.ts": {
+    "mtime": 1784372644.8255527,
+    "ast_hash": "d1e9a64710e49da9e4ec5b4813e47a31",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\supabase\\add-addons.sql": {
+    "mtime": 1784372603.6203706,
+    "ast_hash": "8f6dc893ea3da353b64700888316a0bc",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\public\\logo.jpg": {
+    "mtime": 1784215341.2923975,
+    "ast_hash": "af4eaff8a3858372ea3b02819dd4e477",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\MSI\\Desktop\\Mejri-Rent-a-car\\public\\logo.png": {
+    "mtime": 1784221551.1907263,
+    "ast_hash": "e496d777774f9407af70eac8de668cfc",
     "semantic_hash": ""
   }
 }

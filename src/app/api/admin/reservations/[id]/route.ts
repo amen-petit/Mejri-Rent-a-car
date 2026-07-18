@@ -62,6 +62,7 @@ export async function PATCH(req: Request, { params }: Params) {
       pickupLocation: updated.pickup_location ?? null,
       returnLocation: updated.return_location ?? null,
       totalPrice: updated.total_price,
+      addons: updated.addons ?? null,
       notes: updated.notes ?? null,
     }).catch((emailError) =>
       console.error(

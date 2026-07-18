@@ -8,11 +8,23 @@ import "server-only";
 import nodemailer from "nodemailer";
 import { EMAIL_DEFAULT_PORT } from "./constants";
 import { fr } from "./../i18n/dictionaries/fr";
+import type { ReservationAddon } from "./types";
 
 /** Localize a stored location value for the (French) notification emails. */
 function locationLabel(value?: string | null): string {
   if (!value) return "—";
   return fr.booking.locations[value] ?? value;
+}
+
+/** French one-line summary of add-on services, e.g. "Service chauffeur (7 × 30 DT = 210 DT)". */
+function addonsSummary(addons?: ReservationAddon[] | null): string {
+  if (!addons || addons.length === 0) return "";
+  return addons
+    .map((a) => {
+      const label = fr.addons[a.key]?.label ?? a.key;
+      return `${label} (${a.days} × ${a.daily_rate} DT = ${a.total} DT)`;
+    })
+    .join(" ; ");
 }
 
 export type ReservationEvent = "created" | "confirmed" | "cancelled";
@@ -33,6 +45,8 @@ export type ReservationEmailPayload = {
   /** Pre-discount total, set only when a promotion was applied. */
   originalTotal?: number | null;
   promotionLabel?: string | null;
+  /** Optional add-on services on the reservation (chauffeur, …). */
+  addons?: ReservationAddon[] | null;
   notes?: string | null;
 };
 
@@ -125,6 +139,7 @@ function buildAdminHtml(copy: EmailCopy, p: ReservationEmailPayload): string {
         ${row("Fin", p.returnTime ? `${p.endDate} à ${p.returnTime}` : p.endDate)}
         ${row("Lieu de départ", locationLabel(p.pickupLocation))}
         ${row("Lieu de retour", locationLabel(p.returnLocation))}
+        ${p.addons && p.addons.length > 0 ? row("Services", addonsSummary(p.addons)) : ""}
         ${row("Prix total", `${p.totalPrice} DT`)}
         ${
           p.originalTotal != null && p.originalTotal > p.totalPrice
@@ -146,6 +161,11 @@ function buildCustomerHtml(copy: EmailCopy, p: ReservationEmailPayload): string 
       <p style="margin:0 0 12px;">${copy.customerIntro}</p>
       <p style="margin:0 0 12px;">Période: ${escapeHtml(p.startDate)}${p.pickupTime ? ` à ${escapeHtml(p.pickupTime)}` : ""} au ${escapeHtml(p.endDate)}${p.returnTime ? ` à ${escapeHtml(p.returnTime)}` : ""}</p>
       <p style="margin:0 0 12px;">Lieu: ${escapeHtml(locationLabel(p.pickupLocation))}${p.returnLocation && p.returnLocation !== p.pickupLocation ? ` → ${escapeHtml(locationLabel(p.returnLocation))}` : ""}</p>
+      ${
+        p.addons && p.addons.length > 0
+          ? `<p style="margin:0 0 12px;">✓ ${escapeHtml(addonsSummary(p.addons))}</p>`
+          : ""
+      }
       <p style="margin:0 0 12px;">Prix estimé: ${p.totalPrice} DT</p>
       ${
         p.originalTotal != null && p.originalTotal > p.totalPrice

@@ -15,6 +15,7 @@ import {
   PICKUP_LEAD_MINUTES,
   type RentalLocation,
 } from "./constants";
+import { isAddonKey, type AddonKey } from "./addons";
 
 export type BookingSearch = {
   start: string; // YYYY-MM-DD (pickup date)
@@ -23,6 +24,8 @@ export type BookingSearch = {
   endTime: string; // HH:MM (return time)
   pickup: RentalLocation;
   return: RentalLocation;
+  /** Optional add-on services carried from the hero to the detail page. */
+  addons: AddonKey[];
 };
 
 export type BookingSearchError =
@@ -47,6 +50,8 @@ export function buildBookingSearchParams(search: BookingSearch): string {
     pickup: search.pickup,
     return: search.return,
   });
+  // Only present when something is selected, so bare searches stay clean URLs.
+  if (search.addons.length > 0) params.set("addons", search.addons.join(","));
   return params.toString();
 }
 
@@ -75,7 +80,17 @@ export function parseBookingSearch(
   const returnRaw = get("return");
   const returnLocation = isRentalLocation(returnRaw) ? returnRaw : pickup;
 
-  return { start, end, startTime, endTime, pickup, return: returnLocation };
+  // Comma-separated add-on keys; unknown/malformed entries are dropped, deduped.
+  const addons = [
+    ...new Set(
+      (get("addons") ?? "")
+        .split(",")
+        .map((s) => s.trim())
+        .filter((s): s is AddonKey => isAddonKey(s)),
+    ),
+  ];
+
+  return { start, end, startTime, endTime, pickup, return: returnLocation, addons };
 }
 
 /**

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { reservationInputSchema } from "@/lib/validation";
-import { computeQuote } from "@/lib/pricing";
+import { computeBookingQuote } from "@/lib/pricing";
 import { getActivePromotion } from "@/lib/promotions";
 import { sendReservationEmails } from "@/lib/email";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
@@ -74,8 +74,16 @@ export async function POST(req: Request) {
   const promotion = getActivePromotion(promoRows ?? [], car.id, today);
 
   // Authoritative price computed on the server; any client-sent price is ignored.
-  const quote = computeQuote(car, input.start_date, input.end_date, promotion);
-  if (quote.totalDays <= 0 || quote.totalPrice <= 0) {
+  // computeBookingQuote prices the vehicle AND the selected add-ons over the same
+  // duration; grandTotal is what the customer pays.
+  const quote = computeBookingQuote(
+    car,
+    input.start_date,
+    input.end_date,
+    promotion,
+    input.addons,
+  );
+  if (quote.totalDays <= 0 || quote.grandTotal <= 0) {
     return NextResponse.json({ error: "Période invalide." }, { status: 400 });
   }
 
@@ -90,10 +98,11 @@ export async function POST(req: Request) {
       p_return: input.return_time,
       p_pickup_location: input.pickup_location,
       p_return_location: input.return_location,
-      p_total: quote.totalPrice,
+      p_total: quote.grandTotal,
       p_original_daily: quote.originalDailyRate,
       p_discounted_daily: quote.dailyRate,
       p_promo_label: promotion?.label ?? null,
+      p_addons: quote.addons,
       p_name: input.client_name,
       p_phone: input.client_phone,
       p_email: input.client_email ?? null,
@@ -121,9 +130,10 @@ export async function POST(req: Request) {
     returnTime: input.return_time,
     pickupLocation: input.pickup_location,
     returnLocation: input.return_location,
-    totalPrice: quote.totalPrice,
+    totalPrice: quote.grandTotal,
     originalTotal: promotion ? quote.originalTotal : null,
     promotionLabel: promotion?.label ?? null,
+    addons: quote.addons,
     notes: input.notes ?? null,
   }).catch((error) =>
     console.error(
@@ -132,5 +142,5 @@ export async function POST(req: Request) {
     ),
   );
 
-  return NextResponse.json({ ok: true, id: newId, totalPrice: quote.totalPrice });
+  return NextResponse.json({ ok: true, id: newId, totalPrice: quote.grandTotal });
 }

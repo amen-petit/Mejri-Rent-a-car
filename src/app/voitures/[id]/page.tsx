@@ -10,8 +10,9 @@ import CarGlyph from "@/components/icons/CarGlyph";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { getCarById } from "@/lib/cars";
 import { getActivePromotionForCar } from "@/lib/promotions-data";
-import { computePromotionSavings, applyPromotionToRate } from "@/lib/promotions";
+import { computePromotionSavings } from "@/lib/promotions";
 import PromoBadge from "@/components/PromoBadge";
+import AddonServices from "@/components/AddonServices";
 import { Car, Promotion } from "@/lib/types";
 import {
   WHATSAPP_NUMBER,
@@ -23,7 +24,8 @@ import {
   DEFAULT_RENTAL_LOCATION,
   type RentalLocation,
 } from "@/lib/constants";
-import { computeQuote } from "@/lib/pricing";
+import { computeBookingQuote } from "@/lib/pricing";
+import { type AddonKey } from "@/lib/addons";
 import { parseBookingSearch } from "@/lib/booking-search";
 import { isPickupInPast, nowInTimezone, timeToMinutes } from "@/lib/time";
 import { useI18n } from "@/i18n/client";
@@ -124,6 +126,11 @@ function CarDetailPageContent() {
   const [returnLocation, setReturnLocation] = useState<RentalLocation>(
     presetSearch?.return ?? presetSearch?.pickup ?? DEFAULT_RENTAL_LOCATION,
   );
+  // Optional add-on services (chauffeur, …). An array so more services drop in;
+  // pre-filled from the search when the visitor already chose one in the hero.
+  const [addonKeys, setAddonKeys] = useState<AddonKey[]>(
+    presetSearch?.addons ?? [],
+  );
 
   // Contact form (collected in the confirm modal).
   const [showForm, setShowForm] = useState(false);
@@ -165,13 +172,14 @@ function CarDetailPageContent() {
   // and pure; the server recomputes and validates it on submit (single source
   // of truth for the amount). The user only ever sees the final total. ──
   const quote =
-    car && start && end ? computeQuote(car, start, end, promotion) : null;
+    car && start && end
+      ? computeBookingQuote(car, start, end, promotion, addonKeys)
+      : null;
   const totalDays = quote?.totalDays ?? 0;
-  const totalPrice = quote?.totalPrice ?? 0;
-  // Effective (promo-adjusted) daily rate — falls back to the discounted base
-  // price when no dates are picked yet.
-  const appliedDailyRate =
-    quote?.dailyRate ?? applyPromotionToRate(car?.price_per_day ?? 0, promotion);
+  // Grand total (vehicle + add-ons) is what the customer pays.
+  const totalPrice = quote?.grandTotal ?? 0;
+  const vehicleTotal = quote?.vehicleTotal ?? 0;
+  const addonLines = quote?.addons ?? [];
 
   // ── Time / availability validation (mirrors the server so the customer can't
   // pick something that will be rejected on submit). ──
@@ -290,6 +298,7 @@ function CarDetailPageContent() {
           return_time: returnTime,
           pickup_location: pickupLocation,
           return_location: returnLocation,
+          addons: addonKeys,
           notes: form.notes.trim() || null,
         }),
       });
@@ -585,6 +594,13 @@ function CarDetailPageContent() {
                     ariaLabel={t.booking.returnLocation}
                   />
                 </div>
+
+                {/* Optional services */}
+                <AddonServices
+                  value={addonKeys}
+                  onChange={setAddonKeys}
+                  tone="light"
+                />
               </div>
             </div>
           </div>
@@ -594,7 +610,7 @@ function CarDetailPageContent() {
             data-reveal="right"
             className="reveal-d3 order-4 lg:col-start-2 lg:row-start-2 xl:col-start-3 xl:row-start-1"
           >
-            <div className="flex h-full flex-col rounded-[var(--radius-lg)] bg-ink p-6 text-paper lg:p-7">
+            <div className="flex flex-col rounded-[var(--radius-lg)] bg-ink p-6 text-paper lg:p-7">
               <div className="space-y-4 border-b border-white/10 pb-5">
                 {summaryLine(
                   t.carDetail.pickup,
@@ -620,32 +636,54 @@ function CarDetailPageContent() {
                 </div>
               </div>
 
-              <div className="flex flex-1 flex-col pt-5">
-                <div className="mb-auto">
-                  <p className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
-                    {t.carDetail.totalEstimate}
-                  </p>
-                  <p className="mt-1 font-display text-3xl text-white">
-                    {totalDays > 0 ? `${totalPrice} ${t.common.currency}` : "—"}
-                  </p>
-                  {promotion &&
-                    totalDays > 0 &&
-                    quote &&
-                    quote.originalTotal > totalPrice && (
-                      <p className="mt-0.5 text-sm text-white/40 line-through">
-                        {quote.originalTotal} {t.common.currency}
-                      </p>
-                    )}
-                  {totalDays > 0 && (
-                    <p className="mt-1 text-[0.7rem] text-white/50">
-                      {interpolate(t.carDetail.perDayRate, {
-                        rate: appliedDailyRate,
-                      })}
-                    </p>
-                  )}
-                </div>
+              {/* Pricing → total → CTA: one continuous block, spaced by its own
+                  content rather than stretched to match the neighbouring columns. */}
+              <div className="pt-5">
+                {totalDays > 0 && (
+                  <div className="mb-4 space-y-2 border-b border-white/10 pb-4">
+                    {/* Vehicle line (with promo strikethrough) */}
+                    <div className="flex items-baseline justify-between gap-4">
+                      <span className="text-xs text-white/55">
+                        {t.carDetail.vehicleRental}
+                      </span>
+                      <span className="text-sm text-white">
+                        {promotion &&
+                          quote &&
+                          quote.originalTotal > vehicleTotal && (
+                            <span className="me-2 text-white/40 line-through">
+                              {quote.originalTotal}
+                            </span>
+                          )}
+                        {vehicleTotal} {t.common.currency}
+                      </span>
+                    </div>
+                    {/* Add-on lines */}
+                    {addonLines.map((line) => (
+                      <div
+                        key={line.key}
+                        className="flex items-baseline justify-between gap-4"
+                      >
+                        <span className="text-xs text-white/55">
+                          {t.addons[line.key].label}
+                          <span className="ms-1.5 text-white/35">
+                            {line.days} × {line.daily_rate} {t.common.currency}
+                          </span>
+                        </span>
+                        <span className="whitespace-nowrap text-sm text-white">
+                          {line.total} {t.common.currency}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <p className="text-[0.62rem] uppercase tracking-[0.16em] text-white/45">
+                  {t.carDetail.totalEstimate}
+                </p>
+                <p className="mt-1 font-display text-3xl text-white">
+                  {totalDays > 0 ? `${totalPrice} ${t.common.currency}` : "—"}
+                </p>
 
-                <div className="mt-6">
+                <div className="mt-5">
                   <button
                     onClick={() => setShowForm(true)}
                     disabled={!bookingReady}

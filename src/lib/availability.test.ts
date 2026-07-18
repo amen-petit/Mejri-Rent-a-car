@@ -26,6 +26,7 @@ function res(overrides: Partial<Reservation> = {}): Reservation {
     original_price_per_day: null,
     discounted_price_per_day: null,
     promotion_label: null,
+    addons: [],
     status: "confirmed",
     notes: null,
     created_at: "2026-06-01T00:00:00Z",

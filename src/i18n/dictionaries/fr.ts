@@ -195,6 +195,7 @@ export const fr = {
     returnTime: "Heure de retour",
     pickupLocation: "Lieu de prise en charge",
     returnLocation: "Lieu de retour",
+    optionalServices: "Services optionnels",
     search: "Voir les véhicules disponibles",
     searching: "Recherche…",
     datePlaceholder: "jj/mm/aaaa",
@@ -303,6 +304,8 @@ export const fr = {
       "Le prix de location est calculé automatiquement selon la durée, la saison et les dates choisies. Le montant final est toujours affiché avant la confirmation de votre réservation.",
     totalEstimate: "Total estimé",
     perDayRate: "{rate} DT / jour",
+    vehicleRental: "Location du véhicule",
+    addonPerDay: "+{price} DT / jour",
     confirmDays: "Confirmer — {days} {unit}",
     chooseEndToActivate:
       "Choisissez une date de fin pour activer la confirmation.",
@@ -339,6 +342,14 @@ export const fr = {
     toastConnection:
       "Problème de connexion. Vérifiez votre connexion internet et réessayez.",
   },
+  // Optional booking add-on services, keyed by AddonKey (src/lib/addons.ts).
+  // Record-typed so adding a future service is just one entry + a catalog line.
+  addons: {
+    chauffeur: {
+      label: "Service chauffeur",
+      hint: "Chauffeur professionnel pour toute la durée de la location.",
+    },
+  } as Record<string, { label: string; hint: string }>,
   states: {
     errorEyebrow: "Une erreur est survenue",
     errorTitle: "Quelque chose s'est mal passé",

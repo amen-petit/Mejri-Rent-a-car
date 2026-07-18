@@ -50,6 +50,10 @@ export type Promotion = {
 export type CarWithPromotion = Car & { promotion?: Promotion | null };
 
 import type { RentalLocation } from "./constants";
+import type { AddonLine } from "./addons";
+
+/** A priced optional add-on service stored on a reservation (snapshot). */
+export type ReservationAddon = AddonLine;
 
 export type Reservation = {
   id: string;
@@ -70,6 +74,10 @@ export type Reservation = {
   original_price_per_day: number | null;
   discounted_price_per_day: number | null;
   promotion_label: string | null;
+  // Optional add-on services (chauffeur, …). Priced snapshots; defaults to []
+  // for reservations made before add-ons existed. total_price is the GRAND
+  // total (vehicle + these).
+  addons: ReservationAddon[];
   status: "pending" | "confirmed" | "cancelled";
   notes: string | null;
   created_at: string;

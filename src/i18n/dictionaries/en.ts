@@ -191,6 +191,7 @@ export const en: Messages = {
     returnTime: "Return time",
     pickupLocation: "Pickup location",
     returnLocation: "Return location",
+    optionalServices: "Optional services",
     search: "Find available cars",
     searching: "Searching…",
     datePlaceholder: "dd/mm/yyyy",
@@ -293,6 +294,8 @@ export const en: Messages = {
       "Rental prices are automatically calculated based on the selected duration, season, and booking dates. The final amount is always shown before you confirm your reservation.",
     totalEstimate: "Estimated total",
     perDayRate: "{rate} DT / day",
+    vehicleRental: "Vehicle rental",
+    addonPerDay: "+{price} DT / day",
     confirmDays: "Confirm — {days} {unit}",
     chooseEndToActivate: "Choose an end date to enable confirmation.",
     chooseEnd: "Choose an end",
@@ -326,6 +329,12 @@ export const en: Messages = {
     toastConnection:
       "Connection problem. Check your internet connection and try again.",
   },
+  addons: {
+    chauffeur: {
+      label: "Chauffeur service",
+      hint: "A professional driver for the whole rental period.",
+    },
+  } as Record<string, { label: string; hint: string }>,
   states: {
     errorEyebrow: "An error occurred",
     errorTitle: "Something went wrong",

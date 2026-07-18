@@ -190,6 +190,7 @@ export const ar: Messages = {
     returnTime: "وقت الإرجاع",
     pickupLocation: "مكان الاستلام",
     returnLocation: "مكان الإرجاع",
+    optionalServices: "خدمات اختيارية",
     search: "اعرض السيارات المتاحة",
     searching: "جارٍ البحث…",
     datePlaceholder: "يوم/شهر/سنة",
@@ -292,6 +293,8 @@ export const ar: Messages = {
       "يُحتسب سعر الإيجار تلقائيًا حسب المدة والموسم والتواريخ المختارة. ويُعرض المبلغ النهائي دائمًا قبل تأكيد حجزك.",
     totalEstimate: "الإجمالي التقديري",
     perDayRate: "{rate} د.ت / يوم",
+    vehicleRental: "كراء السيارة",
+    addonPerDay: "+{price} د.ت / يوم",
     confirmDays: "أكّد — {days} {unit}",
     chooseEndToActivate: "اختر تاريخ نهاية لتفعيل التأكيد.",
     chooseEnd: "اختر نهاية",
@@ -322,6 +325,12 @@ export const ar: Messages = {
     toastConnection:
       "مشكلة في الاتصال. تحقق من اتصالك بالإنترنت وأعد المحاولة.",
   },
+  addons: {
+    chauffeur: {
+      label: "خدمة السائق",
+      hint: "سائق محترف طوال مدة الكراء.",
+    },
+  } as Record<string, { label: string; hint: string }>,
   states: {
     errorEyebrow: "حدث خطأ",
     errorTitle: "حدث خطأ ما",

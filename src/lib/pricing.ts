@@ -9,6 +9,12 @@
 import type { Car, PricingTier, Promotion } from "./types";
 import { getDaysBetween, parseDateOnly } from "./dates";
 import { applyPromotionToRate } from "./promotions";
+import {
+  computeAddonLines,
+  sumAddonLines,
+  type AddonKey,
+  type AddonLine,
+} from "./addons";
 
 export function normalizePricingTiers(
   tiers?: PricingTier[] | null,
@@ -129,5 +135,43 @@ export function computeQuote(
     originalDailyRate,
     originalTotal: totalDays * originalDailyRate,
     promotion: promotion ?? null,
+  };
+}
+
+/** A full booking quote: the vehicle quote plus priced optional add-ons. */
+export type BookingQuote = Quote & {
+  /** Vehicle-only total (the effective, promo-adjusted rate × days). */
+  vehicleTotal: number;
+  /** Priced add-on snapshots for the selected services. */
+  addons: AddonLine[];
+  /** Sum of all add-on totals. */
+  addonsTotal: number;
+  /** What the customer pays: vehicleTotal + addonsTotal. */
+  grandTotal: number;
+};
+
+/**
+ * Authoritative booking quote = vehicle quote (via `computeQuote`, unchanged)
+ * plus optional add-on services priced over the SAME duration (no duplicated
+ * date math). Used by the client for the live breakdown and by the server to
+ * persist the grand total + the add-on snapshots. With no add-ons selected,
+ * `grandTotal === vehicleTotal`.
+ */
+export function computeBookingQuote(
+  car: Pick<Car, "price_per_day" | "pricing_tiers">,
+  startDate: string,
+  endDate: string,
+  promotion: Promotion | null | undefined,
+  addonKeys: AddonKey[],
+): BookingQuote {
+  const quote = computeQuote(car, startDate, endDate, promotion);
+  const addons = computeAddonLines(addonKeys, quote.totalDays);
+  const addonsTotal = sumAddonLines(addons);
+  return {
+    ...quote,
+    vehicleTotal: quote.totalPrice,
+    addons,
+    addonsTotal,
+    grandTotal: quote.totalPrice + addonsTotal,
   };
 }

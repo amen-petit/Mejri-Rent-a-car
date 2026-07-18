@@ -22,8 +22,10 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import DateField from "@/components/ui/DateField";
 import Select from "@/components/ui/Select";
+import AddonServices from "@/components/AddonServices";
 import { useI18n } from "@/i18n/client";
 import { nowInTimezone } from "@/lib/time";
+import type { AddonKey } from "@/lib/addons";
 import {
   RENTAL_LOCATIONS,
   DEFAULT_RENTAL_LOCATION,
@@ -91,6 +93,7 @@ export default function BookingSearchCard({
   const [returnLocation, setReturnLocation] = useState<RentalLocation>(
     initial?.return ?? initial?.pickup ?? DEFAULT_RENTAL_LOCATION,
   );
+  const [addonKeys, setAddonKeys] = useState<AddonKey[]>(initial?.addons ?? []);
   const [error, setError] = useState<BookingSearchError | null>(null);
 
   const locationOptions = RENTAL_LOCATIONS.map((value) => ({
@@ -131,6 +134,7 @@ export default function BookingSearchCard({
       endTime,
       pickup,
       return: returnLocation,
+      addons: addonKeys,
     };
     router.push(`/voitures?${buildBookingSearchParams(search)}`);
   }
@@ -226,6 +230,10 @@ export default function BookingSearchCard({
     setReturnLocation,
   );
 
+  const addonGroup = (
+    <AddonServices value={addonKeys} onChange={setAddonKeys} tone={fieldTone} />
+  );
+
   const submitButton = (
     <button
       type="submit"
@@ -289,16 +297,20 @@ export default function BookingSearchCard({
             {returnGroup}
             {pickupLocationGroup}
             {returnLocationGroup}
+            {addonGroup}
           </div>
           <div className="mt-auto pt-7">{submitButton}</div>
         </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1.25fr_1.25fr_1fr_1fr_auto] xl:items-end">
-          {pickupGroup}
-          {returnGroup}
-          {pickupLocationGroup}
-          {returnLocationGroup}
-          {submitButton}
+        <div className="flex flex-col gap-4">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1.25fr_1.25fr_1fr_1fr_auto] xl:items-end">
+            {pickupGroup}
+            {returnGroup}
+            {pickupLocationGroup}
+            {returnLocationGroup}
+            {submitButton}
+          </div>
+          {addonGroup}
         </div>
       )}
 
